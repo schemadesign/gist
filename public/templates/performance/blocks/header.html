@@ -1,0 +1,26 @@
+<header class="aa-performance-header" layout="row" layout-align="space-between center">
+    <div layout="row" layout-align="start center" aa-tooltip="{{ tooltip }}" ng-if="!titles || titles.length === 0">
+        <h3>{{ title }}<i class="fa fa-info-circle aa-performance-header-tooltip" ng-if="tooltip" aria-hidden="true"></i></h3>
+    </div>
+    <div layout="row" layout-align="start center" aa-tooltip="{{ tooltip }}" ng-if="titles.length">
+        <!-- <label for="title">{{ title }}<i class="fa fa-info-circle aa-performance-header-tooltip" ng-if="tooltip" aria-hidden="true"></i></label> -->
+        <md-select name="title" aria-label="{{ title }}" ng-model="title" ng-change="update('title', title)">
+            <md-option ng-repeat="t in titles" value="{{ t.value }}">{{ t.display }}</md-option>
+        </md-select>
+    </div>
+
+    <div layout="row">
+        <div layout="row" layout-align="start center" ng-if="viewFilter">
+            <label for="viewFilter">View</label>&nbsp;
+            <md-select name="viewFilter" aria-label="Filter {{ title }} by {{ viewFilter }}" ng-model="viewFilter" ng-change="update('viewFilter', viewFilter)">
+                <md-option ng-repeat="vf in viewFilters" value="{{ vf }}">{{ vf | capitalize }}</md-option>
+            </md-select>
+        </div>
+        <div layout="row" layout-align="start center" ng-if="timeUnit">
+            <label for="timeUnit">By</label>&nbsp;
+            <md-select name="timeUnit" aria-label="Display {{ title }} by {{ timeUnit }}" ng-model="timeUnit" ng-change="update('timeUnit', timeUnit)">
+                <md-option ng-repeat="tu in timeUnits" value="{{ tu }}">{{ tu | capitalize }}</md-option>
+            </md-select>
+        </div>
+    </div>
+</header>

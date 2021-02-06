@@ -1,0 +1,16 @@
+<md-dialog md-no-ink aria-label="Remove Data source">
+    <aa-toolbar title="Remove Data source" class="warn"></aa-toolbar>
+
+    <md-dialog-content layout-padding>
+        <md-content layout="column">
+            <p>
+                Are you sure you want to remove the data source
+                <span ng-if="apiEndPoint"><strong>{{ apiEndPoint }}</strong></span>
+                <span ng-if="connection"><strong>connection {{ connection.url }}</strong></span>?
+            </p>
+        </md-content>
+
+        <aa-dialog-actions warn="Remove Data source" cancel=""></aa-dialog-actions>
+    </md-dialog-content>
+
+</md-dialog>

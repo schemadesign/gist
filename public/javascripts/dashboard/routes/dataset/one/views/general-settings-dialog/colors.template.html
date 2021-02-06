@@ -1,0 +1,47 @@
+<label>Color Mapping</label>
+
+<p>Here you can assign colors to specific values from your data. If you prefer a certain value to always display as a chosen color, consistently across each of the different views, you can achieve this by assigning a color to it.</p>
+
+<br>
+
+<div ng-repeat="(key, value) in colorMapping.rules track by key">
+    <div layout class="aa-color-picker">
+        <span flex="60">{{key}}</span>
+        <span class="aa-color-swatch" ng-style="{'background-color': value};" flex-offset="5"></span>
+        <span class="dashboard-list-icon warn" ng-click="removeColorRule(key)" aria-hidden="true" aria-label="Delete" flex="5" flex-offset="5">
+            <i class="fa fa-remove" aria-hidden="true"></i>
+        </span>
+    </div>
+    <hr width="80%" style="margin-left: 0">
+</div>
+
+<br>
+
+<!-- Add Color Rule -->
+<label>Add a color rule</label>
+<div layout>
+    <md-input-container class="md-block" md-no-asterisk style="margin-top: 24px" flex="45">
+        <label>Field</label>
+        <md-select class="md-block" ng-model="colorMapping.fieldForCache">
+            <md-option ng-repeat="column in colsAvailable track by column" ng-value="column">
+                {{column}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-input-container class="md-block" md-no-asterisk style="margin-top: 24px" flex="50" flex-offset="5">
+        <label>Value</label>
+        <md-select flex="45" class="md-block" ng-model="colorMapping.value">
+            <md-option ng-repeat="value in colorMapping.cachedValues track by value" ng-value="value">
+                {{value}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+</div>
+
+<aa-color-picker selected="colorMapping.color" palette="teamColorPalette" custom="false"></aa-color-picker>
+
+<md-button ng-show="colorMapping.color && colorMapping.value" class="md-dashboard" ng-click="addColor(colorMapping.color, colorMapping.value)">
+    <span class="btn-label">Add color rule</span>
+</md-button>
+<!-- End Add Color Rule -->

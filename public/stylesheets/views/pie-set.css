@@ -1,0 +1,76 @@
+.pie-set-item {
+    width: 50%;
+    height: auto;
+    max-width: 270px;
+    position: relative;
+    padding: 20px;
+    margin: 6px;
+    border-radius: 5px;
+}
+
+@media (max-width: 479px) {
+    .pie-set-item {
+        padding: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .pie-set-item {
+        width: 33%;
+    }
+}
+
+@media (min-width: 992px) {
+    .pie-set-item {
+        width: 290px;
+    }
+}
+
+.pie-set-item .title {
+    padding: 5px 15px;
+    height: 50px;
+    font-size: 1em;
+    /*line-height: 1.25em;*/
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gist-pie-set .gist-site-content .gist-container-fluid {
+    transition: padding 400ms ease-in-out;
+}
+
+@media (min-width: 768px) {
+    .pie-set-item {
+        height: 270px;
+    }
+}
+
+.gist-pie-set .gist-sort-bar {
+    border-bottom-style: none;
+    padding-bottom: 0;
+}
+
+.gist-pie-set .gist-content {
+    position: relative;
+}
+
+.gist-pie-set .filter-bar-fixed-bottom {
+   position: fixed;
+}
+
+#pie-set path:hover {
+    cursor: pointer;
+}
+
+#pie-set .linkified {
+    white-space: nowrap;
+}
+
+body.puppeteer .gallery {
+    margin-top: -35px;
+    height: calc(100vh - 10px);
+    overflow: hidden;
+}

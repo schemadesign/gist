@@ -1,0 +1,63 @@
+<div class="team-images" layout="column">
+    <div flex="40">
+        <label>Team Logo</label>
+        <p>Upload a header graphic to be displayed at the top of your team page. (For best results, size your graphic to 700px width.)</p>
+        <div>
+            <img class="img-responsive team-logo" ng-if="team.logo" ng-src="{{team.logo}}">
+        </div>
+
+        <input type="file" accept="image/svg+xml,image/jpeg,image/png,image/gif,image/bmp" id="team_logo" nv-file-select="" uploader="logoUploader" class="team-uploader">
+
+        <div class="team-image-actions" layout="row" layout-align="start center">
+            <label for="team_logo" class="md-button md-dashboard" ng-class="{'disabled': logoUploader.getNotUploadedItems().length}">
+                <span class="btn-label">{{team.logo ? 'Update' : 'Add'}}</span>
+            </label>
+            <span><a href="" ng-if="team.logo" ng-click="deleteFile(team.logo, 'logo')" class="warn">Remove</a></span>
+        </div>
+    </div>
+
+    <div flex="10"></div>
+
+    <div flex="40">
+        <hr>
+        <label>Team Header Logo</label>
+        <p>Upload a logo for your team here. The logo will be displayed in the title bar of your visualizations. (For best results, scale your logo to 100px width x 100px height.)</p>
+        <div>
+            <img class="img-responsive team-header" ng-if="team.logo_header" ng-src="{{team.logo_header}}">
+        </div>
+
+        <input type="file" accept="image/svg+xml,image/jpeg,image/png,image/gif,image/bmp" id="team_logo_header" nv-file-select="" uploader="logo_headerUploader" class="team-uploader">
+
+        <div class="team-image-actions" layout="row" layout-align="start center">
+            <label for="team_logo_header" class="md-button md-dashboard" ng-class="{'disabled': logo_headerUploader.getNotUploadedItems().length}">
+                <span class="btn-label">{{team.logo_header ? 'Update' : 'Add'}}</span>
+            </label>
+            <span><a href="" ng-if="team.logo_header" ng-click="deleteFile(team.logo_header, 'logo_header')" class="warn">Remove</a></span>
+        </div>
+    </div>
+
+    <div ng-init="init()">
+        <hr>
+        <label>Custom icons</label>
+        <p class="margin-bottom-2x">Upload icons for display in your visualizations. Icons can be displayed in the Gallery or Grouped Gallery. (For best results, scale icons to 300px width x 300px height.)</p>
+
+        <aa-multi-image-uploader sources="iconsUrl"  uploader="iconsUploader" on-delete="deleteIcon"></aa-multi-image-uploader>
+
+        <label class="pad-top-4x">Preset icons</label>
+        <div ng-repeat="group in iconsSets">
+            <p class="margin-bottom-2x{{ $index ? ' pad-top-4x' : '' }}">{{group.name}}</p>
+            <ul class="dashboard-list user-list">
+                <li ng-repeat="item in group.icons" layout="row" layout-align="none center">
+                    <div flex="10">
+                        <div class="thumb" style='background-image: url("/images/icons/{{ group.prefix }}{{ item }}.png")'></div>
+                    </div>
+                    <span flex>
+                        <span class="dashboard-list-name">{{ item }}</span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>

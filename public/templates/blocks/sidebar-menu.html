@@ -1,0 +1,68 @@
+<ul class="nav">
+
+    <li class="sidebar-label hide-mobile">
+        <span title="{{user.firstName}} {{user.lastName}}">{{user.firstName}} {{user.lastName}}</span>
+    </li>
+
+    <li ng-class="{'active': currentMenuItem === 'account'}">
+        <a ng-click="sidebarNavigate('dashboard.account.profile')" role="button">Account Settings</a>
+    </li>
+
+    <li ng-if="user._team.length > 1 || user.role==='superAdmin'" ng-class="{'active': currentMenuItem === 'teams'}">
+        <a ng-click="sidebarNavigate('dashboard.teams')" role="button">Teams</a>
+    </li>
+
+    <li ng-if="dashboardCtrl.can('user', 'editInsights')" ng-class="{'active': currentMenuItem === 'stories'}">
+        <a ng-click="sidebarNavigate('dashboard.stories.list')" role="button">Insights</a>
+    </li>
+
+    <hr>
+
+    <li class="sidebar-label">
+        <span title="{{team.title}}">{{team.title}}</span>
+    </li>
+
+    <li ng-if="dashboardCtrl.isAdminRole"
+        ng-class="{'active': currentMenuItem === 'site' || currentMenuItem === 'page' }">
+        <a ng-click="sidebarNavigate('dashboard.site.list')" role="button">Sites</a>
+    </li>
+
+    <li ng-if="dashboardCtrl.showTab('articles')" ng-class="{'active': currentMenuItem === 'article'}">
+        <a ng-click="sidebarNavigate('dashboard.article.list')" role="button">Articles</a>
+    </li>
+
+    <li ng-if="dashboardCtrl.showTab('dataset')" ng-class="{'active': currentMenuItem === 'dataset'}">
+        <a ng-click="sidebarNavigate('dashboard.dataset.list')" role="button">Visualizations</a>
+    </li>
+
+    <li ng-if="dashboardCtrl.isAdminRole" ng-class="{'active': currentMenuItem === 'performance'}">
+        <a ng-click="sidebarNavigate('dashboard.performance.team')" role="button">Performance</a>
+    </li>
+
+    <li ng-if="dashboardCtrl.isAdminRole" ng-class="{'active': currentMenuItem === 'user'}">
+        <a ng-click="sidebarNavigate('dashboard.user.list')" role="button">Users</a>
+    </li>
+
+    <li ng-if="dashboardCtrl.isAdminRole" ng-class="{'active': currentMenuItem === 'team'}">
+        <a ng-click="sidebarNavigate('dashboard.team.settings')" role="button">Team Settings</a>
+    </li>
+
+    <li class="sidebar-link hide-mobile">
+        <span>
+            <a href="{{subdomain}}" target="_blank" ng-click="updateSubdomain()">View Team Page</a>
+        </span>
+    </li>
+
+    <ul class="nav mobile-sidebar">
+        <hr>
+        <li>
+            <a href="/dashboard">Dashboard</a>
+        </li>
+        <li>
+            <a href="{{subdomain}}" target="_blank" ng-click="updateSubdomain()">Team Page</a>
+        </li>
+        <li>
+            <a class="pointer" class="sidebar-mobile" ng-click="logout()">Log Out</a>
+        </li>
+    </ul>
+</ul>

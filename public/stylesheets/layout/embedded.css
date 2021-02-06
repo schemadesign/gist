@@ -1,0 +1,171 @@
+/* @override
+	http://austenblokker.local.arrays.co:9080/stylesheets/layout/embedded.css */
+
+/*.view-embedded .array-header,*/
+.view-embedded ul.nav.navbar-nav.navbar-right,
+.view-embedded a.navbar-brand.navbar-brand-arrays.navbar-brand-stacked-logo,
+.view-embedded .site-footer {
+    display: none;
+}
+
+.view-embedded .navbar-right {
+    height: var(--navbar-height-embedded);
+}
+
+/* @group Array Header */
+
+.view-embedded .gist-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.5em;
+}
+
+.view-embedded .gist-sort-bar {
+    padding-top: 10px;
+}
+
+/* @end Array Header */
+
+/*object detail navbar*/
+.view-embedded .navbar {
+    min-height: var(--navbar-height-embedded);
+}
+
+.view-embedded .navbar-default .navbar-brand,
+.view-embedded .navbar-default .navbar-brand-team-title {
+    padding-top: 9px;
+    height: var(--navbar-height-embedded);
+}
+
+.view-embedded .navbar-default,
+.view-embedded .header-shadow {
+    box-shadow: none;
+}
+
+.view-embedded nav.navbar.navbar-default.navbar-fixed-top.background-color-brand,
+.view-embedded .navbar-default .navbar-brand-container {
+    box-shadow: none;
+    border-bottom: 1px solid var(--color-divider);
+    /*need both heights for object detail page*/
+    min-height: var(--navbar-height-embedded);
+    height: var(--navbar-height-embedded);
+}
+
+.view-embedded .color-brand-hover {
+    /*color: var(--color-text-dark) !important;*/ /* Fix embed control hover colors for firefox */
+    transform: none !important;
+}
+
+/*object detail title*/
+.view-embedded a.navbar-brand {
+    font-size: 16px;
+}
+
+.view-embedded .navbar-back-label {
+    font-size: 16px;
+}
+
+.view-embedded .gist-controls {
+    top: 0;
+}
+
+.view-embedded .gist-site-content {
+    padding-top: 0;
+}
+
+.view-embedded #gist-chart {
+    max-width: calc(100vw - var(--navbar-height-embedded));
+    width: 100vh;
+    height: 100vh;
+}
+
+.view-embedded #gist-chart.pie-chart {
+    width: calc(100vh - 210px);
+    height: calc(100vh - var(--viz-header-height-tablet));
+}
+
+.view-embedded #scatterplot {
+    height: calc(100vh - 70px);
+    min-height: calc(100vh - 70px);
+}
+
+.view-embedded ul.nav.navbar-nav,
+.view-embedded .navbar-default {
+    height: var(--navbar-height-embedded);
+}
+
+.view-embedded .embedded-new-tab,
+.view-embedded .navbar-nav > li > div [class^="gist-icon-"],
+.view-embedded .navbar-nav > li > a [class^="gist-icon-"] {
+    font-size: 18px;
+}
+
+.view-embedded .light-text .navbar-nav .gist-dropdown > a,
+.view-embedded .light-text .navbar-nav .gist-dropdown > a span,
+.view-embedded .light-text .sidebar-filter-slide-toggle span,
+.view-embedded .light-text .navbar-brand-container .navbar-brand {
+    color: black;
+}
+
+.view-embedded a.nav.navbar-nav.navbar-right.embedded-new-tab {
+    display: block;
+    width: 48px;
+    padding-top: 10px;
+}
+
+/* Viz Icons */
+.view-embedded .navbar-nav div.color-brand-hover,
+.view-embedded .navbar-nav a.color-brand-hover,
+.view-embedded .navbar-nav a {
+    padding-top: 8px;
+}
+
+h2.embedded-team-title {
+    display: none;
+}
+
+.view-embedded h2.embedded-team-title {
+    display: block;
+    margin-top: 12px;
+    font-size: 16px;
+    /*font-size: .875em;*/
+    font-weight: 600;
+    color: #404040;
+}
+
+.view-embedded a.embedded-new-tab {
+    padding: 10px;
+    padding-top: 8px;
+}
+
+@media (min-width: 768px) {
+    .view-embedded a.embedded-new-tab {
+        padding: 14px;
+        padding-top: 8px;
+    }
+}
+
+.view-embedded a.embedded-new-tab {
+    color: #000;
+    float: right;
+    line-height: 22px;
+    display: block;
+    position: relative;
+}
+
+.embedded-new-tab .gist-icon-extend {
+    font-size: 17px;
+}
+
+/*sidebar filters*/
+.view-embedded div.sidebar-filter-heading {
+    min-height: var(--navbar-height-embedded);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+}
+
+.view-embedded .sidebar-filter a {
+    font-size: 14px;
+    padding: 13px 15px;
+}

@@ -1,0 +1,59 @@
+/* @group Pages */
+
+#viz-dropdown {
+    background-color: white;
+    max-height: 315px;
+    overflow: scroll;
+}
+
+.viz-list-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.viz-list-item:hover {
+    background-color: #005CB5;
+    color: white;
+}
+
+button[title='uploadImage'],
+button[title='Visualization'] {
+    display: block !important;
+    border-color: #005CB5;
+    background: #005CB5;
+    color: #fff;
+    text-align: right;
+    font-size: 14px;
+}
+
+button[title='uploadImage']:hover,
+button[title='Visualization']:hover {
+    background: #005CB5;
+    color: #fff;
+    font-size: 14px;
+}
+
+button[title='Visualization']:before {
+    display: inline;
+    margin-right: 10px;
+    content: 'Insert a Visualization';
+    font-size: 14px;
+}
+
+#acknowledgement {
+    display: hidden;
+}
+
+header {
+    flex-wrap: wrap;
+}
+
+.article-buttons-div {
+    margin-left: auto;
+}
+
+.content-spinner {
+    position: relative;
+}
+
+/* @end Pages */

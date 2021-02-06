@@ -1,0 +1,52 @@
+<ng-switch on="contentFieldCtrl.field.operation" ng-form="contentFieldCtrl.form">
+    <input
+        ng-switch-when="ToDate"
+        type="text"
+        name="{{contentFieldCtrl.field.name}}"
+        ng-model="contentFieldCtrl.data"
+        ng-required="contentFieldCtrl.field.name === contentFieldCtrl.objectTitle"
+        ng-change="contentFieldCtrl.validateField(contentFieldCtrl.field, contentFieldCtrl.data)"
+    >
+
+    <input
+        ng-switch-when="ToInteger"
+        type="number"
+        name="{{contentFieldCtrl.field.name}}"
+        ng-model="contentFieldCtrl.data"
+        ng-required="contentFieldCtrl.field.name === contentFieldCtrl.objectTitle"
+        ng-change="contentFieldCtrl.validateField(contentFieldCtrl.field, contentFieldCtrl.data)"
+    >
+
+    <input
+        ng-switch-when="ToPercent"
+        type="text"
+        name="{{contentFieldCtrl.field.name}}"
+        ng-model="contentFieldCtrl.data"
+        ng-required="contentFieldCtrl.field.name === contentFieldCtrl.objectTitle"
+        ng-change="contentFieldCtrl.validateField(contentFieldCtrl.field, contentFieldCtrl.data)"
+    >
+
+    <input
+        ng-switch-when="ToFloat"
+        type="number"
+        name="{{contentFieldCtrl.field.name}}"
+        ng-model="contentFieldCtrl.data"
+        ng-required="contentFieldCtrl.field.name === contentFieldCtrl.objectTitle"
+        ng-change="contentFieldCtrl.validateField(contentFieldCtrl.field, contentFieldCtrl.data)"
+        step="any"
+    >
+
+    <input
+        ng-switch-default
+        type="text"
+        name="{{contentFieldCtrl.field.name}}"
+        ng-model="contentFieldCtrl.data"
+        ng-required="contentFieldCtrl.field.name === contentFieldCtrl.objectTitle"
+        ng-change="contentFieldCtrl.validateField(contentFieldCtrl.field, contentFieldCtrl.data)"
+    >
+
+    <div ng-messages="contentFieldCtrl.form[contentFieldCtrl.field.name].$error">
+        <p ng-message="required">This field is required.</p>
+        <p ng-message="pattern">Field must match pattern.</p>
+    </div>
+</ng-switch>

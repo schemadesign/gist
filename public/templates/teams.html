@@ -1,0 +1,56 @@
+<header layout-xs="col" layout-gt-xs="row" layout-align="space-between start">
+    <h1>Teams</h1>
+    <div layout="row" layout-align="space-between end">
+        <md-button class="md-dashboard md-dashboard-header" ng-if="user.role=='superAdmin'"
+                   ng-click="openAddTeamDialog($event)" md-no-ink>
+            <span class="btn-label">Add Team</span>
+        </md-button>
+        <md-button class="md-dashboard md-dashboard-header" ng-if="user.role=='superAdmin'"
+                   ng-click="openRegisterLinkDialog($event)" md-no-ink>
+            <span class="btn-label">Generate Signup Link</span>
+        </md-button>
+    </div>
+</header>
+
+<div class="gist-content teams">
+
+    <div ng-if="user.role === 'superAdmin'" layout="column" layout-gt-xs="row" layout-align-gt-xs="space-between center"
+         class="md-button-wide">
+        <md-input-container>
+            <md-select ng-model="teams.sortBy" flex-xs="100" aria-label="Sort by" ng-change="updateOrder()">
+                <md-option value="title">Sort By Title</md-option>
+                <md-option value="createdAt">Sort Chronologically</md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container flex-xs="100" class="hide-validation-error">
+            <input class="team-search" ng-model="filterTeams" ng-change="updateFilter(filterTeams)"
+                   placeholder="Search teams">
+        </md-input-container>
+    </div>
+    <hr>
+    <!-- tm is the list team item -->
+    <!-- team is the team that the user is currently on -->
+    <ul class="dashboard-list team-list" ng-cloak ng-init="updateOrder()">
+        <li ng-repeat="tm in teams track by $index" layout="row" layout-align="space-between center">
+            <md-button class="dashboard-list-hover" ng-disabled="team._id == tm._id" ng-click="signInWithTeam($index)"
+                       md-no-ink>
+                <span class="dashboard-list-name">{{tm.title}}</span> <span class="dashboard-list-revision">{{ env.node_env == 'enterprise' ? '(' + env.host + ')' : '(' + tm.subdomain + '.' + env.host + ')' }}</span>
+            </md-button>
+
+            <div ng-show="team._id !== tm._id && user.role === 'superAdmin'" layout="row" layout-align="end center">
+                <img src="/images/exclamation-triangle.svg" alt="warning" class="team-warning"  ng-if="isUnusedTeam(tm) || isTeamWithoutVizs(tm)">
+                    <md-tooltip md-direction="top">
+                        <span ng-if="isUnusedTeam(tm)">Last used before 6 months.</span>
+                        <span ng-if="isTeamWithoutVizs(tm)">The team has no visualizations.</span>
+                    </md-tooltip>
+                </img>
+                <span class="dashboard-list-icon" ng-click="openEditTeamDialog(tm, $event, $index)" flex="5">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </span>
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+

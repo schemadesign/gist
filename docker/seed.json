@@ -1,0 +1,6 @@
+{
+	"testing": "mongodb/arraysdb",
+	"development": "mongodb/arraysdb",
+	"production": "mongodb/arraysdb",
+    "enterprise": "mongodb/arraysdb"
+}

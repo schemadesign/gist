@@ -1,0 +1,45 @@
+<div ng-form="contentEditCtrl.form">
+    <md-content layout-padding md-no-ink>
+        <h2>
+            <a ui-sref="dashboard.dataset.one.content.list" class="pointer">Entries</a> &ensp;&rsaquo;&ensp;
+            {{contentEditCtrl.title}}
+        </h2>
+
+        <h3>Edit the content of an object below.</h3>
+
+        <div class="editor-fields">
+            <ng-container ng-repeat="field in contentCtrl.fields track by field.name">
+                <div ng-if="contentEditCtrl.entry.rowParams[field.name] | isArray" layout="row" layout-padding>
+                    <div flex>
+                        <span>
+                            {{datasetOneCtrl.dataset.fe_displayTitleOverrides[field.name] || field.name}}
+                            ({{contentEditCtrl.entry.rowParams[field.name].length}} entries)
+                        </span>
+                    </div>
+                </div>
+
+                <md-input-container ng-if="!(contentEditCtrl.entry.rowParams[field.name] | isArray) && field.operation"
+                                    class="md-block" flex="75">
+                    <label ng-class="{'content-edited': !!datasetOneCtrl.dataset.updatedContent.edited[contentEditCtrl.entry.pKey][field.name]}">
+                        {{datasetOneCtrl.dataset.fe_displayTitleOverrides[field.name] || field.name}}
+                        ({{contentCtrl.operationToString(field.operation)}}<span ng-if="field.format"> - {{field.format}}</span>)
+                    </label>
+
+                    <gist-content-field field="field" data="contentEditCtrl.entry.rowParams[field.name]" />
+                </md-input-container>
+
+                <div flex="50" ng-if="datasetOneCtrl.dataset.fe_image.field === field.name">
+                    <img
+                        class="img-responsive form-group"
+                        ng-if="contentEditCtrl.entry.rowParams[datasetOneCtrl.dataset.fe_image.field]"
+                        ng-src="{{ contentEditCtrl.imageUrl }}"
+                    >
+                    <aa-multi-image-uploader
+                        button-label="Upload New Image"
+                        uploader="entryImagesUploader"
+                    ></aa-multi-image-uploader>
+                </div>
+            </ng-container>
+        </div>
+    </md-content>
+</div>

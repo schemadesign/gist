@@ -1,0 +1,77 @@
+<md-content md-no-ink class="tab-content">
+<!-- <form name="vm.websiteForm" ng-submit="submitForm()" novalidate> -->
+
+  <label>Team Name and Subdomain</label>
+  <p class="pad-bottom-2x">Change your team name below. Your team name will appear at the top of your team page. (Note that your subdomain cannot be changed.)</p>
+  <md-input-container class="md-block" flex="50">
+     <label>Team Name</label>
+     <input required name="title" ng-model="team.title" maxlength="48">
+     <div ng-messages="vm.websiteForm.title.$error">
+         <div ng-message="required">This is required.</div>
+     </div>
+  </md-input-container>
+
+  <md-input-container flex="50" ng-hide="isEnterprise">
+     <label>{{ env.node_env !== 'enterprise'? 'Subdomain' : 'Team ID'}}</label>
+     <input ng-if="env.node_env!=='enterprise'" value="{{team.subdomain}}.{{env.host}}" disabled><!--ng-model="team.subdomain" -->
+     <input ng-if="env.node_env=='enterprise'" value="{{team.subdomain}}" disabled><!--ng-model="team.subdomain" -->
+  </md-input-container>
+
+  <hr>
+
+  <label>Team Description</label>
+  <p class="pad-bottom-2x">Describe what your team does. The description will appear at the top of your team page below the team.</p>
+  <md-input-container class="md-block" flex="100">
+     <label>Description (optional)</label>
+     <textarea name="description" ng-model="team.description"></textarea>
+  </md-input-container>
+
+  <hr>
+
+  <label>Branding Options</label>
+  <p class="pad-bottom-2x">Choose your font below. The selected font will appear in all of your team’s visualizations.</p>
+
+  <md-input-container class="md-block pad-bottom-2x" flex="50">
+    <label>Font</label>
+    <md-select aria-label="font selection" name="font" ng-model="team.font">
+      <md-option ng-repeat="font in fontOptions" ng-value="font.name">{{ font.displayName }}</md-option>
+    </md-select>
+  </md-input-container>
+
+  <label>External Website</label>
+  <p class="pad-bottom-2x">Input the url for an external website below. If a team banner logo has been configured, then clicking on it will link to the external website.</p>
+  <md-input-container class="md-block" flex="50">
+     <input name="External Website" ng-model="team.externalWebsite" aria-label="External website url"></input>
+  </md-input-container>
+
+  <label>Color Palette</label>
+  <p class="pad-bottom-2x">Specify colors to be used in your team's visualizations. You can select and add colors below, or select your own using the custom color picker. You can also rearrange the colors in your palette by clicking and dragging them.</p>
+  <aa-multi-color-picker colors="team.colorPalette"></aa-multi-color-picker>
+  <br>
+
+  <div>
+    <label class="thin-label">Select a primary color. This color will be displayed in your chart labels <span class="optional">(optional)</span></label>
+    <aa-color-picker selected="team.brandColor.label" palette="grayPalette"></aa-color-picker>
+  </div>
+
+  <div>
+    <label class="thin-label">Select a secondary color. This color will be displayed in clickable controls such as chart menus and selections <span class="optional">(optional)</span></label>
+    <aa-color-picker selected="team.brandColor.select" palette="grayPalette"></aa-color-picker>
+  </div>
+  <hr>
+
+  <label>Google Analytics Integration</label>
+  <p class="pad-bottom-2x">Add your tracking ID below to track any of your visualizations using Google Analytics. <a href="https://support.google.com/analytics/answer/1008080?hl=en" target="_blank">Click here</a> for information about how to find your tracking ID.</p>
+  <md-input-container class="md-block" flex="50">
+     <label>Google Analytics Tracking ID</label>
+     <textarea name="google_analytics" ng-model="team.google_analytics"></textarea>
+  </md-input-container>
+
+  <div layout="row" layout-align="end center">
+     <md-button class="md-dashboard confirm" type="button" ng-click="submitForm()" ng-disabled="vm.websiteForm.$invalid || !vm.websiteForm.$dirty">
+         <span class="btn-label">Save Settings</span>
+     </md-button>
+  </div>
+
+<!-- </form> -->
+</md-content>

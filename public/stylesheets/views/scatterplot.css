@@ -1,0 +1,13 @@
+#scatterplot {
+    height: calc(100vh - 340px);
+    min-height: 300px;
+}
+
+.scatterplot circle.bubble {
+    stroke: #fff;
+    stroke-width: 1;
+}
+
+body.puppeteer #scatterplot {
+    height: calc(100vh - 80px);
+}

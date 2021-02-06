@@ -1,0 +1,46 @@
+<h2 ng-if="error">Error</h2>
+<div ng-if="error">
+    <p>
+        Account could not be activated because of {{error}} : {{message}}.
+        <a ng-click="login()" class="pointer">Log in</a> to your account to request the resending of activation email.
+    </p>
+</div>
+
+<h2 ng-if="userId">Oops</h2>
+<div ng-if="userId">
+    <p>
+        It looks like you already have an account with us.
+        <br />
+        Check your email for a message from us to activate your account.
+        <br />
+        If you have not received any messages or the email has expired,
+        <a class="pointer" href="{{ resendActivationLink }}" target="_self">click here</a> to resend it.
+    </p>
+</div>
+
+<h2 ng-if="email">Error</h2>
+<div ng-if="email">
+    <p>
+        Something went wrong when resending the email.
+    </p>
+</div>
+
+<h2 ng-if="tokenFlow">Error</h2>
+<div ng-if="tokenFlow">
+    <p>
+        <span ng-if="errorType === 'used'">
+        Sorry, invitation has been used.
+        </span>
+        <span ng-if="errorType === 'expired'">
+        Sorry, it has been over 48 hours and your invitation has expired.
+        </span>
+        <span ng-if="errorType === 'missing'">
+        The token is missing.
+        </span>
+        <span ng-if="errorType === 'creating'">
+        Sorry, something went wrong.
+        </span>
+        <span>Please contact us at <a href="mailto:info@schemadesign.com">info@schemadesign.com</a><span
+            ng-if="['used','expired'].includes(errorType)"> so we can issue a new one</span>.</span>
+    </p>
+</div>

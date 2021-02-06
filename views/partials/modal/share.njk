@@ -1,0 +1,60 @@
+<div class="modal fade" id="gist-share-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="gist-close col-md-1" data-dismiss="modal" aria-label="Close"><span class="gist-icon-close-big" aria-hidden="true"></span></button>
+                <h4 class="modal-title" data-l10n-id="share">Share {{ arrayTitle }}</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 data-l10n-id="share-on-social-media">Share on Social Media</h3>
+                        <div id="gist-facebook" data-text="Gist"></div>
+                        <div id="gist-twitter" data-text="Gist"><span class="gist-icon-twitter" aria-hidden="true"></span>Twitter</div>
+                        <h3 data-l10n-id="share-url"> Share URL </h3>
+                        <pre class="border-color-brand" id="gist-share-url"></pre>
+                        <h3 data-l10n-id="embed-url">Embed URL</h3>
+                        <pre id="gist-embed-url" class="border-color-brand"></pre>
+                        <div id="exportImage" class="hide">
+                            <h3> Export as Image </h3>
+                            <a id="downloadChartImage" class="btn background-color-brand btn-action">Export</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="gist-stories-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button id="modal-close" type="button" class="gist-close col-md-1" data-dismiss="modal" aria-label="Close"><span class="gist-icon-close-big" aria-hidden="true"></span></button>
+                <h4 class="modal-title">New {{ arrayTitle }} Insight</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div id="gist-modal-noty"></div>
+                    <form class="col-sm-12" id="gist-share-story-form" data-toggle="validator" role="form">
+                        <div class="form-group">
+                            <h3>Enter a Title</h3>
+                            <input id="gist-story-title" type="text" class="form-control border-color-brand" required
+                            data-error="This is an required field.">
+                        </div>
+                        <div class="form-group">
+                            <h3>Enter a Description</h3>
+                            <textarea id="gist-story-caption" class="border-color-brand form-control" rows="3"></textarea>
+                        </div>
+                        <button id="story-save" class="btn background-color-brand btn-action" type="submit">Save</button>
+                        <button data-dismiss="modal" id="story-cancel" class="btn story-cancel" type="button">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

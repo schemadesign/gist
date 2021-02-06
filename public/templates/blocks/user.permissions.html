@@ -1,0 +1,25 @@
+<md-dialog md-no-ink aria-label="User Permissions">
+    <aa-toolbar title="User Permissions" class="warn"></aa-toolbar>
+
+    <md-dialog-content layout-padding>
+        <md-content layout="column">
+            <p>
+                Are you sure you want to add
+                <strong>{{ email }}</strong>
+                to <strong>{{ team.title }}</strong>?
+            </p>
+            <p>
+                Adding this user will allow them to edit and view visualizations on your team.
+            </p>
+        </md-content>
+        <md-dialog-actions layout="row" layout-align="end center">
+            <md-button class="md-dashboard md-warn" ng-click="hide()">
+                <span class="btn-label">Accept</span>
+            </md-button>
+            <md-button class="md-dashboard" ng-click="cancel()">
+                Cancel
+            </md-button>
+        </md-dialog-actions>
+    </md-dialog-content>
+
+</md-dialog>

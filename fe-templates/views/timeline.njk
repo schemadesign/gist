@@ -1,0 +1,103 @@
+{# TODO: why set all these variables like this? easier initial transition from the existing gallery templates.
+    lots of opportunity to precalculate this stuff in the data_prep controller and slim down the templates. #}
+
+{% set dataSource = included.dataSource %}
+{% set viewOptions = dataSource.fe_viewOptions %}
+{% set array_source_key = dataSource.uid %}
+{% set fieldKey_objectTitle = options.fieldKey_objectTitle %}
+{% set galleryStyle = options.galleryStyle %}
+{% set secondaryColumnTileDisplay = options.secondaryColumnTileDisplay %}
+{% set nonpagedCount = meta.nonpagedCount %}
+{% set scrapedImages = meta.imageMeta.scrapedImages %}
+{% set sharedPage = options.sharedPage %}
+{% set routePath_base = options.routePath_base %}
+{% set embedded = options.embedded %}
+{% set isPreview = options.preview %}
+{% set revision = options.revision %}
+{% set hasThumbs = meta.imageMeta.hasThumbs %}
+{% set timelineViewSettings = dataSource.fe_views.views.timeline %}
+{% set displaySortFieldText = timelineViewSettings.displaySortFieldText %}
+{% set displayFieldTitles = timelineViewSettings.displayFieldTitles %}
+{% set team = dataSource._team if dataSource._team else null %}
+{% set subdomain = team.subdomain | lower %}
+{% set datasetId = dataSource._id %}
+{% set viewType = 'timeline' %}
+{% set sortBy = options.sortBy %}
+{% set sortBy_realColumnName = options.sortBy_realColumnName %}
+{% set groupBy_realColumnName = options.groupBy_realColumnName %}
+{% set defaultSortByColumnName_humanReadable = options.defaultSortByColumnName_humanReadable %}
+{% set secondaryCol = options.secondaryCol %}
+{% set filterObj = options.filterObj %}
+{% set imageCaption = options.largeTilesWithCaptions %}
+{% set hasTooltip = not options.largeTilesWithCaptions %}
+{% set groupBy_isDate = options.groupBy_isDate %}
+
+<ul class="gallery-timeline">
+    {% for group in data %}
+        {% if groupBy_isDate %}
+            {% set sectionTitle = group.startDate | dateFormat(meta.groupByDateFormat) %}
+
+            {% if options.groupBy === 'Week' %}
+                {% set sectionTitle = 'Week of ' + sectionTitle %}
+            {% endif %}
+        {% else %}
+            {% set sectionTitle = group.group %}
+        {% endif %}
+
+        <li class="gallery-group {{ 'gallery-group--large' if options.largeTilesWithCaptions else 'gallery-group--small' }}"
+            role="listbox" aria-label="{{ sectionTitle }}">
+            <h3 class="gallery-group__label">{{ sectionTitle if sectionTitle !== '' else '(Title not specified)' }}</h3>
+
+            <ul class="gallery-grid">
+                {% for doc in group.results %}
+                    {% set textField = sortBy_realColumnName %}
+
+                    {% if textField === fieldKey_objectTitle %}
+                        {% set displaySortFieldText = false %}
+                    {% endif %}
+
+                    {% if groupBy_isDate %}
+                        {% set defaultTooltipValue = '(Date not specified)' %}
+                    {% else %}
+                        {% set defaultTooltipValue = '(Value not specified)' %}
+                    {% endif %}
+
+                    {% if hasTooltip %}
+                        {% set tooltipKey = doc.rowParams[fieldKey_objectTitle] if doc.rowParams[fieldKey_objectTitle] else '(Title not specified)' %}
+                        {% set tooltipValue = doc.rowParams[textField] if doc.rowParams[textField] else defaultTooltipValue %}
+                    {% endif %}
+
+                    {% if galleryStyle === 'image' and hasThumbs and doc.nestedImagePath %}
+                        {% include 'views/partials/gallery_item_image.njk' %}
+                    {% else %}
+                        {% include 'views/partials/gallery_item_text.njk' %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if meta.groupSize < group.total and meta.groupSize >= 0 %}
+                    <li class="gallery-item">
+                        {% if options.viewOptions.viewInteractivity %}
+                            <a href="{{ group.viewAllUrl }}" class="gallery-item-link gallery-item-link--view-all gallery-item-link--initial">
+                                <div class="gallery-item-inner">
+                                    <div class="gallery-item-initial-wrapper" aria-label="View All {{ group.total }}">
+                                        <span class="gallery-item-initial gallery-item-initial--default">+{{ group.total }}</span>
+                                        <span class="gallery-item-initial gallery-item-initial--hover">view all</span>
+                                    </div>
+                                </div>
+                            </a>
+                        {% else %}
+                            <a class="gallery-item-link gallery-item-link--view-all gallery-item-link--initial">
+                                <div class="gallery-item-inner">
+                                    <div class="gallery-item-initial-wrapper" aria-label="{{ group.total }} more">
+                                        <span class="gallery-item-initial gallery-item-initial--default">+{{ group.total }}</span>
+                                        <span class="gallery-item-initial gallery-item-initial--hover">more</span>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endif %}
+                    </li>
+                {% endif %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>

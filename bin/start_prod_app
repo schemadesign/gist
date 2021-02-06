@@ -1,0 +1,37 @@
+#!/bin/bash
+
+NODE_ENV=$1
+
+if [ "X${STAGE}" != "X" ]; then
+    NODE_ENV=$STAGE
+fi
+
+if [ "X${NODE_ENV}" == "X" ]; then
+    echo "WARNING, NODE_ENV not specified"
+    echo "$0 development|testing|enterprise"
+    echo "Running with NODE_ENV=production"
+    NODE_ENV=production
+fi
+
+export NODE_ENV
+
+CONFIG_DIR="$PWD/config/env"
+
+echo $CONFIG_DIR
+
+# Run grunt watch in the background
+if [ $NODE_ENV = "development" ] && [ "X${DEBUGCODE}" = "X"  ]; then
+    grunt watch --node_env=$NODE_ENV &
+fi
+
+if [ "X$DEBUGCODE" != "X" ]; then
+    echo "Running with debugger mode, connect to port 9229"
+    export WEB_CONCURRENCY=1
+    npm run monitor_inspect
+elif [ "X$PROFILER" != "X" ]; then
+    echo "Running with profiler"
+    export WEB_CONCURRENCY=1
+    npm run profiler
+else
+    npm run-script monitor
+fi

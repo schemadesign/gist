@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`group helpers getGroupByColumnParams should return column params 1`] = `
+Object {
+  "groupIdQueryHelper": "$rowParams.name",
+}
+`;
+
+exports[`group helpers getGroupByDurationParams should return day params 1`] = `
+Object {
+  "filterDateFormat": "YYYY",
+  "groupByDateFormat": "Y",
+  "groupByUnit": "years",
+  "groupIdQueryHelper": Object {
+    "$year": "$rowParams.Day",
+  },
+}
+`;
+
+exports[`group helpers getGroupByDurationParams should return decade params 1`] = `
+Object {
+  "filterDateFormat": "YYYY",
+  "groupByDateFormat": "Y",
+  "groupByUnit": "years",
+  "groupIdQueryHelper": Object {
+    "$year": "$rowParams.Decade",
+  },
+}
+`;
+
+exports[`group helpers getGroupByDurationParams should return default params 1`] = `
+Object {
+  "filterDateFormat": "YYYY",
+  "groupByDateFormat": "Y",
+  "groupByUnit": "years",
+  "groupIdQueryHelper": Object {
+    "$year": "$rowParams.",
+  },
+}
+`;
+
+exports[`group helpers getGroupByDurationParams should return month params 1`] = `
+Object {
+  "filterDateFormat": "YYYY",
+  "groupByDateFormat": "Y",
+  "groupByUnit": "years",
+  "groupIdQueryHelper": Object {
+    "$year": "$rowParams.Month",
+  },
+}
+`;
+
+exports[`group helpers getGroupByDurationParams should return week params 1`] = `
+Object {
+  "filterDateFormat": "YYYY",
+  "groupByDateFormat": "Y",
+  "groupByUnit": "years",
+  "groupIdQueryHelper": Object {
+    "$year": "$rowParams.Week",
+  },
+}
+`;
+
+exports[`group helpers getGroupByDurationParams should return year params 1`] = `
+Object {
+  "filterDateFormat": "YYYY",
+  "groupByDateFormat": "Y",
+  "groupByUnit": "years",
+  "groupIdQueryHelper": Object {
+    "$year": "$rowParams.Year",
+  },
+}
+`;
+
+exports[`group helpers getGroupByRangeParams should return range params 1`] = `
+Object {
+  "groupIdProject": Object {
+    "$multiply": Array [
+      Object {
+        "$floor": "$_id",
+      },
+      1000,
+    ],
+  },
+  "groupIdQueryHelper": Object {
+    "$floor": Object {
+      "$divide": Array [
+        "$rowParams.100s",
+        1000,
+      ],
+    },
+  },
+  "groupNumber": 1000,
+}
+`;

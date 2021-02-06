@@ -1,0 +1,78 @@
+.gist-linechart svg .gist-axis line, .gist-linechart svg .gist-axis path {
+    shape-rendering: crispEdges;
+}
+
+.gist-linechart .gist-y-axis path {
+    visibility: hidden;
+}
+
+.gist-linechart.gist-viewport svg .gist-line {
+    fill: none;
+    stroke-width: 2;
+}
+
+.gist-linechart.gist-viewport svg line.gist-pointer {
+    stroke: #c9c9c9;
+    stroke-width: 1;
+}
+
+.gist-linechart.gist-navigation svg .gist-line {
+    fill: none;
+    stroke-width: 1;
+}
+
+.gist-linechart.gist-viewport svg .gist-y-axis g.tick:first-child line {
+    display: none;
+}
+
+.gist-linechart.gist-viewport svg .gist-x-axis line, .gist-linechart.gist-viewport svg .gist-x-axis path {
+    stroke: #979797;
+}
+
+.gist-linechart .gist-brush-background {
+    fill-opacity: .1;
+    stroke: #d8d8d8;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.gist-linechart circle.gist-handle {
+    fill: #c3c3c3;
+    stroke: #fff;
+    stroke-width: 1;
+}
+
+.gist-linechart rect.gist-handle {
+    fill: #c3c3c3;
+}
+
+.gist-linechart .gist-brush .extent {
+    fill: #fff;
+    fill-opacity: 0;
+    shape-rendering: crispEdges;
+}
+
+.gist-linechart.gist-viewport svg circle.gist-data-point {
+    fill: transparent;
+}
+
+.gist-linechart.gist-viewport svg circle.gist-data-point.gist-annotation {
+    stroke: #9B9B9B;
+}
+
+.gist-linechart.gist-viewport rect, .gist-linechart.gist-viewport .tick text {
+    cursor: pointer;
+}
+
+body.puppeteer .gist-linechart {
+    height: 100% !important;
+}
+
+body.puppeteer .gist-line-chart-nav {
+    display: none;
+}
+
+.gist-line-graph .gist-content {
+    position: relative;
+    overflow: hidden;
+}

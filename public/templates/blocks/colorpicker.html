@@ -1,0 +1,10 @@
+<ul class="aa-color-picker" flex layout="row" layout-align="start center">
+    <li ng-repeat="color in colors" ng-class="{selected: color === selected}" ng-click="pick(color)" ng-style="{'background-color':color};" ng-show="unlist.indexOf(color) == -1"></li>
+    <li ng-show="custom != false" class="custom-color">
+        <input
+            minicolors
+            type="text"
+            placeholder="custom"
+            ng-model="selected">
+    </li>
+</ul>

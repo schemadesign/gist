@@ -1,0 +1,231 @@
+{% set currentView = 'gallery' %}
+
+{% extends '../layout/array.njk' %}
+
+{% import '../partials/array-header.njk' as header %}
+
+{% import '../partials/dropdown.njk' as dropdown %}
+{% import '../partials/search.njk' as search %}
+{% import '../partials/filter.njk' as filter %}
+
+{% block content %}
+    <section class="gist-section">
+        {{ header.default(arrayTitle, array_source_key, defaultView, team, isPreview, embedded, sharedPage, routePath_base, view_description, revision, defaultFilterObj, isEmbed, showInsightsExplorer, stories, subdomain, env, sharedPageId, lastUpdated) }}
+
+        {% include '../partials/modal/info.njk' %}
+        {% include "../partials/modal/detail-view-modal.njk" %}
+
+        <div class="gist-controls" style="display: none">
+            <div class="gist-container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="gist-sort-bar clearfix">
+                            <nav class="sort-bar-left pull-left" role="navigation">
+                                {% if viewOptions.viewControls %}
+                                    <div class="sort-control gist-sort-direction">
+                                        {% if sortDirection == 'Descending' or (not sortDirection and defaultSortOrderDescending) %}
+                                            <a href="{{ routePath_base | constructedRoutePath(filterObj, {
+                                                searchCol: searchCol,
+                                                searchQ: searchQ,
+                                                sortBy: sortBy,
+                                                limit: limit,
+                                                secondaryCol: secondaryCol,
+                                                sortDirection: 'Ascending',
+                                                page: onPageNum if onPageNum != 1 else ''
+                                            }) }}" aria-label="Sort results in ascending order"><span
+                                                    class="gist-icon-sort-descending sort-direction-icon"
+                                                    aria-hidden="true"></span></a>
+                                        {% else %}
+                                            <a href="{{ routePath_base | constructedRoutePath(filterObj, {
+                                                searchCol: searchCol,
+                                                searchQ: searchQ,
+                                                sortBy: sortBy,
+                                                limit: limit,
+                                                secondaryCol: secondaryCol,
+                                                sortDirection: 'Descending',
+                                                page: onPageNum if onPageNum != 1 else ''
+                                            }) }}" aria-label="sort results in descending order"><span
+                                                    class="gist-icon-sort-ascending sort-direction-icon"
+                                                    aria-hidden="true"></span></a>
+                                        {% endif %}
+                                    </div>
+
+                                    {{ dropdown.default(
+                                        'Sort By',
+                                        'sortBy',
+                                        sortBy if sortBy else defaultSortByColumnName_humanReadable,
+                                        colNames_orderedForSortByDropdown,
+                                        routePath_base | constructedRoutePath(filterObj, {
+                                            searchCol: searchCol,
+                                            searchQ: searchQ,
+                                            page: onPageNum if onPageNum != 1 and not groupedResults else '',
+                                            limit: limit if not groupedResults else '',
+                                            sortDirection: sortDirection,
+                                            secondaryCol: secondaryColumnTileDisplay if secondaryColumnTileDisplay else secondaryCol,
+                                            sortBy: ''
+                                        })
+                                    ) }}
+
+                                    {% if secondaryCol and galleryStyle === 'heatmap' and secondaryColumnTileShow %}
+                                        {{ dropdown.default(
+                                            'Display Text',
+                                            'secondaryCol',
+                                            secondaryColumnTileDisplay if secondaryColumnTileDisplay else secondaryCol,
+                                            colNames_orderedForDisplayTitleDropdown,
+                                            routePath_base | constructedRoutePath(filterObj, {
+                                                searchCol: searchCol,
+                                                searchQ: searchQ,
+                                                page: onPageNum if onPageNum != 1 else '',
+                                                limit: limit,
+                                                sortDirection: sortDirection,
+                                                sortBy: sortBy,
+                                                secondaryCol: ''
+                                            })
+                                        ) }}
+                                    {% endif %}
+                                {% endif %}
+                            </nav>
+
+                            {% include "../partials/accessibility/skip-to-page-bottom.njk" %}
+
+                            {% if viewOptions.search %}
+                                <div class="sort-bar-right gist-pull-right">
+                                    {{ search.default(
+                                        routePath_base | constructedRoutePath(filterObj),
+                                        searchCol if searchCol else 'All Fields',
+                                        cols_orderedForSearchByDropdown,
+                                        searchQ if searchQ else '',
+                                        sortBy,
+                                        sortDirection,
+                                        revision,
+                                        filterObj
+                                    ) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div><!-- .row -->
+            </div><!-- .gist-container-fluid -->
+        </div>
+
+        {% if isFilterActive %}
+            {{ filter.default(
+                displayTitleOverrides,
+                routePath_base | constructedRoutePath(null, {
+                    searchQ: searchQ,
+                    searchCol: searchCol,
+                    sortDirection: sortDirection,
+                    sortBy: sortBy,
+                    secondaryCol: secondaryCol}),
+                filterObj,
+                truesByFilterValueByFilterColumnName_forWhichNotToOutputColumnNameInPill,
+                sharedPage,
+                false,
+                'filter-bar-fixed-bottom'
+            ) }}
+        {% endif %}
+
+        <div class="gist-content" longDesc="{{ metaDescription }}">
+            <div class="gist-container-fluid">
+                <div class="gist-loading">
+                    {% include '../partials/loading.njk' %}
+                </div>
+
+                <div class="gist-no-data" style="display:none">
+                    {% include '../partials/no-data.njk' %}
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="pagination-page-dropdown pull-left"></div>
+                        <div class="pagination-limit-dropdown filter-count gist-pull-right"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="gallery"></div>
+                        {% include "../partials/accessibility/skip-to-page-top.njk" %}
+                        <nav class="gallery-pagination"></nav>
+                    </div>
+                </div><!-- .row -->
+            </div><!-- .gist-container-fluid -->
+        </div><!-- .gist-content -->
+    </section>
+
+    {{ script | safe }}
+
+    {% include '../partials/analytics.njk' %}
+
+{% endblock %}
+
+{% block footer %}
+    {% if not isFilterActive %}
+        {% include '../partials/footer.njk' %}
+    {% endif %}
+{% endblock %}
+
+{% block inlineScript %}
+    {{ super() }}
+
+    <script type="text/javascript" src="/vendors/scrollmagic/scrollmagic/minified/ScrollMagic.min.js"></script>
+    <script type="text/javascript" src="/javascripts/build/main/scroll-header.js"></script>
+
+    <script type="text/javascript" src="/vendors/nunjucks/browser/nunjucks-slim.min.js"></script>
+    <script type="text/javascript" src="/vendors/shave/dist/jquery.shave.min.js"></script>
+    <script type="text/javascript" src="/javascripts/build/fe-templates.js"></script>
+
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/html-visualization.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/pagination.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/limit-dropdown.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/page-dropdown.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/nav.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/gallery/gallery.js"></script>
+
+    <script>
+        (function () {
+            window.arrays = window.arrays || {};
+            window.arrays.defaultInstanceId = '{{ viewInstanceId }}';
+            window.arrays.viewOptions = window.arrays.viewOptions || {};
+
+            window.arrays.viewOptions['{{ viewInstanceId }}'] = {
+                viewOptions: {{ viewOptions | dump | safe }},
+                routePath_base: '{{ routePath_base }}',
+                array_source_key: '{{ array_source_key }}',
+                filterObj: {{ filterObj | dump | safe }},
+                searchQ: '{{ searchQ }}',
+                searchCol: '{{ searchCol }}',
+                sortDirection: '{{ sortDirection }}',
+                sortBy: '{{ sortBy }}',
+                limit: '{{ limit }}',
+                sharedPage: {{ sharedPage }},
+                sharedPageId: '{{ sharedPageId }}',
+                preview: '{{ isPreview }}',
+                revision: '{{ revision }}',
+                fieldKey_objectTitle: '{{ fieldKey_objectTitle }}',
+                defaultSortByColumnName_humanReadable: '{{ defaultSortByColumnName_humanReadable }}',
+                sortBy_realColumnName: '{{ sortBy_realColumnName }}',
+                secondaryCol: '{{ secondaryCol }}',
+                galleryStyle: '{{ galleryStyle }}',
+                secondaryColumnTileDisplay: '{{ secondaryColumnTileDisplay }}',
+                secondaryColumnTileShow: {{ secondaryColumnTileShow }},
+                datasetId: '{{ datasetId }}',
+                title: '{{ arrayTitle }}',
+                format: '{{ format }}',
+                subdomain: '{{ subdomain }}',
+                puppeteer: {{ (puppeteer and not puppeteerScreenshot) | default(false) }},
+                environment: '{{ env.NODE_ENV }}',
+                isEmbed: {{ isEmbed }},
+            };
+        })();
+    </script>
+
+    <script type="text/javascript" src="/javascripts/build/core-views/gallery/gallery-main.js"></script>
+    <script type="text/javascript" src="/javascripts/build/core-views/gallery/gallery-init.js"></script>
+{% endblock %}

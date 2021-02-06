@@ -1,0 +1,26 @@
+<div class="modal header-modal fade" id="headerModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+          <button type="button" class="gist-close" data-dismiss="modal" aria-label="Close"><span class="gist-icon-close-big" aria-hidden="true"></span></button>
+          <h1 class="gist-title">{{ arrayTitle }}{% if isPreview %}<span class="preview-indicator"> (preview)</span>{% endif %}</h1>
+      </div>
+
+      <div class="modal-body">
+        <ul>
+          {% if team.subdomain | length %}<li class="modal-header-label">Team</li>
+          <li><a class="color-brand source-underline" href="{{ addSubdomain(team.subdomain) }}">{{ team.title }}</a></li>{% endif %}
+          {% if sourceDocURL %}<li class="modal-header-label">Source</li>
+          <li><a href="{{ sourceDocURL }}" target="_blank" rel="noopener noreferrer" class="array-meta-about color-brand source-underline">{{ sourceDocURL }}</a></li>{% endif %}
+          <li class="modal-header-label">Last Updated</li>
+          <li class="array-meta-updated">Updated {{ sourceDoc.dateOfLastImport | dateFormattedAs_monthDayYear_array }}</li>
+          <li class="modal-header-label">Number of Items</li>
+          <li>{{ sourceDoc.numberOfRows | formatIntegerWithCommas }}</li>
+          {% if description %}<li class="modal-header-label">Description</li>
+          <li><p class="gist-visualization-description">{{description}}</p></li>{% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

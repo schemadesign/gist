@@ -1,0 +1,171 @@
+/* @override
+	http://localhost:9080/stylesheets/module/choropleth.css */
+
+.gist-map-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.gist-map,
+.gist-map.mapboxgl-map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.array-choropleth .gist-sort-bar {
+    border-bottom-style: none;
+}
+
+.gist-map--no-data .gist-content .gist-map,
+.gist-map--no-data .gist-legend {
+    display: none;
+}
+
+.gist-map--no-data .gist-legend-opened .gist-no-data {
+    width: 100%;
+}
+
+.gist-map--no-data .gist-chart-container {
+    min-height: 50px;
+}
+
+.gist-map--no-data .gist-no-data-message,
+.gist-map--undisplayable-data .gist-undisplayable-data-message {
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* @Description Div Wrapper */
+.map-description-wrapper {
+    background-color: #ffffff;
+    z-index: 1;
+    position: relative;
+    overflow: auto;
+    border-bottom: 1px solid var(--color-divider);
+}
+
+.map-description-wrapper {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.map-container .dropdown-toggle {
+    margin-right: 10px;
+}
+
+/* @group Map popups */
+
+.mapboxgl-map {
+    font-size: inherit;
+}
+
+.mapboxgl-popup {
+    z-index: 1;
+}
+
+.mapboxgl-popup-content {
+    padding: 0;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    box-shadow: var(--box-shadow-tooltip);
+    font-size: 1.25em;
+    font-family: var(--font-family-centrano2);
+    line-height: 1.125;
+    max-width: 350px;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+    position: relative;
+    border-top-color: #eeeeee;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip::before {
+    position: absolute;
+    top: -11px;
+    left: -10px;
+    border: 10px solid transparent;
+    border-top-color: #ffffff;
+    border-bottom: none;
+    content: '';
+}
+
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+    position: relative;
+    border-right-color: #eeeeee;
+}
+
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip::before {
+    position: absolute;
+    top: -10px;
+    left: 1px;
+    border: 10px solid transparent;
+    border-right-color: #ffffff;
+    border-left: none;
+    content: '';
+}
+
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+    position: relative;
+    border-left-color: #eeeeee;
+}
+
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip::before {
+    position: absolute;
+    top: -10px;
+    left: -11px;
+    border: 10px solid transparent;
+    border-right: none;
+    border-left-color: #ffffff;
+    content: '';
+}
+
+.popup-key {
+    display: block;
+    padding: 0.5em;
+    color: #4a4a4a;
+    font-weight: 600;
+}
+
+.popup-value {
+    display: block;
+    padding: 0 0.5em 0.5em;
+    color: var(--color-text-dark);
+}
+
+/* @end Map popups */
+
+/* Map Legend */
+.gist-legend-opened .gist-map {
+    width: calc(100% - var(--legend-width));
+}
+
+@media (max-width: 767px) {
+    .gist-legend-opened .gist-map {
+        width: 100%;
+        position: static;
+    }
+
+    .gist-legend-opened .gist-content {
+        height: calc(100% - 100px);
+    }
+
+    /* Hide map box logos since they are absolute positioned at bottom of the page */
+    .gist-legend-opened .gist-map .mapboxgl-ctrl-bottom-left,
+    .gist-legend-opened .gist-map .mapboxgl-ctrl-bottom-right {
+        display: none;
+    }
+
+    .gist-legend-opened .gist-map-container {
+        overflow-y: scroll;
+    }
+
+    .mapboxgl-popup-content {
+        max-width: 200px;
+    }
+
+    .mapboxgl-popup-content div {
+        padding: 0;
+    }
+}

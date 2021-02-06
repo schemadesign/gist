@@ -1,0 +1,6 @@
+<div class="aa-performance-tile" ng-class="{ 'no-data': !data, loading: data.loading }">
+    <header>{{ title }}</header>
+    <span class="angular-spinner" us-spinner="{radius: 5, width: 2, length: 5}" spinner-on="data.loading"></span>
+    <div class="primary">{{ filterData(data.primary) }}</div>
+    <div class="secondary">{{ filterData(data.secondary) }}</div>
+</div>

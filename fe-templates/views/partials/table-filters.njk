@@ -1,0 +1,9 @@
+{% for columnName in meta.columnNames %}
+    <th class="table-head" scope="col" style="width: {{ columnName.width }}; min-width: {{ columnName.minWidth }};">
+        {% set searchCol = dataSource.fe_displayTitleOverrides[options.searchCol] or options.searchCol %}
+        {# placeholder for the autocomplete #}
+        <div class="ui-widget">
+            <input type="text" class="table-column-filter" id="{{ columnName.name }}" data-l10n-id="search" value="{{ options.searchQ if searchCol == columnName.name }}" role="textbox">
+        </div>
+    </th>
+{% endfor %}

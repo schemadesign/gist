@@ -1,0 +1,19 @@
+.gist-bubble-chart .gist-content {
+    position: relative;
+    overflow: hidden;
+}
+
+#bubble-chart {
+    height: calc(100vh - 360px);
+    min-height: 400px;
+}
+
+.bubble-chart circle.bubble {
+    stroke: #fff;
+    stroke-width: 1;
+    opacity: 1.0 !important;
+}
+
+body.puppeteer #bubble-chart {
+    height: calc(100vh - 125px);
+}

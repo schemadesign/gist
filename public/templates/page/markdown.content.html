@@ -1,0 +1,15 @@
+<md-content layout-padding md-no-ink>
+    <form id="form-container" name="markdownForm" ng-submit="submitForm()" autocomplete="off">
+        <div layout-gt-xs="row" layout-xs="column">
+            <md-input-container md-no-float flex flex-gt-xs="66">
+                <label>Page Title</label>
+                <input required name="title" ng-model="page.pageTitle" submitting-flag="submitting" aria-label="Title" placeholder="Title" ng-change="checkSlug()">
+                <div ng-messages="markdownForm.title.$error">
+                    <p ng-message="unique">This title is not available.</p>
+                    <p ng-message="required">This field is required.</p>
+                    <p ng-message="pattern">Slug name must be lowercase and not contain any whitespace or special characters.</p>
+                </div>
+            </md-input-container>
+        </div>
+    </form>
+</md-content>

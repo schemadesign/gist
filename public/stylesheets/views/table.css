@@ -1,0 +1,123 @@
+div.table {
+    border: 1px solid var(--color-divider);
+    overflow-x: auto;
+}
+
+.gist-site-content.preview div.table {
+    width: calc(100vw - 30px);
+    max-height: calc(100vh - 65px);
+}
+
+tr.table-row {
+    display: flex;
+}
+
+table.table {
+    min-width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    display: block;
+}
+
+.table thead {
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+}
+
+.table-row.table-headings {
+    display: flex;
+}
+
+.table tbody {
+    /* header + 12 rows */
+    max-height: 417px;
+    display: block;
+}
+
+.gist-table td.table-data,
+.gist-table th.table-head {
+    font-size: 1em;
+    line-height: 1.15em;
+    min-width: 160px;
+    padding: 4px 4px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    /*bootstrap conflict*/
+    border-top: 0 !important;
+}
+
+.table th.table-head {
+    border-bottom: 1px solid var(--color-divider);
+}
+
+tr:nth-child(odd) {
+    background-color: var(--color-background);
+}
+
+th.table-head.sorted-by {
+    background-color: #e5e5e5;
+}
+
+th.table-head.sorted-by a {
+    font-weight: 800;
+}
+
+th.table-head a,
+th.table-head {
+    color: var(--color-text-dark);
+    font-weight: 600;
+}
+
+td.table-data {
+    color: var(--color-text-dark);
+}
+
+/* jQuery UI Autocomplete overrides / additions */
+.ui-autocomplete-loading {
+    background: white url('/images/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button {
+    font-family: inherit !important;
+    width: 100%;
+}
+
+.ui-widget {
+    font-family: inherit !important;
+}
+
+body.puppeteer #table {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body.puppeteer #table tbody {
+    max-height: 660px;
+}
+
+.table-data__no-results {
+    font-weight: bold;
+}
+
+.table-data-link {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+}
+
+.table-data-link img {
+    max-width: 100%;
+}
+
+.puppeteer-full-screenshot .table tbody {
+    max-height: none;
+}

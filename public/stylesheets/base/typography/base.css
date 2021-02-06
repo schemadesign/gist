@@ -1,0 +1,14 @@
+/* @override
+  http://app.local.arrays.co:9080/stylesheets/base/typography/base.css */
+
+@import url('./font-faces.css');
+@import url('./main.css');
+
+body {
+    font-family: var(--font-family-centrano2);
+    font-size: 14px;
+
+    /* Render fonts thinner and smoother */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

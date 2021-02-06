@@ -1,0 +1,52 @@
+<div class="edit-div">
+
+	<h2 class="story-metadata-title">{{storyTitle }}</h2>
+	<span class="story-metadata">{{storyMetadata}}</span>
+    <!-- <p>{{story}}</p> -->
+	<a class="pointer" ng-href=" {{teamSubdomain + '/s/' + storySharedPage }} " target="_blank">View Insight</a>
+</div>
+
+<div class="detail-image-placeholder" ng-if="makeBannerUrl">
+    <img ng-src="{{ makeBannerUrl }}">
+</div>
+
+
+<form class="story-form" ng-submit="update()" name="storyForm" autocomplete="off">
+	<md-input-container class="md-block">
+		<label>Title</label>
+		<input required name="title" ng-model="story.title" maxlength="48">
+		<div ng-messages="storyForm.title.$error">
+		   <div ng-message="required">This is required.</div>
+		</div>
+	</md-input-container>
+
+	<md-input-container class="md-block">
+		<label>Description</label>
+		<textarea name="description" ng-model="story.caption"></textarea>
+	</md-input-container>
+
+  <md-checkbox class="margin-bottom-3x"
+    name="isPublic"
+    ng-model="story.isPublic"
+    aria-label="Display in Insight Explorer"
+  >
+    Display in Insight Explorer
+  </md-checkbox>
+
+	<div layout="row" layout-align="end center">
+       <md-button class="md-dashboard confirm margin-right" type="submit" ng-disabled="storyForm.$invalid || !storyForm.$dirty">
+           <span class="btn-label">Save</span>
+       </md-button>
+
+        <md-button class="md-dashboard cancel" ng-click="cancel()">
+            <span class="btn-label">Cancel</span>
+        </md-button>
+
+
+   </div>
+
+</form>
+
+
+
+

@@ -1,0 +1,45 @@
+<div>
+    <div>
+        <input type="file" accept="image/svg+xml,image/jpeg,image/png,image/gif,image/bmp" id="icons" nv-file-select="" uploader="$ctrl.uploader" multiple class="team-uploader">
+        <label for="icons" class="md-button md-dashboard btn-label margin-bottom-2x">{{ $ctrl.buttonLabel || 'Add' }}</label>
+    </div>
+
+    <ul class="dashboard-list user-list" ui-sortable="$ctrl.sortableOptions" ng-model="$ctrl.sources">
+        <li ng-repeat="src in $ctrl.sources" layout="row" layout-align="none center">
+            <div flex="10">
+                <div class="thumb" style="background-image: url('{{ src }}')"></div>
+            </div>
+
+            <span flex ng-style="{ 'cursor': $ctrl.isSortable ? 'move': 'default' }">
+                <span class="dashboard-list-name">{{ src | getFilenameWithoutExt }}</span>
+            </span>
+
+            <span flex="5"></span>
+
+            <span class="dashboard-list-icon warn remove" ng-click="$ctrl.delete(src)" aria-hidden="true" aria-label="Delete" flex="5">
+                <i class="fa fa-remove" aria-hidden="true"></i>
+            </span>
+        </li>
+    </ul>
+
+    <ul class="dashboard-list user-list" ng-cloak>
+        <li ng-repeat="item in $ctrl.uploader.queue track by $index" layout="row" layout-align="none center" ng-hide="item.isSuccess">
+
+            <div flex="10"></div>
+
+            <span ng-class="{'pending': item.isUploading }" flex="40">
+                <span class="dashboard-list-name">{{ item.file.name }}</span>
+            </span>
+
+            <div ng-show="$ctrl.uploader.isHTML5" ng-hide="item.isSuccess" class="progress-container" draggable="" flex="40">
+                <md-progress-linear md-mode="{{ progressMode }}" value="{{ item.progress }}"></md-progress-linear>
+            </div>
+
+            <span flex="5"></span>
+
+            <span class="dashboard-list-icon warn remove" ng-click="item.cancel()" ng-hide="!item.isUploading" aria-hidden="true" aria-label="Cancel Upload" flex="5">
+                <i class="fa fa-remove" aria-hidden="true"></i>
+            </span>
+        </li>
+    </ul>
+</div>

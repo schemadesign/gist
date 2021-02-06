@@ -1,0 +1,19 @@
+<md-content layout-padding md-no-ink ng-form="datasetFiltersCtrl.form">
+    <h3>Select Your Filters</h3>
+
+    <ng-include
+        src="'javascripts/dashboard/routes/dataset/one/filters/field-filters.template.html'"
+        md-no-ink
+        ng-if="user.role !== 'superAdmin'"
+    ></ng-include>
+
+    <md-tabs md-dynamic-height md-no-ink ng-if="user.role === 'superAdmin'" class="padding-top-0">
+        <md-tab label="Fields">
+            <ng-include src="'javascripts/dashboard/routes/dataset/one/filters/field-filters.template.html'"></ng-include>
+        </md-tab>
+
+        <md-tab label="Global">
+            <ng-include src="'javascripts/dashboard/routes/dataset/one/filters/global-filters.template.html'"></ng-include>
+        </md-tab>
+    </md-tabs>
+</md-content>

@@ -1,0 +1,5 @@
+<div style="position: relative" ng-class="{ 'aa-visualization-loading': (loading || error), 'aa-visualization-no-data': !data }">
+    <span class="angular-spinner" us-spinner="{radius: 5, width: 2, length: 5}" spinner-on="loading"></span>
+    <div class="aa-visualization-error-message" ng-if="error">{{ error }}</div>
+    <ng-include src="visualizationTemplateUrl"></ng-include>
+</div>

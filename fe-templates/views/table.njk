@@ -1,0 +1,15 @@
+<div class="table" data-length="{{meta.numberOfResults}}">
+    <table class="table">
+        <thead>
+            <tr class="table-row table-headings">
+                {% include "views/partials/table-head.njk" %}
+            </tr>
+            <tr class="table-row table-filters">
+                {% include "views/partials/table-filters.njk" %}
+            </tr>
+        </thead>
+        <tbody>
+            {% include "views/partials/table-body.njk" %}
+        </tbody>
+    </table>
+</div>

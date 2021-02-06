@@ -1,0 +1,27 @@
+<md-dialog md-no-ink aria-label="Delete User">
+    <aa-toolbar title="Delete User" class="warn"></aa-toolbar>
+
+    <md-dialog-content layout-padding>
+        <md-content layout="column">
+            <p>
+                Are you sure you want to remove user
+                <span ng-if="(person.firstName || person.lastName)"><strong>{{person.firstName}} {{person.lastName}}</strong></span>
+                <span ng-if="!(person.firstName || person.lastName)"><strong>{{ person.email }}</strong></span>
+                from <strong>{{team.title}}</strong>?
+            </p>
+            <p>
+                They will no longer be able to access the team and any associated visualizations.
+                Ownership of any associated visualizations will be transferred to the team's admin.
+            </p>
+        </md-content>
+        <md-dialog-actions layout="row" layout-align="end center">
+            <md-button class="md-dashboard md-warn" ng-click="hide()">
+                <span class="btn-label">Remove User</span>
+            </md-button>
+            <md-button class="md-dashboard" ng-click="cancel()">
+                Cancel
+            </md-button>
+        </md-dialog-actions>
+    </md-dialog-content>
+
+</md-dialog>

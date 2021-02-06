@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  web:
+    container_name: gist
+    image: 022528540894.dkr.ecr.us-west-2.amazonaws.com/gist:latest
+
+    depends_on:
+      - mongodb
+      - redis
+
+    networks:
+      app_net:
+
+    volumes:
+      - ./ssl:/src/config/ssl
+
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - MONGODB_URI=mongodb://mongodb/arraysdb
+
+    env_file: .env
+
+    ports:
+      - "80:80"
+      - "443:443"
+
+    restart: always
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:3.4
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      app_net:
+
+    volumes:
+      - ./data/db:/data/db
+
+  redis:
+    container_name: redis
+    image: redis:3.2.4
+    restart: always
+    networks:
+      app_net:
+
+networks:
+  app_net:

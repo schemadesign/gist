@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Keywords helpers processKeywords should return  integer keywords 1`] = `
+Array [
+  Object {
+    "count": 3,
+    "word": "1",
+  },
+  Object {
+    "count": 1,
+    "word": "2",
+  },
+]
+`;
+
+exports[`Keywords helpers processKeywords should return currency keywords 1`] = `
+Array [
+  Object {
+    "count": 2,
+    "word": "0.2 $",
+  },
+  Object {
+    "count": 1,
+    "word": "0.1 $",
+  },
+  Object {
+    "count": 1,
+    "word": "0.5 $",
+  },
+]
+`;
+
+exports[`Keywords helpers processKeywords should return dates keywords 1`] = `
+Array [
+  Object {
+    "count": 2,
+    "word": "2019",
+  },
+  Object {
+    "count": 1,
+    "word": "-566",
+  },
+]
+`;
+
+exports[`Keywords helpers processKeywords should return float keywords 1`] = `
+Array [
+  Object {
+    "count": 2,
+    "word": "0.2",
+  },
+  Object {
+    "count": 1,
+    "word": "0.1",
+  },
+  Object {
+    "count": 1,
+    "word": "0.5",
+  },
+]
+`;
+
+exports[`Keywords helpers processKeywords should return percent keywords 1`] = `
+Array [
+  Object {
+    "count": 2,
+    "word": "20%",
+  },
+  Object {
+    "count": 1,
+    "word": "10%",
+  },
+  Object {
+    "count": 1,
+    "word": "50%",
+  },
+]
+`;
+
+exports[`Keywords helpers processKeywords should return string keywords 1`] = `
+Array [
+  Object {
+    "count": 2,
+    "word": "word",
+  },
+  Object {
+    "count": 1,
+    "word": "some",
+  },
+  Object {
+    "count": 1,
+    "word": "words",
+  },
+]
+`;
+
+exports[`Keywords helpers should return keywords 1`] = `
+Object {
+  "body": Array [
+    Object {
+      "count": 3,
+      "word": "fire",
+    },
+    Object {
+      "count": 3,
+      "word": "grass",
+    },
+    Object {
+      "count": 3,
+      "word": "water",
+    },
+  ],
+  "statusCode": 200,
+}
+`;

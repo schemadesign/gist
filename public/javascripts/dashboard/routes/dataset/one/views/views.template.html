@@ -1,0 +1,62 @@
+<md-content layout-padding>
+    <div layout="row" layout-align="space-between center">
+        <h3>Configure Your Views</h3>
+
+        <md-button
+            ng-if="datasetViewsCtrl.canEditGeneralSettings"
+            class="md-dashboard"
+            ng-click="datasetViewsCtrl.openGeneralSettingsDialog($event)"
+            style="margin-top: 10px;"
+        >
+            <span class="btn-label">General Settings</span>
+        </md-button>
+    </div>
+
+    <p class="padding-top-0">Publish one or more views to visualize your data. Select and edit the views you want to
+                             include below. Click General Settings to make changes that apply to all views.</p>
+
+    <ul class="dataset-view-tiles pad-top-4x" layout="row" layout-wrap layout-margin ng-cloak>
+        <li flex="30">
+            <aa-dataset-view-tile
+                view-display-name="'API'"
+                on-click-fn="datasetViewsCtrl.openAPIDialog"
+                is-visible="true"
+                is-default-view="false"
+                show-options-menu="false"
+            ></aa-dataset-view-tile>
+        </li>
+        <li ng-if="!team.isEnterprise" flex="30">
+            <aa-dataset-view-tile
+                view-display-name="'Detail View'"
+                view-thumbnail="'/images/view-thumbnails/object-detail.png'"
+                on-click-fn="datasetViewsCtrl.openDetailDialog"
+                is-visible="true"
+                is-default-view="false"
+                show-options-menu="false"
+            ></aa-dataset-view-tile>
+        </li>
+        <li
+            ng-repeat="view in ::datasetViewsCtrl.views | orderBy: 'name' track by $index"
+            flex="30"
+        >
+            <aa-dataset-view-tile
+                view-name="::view.name"
+                view-display-name="::view.displayAs"
+                view-thumbnail="datasetViewsCtrl.getThumbnail(view)"
+                on-click-fn="datasetViewsCtrl.openViewEditor"
+                on-click-args="[view]"
+                is-visible="datasetOneCtrl.dataset.fe_views.views[view.name].visible"
+                is-default-view="datasetOneCtrl.dataset.fe_views.default_view === view.name"
+                show-options-menu="true"
+                on-visibility-change="datasetViewsCtrl.setViewVisibility(view, visibility)"
+                on-set-default="datasetViewsCtrl.setDefaultView(viewName)"
+            ></aa-dataset-view-tile>
+        </li>
+    </ul>
+</md-content>
+
+<div class="preview-overlay" ng-show="datasetViewsCtrl.shouldShowPreviewOverlay()" layout layout-align="center center">
+    <md-progress-circular md-mode="indeterminate" />
+</div>
+
+<div ui-view />

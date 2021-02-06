@@ -1,0 +1,144 @@
+{% macro default(user, team, env, isPreview=false, isPublic=true, sharedPage=false, isVisualization=true, storiesCount=0, arrayTitleEscaped='', downloadable=false, canCreateInsight=false) %}
+    <ul class="nav navbar-nav navbar-right hide-mobile">
+        {# Login / Signup links #}
+        {% if not user and isVisualization %}
+            <li class="w-login-container">
+                <a class="pill-link" href="/auth/login">Log In</a>
+            </li>
+        {% endif %}
+
+        {# Profile Menu #}
+        {% if user %}
+            <li class="gist-dropdown navbar-main-menu">
+                {% if user %}
+                    <a href="#" class="dropdown-toggle user-initial-nav" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false" aria-label="Main Menu" title="Main Menu">
+                        <span class="user-initial">{{ user.firstName | initial }}</span>
+                    </a>
+                {% else %}
+                    <a href="#" class="dropdown-toggle color-brand-hover" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false" aria-label="Main Menu" title="Main Menu">
+                        <span class="gist-icon-menu"></span>
+                    </a>
+                {% endif %}
+                <ul class="dropdown-menu">
+                    {% if not isVisualization and user and team and team.subdomain %}
+                        <li class="background-color-brand-hover">
+                            <a href="{{ addSubdomain(team.subdomain) }}">More from {{ team.title }}</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                    {% endif %}
+
+                    <li class="background-color-brand-hover"><a href="/dashboard">Dashboard</a></li>
+                    </li>
+                    <li class="background-color-brand-hover"><a href="#" class="gist-logout-link">Log Out</a></li>
+                </ul>
+            </li>
+        {% endif %}
+        {# End Profile Menu #}
+
+        {# Visualization Menu #}
+        {% if isVisualization or (not isVisualization and not user) %}
+            <li class="gist-dropdown navbar-visualization-menu">
+                <a href="#" class="dropdown-toggle navbar-more-actions" data-toggle="dropdown" role="button"
+                   aria-haspopup="true" aria-expanded="false" aria-label="More" title="More">
+                    <span class="gist-icon-meta-sublist dropdown-toggle-icon" aria-hidden="true"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    {% if isVisualization %}
+                        <li class="background-color-brand-hover">
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#headerModal"
+                               class="array-meta-about">About</a>
+                        </li>
+                        {% if canCreateInsight %}
+                            <li class="background-color-brand-hover">
+                                <a id="gist-create-story" href="javascript:void(0)">Create New Insight</a>
+                            </li>
+                        {% endif %}
+                        <li class="background-color-brand-hover">
+                            <a id="gist-explore-stories"
+                               href="{{ addSubdomain(team.subdomain) }}{{ '/insights?vizName=' + arrayTitleEscaped }}"
+                               class="{{ 'hide' if storiesCount == 0 else '' }}"
+                            >Explore Insights</a>
+                        </li>
+                        {% if downloadable %}
+                            <li class="background-color-brand-hover">
+                                <a class="gist-download-link" href="javascript:void(0)">Download Data</a>
+                            </li>
+                        {% endif %}
+                        <li class="background-color-brand-hover">
+                            <a class="gist-download-current-view">Download Current View</a>
+                        </li>
+
+                        {% if not isPreview and isPublic %}
+                            <li class="background-color-brand-hover"><a href="#" class="gist-share-link">Share</a></li>
+                        {% endif %}
+                    {% endif %}
+                    {% if team and team.subdomain %}
+                        <li class="background-color-brand-hover"><a href="{{ addSubdomain(team.subdomain) }}">More
+                                                                                                              from {{ team.title }}</a></li>
+                    {% endif %}
+
+                    {% if not user %}
+                        <li role="separator" class="divider"></li>
+                        <li class="background-color-brand-hover"><a href="{{ explore_url }}">Explore Visualizations</a>
+                        </li>
+                    {% endif %}
+
+                    {% if not user and not isVisualization %}
+                        <li role="separator" class="divider"></li>
+                        <li class="background-color-brand-hover"><a href="/auth/login">Log In</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+        {% endif %}
+        {# End Visualization Menu #}
+    </ul>
+
+    {# Mobile Menu #}
+    <div class="w-nav-burger array-burger"><a class="w-burger-menu" href="#">
+            <i id="menu-expand" class="gist-icon-menu"></i>
+        </a></div>
+
+    <div class="w-nav-overlay array-nav-overlay">
+        <nav class="mobile-nav-menu">
+            <a href="javascript:void(0)" data-toggle="modal" data-target="#headerModal"
+               class="w-mobile-link array-meta-about">About</a>
+            {% if canCreateInsight %}
+                <a id="gist-create-story" href="javascript:void(0)" class="w-mobile-link">Create New Insight</a>
+            {% endif %}
+            {% if storiesCount > 0 %}
+                <a id="gist-explore-stories"
+                   href="{{ addSubdomain(team.subdomain) }}{{ '/insights?vizName=' + arrayTitleEscaped }}"
+                   class="w-mobile-link stories-link">Explore Insights</a>
+            {% endif %}
+
+            <a class="w-mobile-link gist-download-current-view">Download Current View</a>
+
+            {% if not isPreview and isPublic and not sharedPage and isVisualization %}
+                <a href="#" class="w-mobile-link gist-share-link">Share</a>
+            {% endif %}
+
+            {% if team and team.subdomain %}
+                <a href="{{ addSubdomain(team.subdomain) }}" class="w-mobile-link">More from {{ team.title }}</a>
+            {% endif %}
+
+            {% if user %}
+                <a class="w-mobile-link" href="/dashboard">Dashboard</a>
+                <a class="w-mobile-link gist-logout-link" href="#">Log Out</a>
+            {% endif %}
+
+            <li role="separator" class="divider"></li>
+
+            {% if not user %}
+                <a class="w-mobile-link" href="{{ explore_url }}">Explore Visualizations</a>
+            {% endif %}
+
+            {% if not user %}
+                <a class="w-mobile-link" href="/auth/login">Log In</a>
+            {% endif %}
+        </nav>
+    </div>
+    {# End Mobile Menu #}
+
+{% endmacro %}

@@ -1,0 +1,148 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Insight</title>
+    <meta name="description" content="Insight Fullscreen">
+    <meta name="author" content="Schema">
+
+    <link rel="stylesheet" href="/stylesheets/views/presentation.css">
+</head>
+
+<body>
+
+    <div id="page">
+
+
+        <div id="fullscreen-top">
+            <a href="#" class="icon" id="minimize-icon"><img src="/images/presentation/icon-minimize-white.svg"></a>
+        </div><!-- #fullscreen-top -->
+
+        <header id="header">
+
+            <div id="header-top">
+                <div id="logo-center">
+                    <a href="/" class="icon"><img src="/images/presentation/logo-light.png"></a>
+                </div><!-- #logo-->
+            </div><!-- #header-top -->
+
+            <div id="header-inner">
+                <div id="logo">
+                    <a href="/" class="icon"><img src="/images/presentation/logo-light.png"></a>
+                </div><!-- #logo-->
+
+                <div id="info">
+                    <ul>
+                        <li id="title">{{title}}</li>
+                        <li id="author">{{createdBy.firstName}} {{createdBy.lastName}}</li>
+                        <li id="separator">|</li>
+                        <li id="date">{{createdAt | dateFormattedAs_monthDayYear_array}}</li>
+                    </ul>
+                </div><!-- #info-->
+
+                <div id="icons">
+                    <ul id="icons-inner">
+                        <li><a href="#" class="icon" id="fullscreen-icon"><img src="/images/presentation/icon-fullscreen-white.svg"></a></li>
+                        <li><a href="/?viewBy=stories&vizName={{datasourceDescription.uid}}" class="icon"><img src="/images/presentation/icon-close-white.svg"></a></li>
+                    </ul>
+                </div><!-- #icons-->
+            </div><!-- #header-inner -->
+
+        </header><!-- #header -->
+
+        <main id="content">
+
+            <div id="fullscreen">
+                <div id="fullscreen-inner">
+
+                    <div class="slides">
+                        <div class="slide text-slide">
+                            <div class="attribution">{{createdBy.firstName}} {{createdBy.lastName}} | {{createdAt | dateFormattedAs_monthDayYear_array}}</div>
+                            <div class="title">{{title}}</div>
+                        </div>
+                        {% for sharedPage in sharedPages %}
+                            {% if isDev %}
+                                {% set slideUrl = 'https://source.unsplash.com/random/1920x' + (1080 + loop.index) %}
+                            {% else %}
+								{% set slideUrl =  sharedPage.imageUrl %}
+                            {% endif %}
+                            <div class="slide hidden" style="background-image: url({{slideUrl}});" ></div>
+                        {% endfor %}
+                    </ul><!-- #slides -->
+
+                </div><!-- #fullscreen-inner -->
+            </div><!-- #fullscreen -->
+
+
+            <div id="footer">
+                <div id="footer-inner">
+                    <div class="footer-slide">
+                        <div class="column columns-7 left-column">
+                            <p class="notes">{{caption}} </p>
+                        </div>
+                        <div class="column columns-3">&nbsp;</div>
+                        <div class="column columns-2">
+                            <ul class="slide-number">
+                                <li class="slide-current">1</li>
+                                <li>/</li>
+                                <li class="slide-total">{{sharedPages.length + 1}}</li>
+                        </div>
+                    </div>
+                    {% for sharedPage in sharedPages %}
+                        <div class="footer-slide hidden">
+                            <div class="column columns-7 left-column">
+                                <p class="notes">{{sharedPage.annotation}}&nbsp;</p>
+                            </div>
+                            <div class="column columns-3">&nbsp;</div>
+                            <div class="column columns-2">
+                                <ul class="slide-number">
+                                    <li class="slide-current">{{loop.index + 1}}</li>
+                                    <li>/</li>
+                                    <li class="slide-total">{{sharedPages.length + 1}}</li>
+                            </div>
+                            <div class="column columns-1">&nbsp;</div>
+                            <div class="column columns-4">
+                                <table class="parameters">
+                                    {% for key, value in sharedPage.query %}
+                                        {% set regExp = r/ to / %}
+                                        {% if key === 'pageType' %}
+                                            <tr>
+                                                <td class="parameter-name">View</td>
+                                                <td class="parameter-value">{{value}}</td>
+                                            </tr>
+                                        {% elseif regExp.test(value) %}
+                                            <tr>
+                                                <td class="parameter-name">{{key}}</td>
+                                                <td class="parameter-value">{{value}}</td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+
+                    <div class="clr"></div>
+                </div><!-- #footer-inner -->
+            </div><!-- #footer -->
+
+        </main><!-- #content -->
+    </div><!-- #page -->
+
+
+    <script>
+        window.App = {
+            sharedPages: {{sharedPages | dump | safe}} // just in case we need it on the client side
+        };
+    </script>
+
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="/vendors/lodash/lodash.min.js"></script>
+    <script src="/vendors/screenfull/dist/screenfull.js"></script>
+    <script src="/javascripts/presentation/presentation.js"></script>
+</body>
+</html>

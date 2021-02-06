@@ -1,0 +1,82 @@
+{% macro default(label, key, selectedValue, columnNames, basePath, tailText, toggleButton=false, hasCaret=true) %}
+<div class="gist-dropdown sort-control">
+    {% if columnNames | length > 1 %}
+    <a class="btn dropdown-toggle {{ 'dropdown-toggle-button' if toggleButton }} {{ 'gist-dropdown-toggle-button-has-caret' if hasCaret }} ui-label group-by" type="button" id="{{ label|replace(' ','-') }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0">
+        <div class="dropdown-toggle-label">
+            <span class="label" data-l10n-id="{{label | replace(' ','-') | lower}}">{{ label }}</span> <span class="sort-criteria">{{ selectedValue }}</span>
+        </div>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="{{ label|replace(' ','') }}">
+        {% for colName in columnNames %}
+            <li class="background-color-brand-hover">
+                <a href="{{ basePath | constructedRoutePath(colName | createObject(key)) }}" title="{{ colName }}">{{ colName }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <span class="btn dropdown-toggle {{ 'dropdown-toggle-button' if toggleButton }} dropdown-toggle-empty ui-label group-by" id="{{ label|replace(' ','-') }}">
+        <div class="dropdown-toggle-label">
+            <span class="label" data-l10n-id="{{label | replace(' ','-') | lower}}">{{ label }}</span> <span class="sort-criteria">{{ selectedValue }}</span>
+
+        </div>
+    </span>
+    {% endif %}
+    {% if tailText %}
+    <span class="dropdown-tail-text">{{ tailText }}</span>
+    {% endif %}
+</div>
+{% endmacro %}
+
+{% macro sortbar(label, chartOption, selectedValue, columnNames, basePath, toggleButton=false, hasCaret=true) %}
+<div class="gist-dropdown sort-control">
+    {% if columnNames | length > 1 %}
+    <a class="btn dropdown-toggle {{ 'dropdown-toggle-button' if toggleButton }} {{ 'gist-dropdown-toggle-button-has-caret' if hasCaret }} ui-label group-by" type="button" id="{{ label|replace(' ','-') }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0">
+        <div class="dropdown-toggle-label">
+            <span class="label" data-l10n-id="{{label | replace(' ','-') | lower}}">{{ label }}</span>
+            <span class="sort-criteria"
+            {% if selectedValue == 'Y Axis' or selectedValue == 'X Axis' %} data-l10n-id="{{ selectedValue | replace(' ','-') | lower }}" {% endif %}
+            >{{ selectedValue }}</span>
+        </div>
+    </a>
+    <ul class="dropdown-menu chart-by-options" aria-labelledby="{{ label |replace(' ','') }}">
+        {% for colName in columnNames %}
+        <li class="background-color-brand-hover"><a data-attribute="{{ chartOption }}" href="{{ basePath | constructedRoutePath(colName | createObject(chartOption)) }}"
+        {% if colName == 'Y Axis' or colName == 'X Axis' %} data-l10n-id="{{ colName | replace(' ','-') | lower }}" {% endif %}
+        title="{{ colName }}">{{ colName }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <span class="btn dropdown-toggle {{ 'dropdown-toggle-button' if toggleButton }} dropdown-toggle-empty ui-label group-by" id="{{ label|replace(' ','-') }}">
+        <div class="dropdown-toggle-label">
+            <span class="label"  data-l10n-id="{{label | replace(' ','-') | lower}}">{{ label }}</span>
+            <span class="sort-criteria"
+            {% if selectedValue == 'Y Axis' or selectedValue == 'X Axis' %} data-l10n-id="{{ selectedValue | replace(' ','-') | lower }}" {% endif %}
+            >{{ selectedValue }}</span>
+        </div>
+    </span>
+    {% endif %}
+</div>
+{% endmacro %}
+
+{% macro axis(axis, label, selectedValue, columnNames, toggleButton=false, hasCaret=true) %}
+<div class="dropdown sort-control">
+    {% if columnNames | length %}
+    <a class="btn dropdown-toggle {{ 'dropdown-toggle-button' if toggleButton }} {{ 'gist-dropdown-toggle-button-has-caret' if hasCaret }} ui-label group-by" type="button" id="{{ label|replace(' ','-') }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0">
+        <div class="dropdown-toggle-label">
+            <span class="label">{{ label }}</span> <span class="sort-criteria {{ axis }}-axis-field">{{ selectedValue | replace(r/_/g, ' ') }}</span>
+        </div>
+    </a>
+    <ul class="dropdown-menu axis-control {{ axis }}-axis-control" aria-labelledby="{{ label|replace(' ','') }}">
+        {% for colName in columnNames %}
+        <li class="background-color-brand-hover"><a tabindex="0" data-axis="{{ axis }}" data-colname="{{ colName }}"  title="{{ colName | replace(r/_/g, ' ') }}">{{ colName | replace(r/_/g, ' ') }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <span class="btn dropdown-toggle {{ 'dropdown-toggle-button' if toggleButton }} dropdown-toggle-empty ui-label group-by" id="{{ label|replace(' ','-') }}">
+        <div class="dropdown-toggle-label">
+            <span class="label">{{ label }}</span> <span class="sort-criteria">{{ selectedValue }}</span>
+        </div>
+    </span>
+    {% endif %}
+</div>
+{% endmacro %}

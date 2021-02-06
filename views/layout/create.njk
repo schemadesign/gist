@@ -1,0 +1,45 @@
+{% set isTeamShowView = currentView == 'team-show' %}
+
+{% if not isTeamShowView %}
+    {% set font = "font-" + team.font %}
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+        {% include "../partials/base_header.njk" %}
+
+        {% block headSuffix %}{% endblock %}
+    </head>
+    <body class="array array-{{ currentView }} {{ font }}" >
+
+        <div id="page" class="site">
+            {% include "../partials/header-bar/blank.njk" %}
+
+            <div id="content" class="gist-site-content">
+                {% block content %}{% endblock %}
+            </div><!-- #content -->
+
+            {% include "../partials/footer.njk" %}
+        </div><!-- #page -->
+
+        {% include "../partials/survicate.njk" %}
+
+        <script type="text/javascript" src="/vendors/babel-polyfill/dist/polyfill.min.js"></script>
+        <script type="text/javascript" src="/vendors/lodash/lodash.min.js"></script>
+        <script type="text/javascript" src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/javascripts/build/main/namespaces.js"></script>
+        <script type="text/javascript" src="/javascripts/build/main/utils.js"></script>
+        <script type="text/javascript" src="/javascripts/build/main/banner.js"></script>
+        <script type="text/javascript" src="/javascripts/build/main/main.js"></script>
+        <script type="text/javascript" src="/javascripts/build/visualizations/constants.js"></script>
+
+        {% if isTeamShowView or currentView == 'create' %}
+            <script type="text/javascript" src="/javascripts/build/main/team-show.js"></script>
+        {% endif %}
+    </body>
+
+    {% if env.FE_LIVERELOAD == "true" %}
+        <script src="//localhost:35729/livereload.js"></script>
+    {% endif %}
+</html>

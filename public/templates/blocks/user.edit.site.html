@@ -1,0 +1,49 @@
+<div layout="row" layout-align="space-between center" class="no-padding">
+    <md-switch ng-model="userDialogCtrl.canCreateNewSite" ng-change="userDialogCtrl.toggleCanCreate('canCreateNewSite')" aria-label="Can Create New Site">
+        Allow this user to create new sites
+    </md-switch>
+</div>
+
+<div layout="row" layout-align="end end" class="pad-bottom-2x" ng-if="sites.length > 0">
+    <md-menu>
+        <md-button class="md-dashboard" aria-label="User actions menu" ng-click="$mdMenu.open()">
+            <span class="btn-label">Set all permissions&ensp;<i class="fa fa-caret-down" aria-hidden="true"></i></span>
+            <span class="md-select-icon" aria-hidden="true"></span>
+        </md-button>
+        <md-menu-content width="4" style="z-index: 99999 !important;">
+            <md-menu-item>
+                <md-button ng-click="makeAllRoles(userDialogCtrl.availableUserRoles[0].value, 'site')">
+                    Allow edit access for all
+                </md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button ng-click="makeAllRoles(userDialogCtrl.availableUserRoles[1].value, 'site')">
+                    Allow view access for all
+                </md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button ng-click="makeAllRoles(userDialogCtrl.availableUserRoles[2].value, 'site')">
+                    Disallow access for all
+                </md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+</div>
+
+<ul ng-hide="user.invited[person._id] || !sites.length" class="dashboard-list user-list no-padding">
+    <li ng-repeat="site in sites" layout="row" layout-align="center center">
+        <span flex="65">{{site.title}}</span>
+        <span flex="10"></span>
+
+        <md-select
+            ng-model="siteUserRoles[site._id]"
+            flex="25"
+            aria-label="User role"
+            name="role"
+            required
+            class="no-margin"
+        >
+            <md-option ng-repeat="role in userDialogCtrl.availableUserRoles" value="{{role.value}}" ng-disabled="{{ role.disabled }}">{{role.name}}</md-option>
+        </md-select>
+    </li>
+</ul>

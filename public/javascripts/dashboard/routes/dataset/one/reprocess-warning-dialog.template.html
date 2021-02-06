@@ -1,0 +1,21 @@
+<md-dialog md-no-ink aria-label="Your data will be re-processed">
+    <aa-toolbar title="Your data will be re-processed" class="warn"></aa-toolbar>
+
+    <md-dialog-content layout-padding>
+        <md-content layout="column">
+            <p>
+                Are you sure you want to save changes for <strong>{{title}}</strong>?
+            </p>
+            <p>
+                This will trigger re-processing of your data.
+            </p>
+            <p ng-if="willRemoveEditedContent">
+                Any changes you've made in the content tab will be permanently deleted.
+                If you'd like to keep a copy of your modified data, you can download the modified file from the
+                <a ui-sref="dashboard.dataset.one.upload" ng-click="cancel()">source tab</a>.
+            </p>
+        </md-content>
+
+        <aa-dialog-actions warn="Re-process"></aa-dialog-actions>
+    </md-dialog-content>
+</md-dialog>

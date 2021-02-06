@@ -1,0 +1,64 @@
+/* @override
+	http://schema.local.arrays.co:9080/stylesheets/views/array.css */
+
+.array-no-data .gist-site-content {
+
+}
+
+.gist-no-data-container, .gist-undisplayable-data-container, .gist-loading-container {
+    height: calc(100vh - 285px);
+    min-height: 50px;
+    position: relative;
+}
+
+.gist-no-data-message, .gist-undisplayable-data-message, .gist-loading-message {
+    font-size: 1.25em;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translate(0, -50%);
+    text-align: center;
+}
+
+#gist-noty {
+    position: absolute;
+    right: 20px;
+}
+
+.gist-skip-to-legend,
+.gist-skip-back-to-top,
+.gist-skip-to-top {
+    top: -1000px;
+    position: absolute;
+}
+
+.gist-skip-to-bottom {
+    left: -1000px;
+    position: absolute;
+}
+
+.gist-skip-to-legend:focus,
+.gist-skip-to-top:focus {
+    top: 0px;
+    left: 0px;
+}
+
+.gist-skip-to-bottom:focus {
+    left: 0px;
+}
+
+.gist-skip-back-to-top:focus {
+    top: 0px;
+    left: 5%;
+}
+
+.gist-image-with-fallback {
+    display: none;
+}
+
+.ellipsis-copy {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+}

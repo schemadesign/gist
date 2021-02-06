@@ -1,0 +1,39 @@
+.item-arrow {
+    display: flex;
+    position: fixed;
+    top: 50%;
+    background-color: #000;
+    opacity: 0.100000001;
+    transition: background-color 0.2s, opacity 0.2s;
+    border-radius: 50%;
+    color: #FFF;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-arrow:hover,
+.item-arrow:active,
+.item-arrow:focus {
+    background-color: #FA2900;
+    opacity: 0.800000012;
+    color: #FFF;
+    text-decoration: none;
+}
+
+.item-arrow--left {
+    left: 2em;
+}
+
+.item-arrow--right {
+    right: 2em;
+}
+
+.item-arrow--right .item-arrow__icon {
+    transform: rotate(180deg);
+}
+
+.item-arrow__icon {
+    cursor: pointer;
+}

@@ -1,0 +1,87 @@
+<header id="masthead" class="site-header hidden-print" role="banner">
+    <div class="w-nav">
+        <div class="w-container w-bottom-shadow">
+            <div class="container-fluid">
+                <div id="navbar" class="navbar-collapse collapse">
+                    <div ng-if="::isVisualizationEditor" layout="row" layout-align="space-between center">
+                        <div ng-if="!env.insight" class="arrays-logo ng-scope">
+                            <img sizes="(max-width: 767px) 100vw, 210px"
+                                 src="https://s3-us-west-2.amazonaws.com/arraysassets/Gist_h_rgb.svg" width="116">
+                        </div>
+                        <div>
+                            <md-button
+                                md-no-ink
+                                class="md-dashboard confirm"
+                                ng-click="goToList()"
+                                ng-if="$state.includes('dashboard.dataset.one')"
+                            >
+                                <span class="btn-label">Back to list</span>
+                            </md-button>
+
+                            <md-button
+                                md-no-ink
+                                class="md-dashboard confirm"
+                                ng-click="logout()"
+                            >
+                                <span class="btn-label">Log Out</span>
+                            </md-button>
+
+                        </div>
+                    </div>
+                    <div ng-if="::!isVisualizationEditor">
+                        <a ng-if="!env.insight" class="arrays-logo" href="{{explore_url}}" target="_self">
+                            <img sizes="(max-width: 767px) 100vw, 210px"
+                                 src="https://s3-us-west-2.amazonaws.com/arraysassets/Gist_h_rgb.svg" width="116" />
+                        </a>
+                        <a ng-if="env.insight" class="insight-logo" href="{{explore_url}}" target="_self">
+                            <img sizes="(max-width: 767px) 100vw, 210px"
+                                 src="https://s3-us-west-2.amazonaws.com/arraysassets/Insight_Logo_Horizontal.svg"
+                                 width="210" />
+                        </a>
+
+                        <ul class="nav navbar-nav" hide-gt-sm="">
+                            <li>
+                                <a class="w-burger-menu sidebar-toggle" ng-class="{'open': sidenavActive}"
+                                   ng-click="toggleLeft()" id="leftNav">
+                                    <i id="menu-expand" class="gist-icon-menu"></i>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right header-blank-right hide-mobile">
+                            <li ng-if="user" class="gist-dropdown navbar-main-menu">
+                                <a href="#" class="dropdown-toggle user-initial-nav" data-toggle="dropdown"
+                                   role="button" aria-haspopup="  true" aria-expanded="false">
+                                    <span class="user-initial">{{user.firstName[0]}}</span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li class="background-color-brand-hover">
+                                        <a href="/dashboard">Dashboard</a>
+                                    </li>
+                                    <li class="background-color-brand-hover">
+                                        <a href="{{subdomain}}" ng-click="updateSubdomain()">
+                                            Team Page</a>
+                                    </li>
+                                    <li class="background-color-brand-hover">
+                                        <a class="pointer gist-logout-link" ng-click="logout()">
+                                            Log Out
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <div ng-if="!user">
+                                <li class="w-login-container">
+                                    <a class="pill-link" href="/auth/login">
+                                        Log In
+                                    </a>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,43 @@
+<label class="margin-bottom-3x d-block">{{::setting.displayAs}}</label>
+<p ng-if="::setting.description">{{::setting.description}}</p>
+
+<div layout="row" layout-align="space-between start">
+    <md-input-container flex="45">
+        <md-select
+            ng-model="columnField"
+            ng-model-options="{ updateOn: 'default' }"
+            placeholder="Select field"
+        >
+            <md-option ng-repeat="column in datasetViewsCtrl.colsAvailable | filter: viewCtrl.dataTypeMatch(setting.restrictColumnDataType) | filter: excludeUsedColumns track by column" ng-value="column">
+                {{viewCtrl.dataset.fe_displayTitleOverrides[column] || column}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-input-container flex="50">
+        <label>Width (%)</label>
+        <input type="number" name="value" ng-model="columnWidth" ng-pattern="/^\d+$/" min="0" max="100" aria-label="Column Width">
+    </md-input-container>
+</div>
+
+<md-button ng-if="columnField && columnWidth" class="md-dashboard" ng-click="setWidth()">
+    <span class="btn-label">Set column width</span>
+</md-button>
+
+<div ng-repeat="(key, value) in viewCtrl.data[setting.name] track by key">
+    <div layout="row" layout-align="space-between start">
+        <md-input-container flex="45">
+            <label>Column</label>
+            <input type="text" ng-model="key" aria-label="{{viewCtrl.viewName}} column with name {{key}}" disabled>
+        </md-input-container>
+
+        <md-input-container flex="40">
+            <label>Width (%)</label>
+            <input type="number" ng-model="value" aria-label="Specified width of {{value}}%" disabled>
+        </md-input-container>
+
+        <span class="dashboard-list-icon warn" ng-click="deleteProperty(key)" aria-hidden="true" aria-label="Remove" flex="5">
+            <i class="fa fa-remove" aria-hidden="true"></i>
+        </span>
+    </div>
+</div>

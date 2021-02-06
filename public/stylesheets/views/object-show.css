@@ -1,0 +1,79 @@
+/* @override
+	http://localhost:9080/stylesheets/module/object-show.css */
+
+.object {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.object-title {
+    margin-top: 60px;
+    margin-bottom: 50px;
+    color: #000000;
+    font-size: 2.625em;
+}
+
+.object-subtitle {
+    margin: -30px 0 40px;
+    color: #000;
+    font-size: 24px;
+    font-weight: 400;
+    word-break: break-word;
+}
+
+@media (max-width: 767px) {
+    .object-title {
+        margin-top: 30px;
+        margin-bottom: 25px;
+        font-size: 30px;
+        width: 100%;
+    }
+
+    .object-subtitle {
+        margin: -15px 0 40px;
+        font-size: 20px;
+    }
+}
+
+.object dt, .nested-column-name{
+    margin-top: 30px;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: normal;
+    font-size: 1.25em;
+}
+
+.object dd, .nested-item{
+    color: #000000;
+    font-size: 1.5em;
+}
+
+.object-list {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.object-content {
+    word-break: break-word;
+}
+
+.object-content span.color-brand a {
+    color: inherit;
+}
+
+.object-header-icon {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+/* Gender icon */
+.object-header-icon .color-gender {
+    font-size: 46px;
+}
+
+.object-header-icon .gist-icon-tile {
+    max-height: 250px;
+    width: auto;
+    height: 100%;
+}

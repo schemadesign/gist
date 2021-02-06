@@ -1,0 +1,22 @@
+<md-dialog md-no-ink aria-label="Add Field">
+    <aa-toolbar title="Add Field" class="confirm"></aa-toolbar>
+    <md-dialog-content layout-padding>
+        <md-content>
+            <md-input-container>
+                <label>Field Name:</label>
+                <input name="Field Name" ng-model="field.name" placeholder="New Field Name" required>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Field data type:</label>
+                <md-select ng-model="field.dataType" md-container-class="dialog__type-select">
+                    <md-option ng-repeat="dataType in dataTypes track by dataType" ng-value="dataType">
+                        {{ dataType }}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </md-content>
+
+        <aa-dialog-actions is-confirm-disabled="!field.name.length" confirm="Add Field"></aa-dialog-actions>
+    </md-dialog-content>
+</md-dialog>

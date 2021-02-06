@@ -1,0 +1,9 @@
+<div
+  class="gist-story-title-text gist-insights-frame {{ "highlighted" if sharedPageId == story.sharedPages[0]._id }}"
+  subdomain-url="{{ subdomain }}"
+  share-link="/s/{{ story.sharedPages[0]._id }}"
+  same-page="true">
+
+  <h3 class="gist-insights-title">{{ story.title }}</h3>
+  <img class="gist-insights-thumbnail-img" src="{{ story.sharedPages[0].imageUrl }}" />
+</div>

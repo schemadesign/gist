@@ -1,0 +1,20 @@
+<div layout-padding ng-init="getTabData()">
+    <div>
+        <h2>Summary</h2>
+
+        <aa-performance-header header-title="Top page views" header-time-unit="week" header-update="updateTopPageViews"></aa-performance-header>
+        <aa-visualization viz-type="horizontalbarchart" viz-id="topPageViews"></aa-visualization>
+
+        <aa-performance-header header-title="Top unique page views" header-time-unit="week" header-update="updateTopUniquePageViews"></aa-performance-header>
+        <aa-visualization viz-type="horizontalbarchart" viz-id="topUniquePageViews"></aa-visualization>
+    </div>
+
+    <div>
+        <h2>History</h2>
+        <aa-performance-header header-title="general" header-titles="[{ display: 'Page views', value: 'general' }, { display: 'Unique page views', value: 'unique' }]"
+            header-time-unit="month" header-time-units="['week', 'month', 'year']"
+            header-update="updateHistory">
+        </aa-performance-header>
+        <aa-visualization viz-type="linechart" viz-id="history"></aa-visualization>
+    </div>
+</div>

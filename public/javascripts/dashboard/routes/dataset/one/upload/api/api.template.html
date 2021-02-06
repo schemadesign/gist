@@ -1,0 +1,108 @@
+<div ng-form="connectApiCtrl.form" gist-isolate-form>
+    <h4>Connect to an API</h4>
+
+    <p>
+        Import CSV or JSON formatted data from an API endpoint.
+        <a target="_blank" href="https://github.com/jdorfman/awesome-json-datasets">Click here</a> for some API
+        examples.
+    </p>
+    <p>Start by selecting the data format of your API below:</p>
+
+    <md-radio-group class="api-options" ng-model="connectApiCtrl.fileType">
+        <md-radio-button value="csv">
+            CSV
+        </md-radio-button>
+        <md-radio-button value="tsv">
+            TSV
+        </md-radio-button>
+        <md-radio-button value="json" id="jsonRadioButton">
+            JSON
+        </md-radio-button>
+    </md-radio-group>
+
+    <div ng-show="connectApiCtrl.fileType === 'json'" class="expected-json-format">
+        <p>Please make sure that your JSON data is structured as an array of objects, following this example:</p>
+        <!-- JSON sample must not be indented in order to display correctly -->
+        <pre><code>{
+    “totalContacts”: 2,
+    “contacts”: [
+        {
+            “name”: “John Smith”,
+            “age”: 25,
+            “address”: “21 2nd Street”
+        },
+        {
+            “name”: “Jane Doe”,
+            “age”: 27,
+            “address”: “99 5th Avenue”
+        },
+        ...
+    ]
+}
+</code></pre>
+    </div>
+
+    <p>Next, copy and paste a link to the API web address below:</p>
+    <md-input-container class="md-block" md-no-float>
+        <input type="url"
+               name="endpoint"
+               ng-model="connectApiCtrl.endpoint"
+               ng-change="connectApiCtrl.handleEndpointChange()"
+               aria-label="Dataset api endpoint"
+               placeholder="http://api.tvmaze.com/singlesearch/shows?q=game-of-thrones&embed=episodes"
+               id="jsonApiInput"
+               required />
+        <div ng-messages="connectApiCtrl.form.endpoint.$error">
+            <div class="error-message" ng-message="required">This field is required</div>
+            <div class="error-message" ng-message="url">This is not a valid URL</div>
+        </div>
+    </md-input-container>
+
+    <div ng-if="connectApiCtrl.fileType === 'json'"
+         ng-show="connectApiCtrl.connected && !connectApiCtrl.hasPossiblePaths()">
+        <label>We have successfully connected to your API</label>
+        <p>However, the JSON data does not contain any paths of arrays of objects. Please make sure your JSON data
+            is structured consistently with the example above.</p>
+    </div>
+
+    <div ng-if="connectApiCtrl.fileType === 'json'" ng-show="connectApiCtrl.hasPossiblePaths()">
+        <label>We have successfully connected to your API!</label>
+        <p>
+            Now, please select a path to the array of objects you want to use in your JSON datasetOneCtrl.dataset.
+            Following the above example, your path would be <code>contacts.*</code>
+        </p>
+        <md-input-container class="json-path-container" layout="row" flex="100" md-no-float>
+            <div flex="60">
+                <md-select
+                    ng-model="connectApiCtrl.path"
+                    aria-label="API Endpoint JSON Path"
+                    placeholder="Click Connect and Choose from here.."
+                    ng-required="connectApiCtrl.connected">
+                    <md-option ng-repeat="path in connectApiCtrl.possiblePaths" value="{{ path }}">
+                        {{ path }}
+                    </md-option>
+                </md-select>
+            </div>
+            <span flex="5"></span>
+        </md-input-container>
+        <p>
+            or put your custom path. We support some of json path syntax (see more
+            <a target="_blank" href="https://github.com/dominictarr/JSONStream">here</a>).
+        </p>
+        <md-input-container class="md-block" md-no-float>
+            <input type="text"
+                   ng-model="connectApiCtrl.customPath"
+                   aria-label="Json custom path"
+                   placeholder="contacts.*"
+            />
+        </md-input-container>
+    </div>
+
+    <md-button
+        class="md-dashboard confirm"
+        ng-click="connectApiCtrl.connect()"
+        ng-disabled="connectApiCtrl.form.$invalid || connectApiCtrl.pending"
+        id="connectButton">
+        <span class="btn-label">{{ connectApiCtrl.pending ? 'Connecting...' : 'Connect' }}</span>
+    </md-button>
+</div>

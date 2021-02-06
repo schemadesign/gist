@@ -1,0 +1,47 @@
+<div ng-if="setting.mappingType === 'dataset'">
+    <label class="margin-bottom-3x d-block">{{::setting.displayAs}}</label>
+    <p ng-if="::setting.description">{{::setting.description}}</p>
+
+    <md-input-container class="md-block">
+        <md-select aria-label="{{setting.name}} for {{viewCtrl.viewName}}" ng-model="viewCtrl.data[setting.name].pKey" ng-change="loadDatasetColumnsByPkey(viewCtrl.data[setting.name].pKey)">
+            <md-option ng-repeat="dataset in otherAvailableDatasets track by $index" ng-value="dataset.mappingPkey">
+                {{dataset.displayAs}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+</div>
+
+<div ng-if="setting.mappingType === 'fields' && viewCtrl.data[setting.name].pKey">
+    <label class="margin-bottom-3x d-block">{{::setting.displayAs}}</label>
+    <p ng-if="::setting.description">{{::setting.description}}</p>
+
+    <div ng-repeat="mapping in viewCtrl.data[setting.name].mappings track by $index">
+        <div layout="row" layout-align="space-between center">
+            <md-input-container flex="40">
+                <md-select aria-label="{{setting.name}} for {{viewCtrl.viewName}}" ng-model="mapping.key">
+                    <md-option ng-repeat="column in datasetViewsCtrl.colsAvailable | filter: checkDuplicateKeyInMapping($index) | filter: viewCtrl.excludeBy(setting.keyExcludeBy): false track by column" ng-value="column">
+                        {{viewCtrl.dataset.fe_displayTitleOverrides[column] || column}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container flex="45">
+                <md-select aria-label="{{setting.name}} for {{viewCtrl.viewName}}" ng-model="mapping.value">
+                    <md-option ng-repeat="column in otherDatasetCols[viewCtrl.data[setting.name].pKey] track by $index" ng-value="column.name">
+                        {{column.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <div flex="5">
+                <span class="dashboard-list-icon warn" ng-click="removeDatasetMapping($index)" aria-hidden="true" aria-label="Remove">
+                    <i class="fa fa-remove" aria-hidden="true"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <md-button class="md-dashboard" ng-click="addDatasetMapping()">
+        Add more
+    </md-button>
+</div>

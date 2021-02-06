@@ -1,0 +1,182 @@
+{% set showLegend = (not puppeteer or puppeteerScreenshot) and displayLegend %}
+{% set isOpenLegend = 'gist-legend-opened' if showLegend else '' %}
+
+<section id="gist-view-{{ viewInstanceId }}" class="gist-section {{ isOpenLegend }}">
+
+    {% if header %}
+        {{ header.default(arrayTitle, array_source_key, defaultView, team, isPreview, embedded, sharedPage, routePath_base, view_description, revision, defaultFilterObj, isEmbed, showInsightsExplorer, stories, subdomain, env, sharedPageId, lastUpdated) }}
+
+        {% include "../../partials/modal/info.njk" %}
+        {% include "../../partials/modal/detail-view-modal.njk" %}
+    {% endif %}
+    <div class="gist-map-container" longDesc="{{ metaDescription }}">
+        {% if dropdown %}
+            <div class="col-sm-12 gist-chart-container">
+                <div class="gist-container-fluid">
+                    <div class="gist-row">
+                        <div class="gist-controls gist-sort-bar clearfix" style="display:none">
+                            {% if viewOptions.viewControls %}
+                                <nav style="display: none" class="map-by sort-bar-left pull-left" role="navigation">
+                                    {{ dropdown.default(
+                                        'Map By',
+                                        'mapBy',
+                                        mapBy,
+                                        colNames_orderedForMapByDropdown,
+                                        routePath_base | constructedRoutePath(filterObj, {
+                                            searchCol: searchCol,
+                                            searchQ: searchQ,
+                                            aggregateBy: aggregateBy,
+                                            mapBy: ''
+                                        })
+                                    ) }}
+                                </nav>
+                                {% if displayAggregate and mapStyle !== 'heatmap' %}
+                                    <nav style="display: none" class="aggregate-by sort-bar-left pull-left"
+                                         role="navigation">
+                                        {{ dropdown.sortbar(
+                                            'Aggregate By',
+                                            'aggregateBy',
+                                            aggregateBy if aggregateBy else defaultAggregateByColumnName_humanReadable,
+                                            colNames_orderedForAggregateByDropdown,
+                                            routePath_base | constructedRoutePath(filterObj, {
+                                                searchCol: searchCol,
+                                                searchQ: searchQ,
+                                                mapBy: mapBy,
+                                                aggregateBy: ''
+                                            })
+                                        ) }}
+                                    </nav>
+                                {% endif %}
+                            {% endif %}
+
+                            {% include "../../partials/accessibility/skip-to-legend.njk" %}
+
+                            {% if viewOptions.search %}
+                                <div class="sort-bar-right gist-pull-right">
+                                    {{ search.default(
+                                        routePath_base,
+                                        searchCol if searchCol else 'All Fields',
+                                        cols_orderedForSearchByDropdown,
+                                        searchQ if searchQ else "",
+                                        sortBy,
+                                        sortDirection,
+                                        revision,
+                                        filterObj
+                                    ) }}
+                                    {% if showLegend %}
+                                        <div class="gist-legend-open color-brand-hover hidden-xs">
+                                            <span class="gist-icon-legend" aria-hidden="true"></span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div><!-- .gist-row -->
+            </div><!-- .gist-container-fluid -->
+        {% endif %}
+
+        {% if isFilterActive and filter %}
+            {{ filter.default(displayTitleOverrides,
+                routePath_base | constructedRoutePath(null, {
+                    searchCol: searchCol,
+                    searchQ: searchQ,
+                    mapBy: mapBy
+                }),
+                filterObj,
+                truesByFilterValueByFilterColumnName_forWhichNotToOutputColumnNameInPill,
+                sharedPage,
+                false,
+                'filter-bar-fixed-bottom'
+            ) }}
+        {% endif %}
+
+        <div class="gist-content" longDesc="{{ metaDescription }}">
+
+            <div class="gist-map" style="height: 100%"></div>
+
+            <div class="gist-loading">
+                {% include "../../partials/loading.njk" %}
+            </div>
+
+            <div class="gist-no-data" style="display:none">
+                {% include "../../partials/no-data.njk" %}
+            </div>
+
+            <div class="gist-undisplayable-data" style="display:none">
+                {% include "../../partials/undisplayable-data.njk" %}
+            </div>
+
+        </div>
+        {% if not dropdown and displayLegend %}
+            {% include "../../partials/legend-open-button.njk" %}
+        {% endif %}
+
+        {% if showLegend %}
+            <nav class="gist-legend" role="navigation">
+                <button type="button" class="gist-close gist-legend-close" aria-label="Close">
+                    <span class="gist-icon-close-big" aria-hidden="true"></span>
+                </button>
+                <h3 class="gist-legend-title">{{ humanReadableColumnName_objectTitle if mapStyle !== 'country' else mapBy }}</h3>
+
+                {% include "../../partials/accessibility/skip-back-to-top.njk" %}
+
+                <ul class="gist-legend-list gist-legend-list-{{ viewInstanceId }}"></ul>
+            </nav>
+        {% endif %}
+    </div>
+
+</section>
+
+<script type="text/javascript">
+    (function () {
+        window.arrays = window.arrays || {};
+        window.arrays.defaultInstanceId = '{{ viewInstanceId }}';
+        window.arrays.viewOptions = window.arrays.viewOptions || {};
+
+        window.arrays.viewOptions['{{ viewInstanceId }}'] = {
+            array_source_key: '{{ array_source_key }}',
+            sharedPage: {{ sharedPage }},
+            sharedPageId: '{{ sharedPageId }}',
+            filterObj: {{ filterObj | dump | safe }},
+            routePath_withoutFilter: "{{ routePath_base | constructedRoutePath(null, {
+                searchCol: searchCol,
+                searchQ: searchQ,
+                aggregateBy: aggregateBy,
+                mapBy: mapBy
+            }) | safe }}",
+            viewOptions: {{ viewOptions | dump | safe }},
+            brandColor: {{ brandColor | dump | safe }},
+            galleryViewEnabled: {{ hasGalleryView }},
+            mapBy: '{{ humanReadableColumnName_objectTitle if mapStyle !== 'country' else mapBy }}',
+            mapBy_isDate: {{ mapBy_isDate }},
+            aggregateBy: '{{ aggregateBy if aggregateBy else defaultAggregateByColumnName_humanReadable }}',
+            defaultLatitude: {{ defaultLatitude }},
+            defaultLongitude: {{ defaultLongitude }},
+            defaultZoom: {{ defaultZoom }},
+            mapStyle: '{{ mapStyle }}',
+            mapScaleType: '{{ mapScaleType }}',
+            datasetId: '{{ datasetId }}',
+            title: '{{ arrayTitle }}',
+            format: '{{ format }}',
+            puppeteer: {{ (puppeteer and not puppeteerScreenshot) | default(false) }},
+            displayLegend: {{ displayLegend }},
+            clickThroughView: '{{ clickThroughView }}',
+            isCustomInstance: {{ isCustomInstance }},
+            viewSelector: '#gist-view-{{ viewInstanceId }}',
+            subdomain: '{{ subdomain }}',
+            cdnAddress: '{{ cdnAddress }}',
+            environment: '{{ env.NODE_ENV }}',
+            accessToken: '{{ env.MAPBOX_ACCESS_KEY }}',
+            basicLayout: '{{ env.MAPBOX_BASIC_LAYOUT }}',
+            roadsLayout: '{{ env.MAPBOX_ROADS_LAYOUT }}',
+            revision: '{{ revision }}',
+            isExternalAccess: {{ isExternalAccess }},
+            isEmbed: {{ isEmbed }},
+            brandWhiteText: {{ brandWhiteText | dump | safe }}
+        };
+    })();
+</script>
+
+
+

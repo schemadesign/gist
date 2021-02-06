@@ -1,0 +1,60 @@
+<li
+    class="gallery-item gallery-item--image {{ 'has-tooltip' if hasTooltip }}"
+    data-tooltip-key="{{ tooltipKey }}"
+    data-tooltip-value="{{ tooltipValue }}"
+    role="listitem"
+    aria-describedby="gallery-tooltip"
+    aria-label="{{ tooltipKey }}"
+>
+    <button
+        onclick="window.arrays.showDetailViewModal('{{ doc._id }}', '{{ loop.index0 }}', '{{ viewType }}')"
+        class="gallery-item-link"
+        aria-describedby="gallery-tooltip"
+    >
+        <div class="gallery-item-inner">
+            {% if scrapedImages %}
+                <img
+                    src="{{ doc.scrapedImageUrl }}"
+                    class="gallery-image gist-image-with-fallback"
+                    scraped="true"
+                    alt="{{ doc.rowParams[fieldKey_objectTitle] }} gallery image"
+                    original-image="{{ doc.nestedImagePath }}"
+                />
+            {% else %}
+                <img
+                    src="{{ doc.nestedImagePath }}"
+                    class="gallery-image gist-image-with-fallback"
+                    alt="{{ doc.rowParams[fieldKey_objectTitle] }} gallery image"
+                />
+            {% endif %}
+        </div>
+
+        {% if imageCaption %}
+            <div class="gallery-description {{ 'gallery-description--long' if displaySortFieldText }}">
+                <h2 class="gallery-title">
+                    <span class="gallery-title-wrapper">
+                        {% set titleKey = dataSource.fe_displayTitleOverrides[fieldKey_objectTitle] if dataSource.fe_displayTitleOverrides[fieldKey_objectTitle] else fieldKey_objectTitle %}
+                        {% set titleValue = doc.rowParams[fieldKey_objectTitle] if doc.rowParams[fieldKey_objectTitle] else "(Title not specified)" %}
+                        {% if displayFieldTitles %}
+                            {{ titleKey }}: {{ titleValue }}
+                        {% else %}
+                            {{ titleValue }}
+                        {% endif %}
+                    </span>
+                </h2>
+
+                {% if displaySortFieldText %}
+                    <h5 class="gallery-secondary-title">
+                        {% set sortKey = dataSource.fe_displayTitleOverrides[textField] if dataSource.fe_displayTitleOverrides[textField] else textField %}
+                        {% set sortValue = doc.rowParams[textField] | formatGallerySubtitle %}
+                        {% if displayFieldTitles %}
+                            {{ sortKey }}: {{sortValue }}
+                        {% else %}
+                            {{sortValue }}
+                        {% endif %}
+                    </h5>
+                {% endif %}
+            </div>
+        {% endif %}
+    </button>
+</li>

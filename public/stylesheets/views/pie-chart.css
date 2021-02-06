@@ -1,0 +1,33 @@
+.gist-pie-background {
+    fill: #ffffff;
+    stroke-width: 2px;
+    stroke: #ffffff;
+}
+
+/* Screenshot styles */
+body.puppeteer .gist-pie-chart {
+    padding: 0px !important;
+    width: 100vh !important;
+}
+
+.gist-pie-chart-main {
+    padding-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+    .gist-pie-chart-main  {
+        overflow: hidden;
+        margin-right: auto;
+        margin-left: auto;
+        padding-top: 70px;
+        padding-bottom: 0;
+        max-width: 100%;
+        width: calc(100vh - 210px);
+        height: calc(100vh - var(--viz-header-height-tablet));
+    }
+
+    body.puppeteer .gist-pie-chart-main {
+        width: 100vh;
+        height: 100vh;
+    }
+}

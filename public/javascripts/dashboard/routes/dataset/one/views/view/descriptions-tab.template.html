@@ -1,0 +1,27 @@
+<label class="margin-bottom-3x">Enter a Description for This View</label>
+<p>
+    The description will appear at the top of the view.
+    You can use it to describe or give context to your visualization.
+</p>
+<md-input-container class="md-block">
+    <textarea
+        ng-model="viewCtrl.data.description"
+        md-maxlength="500"
+        rows="3"
+        aria-label="{{viewCtrl.viewDisplayName}} Description"
+    ></textarea>
+</md-input-container>
+
+<label class="margin-bottom-3x">Enter a Meta-Description for This View</label>
+<p>
+    The meta description enhances user accessibility.
+    It will not display on the chart but will provide contextual information for users navigating your visualization using screenreaders.
+</p>
+<md-input-container class="md-block">
+    <textarea
+        ng-model="viewCtrl.data.metaDescription"
+        md-maxlength="500"
+        rows="3"
+        aria-label="{{viewCtrl.viewDisplayName}} Meta Description"
+    ></textarea>
+</md-input-container>

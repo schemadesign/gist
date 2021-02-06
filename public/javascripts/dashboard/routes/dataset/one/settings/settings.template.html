@@ -1,0 +1,190 @@
+<md-content layout-padding ng-form="datasetSettingsCtrl.form">
+    <h3>Display Settings</h3>
+
+    <h4 class="no-padding">Change your display and publishing settings below.</h4>
+
+    <md-input-container class="md-block md-input-container-settings md-input-has-value">
+        <label>Title (Note: Changing the title will also change the URL for this visualization)</label>
+        <input unique-title required name="title" ng-model="datasetOneCtrl.dataset.title"
+               dataset-id="datasetOneCtrl.dataset._id" replacement="datasetOneCtrl.dataset.replacement">
+        <div ng-messages="datasetSettingsCtrl.form.title.$error">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="titleAvailable">This title is already used on your team.</div>
+        </div>
+    </md-input-container>
+
+    <md-input-container class="md-block md-input-container-settings">
+        <label>Enter a description for your visualization</label>
+        <textarea name="description" ng-model="datasetOneCtrl.dataset.description" rows="2"></textarea>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+        <label>Enter a link to your source data <span class="optional">(optional)</span></label>
+        <input type="url" name="source_urls" ng-model="datasetOneCtrl.dataset.urls[0]">
+        <div ng-messages="datasetSettingsCtrl.form.source_urls.$error">
+            <div ng-message="url">Please enter a valid url.</div>
+        </div>
+    </md-input-container>
+
+    <md-input-container class="md-block publish-settings">
+        <b>Privacy settings</b>
+
+        <md-switch ng-model="datasetOneCtrl.dataset.isPublic"
+                   ng-disabled="!datasetOneCtrl.dataset.fe_visible || datasetOneCtrl.dataset.sample"
+                   aria-label="Make dataset public">
+            Allow anyone to view visualization (not only registered users)
+        </md-switch>
+
+        <md-switch ng-model="datasetOneCtrl.dataset.openDownload"
+                   aria-label="Make dataset downloadable">
+            Allow anyone to download your data
+        </md-switch>
+
+        <md-switch ng-model="datasetOneCtrl.dataset.fe_listed"
+                   ng-disabled="datasetOneCtrl.dataset.sample"
+                   aria-label="List dataset">
+            List visualization on your team page
+        </md-switch>
+    </md-input-container>
+
+    <p class="small-text"
+       ng-show="datasetOneCtrl.originalDataset.state === 'pending' && (!datasetOneCtrl.dataset.fe_visible || !datasetOneCtrl.dataset.fe_listed || !datasetOneCtrl.dataset.isPublic)">
+        <b>Note:</b> If you save these settings, the listing request will be cancelled.
+    </p>
+
+    <p class="small-text"
+       ng-show="datasetOneCtrl.originalDataset.state === 'approved' && (!datasetOneCtrl.dataset.fe_visible || !datasetOneCtrl.dataset.fe_listed || !datasetOneCtrl.dataset.isPublic)">
+        <b>Note:</b> If you save these settings, visualization will be removed from the Showcase too.
+    </p>
+
+    <div ng-if="env.node_env !== 'enterprise'">
+        <md-input-container class="md-block publish-settings"
+                            ng-if="datasetOneCtrl.originalDataset.state === 'approved' || !datasetOneCtrl.originalDataset.state && (user | isSuperAdmin)">
+            <b id="request-listing">List in the Showcase</b>
+            <md-switch
+                ng-true-value="'approved'"
+                ng-false-value="null"
+                ng-model="datasetOneCtrl.dataset.state"
+                ng-disabled="!datasetOneCtrl.dataset.fe_visible || !datasetOneCtrl.dataset.fe_listed || !datasetOneCtrl.dataset.isPublic || datasetOneCtrl.dataset.sample"
+                aria-label="List visualization in the Showcase">
+                List visualization in the Showcase
+            </md-switch>
+        </md-input-container>
+
+        <div ng-if="!(user | isSuperAdmin) &&
+            !datasetOneCtrl.dataset.connection &&
+            !datasetOneCtrl.dataset.sample &&
+            !team.isEnterprise &&
+            datasetOneCtrl.originalDataset.state !== 'approved'">
+            <h3>List visualization in the Showcase</h3>
+            <div
+                ng-hide="!datasetOneCtrl.originalDataset.fe_visible || !datasetOneCtrl.originalDataset.fe_listed || !datasetOneCtrl.originalDataset.isPublic">
+                <md-button
+                    ng-if="!datasetOneCtrl.originalDataset.state"
+                    class="md-dashboard"
+                    aria-label="Request listing in the Showcase"
+                    ng-click="datasetSettingsCtrl.submitListingRequest()"
+                    ng-disabled="datasetSettingsCtrl.requestPending">
+                    <span class="btn-label">Request listing in the Showcase</span>
+                </md-button>
+                <p class="small-text request-description" ng-if="datasetOneCtrl.originalDataset.state === 'pending'">
+                    Your request to list this visualization in the Showcase is pending review
+                </p>
+                <p class="small-text request-description"
+                   ng-if="datasetOneCtrl.originalDataset.state === 'disapproved'">
+                    Your request to list this visualization in the Showcase has not been approved
+                </p>
+                <md-button
+                    ng-if="datasetOneCtrl.originalDataset.state === 'pending'"
+                    class="md-dashboard"
+                    aria-label="Cancel request for listing in the Showcase"
+                    ng-click="datasetSettingsCtrl.cancelListingRequest()"
+                    ng-disabled="datasetSettingsCtrl.requestPending">
+                    <span class="btn-label">Cancel request</span>
+                </md-button>
+            </div>
+            <p class="small-text request-description"
+               ng-show="!datasetOneCtrl.originalDataset.fe_visible || !datasetOneCtrl.originalDataset.fe_listed || !datasetOneCtrl.originalDataset.isPublic">
+                Visualization must be made publicly viewable and listed on your team page before making a request to
+                list it in the Showcase. Review the settings above and hit <b>Save</b> to enable this option.
+            </p>
+        </div>
+
+        <div
+            ng-if="user.role === 'superAdmin' && (datasetOneCtrl.originalDataset.state === 'pending' || datasetOneCtrl.originalDataset.state === 'disapproved')">
+            <h3 ng-if="datasetOneCtrl.originalDataset.state === 'pending'">Listing visualization in the Showcase
+                requested</h3>
+            <h3 ng-if="datasetOneCtrl.originalDataset.state === 'disapproved'">Listing visualization in the Showcase
+                disapproved</h3>
+            <md-button class="md-dashboard"
+                       aria-label="Approve Listing On {{ env.host }}"
+                       ng-disabled="datasetOneCtrl.originalDataset.state === 'approved' || datasetSettingsCtrl.requestPending"
+                       ng-click="datasetSettingsCtrl.approveListingRequest()">
+                Approve
+            </md-button>
+            <md-button class="md-dashboard"
+                       aria-label="Approve Listing On {{ env.host }}"
+                       ng-disabled="datasetOneCtrl.originalDataset.state === 'disapproved' || datasetSettingsCtrl.requestPending"
+                       ng-click="datasetSettingsCtrl.disapproveListingRequest()">
+                Disapprove
+            </md-button>
+        </div>
+    </div>
+
+    <h3>Visualization Color</h3>
+
+    <div>
+        <label class="thin-label">Select an accent color for your visualization <span class="optional">(optional)</span></label>
+        <aa-color-picker palette="team.colorPalette" selected="datasetOneCtrl.dataset.brandColor.accent"
+                         custom="false" />
+    </div>
+
+    <h3>Visualization Tile</h3>
+
+    <div>
+        <label class="thin-label">Upload an image to showcase your visualization</label> <span class="optional"
+                                                                                               ng-if="!datasetOneCtrl.dataset.banner">(optional)</span>
+        <div ng-hide="datasetSettingsCtrl.uploadPending">
+            <div flex="50">
+                <img class="img-responsive"
+                     ng-if="datasetOneCtrl.dataset.banner"
+                     ng-src="{{ datasetSettingsCtrl.getBannerUrl() }}">
+            </div>
+            <input id="banner" accept="image/svg+xml,image/jpeg,image/png,image/gif,image/bmp" type="file"
+                   nv-file-select uploader="datasetSettingsCtrl.imageUploader" multiple class="team-uploader">
+            <div layout="row" layout-align="start center">
+                <label for="banner" class="md-button md-dashboard" ng-if="!datasetOneCtrl.dataset.banner">
+                    <span class="btn-label">Choose File</span>
+                </label>
+                <span><a href="" ng-if="datasetOneCtrl.dataset.banner" ng-click="datasetSettingsCtrl.deleteBanner()"
+                         class="warn">Remove</a></span>
+            </div>
+        </div>
+        <md-progress-circular md-diameter="40" ng-show="datasetSettingsCtrl.uploadPending" md-mode="indeterminate" />
+    </div>
+
+    <div ng-if="datasetOneCtrl.dataset.isPublic" class="embed-code">
+        <h3>Embed URL</h3>
+        <div class="embed-code__container">
+            <div class="embed-code__wrapper">
+                <pre>{{datasetSettingsCtrl.embedUrl}}</pre>
+            </div>
+            <i
+                class="embed-code__icon fa fa-clipboard"
+                ng-click="datasetSettingsCtrl.copyToClipboard(datasetSettingsCtrl.embedUrl)"
+                aria-hidden="true"
+            >
+                <md-tooltip md-direction="top">Copy to clipboard</md-tooltip>
+            </i>
+        </div>
+    </div>
+
+    <div
+        ng-if="datasetOneCtrl.dataset.isPublic && datasetSettingsCtrl.drupalTags.length && (user.isSuperAdmin || isVisualizationEditor || isAdmin)"
+        class="pad-top-4x">
+        <md-button class="md-dashboard" ng-click="openDrupalTagsDialog()">
+          Drupal tags
+        </md-button>
+    </div>
+</md-content>
+

@@ -1,0 +1,190 @@
+/* @group Dataset */
+/* NOTE currently just the Views tab but can expand here */
+
+.dataset-view-tiles {
+    list-style: none;
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+.dataset-view-tile {
+    border: 1px solid #eeeeee;
+}
+
+.dataset-view-tile-not-visible .dataset-view-tile-thumbnail {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+.dataset-view-tile-thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.dataset-view-tile-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-position: center;
+    background-size: cover;
+}
+
+/* TODO add focus states */
+.dataset-view-tile-thumbnail-wrapper:focus,
+.dataset-view-tile-footer span:focus {
+    outline: 0;
+}
+
+.dataset-view-tile-footer {
+    height: 34px;
+    margin: 0.5em 0.625em;
+    color: var(--color-text-dark);
+}
+
+.dataset-view-tile-footer .fa {
+    color: var(--color-text-ultralight);
+    text-align: center;
+    font-size: 16px;
+}
+
+/* .fa-home needs to be a little smaller than .fa-lg */
+.dataset-view-tile-footer .fa-home {
+    font-size: 19px;
+    color: var(--color-text-dark);
+}
+
+/* hover states */
+.dataset-view-tile:hover .dataset-view-tile-thumbnail {
+    -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(0%);
+}
+
+.dataset-view-tile:hover .fa {
+    color: var(--color-text-dark);
+}
+
+/* Disable transition for fading in view settings dialogs. */
+md-dialog.view-settings-dialog.md-transition-in {
+    opacity: 1;
+    transition: none;
+    -webkit-transform: none;
+    transform: none;
+}
+
+md-dialog.view-settings-dialog.md-transition-out {
+    opacity: 0;
+    transition: none;
+    -webkit-transform: none;
+    transform: none;
+}
+
+md-dialog.view-settings-dialog._md-transition-in,
+md-dialog.view-settings-dialog._md-transition-out {
+    transition: none;
+    transition-duration: 0ms;
+    transition-delay: 0ms;
+}
+
+.keyword-selector-keyword {
+    margin-right: 1em;
+    display: inline-block;
+}
+
+.dataset-tab-content {
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dataset-tab-content--loading {
+    opacity: 0.5;
+}
+
+.dataset-block {
+    margin-top: 25px;
+}
+
+.dataset-sub-block,
+.md-button.md-dashboard.dataset-button-offset {
+    margin-top: 15px;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .dataset-view-tile-not-visible .dataset-view-tile-thumbnail {
+        opacity: 0.4;
+    }
+
+    .dataset-view-tile:hover .dataset-view-tile-thumbnail {
+        opacity: 1;
+    }
+}
+
+.dataset-view-tile .md-button.dataset-set-default-view {
+    opacity: 0.5;
+    min-height: 0;
+    min-width: 0;
+    line-height: normal;
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+    transition: opacity 200ms ease-in-out;
+}
+
+.dataset-set-default-view:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.dataset-view-tile .md-button.dataset-set-default-view.active {
+    opacity: 1;
+    pointer-events: none;
+}
+
+.dataset-view-tile .md-button.dataset-set-default-view:not([disabled]):hover {
+    opacity: 1;
+    background-color: transparent;
+}
+
+.dataset-view-tiles md-switch {
+    margin: 0;
+    line-height: normal;
+    height: auto;
+}
+
+.dataset-view-tiles md-switch .md-container {
+    width: 25px;
+    height: 15px;
+    margin: 0;
+}
+
+.dataset-view-tiles md-switch .md-bar {
+    left: 1px;
+    width: 25px;
+    top: 4px;
+    height: 10px;
+    border-radius: 6px;
+}
+
+.dataset-view-tiles md-switch .md-thumb {
+    height: 15px;
+    width: 15px;
+    top: -1px;
+}
+
+.dataset-view-tiles md-switch .md-thumb-container {
+    width: 12px;
+}
+
+.dataset-view-tile-name {
+    font-size: 15px;
+}
+
+.dataset-view-tile-footer > span {
+    margin: 0 3px;
+}
+
+/* @end Dataset */

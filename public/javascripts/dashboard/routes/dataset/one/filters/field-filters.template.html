@@ -1,0 +1,45 @@
+<md-content layout-padding>
+    <p>
+        The data used in your visualization can be narrowed down through the use of filters.
+        Choose the fields you want to include as filters below.
+        <span>Filters are limited to 180 items each.</span>
+    </p>
+
+    <md-button class="md-dashboard" ng-click="datasetFiltersCtrl.toggleExcludeAll()">
+        <span class="btn-label">{{datasetFiltersCtrl.excludeAll ? 'Include' : 'Exclude'}} all filters</span>
+    </md-button>
+
+    <ul class="dashboard-list user-list margin-top-2x">
+        <li
+            ng-repeat="field in datasetFiltersCtrl.fields track by $index"
+            ng-hide="datasetOneCtrl.dataset.fe_excludeFields[field.name]"
+            layout="row"
+            layout-align="space-between center"
+        >
+            <md-checkbox
+                ng-checked="datasetOneCtrl.dataset.fe_filters.fieldsNotAvailable.indexOf(field.name) === -1"
+                ng-click="datasetFiltersCtrl.toggleFilter(field.name)"
+                name="{{field.name}}"
+                aria-label="{{field.name}}"
+                flex="10"
+            ></md-checkbox>
+
+            <div flex ng-click="datasetFiltersCtrl.editFilter(field)">
+                {{datasetOneCtrl.dataset.fe_displayTitleOverrides[field.name] || field.name}}
+
+                <span class="sample sample-value">
+                    <span class="sample-value" ng-if="!field.custom">(Sample: {{field.sample | formatField:field | limitTo: datasetFiltersCtrl.maxSampleDataLength}})</span>
+                </span>
+            </div>
+
+            <span
+                class="dashboard-list-icon"
+                flex="5"
+                aa-tooltip="Edit filter"
+                ng-click="datasetFiltersCtrl.editFilter(field)"
+            >
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+            </span>
+        </li>
+    </ul>
+</md-content>

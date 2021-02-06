@@ -1,0 +1,21 @@
+<md-dialog aria-label="Drupal Tags" class="field-dialog" md-no-ink>
+    <aa-toolbar title="Drupal Tags"></aa-toolbar>
+    <md-dialog-content layout-padding class="embed-code">
+        <div ng-repeat="drupalTag in drupalTags">
+            <h4>{{drupalTag.name}}:</h4>
+
+            <div class="embed-code__container">
+                <div class="embed-code__wrapper">
+                    <pre>{{drupalTag.tag}}</pre>
+                </div>
+                <i
+                    class="embed-code__icon fa fa-clipboard"
+                    ng-click="copyToClipboard(drupalTag.tag)"
+                    aria-hidden="true"
+                >
+                    <md-tooltip md-direction="top">Copy to clipboard</md-tooltip>
+                </i>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

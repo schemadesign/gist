@@ -1,0 +1,14 @@
+<md-dialog md-no-ink aria-label="Edit Team: {{ team.title }}">
+    <aa-toolbar title="Edit Team: {{ team.title }}"></aa-toolbar>
+    <md-dialog-content layout-padding>
+        <md-content>
+            <div ng-if="user.role=='superAdmin'">
+                <p>The number of visualizations: {{visualisationsCount}}</p>
+                <p>The date the team last had any activity: {{updatedAt}}</p>
+            </div>
+            <md-input-container class="md-block" flex="100" flex-gt-sm="65">
+                <a href="#" ng-click="deleteTeam()" class="warn">Delete Team</a>
+            </md-input-container>
+        </md-content>
+    </md-dialog-content>
+</md-dialog>

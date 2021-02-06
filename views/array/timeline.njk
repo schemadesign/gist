@@ -1,0 +1,239 @@
+{% set currentView = "timeline" %}
+
+{% extends "../layout/array.njk" %}
+
+{% import "../partials/array-header.njk" as header %}
+
+{% import "../partials/dropdown.njk" as dropdown %}
+{% import "../partials/search.njk" as search %}
+{% import "../partials/filter.njk" as filter %}
+
+{% block content %}
+    <section class="gist-section">
+
+        {{ header.default(arrayTitle, array_source_key, defaultView, team, isPreview, embedded, sharedPage, routePath_base, view_description, revision, defaultFilterObj, isEmbed, showInsightsExplorer, stories, subdomain, env, sharedPageId, lastUpdated) }}
+
+        {% include "../partials/modal/info.njk" %}
+        {% include "../partials/modal/detail-view-modal.njk" %}
+
+        <div class="gist-controls" style="display:none">
+            <div class="gist-container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <div class="gist-sort-bar clearfix">
+                            <nav class="sort-bar-left pull-left" role="navigation">
+                                {% if viewOptions.viewControls %}
+                
+                                    {{ dropdown.sortbar(
+                                        'Group By',
+                                        'groupBy',
+                                        groupBy if groupBy else defaultGroupByColumnName_humanReadable,
+                                        colNames_orderedForGroupByDropdown,
+                                        routePath_base | constructedRoutePath(filterObj, {
+                                            searchCol: searchCol,
+                                            searchQ: searchQ,
+                                            sortBy: sortBy,
+                                            sortDirection: sortDirection,
+                                            groupBy: ''
+                                        })
+                                    ) }}
+
+                                    {{ dropdown.sortbar(
+                                        'Sort By',
+                                        'sortBy',
+                                        sortBy if sortBy else defaultSortByColumnName_humanReadable,
+                                        colNames_orderedForSortByDropdown,
+                                        routePath_base | constructedRoutePath(filterObj, {
+                                            searchCol: searchCol,
+                                            searchQ: searchQ,
+                                            sortDirection: sortDirection,
+                                            groupBy: groupBy,
+                                            sortBy: ''
+                                        })
+                                    ) }}
+
+                                    {% if groupBy_isNumber %}
+                                       {{ dropdown.sortbar(
+                                        'Segment By Range',
+                                        'groupByRange',
+                                        groupByRange if groupByRange else defaultGroupByRange,
+                                        rangesAvailableForGroupBy,
+                                        routePath_base | constructedRoutePath(filterObj, {
+                                            searchCol: searchCol,
+                                            searchQ: searchQ,
+                                            sortDirection: sortDirection,
+                                            groupBy: groupBy,
+                                            sortBy: sortBy,
+                                            groupByRange: ''
+                                        })
+                                        ) }}
+                                    {% endif %}
+                                    {% if groupBy_isDate %}
+                                       {{ dropdown.sortbar(
+                                        'Segment By Duration',
+                                        'groupByDuration',
+                                        groupByDuration if groupByDuration else defaultGroupByDuration,
+                                        durationsAvailableForGroupBy,
+                                        routePath_base | constructedRoutePath(filterObj, {
+                                            searchCol: searchCol,
+                                            searchQ: searchQ,
+                                            sortDirection: sortDirection,
+                                            groupBy: groupBy,
+                                            sortBy: sortBy,
+                                            groupByDuration: ''
+                                        })
+                                        ) }}
+                                    {% endif %}
+                                {% endif %}
+                            </nav>
+
+                            {% include "../partials/accessibility/skip-to-page-bottom.njk" %}
+
+                            {% if viewOptions.search %}
+                                <div class="sort-bar-right gist-pull-right">
+                                    {{ search.default(
+                                        routePath_base,
+                                        searchCol if searchCol else 'All Fields',
+                                        cols_orderedForSearchByDropdown,
+                                        searchQ if searchQ else '',
+                                        sortBy,
+                                        sortDirection,
+                                        revision,
+                                        filterObj
+                                    ) }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div><!-- .row -->
+
+            </div><!-- .gist-container-fluid -->
+        </div>
+
+        {% if isFilterActive %}
+            {{ filter.default(displayTitleOverrides,
+                routePath_base | constructedRoutePath(null, {
+                    searchCol: searchCol,
+                    searchQ: searchQ,
+                    sortBy: sortBy,
+                    sortDirection: sortDirection,
+                    page: onPageNum if onPageNum != 1 else '',
+                    groupBy: groupBy
+                }),
+                filterObj,
+                truesByFilterValueByFilterColumnName_forWhichNotToOutputColumnNameInPill,
+                sharedPage,
+                false,
+                'filter-bar-fixed-bottom'
+            ) }}
+        {% endif %}
+
+        <div class="gist-content" longDesc="{{ metaDescription }}">
+
+            <div class="timeline-container">
+
+                <div class="gist-container-fluid">
+                    <div class="gist-loading">
+                        {% include "../partials/loading.njk" %}
+                    </div>
+
+                    <div class="gist-no-data" style="display:none">
+                        {% include "../partials/no-data.njk" %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="pagination-page-dropdown pull-left"></div>
+                            <div class="pagination-limit-dropdown filter-count gist-pull-right"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="timeline"></div>
+                            {% include "../partials/accessibility/skip-to-page-top.njk" %}
+                            <nav class="timeline-pagination"></nav>
+                        </div>
+                    </div><!-- .row -->
+
+                </div><!-- .gist-container-fluid -->
+
+            </div><!-- .gist-chart-container -->
+
+        </div><!-- .gist-content -->
+
+    </section>
+
+    {% include "../partials/analytics.njk" %}
+
+{% endblock %}
+
+{% block inlineScript %}
+    {{ super() }}
+
+    <script type="text/javascript" src="/vendors/scrollmagic/scrollmagic/minified/ScrollMagic.min.js"></script>
+    <script type="text/javascript" src="/javascripts/build/main/scroll-header.js"></script>
+
+    <script type="text/javascript" src="/vendors/nunjucks/browser/nunjucks-slim.min.js"></script>
+    <script type="text/javascript" src="/javascripts/build/fe-templates.js"></script>
+
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/html-visualization.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/pagination.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/limit-dropdown.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/page-dropdown.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/nav.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/timeline/timeline.js"></script>
+
+    <script>
+        (function () {
+            window.arrays = window.arrays || {};
+            window.arrays.defaultInstanceId = '{{ viewInstanceId }}';
+            window.arrays.viewOptions = window.arrays.viewOptions || {};
+
+            window.arrays.viewOptions['{{ viewInstanceId }}'] = {
+                viewOptions: {{ viewOptions | dump | safe }},
+                routePath_base: '{{ routePath_base }}',
+                array_source_key: '{{ array_source_key }}',
+                filterObj: {{ filterObj | dump | safe }},
+                searchQ: '{{ searchQ }}',
+                searchCol: '{{ searchCol }}',
+                sortDirection: '{{ sortDirection }}',
+                sortBy: '{{ sortBy if sortBy else defaultSortByColumnName_humanReadable }}',
+                limit: '{{ limit }}',
+                sharedPage: {{ sharedPage }},
+                sharedPageId: '{{ sharedPageId }}',
+                preview: '{{ isPreview }}',
+                revision: '{{ revision }}',
+                fieldKey_objectTitle: '{{ fieldKey_objectTitle }}',
+                defaultSortByColumnName_humanReadable: '{{ defaultSortByColumnName_humanReadable }}',
+                sortBy_realColumnName: '{{ sortBy_realColumnName }}',
+                groupBy: '{{ groupBy_realColumnName }}',
+                galleryStyle: '{{ galleryStyle }}',
+                secondaryColumnTileDisplay: '{{ secondaryColumnTileDisplay }}',
+                datasetId: '{{ datasetId }}',
+                title: '{{ arrayTitle }}',
+                format: '{{ format }}',
+                puppeteer: {{ (puppeteer and not puppeteerScreenshot) | default(false) }},
+                groupSize: {{ groupSize }},
+                largeTilesWithCaptions: {{ largeTilesWithCaptions }},
+                clickThroughView: '{{ clickThroughView }}',
+                groupBy_isDate: {{ groupBy_isDate }},
+                groupBy_realColumnName: '{{ groupBy_realColumnName }}',
+                subdomain: '{{ subdomain }}',
+                environment: '{{ env.NODE_ENV }}',
+                isEmbed: {{ isEmbed }},
+            };
+        })();
+    </script>
+
+    <script type="text/javascript" src="/javascripts/build/core-views/timeline/timeline-main.js"></script>
+    <script type="text/javascript" src="/javascripts/build/core-views/timeline/timeline-init.js"></script>
+{% endblock %}

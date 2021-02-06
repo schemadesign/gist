@@ -1,0 +1,133 @@
+<md-dialog aria-label="Join Dataset" class="field-dialog">
+    <aa-toolbar title="Join Dataset"></aa-toolbar>
+
+    <md-dialog-content md-no-ink>
+        <form name="dialog.form">
+            <md-content layout-padding>
+                <div ng-repeat="relationshipField in dataset.relationshipFields"
+                    style="border-bottom: 1px solid #eeeeee; margin-bottom: 16px">
+                    <div layout="row">
+                        <md-input-container flex>
+                            <label>Field Name</label>
+                            <input type="text" required name="field_{{$index}}"
+                                   ng-model="relationshipField.field"
+                                   ng-change="verifyValidFieldName(relationshipField.field, $index)"/>
+                            <div ng-messages="dialog.form.field.$error">
+                                <div ng-message="required">This is required.</div>
+                                <div ng-message="unique">Must be unique.</div>
+                                <div ng-message="valid">Name is invalid</div>
+                            </div>
+                        </md-input-container>
+
+                        <span flex="5"></span>
+                        <span class="dashboard-list-icon warn" ng-click="removeJoin($index)" aria-hidden="true"
+                            aria-label="Remove join" flex="5">
+                            <i class="fa fa-remove" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <label>Join Conditions</label>
+                    <div layout="row">
+                        <md-input-container flex="30">
+                            <label>Local Field</label>
+                            <md-select required name="localField_{{$index}}"
+                                       ng-model="relationshipField.by.withLocalField">
+                                <md-option ng-repeat="column in columnsAvailable" value="{{column.name}}">
+                                    {{column.name}}
+                                </md-option>
+                            </md-select>
+                            <div ng-messages="dialog.form.localField.$error">
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                        </md-input-container>
+                        <span flex="5"></span>
+                       <!--  <md-input-container flex="20">
+                            <label>Match Function</label>
+                            <md-select required name="matchFn_{{$index}}"
+                                       ng-model="relationshipField.by.matchFn">
+                                <md-option ng-repeat="fn in availableMatchFns" value="{{fn}}">{{fn}}</md-option>
+                            </md-select>
+                        </md-input-container> -->
+
+                        <!-- <div layout="row" flex="55"> -->
+                            <md-input-container flex="30">
+                                <label>Foreign Dataset</label>
+                                <md-select required name="foreignDataset_{{$index}}"
+                                           ng-model="data.foreignDataset[$index]"
+                                           ng-change="loadColumnsForDataset($index)">
+                                    <md-option ng-repeat="source in datasets" ng-if="source.uid" ng-value="source">
+                                        {{source.title}} ({{source.importRevision}})
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <span flex="5"></span>
+
+                            <md-input-container flex="30">
+                                <label>Foreign Field</label>
+                                <md-select required name="foreignField_{{$index}}"
+                                           ng-model="relationshipField.by.findingMatchOnField">
+                                    <md-option ng-repeat="column in data.columns[$index]" value="{{column.name}}">{{column.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        <!-- </div> -->
+                    </div>
+
+                     <md-input-container class="md-block">
+                        <md-checkbox  ng-if="relationshipField.field && relationshipField.field!=='' && !relationshipField.by.obtainingValueFromField" name="selectAll_showFields" aria-label="Select All" ng-click="toggleAll(relationshipField.field,data.columns[$index])"
+                        ng-checked="isChecked(relationshipField.field,data.columns[$index])">
+                            <span ng-if="!relationshipField.by.obtainingValueFromField &&
+                            isChecked(relationshipField.field,data.columns[$index])" >Un-</span>Select All
+                        </md-checkbox>
+                     </md-input-container>
+
+                    <div ng-if="!relationshipField.by.obtainingValueFromField" layout="row" layout-wrap flex>
+                        <div flex="20" ng-repeat="column in data.columns[$index]">
+                            <md-checkbox name="showFields_{{column.name}}" aria-label="{{column.name}}" ng-checked="dataset.fe_objectShow_customHTMLOverrideFnsByColumnNames[relationshipField.field].showField.indexOf(column.name)>=0"
+                            ng-click="toggle(column.name, relationshipField.field)"> {{column.name}}</md-checkbox>
+                        </div>
+                    </div>
+
+                    <md-input-container class="md-block">
+                        <label>Mapping Foreign Field</label>
+                        <md-select name="obtainingValueFromField_{{$index}}"
+                                   ng-model="relationshipField.by.obtainingValueFromField">
+                            <md-option ng-repeat="column in data.columns[$index]" ng-click="deleteFeObjectShow(relationshipField.field)" value="{{column.name}}">
+                                {{column.name}}
+                            </md-option>
+                        </md-select>
+                        <div ng-messages="dialog.form.obtainingValueFromField.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+
+                    <div layout="row">
+                        <div flex="50">
+                            <md-checkbox name="singular" ng-model="relationshipField.singular" ng-click="relationshipField.relationship=false">Singular</md-checkbox>
+                        </div>
+                        <div flex="50">
+
+                            <md-checkbox name="relationship" ng-model="relationshipField.relationship" ng-click="relationshipField.singular=false">Relationship</md-checkbox>
+                        </div>
+                    </div>
+
+                </div>
+
+                <md-button class="md-dashboard" ng-click="addJoin()">
+                    Add a dataset to join
+                </md-button>
+            </md-content>
+
+            <md-dialog-actions layout="row" layout-align="end center">
+                <md-button class="md-dashboard cancel" ng-click="cancel()">
+                    <span class="btn-label">Cancel</span>
+                </md-button>
+
+                <md-button class="md-dashboard confirm" ng-click="save()"
+                           ng-disabled="!dialog.form.$dirty || dialog.form.$invalid">
+                    <span class="btn-label">Save</span>
+                </md-button>
+            </md-dialog-actions>
+        </form>
+    </md-dialog-content>
+</md-dialog>

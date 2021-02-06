@@ -1,0 +1,42 @@
+@import url('/stylesheets/base/variables.css');
+@import url('/stylesheets/base/typography/base.css');
+
+.step h1{
+	flex: 0 0 15%;
+}
+
+.step p {
+    flex: 1;
+    margin-top: 28px;
+    font-weight: bold;
+}
+
+.step{
+	margin: 20px;
+	display: flex;
+
+}
+
+h4{
+	line-height: 32px;
+}
+
+p{
+	font-size: 20px;
+}
+
+nav{
+	background-color: #027cc2;
+}
+
+.navbar{
+	border-radius: 0; 
+}
+
+.endblock{
+	height: 30%;
+}
+
+.splash-logo{
+	margin-top: 35px;
+}

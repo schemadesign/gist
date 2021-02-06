@@ -1,0 +1,30 @@
+<md-dialog md-no-ink aria-label="Missing Samples or override columns">
+    <aa-toolbar title="Missing Samples or override columns" class="warn"></aa-toolbar>
+
+    <md-dialog-content layout-padding>
+        <md-content layout="column">
+            <p>
+                {{ fileName }} uploaded!
+            </p>
+            <div ng-if="missingSamples.length">
+                <p>
+                    We couldn't find samples in the first 1000 rows for the following columns:
+                </p>
+                <ul>
+                    <li ng-repeat="column in missingSamples track by column">{{ column }}</li>
+                </ul>
+            </div>
+            <div ng-if="overrideColumns.length">
+                <p>
+                    We are overriding the following columns with the just imported dataset:
+                </p>
+                <ul>
+                    <li ng-repeat="column in overrideColumns track by column">{{ column }}</li>
+                </ul>
+            </div>
+        </md-content>
+
+        <aa-dialog-actions warn="Got it" hide-cancel="true"></aa-dialog-actions>
+    </md-dialog-content>
+
+</md-dialog>

@@ -1,0 +1,112 @@
+/* @override
+	http://austenblokker.local.arrays.co:9080/stylesheets/base/variables.css */
+
+:root {
+    --color-primary: #005cb5;
+    --color-warn: #fb4400;
+    --color-warn-dark: #990000;
+
+    --color-background: #ffffff;
+
+    --color-text-dark: #2a2a2a;
+    --color-text-med-dark: #333333;
+    --color-text-med: #777777;
+    --color-text-light: #595959;
+    --color-text-ultralight: #c3c3c3;
+
+    --color-sort-bar-border: #d8d8d8;
+    --color-sort-bar-label: #9b9b9b;
+
+    --color-divider: #d8d8d8;
+
+    --color-item-hover: #ddd;
+    --color-item-active: #9e9e9e;
+
+    --color-filter-menu-hover-bg: #fafafa;
+    --color-filter-menu-arrow: #ddd;
+    --color-filter-menu-arrow-hover: #9b9b9b;
+
+    --font-family-centrano2: 'CentraNo2', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    --box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
+    --box-shadow-dark: 0 2px 4px rgba(0, 0, 0, 0.5);
+    --box-shadow-tooltip: .1em .1em .2em lightgrey, -.05em -.05em .1em lightgrey;
+
+    --navbar-height-mobile: 50px;
+    --navbar-height-tablet: 64px;
+    --navbar-height-embedded: 40px;
+
+    --legend-width: 300px;
+
+    --viz-header-height-tablet: 140px;
+
+    --sort-bar-border-transition: border 200ms ease-in-out;
+
+    --brand-color-accent: #005cb5;
+}
+
+/* @group Icon colors */
+
+.color-default {
+    color: #000000;
+}
+
+.color-gender {
+    color: #7a00f6;
+}
+
+.color-vital-status {
+    color: var(--color-primary);
+}
+
+/* @end */
+
+.no-padding {
+    padding: 0 !important;
+}
+
+/* @group Primary Color */
+
+.color-brand,
+td.color-brand,
+a.color-brand:hover,
+a.color-brand:focus,
+a.color-brand:active,
+.sidebar-filter-toggle .color-brand {
+    color: var(--color-primary);
+}
+
+/*.color-brand-hover:hover,
+.dropdown-toggle:hover .color-brand-hover,
+.open .color-brand-hover {
+	color: var(--color-primary);
+}*/
+
+.background-color-brand,
+.background-color-brand-hover:hover,
+.background-color-brand-hover:focus,
+.background-color-brand-hover:active,
+.background-color-brand-hover > a:hover,
+.background-color-brand-hover > a:focus,
+.background-color-brand-hover > a:active {
+    background-color: var(--color-primary);
+    cursor: pointer;
+}
+
+.border-color-brand {
+    border-color: var(--color-primary);
+}
+
+/* @end Primary Color */
+a.array-meta-about.color-brand.source-underline,
+a.color-brand.source-underline {
+    position: relative;
+    width: auto;
+    cursor: pointer;
+}
+
+a.array-meta-about.color-brand.source-underline:before,
+a.color-brand.source-underline:before {
+    bottom: 0px;
+    background-color: var(--color-primary);
+}

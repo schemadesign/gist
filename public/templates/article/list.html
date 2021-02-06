@@ -1,0 +1,48 @@
+<md-content layout-padding md-no-ink ng-if="pages.length">
+
+    <div layout-gt-xs="row" layout-align="space-between center">
+        <md-select ng-model="sortCriteria.sortLabel" ng-if="pageIsAvailable" aria-label="Sort articles">
+            <md-option value="Sort By Date" ng-click="updateSort($event, '-createdAt', 1)">Sort By Date</md-option>
+            <md-option value="Sort Alphabetically" ng-click="updateSort($event, 'pageTitle', 2)">Sort Alphabetically
+            </md-option>
+        </md-select>
+    </div>
+
+    <ul class="dashboard-list user-list" ng-cloak>
+        <li ng-repeat="page in pages | orderBy : sortCriteria.sortValue" layout="row"
+            layout-align="space-between center">
+
+        <span aa-tooltip="{{ page.published == true ? 'Unpublish' : 'Publish' }}" flex="10" ng-if="canEdit(page._id)">
+            <md-checkbox name=""
+                         ng-model="page.published"
+                         aria-label="Publish {{ page.pageTitle }}"
+                         ng-click="$event.stopPropagation();"
+                         ng-change="updateStatus(page)"
+            ></md-checkbox>
+        </span>
+
+            <span flex class="dashboard-list-name" ng-click="select(page)" role="button" tabindex="0"
+                  ng-class="{disabled: !canEdit(page._id)}">
+                {{page.pageTitle}}
+        </span>
+
+            <span class="dashboard-list-icon" flex="10" aa-tooltip="Copy page" ng-click="copyPage(page, true)"
+                  ng-if="canEdit(page._id)">
+            <i class="fa fa-clone" aria-hidden="true"></i>
+        </span>
+
+            <span class="dashboard-list-icon" ng-click="view(page)" flex="10">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+        </span>
+
+            <span class="dashboard-list-icon warn" ng-click="remove(page, $event)" aria-hidden="true"
+                  aria-label="Delete" flex="5" ng-if="canEdit(page._id)">
+            <i class="fa fa-remove" aria-hidden="true"></i>
+        </span>
+        </li>
+    </ul>
+
+</md-content>
+<md-content layout-padding md-no-ink ng-if="!pages.length">
+    <p class="padding-top-0">You have not created any articles yet.</p>
+</md-content>

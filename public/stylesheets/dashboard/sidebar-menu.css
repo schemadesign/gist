@@ -1,0 +1,180 @@
+/* Menu Nav Bar */
+
+.dashboard .dashboard-container md-sidenav.md-sidenav-left {
+    position: fixed;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.md-sidenav-backdrop {
+    position: fixed !important;
+}
+
+@media (min-width: 960px) {
+    .dashboard .dashboard-container md-sidenav.md-sidenav-left {
+        padding-top: 120px;
+        margin-right: 60px;
+        position: relative;
+        transform: none;
+    }
+}
+
+/* Mobile Version of Side Nav */
+@media (max-width: 959px) {
+    .dashboard md-sidenav {
+        bottom: auto;
+        overflow: hidden;
+        border-radius: 4px;
+        box-shadow: 1px 1px 4px 0 rgba(0,0,0,.14);
+    }
+
+    .dashboard .md-sidenav-left,
+    .dashboard .sidebar-menu {
+        width: auto;
+        max-width: 100%;
+        background-color: #FFF;
+        text-align: left;
+        left: 10px;
+        right: 10px;
+        max-height: calc(100% - 70px);
+        overflow-y: scroll;
+        top: 70px;
+        transition: none !important;
+        z-index: 62;
+    }
+
+    .dashboard .sidebar-menu .nav li a {
+        color: #333;
+    }
+
+    .dashboard .sidebar-menu .hide-mobile {
+        display: none;
+    }
+
+    .dashboard .sidebar-menu .nav > li:not(.active) > a:hover,
+    .dashboard .sidebar-menu .nav > li:not(.active) > a:focus,
+    .dashboard .sidebar-menu .nav > li.active > a{
+        background-color: #fafafa;
+        color: #333;
+    }
+
+    .dashboard md-sidenav hr {
+        width: 100%;
+        margin-left: 0px;
+        margin: 20px;
+        border-top: none;
+    }
+
+    a#leftNav.w-burger-menu.sidebar-toggle:hover {
+        background-color: inherit;
+    }
+
+    a#leftNav.w-burger-menu.sidebar-toggle.open:hover {
+        background-color: #333;
+        color: #fff;
+    }
+}
+
+/*dont do a transition when resizing the window*/
+/*md-sidenav.md-closed-add,*/
+/*md-sidenav.md-closed-remove,*/
+/*md-sidenav.md-closed-add.md-closed-add-active,*/
+/*md-sidenav.md-closed-remove.md-closed-remove-active,*/
+md-sidenav.md-locked-open-remove-active,
+md-sidenav.md-closed.md-locked-open-add-active {
+    transition: none !important;
+    transform: none;
+}
+
+/*menu items*/
+
+.sidebar-menu .nav > li > a,
+.sidebar-menu .nav > li > span {
+    position: relative;
+    /*letter-spacing: 2px;*/
+    /*font-size: 1.1em;*/
+    /*font-size: 16px;*/
+    line-height: 1em;
+
+    display: inline-block;
+    margin-bottom: 1px;
+    padding: 12px;
+    width: 100%;
+    /*color: #fff;*/
+    color: var(--color-text-dark);
+    border-radius: 4px;
+
+    transition: background-color 0.3s, color 0.15s;
+}
+
+.sidebar-menu .nav > li.active > a {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+.sidebar-menu .nav > li:not(.active) > a:hover,
+.sidebar-menu .nav > li:not(.active) > a:focus {
+    background-color: #eeeeee;
+    color: var(--color-text-dark);
+}
+
+/*treat View Website as link*/
+.sidebar-menu .nav li.sidebar-link > span > a:hover {
+    color: var(--color-primary);
+    border-bottom: 1px solid;
+    text-decoration: none;
+}
+
+li.sidebar-link span a {
+    text-decoration: none;
+}
+
+.sidebar-menu .nav .sidebar-label {
+    overflow-x: hidden;
+    /* style as if disabled, for now */
+    color: var(--color-text-med-dark);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 700;
+    cursor: default;
+}
+
+.sidebar-menu hr {
+    margin: 36px 12px 12px 12px;
+}
+
+.dashboard-menu-toggle svg {
+	width: 18px;
+}
+ul.nav.active .dashboard-menu-toggle svg g {
+    fill: white;
+}
+
+/*@media (min-width: 768px)  {*/
+    .dashboard .navbar-nav {
+        float: right;
+    }
+	.navbar-nav > li > a.dashboard-menu-toggle {
+	    padding: 20px;
+		padding-top: 22px;
+	}
+	.dashboard-menu-toggle svg {
+		width: 24px;
+	}
+/*}*/
+
+@media (min-width: 960px) { /* Hide mobile versions of links from sidebar */
+    .nav.mobile-sidebar {
+        display: none;
+    }
+}
+
+@media (min-width: 960px) and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .dashboard .dashboard-container md-sidenav.md-sidenav-left {
+        min-height: 670px;
+        position: static;
+        overflow: visible;
+    }
+}
+
+/* Menu Nav Bar */

@@ -1,0 +1,197 @@
+{% import './hamburger-menu.njk' as menu %}
+
+{% if brandColor %}
+    {% include "./styles.njk" %}
+{% endif %}
+
+{% set visHomeUrl = "/" + array_source_key + "/" + defaultView | constructedRoutePath(defaultFilterObj, {
+    preview: isPreview if isPreview else
+    null,
+    embed: embedded,
+    revision: revision
+}) %}
+{% set fullViewURL = "/" + array_source_key + "/" + currentView + '' | constructedRoutePath(filterObj, {
+    colFilter: colFilter,
+    searchQ: searchQ,
+    searchCol: searchCol,
+    preview: isPreview if isPreview else
+    null,
+    revision: revision
+}) %}
+
+{% set currentUrl = "/" + array_source_key + "/" + currentView + ("?" if isPreview or embedded) + ("preview=true" if isPreview) + ("embed=true" if embedded) %}
+{% set isFilter = viewOptions.filtersRail and uniqueFieldValuesByFieldName | length %}
+
+{% if team.externalWebsite and team.logo_header %}
+    {% set logoLink = externalWebsite(team.externalWebsite) %}
+{% elseif team.subdomain | length %}
+    {% set logoLink = addSubdomain(team.subdomain) %}
+{% else %}
+    {% set logoLink = '/' %}
+{% endif %}
+
+<!-- Fixed navbar -->
+<header id="masthead" class="site-header hidden-print" role="banner">
+    <nav class="navbar navbar-default navbar-fixed-top" {% if isPreview %} style="display: none" {% endif %}>
+        <div class="container-fluid container-full-width">
+            <div class="navbar-brand-container">
+                {% if team.logo_header and not embedded %}
+                    <a class="navbar-brand navbar-brand-arrays navbar-brand-team-logo" href="{{ logoLink }}"
+                       target="_blank" title="Explore {{ team.title }}'s team page">
+                        <div class="team-header-logo" style="background-image: url('{{ team.logo_header }}');"></div>
+                    </a>
+                    <br/>
+                    <a href="{{ visHomeUrl }}" class="navbar-brand navbar-brand-array-title color-brand-hover"
+                       title="Go back to visualization home" aria-label="Go back to visualization home">
+                        <span
+                            class="truncate">{{ arrayTitle }}</span></a>
+                {% elseif not embedded %}
+                    <a class="navbar-brand navbar-brand-team-title color-brand color-brand-hover"
+                       href="{% if team.subdomain | length %}{{ addSubdomain(team.subdomain) }}{% else %}/{% endif %}"
+                       target="_blank"
+                       aria-label="{% if team.subdomain | length %} team page {% else %} arrays explore page{% endif %}">
+                        <span
+                            class="truncate navbar-brand-team-title-underline">{{ team.title }}</span></a>
+                    <br/>
+                    <a href="{{ visHomeUrl }}" class="navbar-brand navbar-brand-array-title color-brand-hover {% if isFilter %}navbar-brand-array-title--filter{% endif %}">
+                        <span class="truncate">{{ arrayTitle }}</span>
+                        {% if isPreview %}
+                            <span class="preview-indicator"> (preview)</span>
+                        {% endif %}
+                    </a>
+                {% else %}
+                    <a href="{{ visHomeUrl }}"
+                       class="navbar-brand navbar-brand-array-title view-embedded color-brand-hover">
+                        <span class="truncate">{{ arrayTitle }}</span>
+                        {% if isPreview %}
+                            <span class="preview-indicator"> (preview)</span>
+                        {% endif %}
+                    </a>
+                    {% if not isPreview %}
+                        <span class="gist-header-expand-button-wrapper {{'has-insights' if showInsightsExplorer}} {{ 'has-description' if view_description }} {{ 'has-updated-date' if lastUpdated }} insights-explorer-dropdown-toggle">
+                            <a id="gist-header-expand-button" class="gist-header-expand-button--hidden gist-dropdown-toggle-button-has-caret "></a>
+                        </span>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    {% if isFilter %}
+                        <li>
+                            <div data-l10n-id="show-filter-options" class="gist-filter-menu-toggle color-brand-hover"
+                                 title="Show filter options" aria-haspopup="true" aria-label="Show filter options"
+                                 aria-expanded="false">
+                                <span class="gist-icon-filter"></span>
+                                {% if
+                                    isFilterActive %}
+                                    <span class="sidebar-filter-active"></span>{% endif %}
+                            </div>
+                            {% include "../filter-menu.njk" %}
+                        </li>
+                    {% endif %}
+
+                    {% if showViewMenu %}
+                        {% set views_order = [
+                            'gallery',
+                            'timeline',
+                            'regionalMap',
+                            'map',
+                            'globe',
+                            'pieChart',
+                            'scatterplot',
+                            'wordCloud',
+                            'lineGraph',
+                            'pieSet',
+                            'barChart',
+                            'table',
+                            'bubbleChart',
+                            'areaChart',
+                            'treemap'
+                        ] %}
+                        {% set views_sorted = view_visibility | sortViews(views_order) %}
+
+                        {# Horizontal view icons #}
+                        {% if views_sorted | length <= 6 %}
+                            {% for view in views_sorted %}
+                                {% if view.name === 'timeline' %}
+                                    {% set viewName = 'groupedGallery' %}
+                                {% else %}
+                                    {% set viewName = view.name %}
+                                {% endif %}
+
+                                {% set view_slug = viewName | kebabCase %}
+                                {% set view_real_slug = view.name | kebabCase %}
+                                {% set view_name = viewName | startCase %}
+
+                                <li class="navbar-view-item hidden-md hidden-sm hidden-xs {{ "active" if currentView === view_real_slug }}">
+                                    <a href="{{ currentUrl | replaceViewInUrl(currentView, view_slug) | constructedRoutePath(filterObj, {
+                                        colFilter: colFilter,
+                                        searchQ: searchQ,
+                                        searchCol: searchCol,
+                                        revision: revision
+                                    }) }}" title="{{ view_name }}" class="color-brand-hover">
+                                        <span class="gist-icon-{{ view_slug }}" aria-hidden="true"></span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+
+                        {# Dropdown view select #}
+                        <li class="gist-dropdown navbar-view-select {% if views_sorted | length <= 6 %} hidden-lg{% endif %}">
+                            {% if currentView === 'timeline' %}
+                                {% set iconName = 'grouped-gallery' %}
+                            {% else %}
+                                {% set iconName = currentView %}
+                            {% endif %}
+                            <a href="#" class="dropdown-toggle color-brand-hover" title="Switch to a different view"
+                               data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false" aria-label="Switch to a different view">
+                                <span
+                                    class="gist-icon-{{ iconName }}" aria-hidden="true"></span></a>
+
+                            <ul class="dropdown-menu gist-views-menu-group">
+                                {% for view in views_sorted %}
+                                    {% if view.name === 'timeline' %}
+                                        {% set viewName = 'groupedGallery' %}
+                                    {% else %}
+                                        {% set viewName = view.name %}
+                                    {% endif %}
+
+                                    {% set view_slug = viewName | kebabCase %}
+                                    {% set view_real_slug = view.name | kebabCase %}
+                                    {% set view_name = viewName | startCase %}
+
+                                    <li class="background-color-brand-hover {{ "active" if currentUrl === view_real_slug }}">
+                                        <a href="{{ currentUrl | replaceViewInUrl(currentView, view_real_slug) | constructedRoutePath(filterObj, {
+                                            colFilter: colFilter,
+                                            searchQ: searchQ,
+                                            searchCol: searchCol,
+                                            revision: revision
+                                        }) }}">
+                                            <span class="gist-icon-{{ view_slug }}" aria-hidden="true"></span>
+                                            <span data-l10n-id="{{ view_slug }}">{{ view_name }}</span>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endif %}
+                </ul>
+
+                <!-- full page link for embedded view -->
+                {% if viewOptions.fullscreenExpand %}
+                    <a class="nav navbar-nav navbar-right embedded-new-tab" href="{{ fullViewURL }}" target="_blank"
+                       title="Open the full version of this view in a new tab">
+                        <span class="gist-icon-extend" aria-hidden="true"></span>
+                    </a>
+                {% endif %}
+
+                {{ menu.default(user, team, env, isPreview, isPublic, sharedPage, true, storiesCount, arrayTitleEscaped, openDownload, canCreateInsight) }}
+
+            </div>
+            <!-- #navbar -->
+        </div>
+        <div id="gist-noty"></div>
+    </nav>
+</header>

@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Content API Create processed row object should return proper response 1`] = `
+Object {
+  "body": Object {
+    "created": true,
+    "published": true,
+    "rowParams": Object {
+      "Image URL": "http://cdn.bulbagarden.net/upload/thumb/5/5d/010Caterpie.png/250px-010Caterpie.png",
+      "Max CP": 446,
+      "Max HP": 83,
+      "Name": "Caterpie",
+      "Pokemon No_": 10,
+      "Type 1": "Bug",
+      "Type 2": "None",
+    },
+    "srcDocPKey": "5a42c26e303770207ce8f83b",
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Content API Publish processed row object should return proper response 1`] = `
+Object {
+  "body": Object {
+    "pKey": "14",
+    "published": true,
+    "rowParams": Object {
+      "Image URL": "http://cdn.bulbagarden.net/upload/thumb/3/39/007Squirtle.png/250px-007Squirtle.png",
+      "Max CP": 1015,
+      "Max HP": 81,
+      "Name": "Squirtle",
+      "Pokemon No_": 7,
+      "Type 1": "Water",
+      "Type 2": "None",
+    },
+    "srcDocPKey": "5a42c26e303770207ce8f83b",
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Content API Remove processed row object should return proper response 1`] = `
+Object {
+  "body": Object {
+    "success": true,
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Content API Unpublish processed row object should return proper response 1`] = `
+Object {
+  "body": Object {
+    "pKey": "2",
+    "published": false,
+    "rowParams": Object {
+      "Image URL": "http://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png",
+      "Max CP": 1079,
+      "Max HP": 83,
+      "Name": "Bulbasaur",
+      "Pokemon No_": 1,
+      "Type 1": "Grass",
+      "Type 2": "Poison",
+    },
+    "srcDocPKey": "5a42c26e303770207ce8f83b",
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Content API Update row object's params should return proper response 1`] = `
+Object {
+  "body": Object {
+    "pKey": "2",
+    "published": true,
+    "rowParams": Object {
+      "Image URL": "http://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png",
+      "Max CP": 1079,
+      "Max HP": 83,
+      "Name": "Bulbasaur",
+      "Pokemon No_": 12,
+      "Type 1": "Grass",
+      "Type 2": "Poison",
+    },
+    "srcDocPKey": "5a42c26e303770207ce8f83b",
+  },
+  "statusCode": 200,
+}
+`;

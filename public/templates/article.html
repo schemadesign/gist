@@ -1,0 +1,40 @@
+<header layout-xs="col" layout-gt-xs="row" layout-align="space-between start">
+    <h1 ng-if="$state.is('dashboard.article.list') == true">Articles</h1>
+    <h1 ng-if="$state.is('dashboard.article.list') == false">{{ page.pageTitle ? page.pageTitle : 'Page Title' }}</h1>
+    <div class="article-buttons-div">
+        <md-button ng-hide="!thirdAction.text"
+                   class="md-dashboard md-dashboard-header" md-no-ink
+                   ng-disabled="thirdAction.disabled"
+                   ng-click="thirdAction.do($event)">
+            <span class="btn-label">{{ thirdAction.text }}</span>
+        </md-button>
+
+        <md-button ng-hide="!secondaryAction.text"
+                   class="md-dashboard md-dashboard-header" md-no-ink
+                   ng-disabled="secondaryAction.disabled"
+                   ng-click="secondaryAction.do($event)">
+            <span class="btn-label">{{ secondaryAction.text }}</span>
+        </md-button>
+
+        <md-button ng-hide="!primaryAction.text"
+            class="md-dashboard md-dashboard-header" md-no-ink
+            ng-class="{ 'confirm': !$state.is('dashboard.page.list') }"
+            ng-disabled="primaryAction.disabled"
+            ng-if="primaryAction.show"
+            ng-click="primaryAction.do($event)">
+            <span class="btn-label">{{ primaryAction.text }}</span>
+        </md-button>
+    </div>
+    <!-- <md-button
+        class="md-dashboard md-dashboard-header" md-no-ink
+        ng-if="$state.is('dashboard.page.list') == true"
+        ng-click="openAddNewPageDialog($event)">
+        <span class="btn-label">{{'New Page'}}</span>
+    </md-button> -->
+</header>
+
+<div class="gist-content dataset">
+
+    <div ui-view class="ext-content"></div>
+
+</div>

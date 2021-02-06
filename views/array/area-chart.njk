@@ -1,0 +1,20 @@
+{% set currentView = "area-chart" %}
+
+{% extends "../layout/array.njk" %}
+
+{% import "../partials/array-header.njk" as header %}
+
+{% import "../partials/dropdown.njk" as dropdown %}
+{% import "../partials/search.njk" as search %}
+{% import "../partials/filter.njk" as filter %}
+
+{% block content %}
+    {% include "./content/area-chart-content.njk" %}
+    {% include "../partials/analytics.njk" %}
+{% endblock %}
+
+{% block inlineScript %}
+    {{ super() }}
+
+    <script type="text/javascript" src="/javascripts/build/core-views/area-chart/area-chart-init.js"></script>
+{% endblock %}

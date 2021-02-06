@@ -1,0 +1,23 @@
+{
+  "globalSetup": "./internals/testing/backend/setup.js",
+  "globalTeardown": "./internals/testing/backend/teardown.js",
+  "setupTestFrameworkScriptFile": "./internals/testing/backend/setupFramework.js",
+  "testMatch": [
+    "<rootDir>/app/**/__tests__/**/*.spec.js",
+    "<rootDir>/shared/**/__tests__/**/*.spec.js"
+  ],
+  "rootDir": "../../../",
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/contrib/"
+  ],
+  "snapshotSerializers": [
+    "./internals/testing/backend/serializers/response.js"
+  ],
+  "clearMocks": true,
+  "watchPathIgnorePatterns": [
+    "./__mocks__/tmp",
+    "<rootDir>/node_modules/"
+  ],
+  "testEnvironment": "node"
+}

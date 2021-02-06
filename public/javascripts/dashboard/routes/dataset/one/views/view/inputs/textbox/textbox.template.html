@@ -1,0 +1,6 @@
+<label class="margin-bottom-3x d-block">{{::setting.displayAs}}</label>
+<p ng-if="::setting.description">{{::setting.description}}</p>
+
+<md-input-container class="md-block" flex-gt-sm md-no-float>
+    <input ng-if="!setting.expectedInputType" placeholder="{{::setting.placeholder || ''}}" type="text" ng-model="viewCtrl.data[setting.name]">
+</md-input-container>

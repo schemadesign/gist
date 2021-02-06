@@ -1,0 +1,13 @@
+<p class="data-format-question">
+    Select the visual style of your map below.
+    <a ng-click="showExplanation = !showExplanation">
+        <span ng-if="!showExplanation">Learn more</span>
+        <span ng-if="showExplanation">Close</span>
+    </a>
+</p>
+
+<div ng-if="showExplanation" class="data-format-explanation">
+    <p>
+        Your map can have different styles. The <strong>Country Map</strong> is the default, and will display country regions across the world. Data will be aggregated based on the country names in your dataset. The <strong>Pin Map</strong> will display specific locations in your dataset. This requires latitude and longitude coordinates. Finally, the <strong>Bubble Map</strong> also displays individual locations, but adds a magnitude for the size of the bubble.
+    </p>
+</div>

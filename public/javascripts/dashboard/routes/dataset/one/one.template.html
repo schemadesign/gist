@@ -1,0 +1,148 @@
+<md-toast
+    ng-if="datasetOneCtrl.dataset.lastImportTriggeredBy === 'automated' && datasetOneCtrl.dataset.lastImportErrorLog"
+    md-theme="error-toast"
+    class="md-error-toast-theme md-top md-left md-right"
+>
+    <div class="md-toast-content">
+        <span class="md-toast-text">Last automated import failed with this dataset. Error:  {{datasetOneCtrl.dataset.lastImportErrorLog}}</span>
+        <button class="md-action md-button md-link-ripple md-error-toast-theme" ng-click="datasetOneCtrl.clearErrorLog()">Don't show this message again</button>
+    </div>
+</md-toast>
+
+<header layout-xs="col" layout-gt-xs="row" layout-align="space-between start">
+    <h1 class="pad-bottom-2x">{{ datasetOneCtrl.originalDataset.title }}</h1>
+
+    <div layout="row" layout-align="start center" ng-if="!datasetOneCtrl.isProcessing() && !datasetOneCtrl.isContentForm()">
+        <md-button
+            md-no-ink
+            class="md-dashboard md-dashboard-header"
+            ng-click="datasetOneCtrl.revert()"
+            ng-if="datasetOneCtrl.isDirty()"
+            ng-disabled="datasetOneCtrl.isLoading()"
+        >
+            <span class="btn-label">Revert</span>
+        </md-button>
+
+        <md-button
+            md-no-ink
+            ng-if="datasetOneCtrl.dataset.firstImport && datasetOneCtrl.hasNothingToUpdate()"
+            class="md-dashboard md-dashboard-header confirm"
+            ng-disabled="datasetOneCtrl.form.$invalid || datasetOneCtrl.isLoading()"
+            ng-click="datasetOneCtrl.next()"
+        >
+            <span class="btn-label">Next</span>
+        </md-button>
+
+        <md-button
+            md-no-ink
+            ng-if="datasetOneCtrl.firstImportNeedsIncrement()"
+            class="md-dashboard md-dashboard-header confirm"
+            ng-disabled="datasetOneCtrl.form.$invalid || datasetOneCtrl.isLoading()"
+            ng-click="datasetOneCtrl.saveAndNext()"
+        >
+            <span class="btn-label">Save and Next</span>
+        </md-button>
+
+        <md-button
+            md-no-ink
+            ng-if="datasetOneCtrl.isDirty() && !datasetOneCtrl.firstImportNeedsIncrement()"
+            class="md-dashboard md-dashboard-header confirm"
+            ng-disabled="datasetOneCtrl.form.$invalid || datasetOneCtrl.isLoading()"
+            ng-click="datasetOneCtrl.save()"
+        >
+            <span class="btn-label">Save</span>
+        </md-button>
+
+        <md-button
+            md-no-ink
+            ng-if="!datasetOneCtrl.dataset.firstImport && !datasetOneCtrl.dataset.replacement && !datasetOneCtrl.isDirty()"
+            class="md-dashboard md-dashboard-header confirm"
+            ng-click="datasetOneCtrl.view()"
+        >
+            <span class="btn-label">View</span>
+        </md-button>
+
+        <md-button
+            md-no-ink
+            ng-if="datasetOneCtrl.isPublishAvailable()"
+            class="md-dashboard md-dashboard-header confirm"
+            ng-click="datasetOneCtrl.publish()"
+            ng-disabled="datasetOneCtrl.isLoading()"
+        >
+            <span class="btn-label">Publish</span>
+        </md-button>
+
+        <md-menu ng-if="datasetOneCtrl.dataset.replacement" class="md-dashboard md-dashboard-header replace-menu">
+            <md-button
+                class="md-dashboard"
+                aria-label="More actions menu"
+                ng-click="$mdMenu.open()"
+                ng-disabled="datasetOneCtrl.isLoading()"
+            >
+                <span class="btn-label">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </span>
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item ng-if="datasetOneCtrl.isDiscardAvilable()">
+                    <md-button ng-click="datasetOneCtrl.discardReimportedChanges($event)">
+                        Discard Reimported Changes
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item ng-if="datasetOneCtrl.dataset.replacement">
+                    <md-button ng-click="datasetOneCtrl.view()">
+                        Preview
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+
+    <div layout="row" layout-align="start center" ng-if="datasetOneCtrl.isContentForm()">
+        <md-button
+            md-no-ink
+            class="md-dashboard md-dashboard-header"
+            ng-click="datasetOneCtrl.closeContentForm()"
+            ui-sref="dashboard.dataset.one.content.list"
+        >
+            <span class="btn-label">Cancel</span>
+        </md-button>
+
+        <md-button
+            md-no-ink
+            class="md-dashboard md-dashboard-header confirm"
+            ng-click="datasetOneCtrl.saveContentForm()"
+            ng-disabled="datasetOneCtrl.form.$pristine || datasetOneCtrl.form.$invalid"
+        >
+            <span class="btn-label">Save</span>
+        </md-button>
+    </div>
+</header>
+
+<div class="gist-content dataset">
+    <div class="ext-content">
+        <md-nav-bar md-no-ink role="navigation" aria-label="navigation links" class="dashboard-navbar">
+            <md-nav-item
+                ng-repeat="step in ::datasetOneCtrl.wizardSteps"
+                ng-disabled="datasetOneCtrl.isProcessing() || datasetOneCtrl.isLoading()"
+                md-nav-sref="{{::step.sref}}"
+                ui-sref-active="step.active ? { activeTab: step.active } : 'activeTab'"
+                ng-show="datasetOneCtrl.isTabVisible(step, $index)"
+            >
+                {{::step.label}}
+            </md-nav-item>
+        </md-nav-bar>
+
+        <div class="dataset-tab-content" ng-class="{
+            'dataset-tab-content--loading': datasetOneCtrl.isLoading()
+        }">
+            <form
+                name="datasetOneCtrl.form"
+                ng-submit="datasetOneCtrl.form.$valid && datasetOneCtrl.save()"
+            >
+                <div ui-view/>
+                <input type="submit" class="ng-hide"/>
+            </form>
+        </div>
+    </div>
+</div>

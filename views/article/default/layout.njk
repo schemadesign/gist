@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <base href="/">
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16" />
+
+    {% set meta_title %}{% block meta_title %}{% endblock %}{% block meta_team %}{% endblock %} - Gist{% endset %}
+    {% set meta_description %}{% block meta_description %}{% endblock %}{% endset %}
+    <title>{{ meta_title }}</title>
+    <meta name="description" content="{{ meta_description }}">
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ meta_title }}" />
+    <meta name="twitter:image" content="{{ article.thumbnail }}">
+
+    <meta property="og:url" content="{{ currentUrl }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{ meta_title }}" />
+    <meta property="og:description" content="{{ meta_description }}" />
+    <meta property="og:image" content="{{ article.thumbnail }}" />
+
+    {% if env.FE_UNPROCESSEDCSS == "true" %}
+        <link href="/stylesheets/articles/default/main.css" rel="stylesheet">
+    {% else %}
+        <link href="/stylesheets/build/articles/default/main.min.css" rel="stylesheet">
+    {% endif %}
+
+    {% if header_script %}
+        {{ header_script | safe}}
+    {% endif %}
+
+    {% include "../../partials/mixpanel.njk" %}
+
+    {% block headSuffix %}{% endblock %}
+</head>
+<body class="gist-article article-template {% block body_class %}{% endblock %}">
+<div id="page" class="page">
+    <a class="skip-link screen-reader-text sr-only" href="#content">Skip to content</a>
+
+    <div class="container-fluid max-width-960">
+        <header id="masthead" class="page-header navbar">
+            <div class="team-branding">
+                <a href="{{ explore_url }}" class="app-logo-link"><img src="/images/Gist_s_bw.svg" width="30" height="30" class="app-logo" alt="Arrays Logo" /></a>
+                <span class="sep"></span>
+                <span class="team-title"><a href="{{ urlbase }}" title="{{ team.title }}" rel="home">{% if team.logo_header %}<img src="{{ team.logo_header }}" alt="{{ team.title }}" />{% else %}{{ team.title }}{% endif %}</a></span>
+            </div><!-- .team-branding --><!-- space remover
+
+                --><nav id="page-navigation" class="main-navigation">
+                <div id="navbar" class="navbar-default navbar-collapse collapse">
+                    {% block site_menu %}{% endblock %}
+                </div>
+            </nav><!-- #page-navigation -->
+        </header><!-- #masthead -->
+    </div><!-- .container-fluid -->
+
+    <div id="content" class="page-content">
+        {% block content %}{% endblock %}
+    </div><!-- #content -->
+
+    <div class="container-fluid max-width-960">
+        <footer id="colophon" class="page-footer">
+            <div class="page-info">
+                &copy; {{ copyrightYear }} <a href="{{ marketing_url }}">Schema Design, LLC</a>
+                &copy; {{ copyrightYear }} <a href="{{ marketing_url }}">Schema Design, LLC</a>
+            </div><!-- .page-info -->
+        </footer><!-- #colophon -->
+    </div><!-- .container-fluid -->
+
+</div><!-- #page -->
+
+{% include "../../partials/modal/alert.njk" %}
+
+{% include "../partials/share.njk" %}
+
+{% include "../../partials/survicate.njk" %}
+
+{% include "../../partials/analytics.njk" %}
+
+
+{% block inlineScript %}
+    <script type="text/javascript" src="/vendors/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/vendors/sharrre/jquery.sharrre.min.js"></script>
+    <script type="text/javascript" src="/vendors/lodash/lodash.min.js"></script>
+    <script type="text/javascript" src="/javascripts/build/main/namespaces.js"></script>
+    <script type="text/javascript" src="/javascripts/build/main/utils.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/constants.js"></script>
+    <script type="text/javascript" src="/javascripts/build/main/banner.js"></script>{# Mobile collapsed menu #}
+    <script type="text/javascript" src="/javascripts/build/main/article.js"></script>
+
+{% endblock %}
+
+{% if footer_script %}
+    {{ footer_script | safe }}
+{% endif %}
+
+{% if env.FE_LIVERELOAD == "true" %}
+    <script src="//localhost:35729/livereload.js"></script>
+{% endif %}
+</body>
+</html>

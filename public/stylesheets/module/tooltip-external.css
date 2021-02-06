@@ -1,0 +1,15 @@
+/*
+    To avoid problem with font-size in external view it have to be calculated manually (14px * 1.25em) = 17.5px
+*/
+div.gist-tooltip {
+    font-family: var(--font-family-centrano2);
+    font-size: 17.5px;
+
+    /* Render fonts thinner and smoother */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+div.gist-tooltip * {
+    box-sizing: border-box;
+}

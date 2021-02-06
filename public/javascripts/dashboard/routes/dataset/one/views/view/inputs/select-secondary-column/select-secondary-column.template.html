@@ -1,0 +1,28 @@
+<label class="margin-bottom-3x d-block">{{::setting.displayAs}}</label>
+<p ng-if="::setting.description">{{::setting.description}}</p>
+
+<small class="gist-pull-right" ng-if="setting.restrictColumnDataType">
+    Field type is restrcited to {{setting.restrictColumnDataType}}.
+</small>
+<br ng-if="setting.restrictColumnDataType">
+<small class="gist-pull-right" ng-if="setting.require">
+    This is a required field.
+</small>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <md-select ng-required="setting.require" aria-label="{{setting.name}} for {{viewCtrl.viewName}}" ng-model=" viewCtrl.data[setting.name]">
+        <md-option ng-if="!setting.require" value="">None</md-option>
+        <md-option ng-if="setting.selectFrom === 'column'" ng-repeat="column in datasetViewsCtrl.colsAvailable | filter: viewCtrl.dataTypeMatch(setting.restrictColumnDataType) | filter: viewCtrl.excludeBy(setting.selectExcludeBy) track by column" ng-value="column">
+            {{viewCtrl.dataset.fe_displayTitleOverrides[column] || column}}
+        </md-option>
+        <md-option ng-if="setting.selectFrom === 'duration'" ng-repeat="duration in setting.durations track by duration" ng-value="duration">
+            {{duration}}
+        </md-option>
+        <md-option ng-if="setting.selectFrom === 'range'" ng-repeat="range in setting.ranges track by range" ng-value="range">
+            {{range}}
+        </md-option>
+        <md-option ng-if="hasDependency" ng-repeat="option in viewCtrl.data[setting.selectFrom] track by option" ng-value="option">
+            {{option}}
+        </md-option>
+    </md-select>
+</md-input-container>

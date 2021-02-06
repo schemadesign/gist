@@ -1,0 +1,336 @@
+/* @override 
+	http://localhost:9080/stylesheets/module/splash.css */
+
+:root {
+    --font-weight-medium: 600;
+}
+
+.splash .container-fluid {
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+@media (min-width: 768px) {
+    .splash .container-fluid {
+        padding-right: 60px;
+        padding-left: 60px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .splash .container-fluid {
+        padding-right: 80px;
+        padding-left: 80px;
+    }
+}
+
+.splash-logo,
+.splash-logo-letters {
+    margin-top: 15px;
+    margin-bottom: 35px;
+}
+
+@media (min-width: 768px) {
+    .splash-logo,
+    .splash-logo-letters {
+        margin-top: 165px;
+        margin-bottom: 70px;
+    }
+}
+
+.splash-logo-letters .letter {
+    display: inline-block;
+    width: 16.6667%;
+}
+
+.splash-intro {
+    margin-top: 0;
+    margin-bottom: 35px;
+    font-weight: var(--font-weight-medium);
+    font-size: 20px;
+    line-height: 24px;
+}
+
+@media (min-width: 768px) {
+    .splash-intro {
+        margin-bottom: 55px;
+        font-size: 28px;
+        line-height: 34px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .splash-intro {
+        margin-bottom: 55px;
+        font-size: 38px;
+        line-height: 44px;
+    }
+}
+
+.btn-splash {
+    margin-bottom: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--color-primary);
+    border-radius: 1000px;
+    box-shadow: var(--box-shadow);
+    color: var(--color-text-dark);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 14px;
+    background-color: white;
+}
+
+.splash-devices {
+    margin-top: 100px;
+    margin-bottom: 75px;
+}
+
+@media (min-width: 768px) {
+    .splash-devices {
+        margin-top: 130px;
+        margin-bottom: 100px;
+    }
+}
+
+/* @group Benefits */
+
+.splash-benefits {
+    margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+    .splash-benefits {
+        margin-bottom: 95px;
+    }
+}
+
+.splash-benefits-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: var(--font-weight-medium);
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.splash-benefits-description {
+    margin-bottom: 1em;
+    color: var(--color-text-light);
+    font-weight: var(--font-weight-medium);
+    font-size: 18px;
+    line-height: 24px;
+}
+
+@media (min-width: 768px) {
+    .splash-benefits-title,
+    .splash-benefits-description {
+        font-size: 20px;
+        line-height: 26px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .splash-benefits-title,
+    .splash-benefits-description {
+        font-size: 24px;
+        line-height: 30px;
+    }
+}
+
+/* @end Benefits */
+
+/* @group Scenarios */
+
+.splash-scenarios-title {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    font-weight: var(--font-weight-medium);
+    font-size: 20px;
+    line-height: 24px;
+}
+
+@media (min-width: 768px) {
+    .splash-scenarios-title {
+        margin-top: 0;
+        margin-bottom: 50px;
+        font-size: 28px;
+        line-height: 34px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .splash-scenarios-title {
+        margin-top: 0;
+        margin-bottom: 50px;
+        font-size: 38px;
+        line-height: 44px;
+    }
+}
+
+.splash-scenarios-list {
+    margin-right: -15px;
+    margin-bottom: 60px;
+    margin-left: -15px;
+    padding-left: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .splash-scenarios-list {
+        margin-bottom: 130px;
+    }
+}
+
+.splash-scenarios-list-item {
+    display: inline-block;
+    margin-right: -0.15em;
+    margin-bottom: 40px;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    color: var(--color-text-light);
+    vertical-align: top;
+    text-align: left;
+    font-weight: var(--font-weight-medium);
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.splash-scenarios-list-item:last-child {
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .splash-scenarios-list-item {
+        margin-bottom: 50px;
+        width: 50%;
+        font-size: 20px;
+        line-height: 26px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .splash-scenarios-list-item {
+        margin-bottom: 50px;
+        font-size: 24px;
+        line-height: 30px;
+    }
+}
+
+.splash-scenarios-list-item strong {
+    color: var(--color-text-dark);
+    font-weight: var(--font-weight-medium);
+}
+
+/* @end Scenarios */
+
+/* @group Footer */
+
+.splash-footer-intro {
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: #000000;
+    font-weight: var(--font-weight-medium);
+    font-size: 20px;
+    line-height: 26px;
+}
+
+@media (min-width: 768px) {
+    .splash-footer-intro {
+        margin-top: 60px;
+        margin-bottom: 40px;
+        font-size: 22px;
+        line-height: 28px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .splash-footer-intro {
+        margin-top: 60px;
+        margin-bottom: 40px;
+        font-size: 38px;
+        line-height: 44px;
+    }
+}
+
+.splash-footer-intro a {
+    color: #000000;
+    text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+    .splash .input-subscribe,
+    .splash .btn-submit {
+        padding: 5px;
+        height: 33px;
+    }
+
+    .splash .input-subscribe {
+        font-size: 13px;
+    }
+
+    .splash .btn-submit {
+        font-size: 11px;
+    }
+}
+
+.splash-footer-logo .site-logo {
+    margin-top: 60px;
+    margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+    .splash-footer-logo .site-logo {
+        margin-top: 110px;
+        margin-bottom: 0;
+    }
+}
+
+.splash .site-info {
+    margin-top: 15px;
+}
+
+.splash .site-info,
+.splash .site-info a span {
+    font-size: 12px;
+}
+
+@media (min-width: 768px) {
+    .splash .site-info {
+        margin-top: 25px;
+    }
+
+    .splash .site-info,
+    .splash .site-info a span {
+        font-size: 18px;
+    }
+}
+
+.splash-video {
+    background: #FE00FF;
+    max-width: auto;
+}
+
+.embed-container {
+    position: relative;
+    margin-bottom: 80px;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* @end Footer */

@@ -1,0 +1,97 @@
+{
+    "standardViz": [
+        "seeFields",
+        "seeFilters",
+        "seeContent",
+        "seeViews",
+        "seeStandardViews",
+        "seeSettings",
+        "editFields",
+        "editViews",
+        "editGeneralSettings",
+        "editObjectDetail",
+        "useStandardImport",
+        "useStandardSaveColumns",
+        "useStandardGet"
+    ],
+    "superAdmin": [
+        "createViz",
+        "seeViz",
+        "editViz",
+        "manageTeams",
+        "seeArticles",
+        "createArticles",
+        "editArticles",
+        "manageAllArticles",
+        "seeSites",
+        "editSites",
+        "createSites",
+        "seeInsights",
+        "editInsights",
+        "createInsights",
+        "seePerformance",
+        "manageUsers"
+    ],
+    "admin": [
+        "manageTeams",
+        "createViz",
+        "seeViz",
+        "editViz",
+        "seeArticles",
+        "createArticles",
+        "editArticles",
+        "manageAllArticles",
+        "seeInsights",
+        "editInsights",
+        "createInsights",
+        "seePerformance",
+        "manageUsers"
+    ],
+    "vizEditor": [
+        "seeViz",
+        "editViz",
+        "seeInsights",
+        "editInsights",
+        "createInsights",
+        "seePerformance"
+    ],
+    "vizViewer": [
+        "seeViz",
+        "seeInsights",
+        "editInsights",
+        "createInsights"
+    ],
+    "vizAuthor": [
+        "createViz",
+        "seeViz",
+        "editViz",
+        "seePerformance"
+    ],
+    "articleEditor": [
+        "seeArticles",
+        "editArticles"
+    ],
+    "articleViewer": [
+        "seeArticles"
+    ],
+    "articleAuthor": [
+        "createArticles",
+        "seeArticles",
+        "editArticles"
+    ],
+    "siteViewer": [
+        "seeSites"
+    ],
+    "siteEditor": [
+        "seeSites",
+        "editSites"
+    ],
+    "siteAuthor": [
+        "createSites",
+        "seeSites",
+        "editSites"
+    ],
+    "team": [
+        "createStandardViz"
+    ]
+}

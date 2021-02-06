@@ -1,0 +1,53 @@
+<label class="margin-bottom-3x">Region</label>
+<p>Select the geographic region associated with your data. Note: more regions will be available in the future.</p>
+
+<md-select aria-label="Select region" ng-model="selectedRegion" ng-change="updateRegion(selectedRegion)" ng-model-options="{trackBy: '$value.id'}">
+    <md-option ng-repeat="region in regionDefinitions track by region.id" ng-value="region">
+        {{region.name}}
+    </md-option>
+</md-select>
+
+<label class="margin-bottom-3x">Region Data Field</label>
+<p>
+    Select the field that contains the <strong>{{selectedRegion.name}}</strong> data.
+    The data should contain a {{selectedMatchBy.name}} (e.g. {{selectedMatchBy.example}}).
+</p>
+<small>Note that this setting is limited to string fields only.</small>
+
+<md-select aria-label="Select Map By field" ng-model="viewCtrl.data.regionField">
+    <md-option ng-repeat="column in datasetViewsCtrl.colsAvailable | filter: viewCtrl.dataTypeMatch('string') track by column" ng-value="column">
+        {{column}}
+    </md-option>
+</md-select>
+
+<div ng-if="selectedMatchBy && !selectedMatchBy.unique" ng-repeat="region in regionDefinitions | filter:{'id':selectedRegion.parent}:true track by $index">
+    <label class="margin-bottom-3x">Parent Region Data Field</label>
+    <p>
+        We need another field to match your data to <strong>{{selectedRegion.name}}</strong>.
+        Select the field that contains the <strong>{{region.name}}</strong> data.
+        The data should contain a {{selectedParentMatchBy.name}} (e.g. {{selectedParentMatchBy.example}})
+    </p>
+    <small>Note that this setting is limited to string fields only.</small>
+
+    <md-select aria-label="Select Map By parent field" ng-model="viewCtrl.data.parentRegionField">
+        <md-option ng-repeat="column in datasetViewsCtrl.colsAvailable | filter: viewCtrl.dataTypeMatch('string') track by column" ng-value="column">
+            {{column}}
+        </md-option>
+    </md-select>
+</div>
+
+<div ng-if="selectedMatchBy && !selectedMatchBy.unique && selectedMatchBy.useGrandparent" ng-repeat="region in regionDefinitions | filter:{'id':selectedRegion.grandparent}:true track by $index">
+    <label class="margin-bottom-3x">Grandparent Region Data Field</label>
+    <p>
+        We need a third field to match your data to <strong>{{selectedRegion.name}}</strong>.
+        Select the field that contains the <strong>{{region.name}}</strong> data.
+        The data should contain a {{selectedGrandparentMatchBy.name}} (e.g. {{selectedGrandparentMatchBy.example}})
+    </p>
+    <small>Note that this setting is limited to string fields only.</small>
+
+    <md-select aria-label="Select Map By grandparent field" ng-model="viewCtrl.data.grandparentRegionField">
+        <md-option ng-repeat="column in datasetViewsCtrl.colsAvailable | filter: viewCtrl.dataTypeMatch('string') track by column" ng-value="column">
+            {{column}}
+        </md-option>
+    </md-select>
+</div>

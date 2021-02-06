@@ -1,0 +1,57 @@
+<div class="gist-content">
+    <h2>Your data is processing&hellip;</h2>
+
+    <div class="progress-linear">
+        <div class="progress-indeterminate"></div>
+    </div>
+
+    <p ng-if="user.role === 'superAdmin'" style="margin-top: 15px;">
+        <a class="pointer" ng-click="datasetProcessCtrl.toggleShowAdvanced()">
+            Advanced
+        </a>
+    </p>
+
+    <div ng-show="datasetProcessCtrl.showAdvanced">
+        <h3>Options</h3>
+
+        <div layout="row" layout-align="space-between center" ng-form="datasetProcessCtrl.form" gist-isolate-form>
+            <md-checkbox
+                ng-model="datasetOneCtrl.dataset.skipImageScraping"
+                ng-change="datasetProcessCtrl.toggleImageScraping()"
+                aria-label="Skip image scraping">
+                Skip Image Scraping
+            </md-checkbox>
+
+            <md-button class="md-raised gist-pull-right" ng-click="datasetProcessCtrl.killJobs()">
+                Cancel processing
+            </md-button>
+        </div>
+
+        <h3>Logs</h3>
+
+        <div ng-repeat="job in datasetProcessCtrl.jobs track by job.id">
+            <div>
+                <span ng-switch="job.state">
+                    <span ng-switch-when="complete">✅</span>
+                    <span ng-switch-when="failed">❌</span>
+                    <span ng-switch-default>⏳</span>
+                </span>
+                [{{ datasetProcessCtrl.getDatasetUid(job.data.id) }}]
+                <span ng-switch="job.state">
+                    <span ng-switch-when="complete">Completed</span>
+                    <span ng-switch-when="failed">Task</span>
+                    <span ng-switch-when="inactive">In Queue</span>
+                    <span ng-switch-when="active">In Progress</span>
+                </span>
+                {{ job.type | jobTask }} Task
+            </div>
+            <ul>
+                <li ng-repeat="log in job.logs track by $index">{{ log }}</li>
+            </ul>
+        </div>
+
+        <span ng-show="datasetProcessCtrl.jobs.length === 0">
+            No active tasks
+        </span>
+    </div>
+</div>

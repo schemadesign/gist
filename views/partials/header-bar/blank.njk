@@ -1,0 +1,61 @@
+{% if brandColor %}
+    {% include "./styles.njk" %}
+{% endif %}
+
+<header id="masthead" class="site-header hidden-print" role="banner">
+    <div class="w-nav">
+        <div class="w-container w-bottom-shadow">
+            <div class="container-fluid">
+
+                {% if env.INSIGHT %}
+                    <a ng-if="env.insight" class="insight-logo" href="{{explore_url}}" target="_self">
+                        <img sizes="(max-width: 767px) 100vw, 210px" src="https://s3-us-west-2.amazonaws.com/arraysassets/Insight_Logo_Horizontal.svg" width="210" />
+                    </a>
+                {% else %}
+                    <a class="arrays-logo" href="{{marketing_url}}">
+                        <img sizes="(max-width: 767px) 100vw, 210px" src="https://s3-us-west-2.amazonaws.com/arraysassets/Gist_h_rgb.svg" width="116" />
+                    </a>
+                {% endif %}
+
+                <ul class="nav navbar-nav navbar-right header-blank-right hide-mobile">
+                    {% if user %}
+                        <li class="gist-dropdown navbar-main-menu">
+                            <a href="#" class="dropdown-toggle user-initial-nav" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false">
+                                <span class="user-initial">{{user.firstName | initial}}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="background-color-brand-hover"><a href="/dashboard">Dashboard</a></li>
+                                <li class="background-color-brand-hover"><a href="{% if user.defaultLoginTeam.subdomain | length %}{{ addSubdomain(user.defaultLoginTeam.subdomain) }}{% else %}/{% endif %}">Team Page</a></li>
+                                <li class="background-color-brand-hover"><a class="pointer gist-logout-link">Log Out</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="w-login-container">
+                            <a class="pill-link" href="/auth/login">Log In</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <div class="w-nav-burger">
+                    <a class="w-burger-menu" href="#">
+                        <i id="menu-expand" class="gist-icon-menu"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-nav-overlay">
+        <nav class="mobile-nav-menu">
+            {% if user %}
+                <li role="separator" class="divider"></li>
+
+                <a class="w-mobile-link" href="/dashboard">Dashboard</a>
+                <a class="w-mobile-link" href="{% if user.defaultLoginTeam.subdomain | length %}{{ addSubdomain(user.defaultLoginTeam.subdomain) }}{% else %}/{% endif %}">Team Page</a>
+                <a class="w-mobile-link pointer" id="logout">Log Out</a>
+            {% else %}
+                <a class="w-mobile-link" href="/auth/login">Log In</a>
+            {% endif %}
+        </nav>
+    </div>
+</header>

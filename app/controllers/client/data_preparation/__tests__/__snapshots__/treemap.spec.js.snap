@@ -1,0 +1,544 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Treemap should return graph data 1`] = `
+Object {
+  "body": Object {
+    "docs": Array [
+      1,
+    ],
+    "graphData": Object {
+      "columns": Object {
+        "Image URL": Object {
+          "operation": "ToString",
+        },
+        "Max CP": Object {
+          "operation": "ToInteger",
+        },
+        "Max HP": Object {
+          "operation": "ToInteger",
+        },
+        "Name": Object {
+          "operation": "ToString",
+        },
+        "Pokemon No_": Object {
+          "operation": "ToInteger",
+        },
+        "Type 1": Object {
+          "operation": "ToString",
+        },
+        "Type 2": Object {
+          "operation": "ToString",
+        },
+      },
+      "data": Array [
+        Object {
+          "id": "Charizard",
+          "originalId": "5b05346ad7a86407e5ef7842",
+          "parentId": "@Fire",
+          "value": 135,
+        },
+        Object {
+          "id": "Charmeleon",
+          "originalId": "5b05346ad7a86407e5ef7841",
+          "parentId": "@Fire",
+          "value": 103,
+        },
+        Object {
+          "id": "Charmander",
+          "originalId": "5b05346ad7a86407e5ef7840",
+          "parentId": "@Fire",
+          "value": 73,
+        },
+        Object {
+          "id": "Venusaur",
+          "originalId": "5b05346ad7a86407e5ef783f",
+          "parentId": "@Grass",
+          "value": 138,
+        },
+        Object {
+          "id": "Ivysaur",
+          "originalId": "5b05346ad7a86407e5ef783e",
+          "parentId": "@Grass",
+          "value": 107,
+        },
+        Object {
+          "id": "Bulbasaur",
+          "originalId": "5b05346ad7a86407e5ef783d",
+          "parentId": "@Grass",
+          "value": 83,
+        },
+        Object {
+          "id": "Blastoise",
+          "originalId": "5b05346ad7a86407e5ef7845",
+          "parentId": "@Water",
+          "value": 137,
+        },
+        Object {
+          "id": "Wartortle",
+          "originalId": "5b05346ad7a86407e5ef7844",
+          "parentId": "@Water",
+          "value": 105,
+        },
+        Object {
+          "id": "Squirtle",
+          "originalId": "5b05346ad7a86407e5ef7843",
+          "parentId": "@Water",
+          "value": 81,
+        },
+        Object {
+          "color": "#1B6DFC",
+          "id": "@Fire",
+          "label": "Fire",
+          "parentId": "@treemap",
+          "textColor": "#FFFFFF",
+        },
+        Object {
+          "color": "#0CB7FA",
+          "id": "@Grass",
+          "label": "Grass",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#FA79FC",
+          "id": "@Water",
+          "label": "Water",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "id": "@treemap",
+          "parentId": "",
+        },
+      ],
+      "parents": Array [
+        Object {
+          "color": "#1B6DFC",
+          "id": "@Fire",
+          "label": "Fire",
+          "parentId": "@treemap",
+          "textColor": "#FFFFFF",
+        },
+        Object {
+          "color": "#0CB7FA",
+          "id": "@Grass",
+          "label": "Grass",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#FA79FC",
+          "id": "@Water",
+          "label": "Water",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+      ],
+    },
+    "meta": Object {
+      "filterObj": Object {},
+      "isAggregateByPercent": false,
+      "isChartByPercent": false,
+      "isGroupByPercent": false,
+      "isSegmentBy": false,
+      "nonpagedCount": 9,
+      "numPages": 1,
+      "numberOfResults": 9,
+      "onPageNum": 1,
+      "pageSize": 9,
+      "routePath_base": "/pokemon/treemap",
+    },
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Treemap should return graph data aggregate by number of items 1`] = `
+Object {
+  "body": Object {
+    "docs": Array [
+      1,
+    ],
+    "graphData": Object {
+      "columns": Object {
+        "Image URL": Object {
+          "operation": "ToString",
+        },
+        "Max CP": Object {
+          "operation": "ToInteger",
+        },
+        "Max HP": Object {
+          "operation": "ToInteger",
+        },
+        "Name": Object {
+          "operation": "ToString",
+        },
+        "Pokemon No_": Object {
+          "operation": "ToInteger",
+        },
+        "Type 1": Object {
+          "operation": "ToString",
+        },
+        "Type 2": Object {
+          "operation": "ToString",
+        },
+      },
+      "data": Array [
+        Object {
+          "id": "Squirtle",
+          "originalId": "5b05346ad7a86407e5ef7843",
+          "parentId": "@Water",
+          "value": 1,
+        },
+        Object {
+          "id": "Blastoise",
+          "originalId": "5b05346ad7a86407e5ef7845",
+          "parentId": "@Water",
+          "value": 1,
+        },
+        Object {
+          "id": "Wartortle",
+          "originalId": "5b05346ad7a86407e5ef7844",
+          "parentId": "@Water",
+          "value": 1,
+        },
+        Object {
+          "id": "Venusaur",
+          "originalId": "5b05346ad7a86407e5ef783f",
+          "parentId": "@Grass",
+          "value": 1,
+        },
+        Object {
+          "id": "Charmander",
+          "originalId": "5b05346ad7a86407e5ef7840",
+          "parentId": "@Fire",
+          "value": 1,
+        },
+        Object {
+          "id": "Charizard",
+          "originalId": "5b05346ad7a86407e5ef7842",
+          "parentId": "@Fire",
+          "value": 1,
+        },
+        Object {
+          "id": "Charmeleon",
+          "originalId": "5b05346ad7a86407e5ef7841",
+          "parentId": "@Fire",
+          "value": 1,
+        },
+        Object {
+          "id": "Ivysaur",
+          "originalId": "5b05346ad7a86407e5ef783e",
+          "parentId": "@Grass",
+          "value": 1,
+        },
+        Object {
+          "id": "Bulbasaur",
+          "originalId": "5b05346ad7a86407e5ef783d",
+          "parentId": "@Grass",
+          "value": 1,
+        },
+        Object {
+          "color": "#1B6DFC",
+          "id": "@Water",
+          "label": "Water",
+          "parentId": "@treemap",
+          "textColor": "#FFFFFF",
+        },
+        Object {
+          "color": "#0CB7FA",
+          "id": "@Grass",
+          "label": "Grass",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#FA79FC",
+          "id": "@Fire",
+          "label": "Fire",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "id": "@treemap",
+          "parentId": "",
+        },
+      ],
+      "parents": Array [
+        Object {
+          "color": "#1B6DFC",
+          "id": "@Water",
+          "label": "Water",
+          "parentId": "@treemap",
+          "textColor": "#FFFFFF",
+        },
+        Object {
+          "color": "#0CB7FA",
+          "id": "@Grass",
+          "label": "Grass",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#FA79FC",
+          "id": "@Fire",
+          "label": "Fire",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+      ],
+    },
+    "meta": Object {
+      "filterObj": Object {},
+      "isAggregateByPercent": false,
+      "isChartByPercent": false,
+      "isGroupByPercent": false,
+      "isSegmentBy": false,
+      "nonpagedCount": 9,
+      "numPages": 1,
+      "numberOfResults": 9,
+      "onPageNum": 1,
+      "pageSize": 9,
+      "routePath_base": "/pokemon/treemap",
+    },
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Treemap should return graph data group by is equal to chart by 1`] = `
+Object {
+  "body": Object {
+    "docs": Array [
+      1,
+    ],
+    "graphData": Object {
+      "columns": Object {
+        "Image URL": Object {
+          "operation": "ToString",
+        },
+        "Max CP": Object {
+          "operation": "ToInteger",
+        },
+        "Max HP": Object {
+          "operation": "ToInteger",
+        },
+        "Name": Object {
+          "operation": "ToString",
+        },
+        "Pokemon No_": Object {
+          "operation": "ToInteger",
+        },
+        "Type 1": Object {
+          "operation": "ToString",
+        },
+        "Type 2": Object {
+          "operation": "ToString",
+        },
+      },
+      "data": Array [
+        Object {
+          "id": "Blastoise",
+          "originalId": "5b05346ad7a86407e5ef7845",
+          "parentId": "@Blastoise",
+          "value": 137,
+        },
+        Object {
+          "id": "Bulbasaur",
+          "originalId": "5b05346ad7a86407e5ef783d",
+          "parentId": "@Bulbasaur",
+          "value": 83,
+        },
+        Object {
+          "id": "Charizard",
+          "originalId": "5b05346ad7a86407e5ef7842",
+          "parentId": "@Charizard",
+          "value": 135,
+        },
+        Object {
+          "id": "Charmander",
+          "originalId": "5b05346ad7a86407e5ef7840",
+          "parentId": "@Charmander",
+          "value": 73,
+        },
+        Object {
+          "id": "Charmeleon",
+          "originalId": "5b05346ad7a86407e5ef7841",
+          "parentId": "@Charmeleon",
+          "value": 103,
+        },
+        Object {
+          "id": "Ivysaur",
+          "originalId": "5b05346ad7a86407e5ef783e",
+          "parentId": "@Ivysaur",
+          "value": 107,
+        },
+        Object {
+          "id": "Squirtle",
+          "originalId": "5b05346ad7a86407e5ef7843",
+          "parentId": "@Squirtle",
+          "value": 81,
+        },
+        Object {
+          "id": "Venusaur",
+          "originalId": "5b05346ad7a86407e5ef783f",
+          "parentId": "@Venusaur",
+          "value": 138,
+        },
+        Object {
+          "id": "Wartortle",
+          "originalId": "5b05346ad7a86407e5ef7844",
+          "parentId": "@Wartortle",
+          "value": 105,
+        },
+        Object {
+          "color": "#1B6DFC",
+          "id": "@Blastoise",
+          "label": "Blastoise",
+          "parentId": "@treemap",
+          "textColor": "#FFFFFF",
+        },
+        Object {
+          "color": "#0CB7FA",
+          "id": "@Bulbasaur",
+          "label": "Bulbasaur",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#FA79FC",
+          "id": "@Charizard",
+          "label": "Charizard",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#FB3705",
+          "id": "@Charmander",
+          "label": "Charmander",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#F9D307",
+          "id": "@Charmeleon",
+          "label": "Charmeleon",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#FA9007",
+          "id": "@Ivysaur",
+          "label": "Ivysaur",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#7D5807",
+          "id": "@Squirtle",
+          "label": "Squirtle",
+          "parentId": "@treemap",
+          "textColor": "#FFFFFF",
+        },
+        Object {
+          "color": "#B2E606",
+          "id": "@Venusaur",
+          "label": "Venusaur",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#069908",
+          "id": "@Wartortle",
+          "label": "Wartortle",
+          "parentId": "@treemap",
+          "textColor": "#FFFFFF",
+        },
+        Object {
+          "id": "@treemap",
+          "parentId": "",
+        },
+      ],
+      "parents": Array [
+        Object {
+          "color": "#1B6DFC",
+          "id": "@Blastoise",
+          "label": "Blastoise",
+          "parentId": "@treemap",
+          "textColor": "#FFFFFF",
+        },
+        Object {
+          "color": "#0CB7FA",
+          "id": "@Bulbasaur",
+          "label": "Bulbasaur",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#FA79FC",
+          "id": "@Charizard",
+          "label": "Charizard",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#FB3705",
+          "id": "@Charmander",
+          "label": "Charmander",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#F9D307",
+          "id": "@Charmeleon",
+          "label": "Charmeleon",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#FA9007",
+          "id": "@Ivysaur",
+          "label": "Ivysaur",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#7D5807",
+          "id": "@Squirtle",
+          "label": "Squirtle",
+          "parentId": "@treemap",
+          "textColor": "#FFFFFF",
+        },
+        Object {
+          "color": "#B2E606",
+          "id": "@Venusaur",
+          "label": "Venusaur",
+          "parentId": "@treemap",
+          "textColor": "#000000",
+        },
+        Object {
+          "color": "#069908",
+          "id": "@Wartortle",
+          "label": "Wartortle",
+          "parentId": "@treemap",
+          "textColor": "#FFFFFF",
+        },
+      ],
+    },
+    "meta": Object {
+      "filterObj": Object {},
+      "isAggregateByPercent": false,
+      "isChartByPercent": false,
+      "isGroupByPercent": false,
+      "isSegmentBy": false,
+      "nonpagedCount": 9,
+      "numPages": 1,
+      "numberOfResults": 9,
+      "onPageNum": 1,
+      "pageSize": 9,
+      "routePath_base": "/pokemon/treemap",
+    },
+  },
+  "statusCode": 200,
+}
+`;

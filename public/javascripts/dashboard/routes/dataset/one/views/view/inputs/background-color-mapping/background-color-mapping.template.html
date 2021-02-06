@@ -1,0 +1,15 @@
+<label class="margin-bottom-3x d-block">{{::setting.displayAs}}</label>
+<p ng-if="::setting.description">{{::setting.description}}</p>
+
+<md-select
+    aria-label="{{setting.name}} for {{viewCtrl.viewName}}"
+    flex="45"
+    class="md-block"
+    placeholder="Select field"
+    ng-model="viewCtrl.data[setting.name].field"
+    ng-model-options="{ updateOn: 'default' }"
+>
+    <md-option ng-repeat="column in datasetViewsCtrl.colsAvailable | filter: viewCtrl.dataTypeMatch(setting.restrictColumnDataType) track by column" ng-value="column">
+        {{viewCtrl.dataset.fe_displayTitleOverrides[column] || column}}
+    </md-option>
+</md-select>

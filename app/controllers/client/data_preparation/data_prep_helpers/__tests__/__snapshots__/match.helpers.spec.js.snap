@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`project helpers getMatch should return default value 1`] = `
+Object {
+  "rowParams": Object {
+    "$exists": true,
+  },
+}
+`;
+
+exports[`project helpers getMatch should return match for regional map 1`] = `
+Object {
+  "rowParams.Name": Object {
+    "$in": Array [
+      "Albania",
+      "Andorra",
+      "Armenia",
+      "Austria",
+      "Azerbaijan",
+      "Belgium",
+      "Bulgaria",
+      "Bosnia and Herzegovina",
+      "Belarus",
+      "Switzerland",
+      "Cyprus",
+      "Czechia",
+      "Germany",
+      "Denmark",
+      "Spain",
+      "Estonia",
+      "Finland",
+      "France",
+      "United Kingdom",
+      "Georgia",
+      "Greece",
+      "Croatia",
+      "Hungary",
+      "Ireland",
+      "Iceland",
+      "Italy",
+      "Kosovo",
+      "Liechtenstein",
+      "Lithuania",
+      "Luxembourg",
+      "Latvia",
+      "Monaco",
+      "Moldova",
+      "Macedonia",
+      "Montenegro",
+      "Netherlands",
+      "Norway",
+      "Poland",
+      "Portugal",
+      "Romania",
+      "Russia",
+      "San Marino",
+      "Serbia",
+      "Slovakia",
+      "Slovenia",
+      "Sweden",
+      "Turkey",
+      "Ukraine",
+      "Vatican",
+    ],
+  },
+}
+`;

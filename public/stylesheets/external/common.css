@@ -1,0 +1,35 @@
+@import url('../base/external.css');
+
+@import url('../module/tooltip.css');
+@import url('../module/tooltip-external.css');
+
+@import url('../views/gist.css');
+@import url('../views/chart/main.css');
+
+.gist-section {
+    /* @include '../module/filter-menu.css' */
+    /* @include '../module/sort-bar.css' */
+    /* @include '../module/pagination.css' */
+    /* @include '../module/tooltip.css' */
+    /* @include '../module/loader.css' */
+    /* @include '../views/array.css' */
+    /* @include '../views/svg-chart-base.css' */
+    /* @include '../views/chart/legend-extension.css' */
+}
+
+/* Partially copied from views/partials/header-bar/styles.njk with default values */
+.gist-section .gist-legend .gist-legend-list-link {
+    background-color: #fff;
+}
+.gist-section .gist-legend .gist-legend-list-link:hover,
+.gist-section .gist-legend .gist-legend-list-link:focus {
+    background: #F2F2F2;
+    text-decoration: none;
+}
+.gist-legend-opened.gist-section .gist-chart-container {
+    min-height: auto;
+}
+
+.gist-section .gist-chart {
+    position: inherit;
+}

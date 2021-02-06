@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+    {% include "../partials/base_header.njk" %}
+    <script type="text/javascript" src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <title>Email Confirmation - Gist</title>
+</head>
+<body class="login-page">
+    <div class="container-fluid" style="margin-top: 30px;">
+    {% if env.NODE_ENV !== 'enterprise' %}
+    <img src="/images/Gist-1-V-Color.svg" alt="Gist logo" class="login-logo img-responsive col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4"/>
+    {% else %}
+    <h1 class="text-center col-xs-12 signup">Sign in</h1>
+    {% endif %}
+    <div class="invitation-code-enter row col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 form-group">
+        {% if message %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+        {% endif %}
+        <label style="font-size: 18px;">Enter the activation code from your email invitation here</label>
+        <form action="/account/invitation" method="post">
+            <input name="confirmation_code" id="confirmation_code" placeholder="Enter your activation code here" class="form-control ng-pristine ng-empty ng-valid-email ng-invalid ng-invalid-required ng-touched"/>
+            <button class="btn btn-primary gist-pull-right" style="margin-top: 23px;">Complete Registration</button>
+        </form>
+    </div>
+    </div>
+</body>

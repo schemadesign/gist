@@ -1,0 +1,48 @@
+<div ng-form="connectDatadotworldCtrl.form" gist-isolate-form>
+    <h4>Connect to data.world</h4>
+    <div>
+        <p ng-if="connectDatadotworldCtrl.datasets.length !== 0">
+            Choose a project below to connect to.
+        </p>
+        <p ng-if="connectDatadotworldCtrl.datasets.length === 0">
+            Could not find any projects that belong to your data.world account.
+        </p>
+        <div class="upload-options-wrapper">
+            <a ng-repeat="dataset in connectDatadotworldCtrl.datasets" class="gist-pointer" ng-class="{ 'upload-options-wrapper-inset': connectDatadotworldCtrl.activeBox(dataset.title) }" ng-click="connectDatadotworldCtrl.loadDatasetInfo(dataset)">
+                <div>
+                    <img src="/images/source_tab_data_format/data-world-project.svg" />
+                    <span>{{ dataset.title }}</span>
+                </div>
+            </a>
+        </div>
+        <div ng-if="connectDatadotworldCtrl.tables || connectDatadotworldCtrl.queries">
+            <p ng-if="connectDatadotworldCtrl.tables.records.length !== 0 || connectDatadotworldCtrl.queries.records.length !== 0">
+                Choose a project's tables or saved queries to connect with.
+            </p>
+            <p ng-if="connectDatadotworldCtrl.tables.records.length === 0 || connectDatadotwoldCtrl.queries.records.length === 0">
+                Could not find any saved queries or datasets belonging to this project. Please add data to your project in data.world.
+            </p>
+        </div>
+        <div class="upload-options-wrapper" >
+            <a class="gist-pointer" ng-class="{ 'upload-options-wrapper-inset': connectDatadotworldCtrl.activeBox(query.body) }" ng-repeat="query in connectDatadotworldCtrl.queries.records" ng-click="connectDatadotworldCtrl.selectQuery(query)">
+                <div>
+                    <img src="/images/source_tab_data_format/data-world-query.svg" />
+                    <span>{{ query.name }}</span>
+                </div>
+            </a>
+            <a class="gist-pointer" ng-class="{ 'upload-options-wrapper-inset': connectDatadotworldCtrl.activeBox(table.tableName) }" ng-repeat="table in connectDatadotworldCtrl.tables.records" ng-click="connectDatadotworldCtrl.selectTable(table.tableName)">
+                <div>
+                    <img src="/images/source_tab_data_format/spreadsheet.svg" />
+                    <span>{{ table.tableName }}</span>
+                </div>
+            </a>
+        </div>
+        <md-button
+            class="md-dashboard confirm"
+            ng-click="connectDatadotworldCtrl.connect()"
+            ng-disabled="!(connectDatadotworldCtrl.datadotworld.table || connectDatadotworldCtrl.datadotworld.query)"
+            id="connectButton">
+            <span class="btn-label">Connect</span>
+        </md-button>
+    </div>
+</div>

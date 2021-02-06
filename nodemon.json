@@ -1,0 +1,8 @@
+{
+    "ignore": [
+        "public/*",
+        "user/*/static/*",
+        "tmp/*",
+        "data/*"
+    ]
+}

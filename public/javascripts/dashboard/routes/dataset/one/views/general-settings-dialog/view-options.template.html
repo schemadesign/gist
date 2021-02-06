@@ -1,0 +1,80 @@
+<h4 ng-hide="dataset.connection" class="no-padding">Select the field you'd like to use as a title for each item</h4>
+
+<md-input-container ng-hide="dataset.connection" class="md-block" style="margin-top: 0; padding-bottom: 15px;">
+    <md-select
+        name="ObjectTitle"
+        aria-label="Item title"
+        ng-model="dataset.objectTitle"
+        md-no-asterisk
+    >
+        <md-option ng-repeat="column in colsAvailable track by column" value="{{column}}">
+            {{dataset.fe_displayTitleOverrides[column] || column}}
+        </md-option>
+    </md-select>
+</md-input-container>
+
+<md-input-container ng-hide="dataset.connection" class="md-block" md-no-asterisk style="margin-top: 24px">
+    <label>Select the field you'd like to use as a subtitle for detail view</label>
+
+    <md-select
+        name="image field"
+        aria-label="Item title"
+        ng-model="dataset.objectSubtitle"
+    >
+        <md-option value="">None</md-option>
+        <md-option ng-repeat="column in colsAvailable track by column" value="{{column}}">
+            {{dataset.fe_displayTitleOverrides[column] || column}}
+        </md-option>
+    </md-select>
+</md-input-container>
+<md-input-container ng-hide="dataset.connection" class="md-block" md-no-asterisk style="margin-top: 24px">
+    <label>Select the field you'd like to use as an image for each item (optional)</label>
+
+    <md-select
+        name="image field"
+        aria-label="Item title"
+        ng-model="dataset.fe_image.field"
+    >
+        <md-option value="">None</md-option>
+        <md-option ng-repeat="column in imageFields track by column" value="{{column}}">
+            {{dataset.fe_displayTitleOverrides[column] || column}}
+        </md-option>
+    </md-select>
+
+    <br>
+
+    <div ng-if="dataset.fe_image.field">
+        <p>Display images in the following views</p>
+
+        <md-checkbox ng-model="dataset.fe_image.gallery" aria-label="Display images in Gallery">
+            Gallery
+        </md-checkbox>
+        <md-checkbox ng-model="dataset.fe_image.timeline" aria-label="Display images in Timeline">
+            Timeline
+        </md-checkbox>
+        <md-checkbox ng-model="dataset.fe_image.detailView" aria-label="Display images in Detail View">
+            Detail View
+        </md-checkbox>
+    </div>
+
+    <br>
+
+    <md-checkbox
+        ng-if="dataset.fe_image.field"
+        ng-model="dataset.fe_filters.default['Has Image']"
+        aria-label="display has image filter"
+        ng-true-value="'Has Image'"
+    >
+        Display 'Has Image' Filter
+    </md-checkbox>
+
+    <br>
+
+    <md-checkbox
+        ng-model="dataset.fe_filters.default['Has Title']"
+        aria-label="display has title filter"
+        ng-true-value="'Has Title'"
+    >
+        Display 'Has Title' Filter
+    </md-checkbox>
+</md-input-container>

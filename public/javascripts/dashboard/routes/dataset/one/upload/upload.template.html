@@ -1,0 +1,294 @@
+<md-content layout-padding md-no-ink>
+    <h3>Select Your Data Source</h3>
+
+    <div ng-if="datasetUploadCtrl.isHome()">
+        <div ng-if="!datasetUploadCtrl.hasMainSource()">
+            <h4>Choose Your Data Format</h4>
+            <p>
+                Start by uploading a spreadsheet, or connect to an API for automatic, scheduled data updates.
+                Contact <a href="mailto:info@schemadesign.com">support</a> to learn about connecting to a database.
+            </p>
+            <div class="upload-options-wrapper">
+                <a ui-sref=".main.file">
+                    <div>
+                        <img src="/images/source_tab_data_format/spreadsheet.svg" />
+                        <span>Upload a spreadsheet</span>
+                    </div>
+                </a>
+                <a ui-sref=".main.api">
+                    <div>
+                        <img src="/images/source_tab_data_format/api.svg" />
+                        <span>Connect to an API</span>
+                    </div>
+                </a>
+                <a ui-sref=".main.database" ng-if="env.node_env === 'enterprise' || user.role === 'superAdmin'">
+                    <div>
+                        <img src="/images/source_tab_data_format/database.svg" />
+                        <span>Connect to a database</span>
+                    </div>
+                </a>
+                <a ui-sref=".main.googlesheet">
+                    <div>
+                        <img src="/images/source_tab_data_format/google-docs.png" />
+                        <span>Connect to a Google Sheet</span>
+                    </div>
+                </a>
+                <a ng-if="env.hasSmartsheetInfo" ui-sref=".main.tokenCheck({ type: 'smartsheet' })">
+                    <div>
+                        <img src="/images/source_tab_data_format/smartsheet.png" />
+                        <span>Connect to a Smartsheet</span>
+                    </div>
+                </a>
+                <a ng-if="env.hasDatadotworldInfo" ui-sref=".main.tokenCheck({ type: 'datadotworld' })">
+                    <div>
+                        <img src="/images/source_tab_data_format/data-world.png" />
+                        <span>Connect to data.world</span>
+                    </div>
+                </a>
+                <a ng-if="env.hasPipedriveInfo" ui-sref=".main.tokenCheck({ type: 'pipedrive' })">
+                    <div>
+                        <img src="/images/source_tab_data_format/pipedrive.png" />
+                        <span>Connect to Pipedrive</span>
+                    </div>
+                </a>
+                <a ng-if="env.hasSalesforceInfo" ui-sref=".main.tokenCheck({ type: 'salesforce' })">
+                    <div>
+                        <img src="/images/source_tab_data_format/salesforce.png" />
+                        <span>Connect to Salesforce</span>
+                    </div>
+                </a>
+                <a ui-sref=".main.socrata">
+                    <div>
+                        <img src="/images/source_tab_data_format/socrata.png" />
+                        <span>Connect to Socrata</span>
+                    </div>
+                </a>
+            </div>
+            <div class="dataset-sub-block" ng-if="!isEnterpriseCloud">
+                <h4>Help</h4>
+                <p>To help you get started, we have put together a series of sample datasets for each chart type that you can upload. You can also use these datasets as a reference to structure your own data.</p>
+            </div>
+        </div>
+
+        <div ng-if="datasetUploadCtrl.hasMainSource()">
+            <h4 id="dataSourceTitle">
+                Data Source(s)
+            </h4>
+            <ul class="dashboard-list user-list no-padding">
+                <li
+                    layout
+                    layout-align="space-between center"
+                    ng-repeat="dataset in datasetUploadCtrl.getDatasets() track by dataset._id"
+                >
+                    <div flex="50" ng-if="dataset.fileName">
+                        <strong>{{ dataset.fileName }}</strong>
+                    </div>
+                    <div flex="50" ng-if="dataset.connection">
+                        <strong>Type:</strong> {{ dataset.connection.type }},<br>
+                        <strong>URL:</strong> {{ dataset.connection.url }},<br>
+                        <strong>Table: </strong>{{ dataset.connection.tableName }}
+                    </div>
+                    <div flex="95" ng-if="dataset.apiEndPoint" class="dashboard-list-name api-url">
+                        <strong class="api-url__label">API web address:</strong>
+                        <span class="api-url__value-wrapper">
+                            <a class="api-url__value" href="{{datasetUploadCtrl.parseFileUrl(dataset.apiEndPoint)}}" target="_blank"
+                               rel="nofollow noopener noreferrer">{{dataset.apiEndPoint}}</a>
+                        </span>
+                        <br>
+                        <span ng-if="dataset.format === 'JSON'">
+                            <strong>Selected path:</strong> {{ dataset.JSONPath }}
+                        </span>
+                    </div>
+                    <div flex="95" ng-if="dataset.smartsheet">
+                        <strong>Smartsheet:</strong>
+                        <a href="{{ dataset.smartsheet.permalink }}" target="_blank" rel="nofollow noopener noreferrer">{{dataset.smartsheet.name}}</a>
+                    </div>
+                    <div flex="95" ng-if="dataset.pipedrive">
+                        <strong class="text-capitalize">Pipedrive: {{ dataset.pipedrive }} Connection</strong>
+                    </div>
+                    <div flex="95" ng-if="dataset.datadotworld">
+                        <strong class="text-capitalize">data.world Project: {{ dataset.datadotworld.name }}</strong>
+                    </div>
+                    <div flex="95" ng-if="dataset.salesforce">
+                        <strong class="text-capitalize">Salesforce:</strong>
+                        <p><strong>Table:</strong> {{dataset.salesforce.table}}</p>
+                        <p><strong>Fields:</strong> {{dataset.salesforce.fields.join(', ')}}</p>
+                    </div>
+                    <span
+                        ng-if="(dataset.connection || user.role === 'superAdmin') && !dataset.datadotworld && !dataset.smartsheet && !dataset.pipedrive && !dataset.salesforce"
+                        ng-show="dataset === datasetOneCtrl.dataset && !dataset.fileName"
+                        class="dashboard-list-icon warn"
+                        aria-label="Remove"
+                        flex="5"
+                        ng-click="datasetUploadCtrl.removeDatasource($event)"
+                    >
+                        <i class="fa fa-remove"></i>
+                    </span>
+                </li>
+            </ul>
+            <div
+                ng-if="( datasetOneCtrl.dataset.apiEndPoint || datasetOneCtrl.dataset.smartsheet || datasetOneCtrl.dataset.pipedrive || datasetOneCtrl.dataset.datadotworld || datasetOneCtrl.dataset.salesforce ) && datasetOneCtrl.dataset.imported"
+                class="dashboard-cron"
+            >
+                <cron-selection
+                    ng-if="datasetUploadCtrl.scheduledJob.status"
+                    ng-model="datasetUploadCtrl.scheduledJob.time"
+                    config="{status: datasetUploadCtrl.scheduledJob.status}"
+                    template="javascripts/dashboard/routes/dataset/one/upload/time.template.html"
+                ></cron-selection>
+                <a class="gist-pointer" ng-click="datasetUploadCtrl.openSchedulerModal()">Schedule an automatic
+                                                                                          update</a>
+            </div>
+            <div layout>
+                <md-button
+                    class="md-dashboard confirm dataset-button-offset"
+                    ng-if="datasetOneCtrl.dataset.apiEndPoint && datasetOneCtrl.dataset.imported"
+                    ng-click="datasetUploadCtrl.reimportAPIDatasource()"
+                    ng-disabled="datasetOneCtrl.isDirty()"
+                >
+                    <span class="btn-label">Reimport Data</span>
+                </md-button>
+
+                <a
+                    class="md-button md-dashboard confirm dataset-button-offset"
+                    ng-if="datasetOneCtrl.originalDataset.fileName &&
+                        !datasetOneCtrl.dataset.firstImport &&
+                        !datasetOneCtrl.dataset.replacement"
+                    ui-sref=".replace({ type: datasetUploadCtrl.getTypeFromFileFormat() })"
+                    ng-disabled="datasetOneCtrl.isDirty()"
+                >
+                    <span class="btn-label">Replace data source</span>
+                </a>
+            </div>
+
+            <div>
+                <md-input-container>
+                    <md-checkbox
+                        ng-model="datasetOneCtrl.dataset.preserveEditedData"
+                        ng-show="datasetOneCtrl.dataset.updatedContent.new && !datasetOneCtrl.dataset.firstImport"
+                        aria-label="Preserve edited data"
+                        layout="row"
+                    >
+                        Only reimport values that haven't been edited in the Gist content editor
+                    </md-checkbox>
+                    <div
+                        ng-show="datasetOneCtrl.dataset.updatedContent.new && !datasetOneCtrl.dataset.firstImport"
+                        aa-tooltip="If this option is turned off then images could get realigned."
+                    >
+                        <md-checkbox
+                            ng-model="datasetOneCtrl.dataset.fe_image.overwrite"
+                            ng-if="datasetOneCtrl.dataset.fe_image.field && datasetOneCtrl.dataset.fe_image.scraped"
+                            aria-label="Overwrite image scraping"
+                        >
+                            Allow replacement of existing images during data reimport
+                        </md-checkbox>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <div class="dataset-sub-block"
+                 ng-if="(user.role === 'superAdmin' || env.node_env === 'enterprise' || team.customAccess.indexOf('combineDatasource') > -1) && datasetUploadCtrl.hasMainSource() && !datasetUploadCtrl.hasAdditionalSource()">
+                <h4>Additional Data Source</h4>
+                <div ng-hide="datasetOneCtrl.combine">
+                    <p>
+                        You can combine this Data Source with another.
+                        Please make sure that your new Data Source has the same fields as the original.
+                    </p>
+                    <md-button
+                        class="md-dashboard"
+                        ng-click="datasetOneCtrl.combine = true;"
+                        ng-disabled="datasetOneCtrl.isDirty()"
+                    >
+                        <span class="btn-label">Combine with another data source</span>
+                    </md-button>
+                </div>
+                <div ng-show="datasetOneCtrl.combine">
+                    <ul class="dashboard-list">
+                        <li>
+                            <a class="pointer" ui-sref=".additional.file">Upload a spreadsheet</a>
+                        </li>
+                        <li ng-if="env.node_env === 'enterprise' || user.role === 'superAdmin'">
+                            <a class="pointer" ui-sref=".additional.database">Connect to a database</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div
+                class="dataset-sub-block"
+                layout="column"
+                layout-align="start start"
+                ng-if="datasetOneCtrl.dataset.imported && (datasetOneCtrl.dataset.fileName || datasetOneCtrl.dataset.contentEdited)"
+            >
+                <h4>Export</h4>
+                <div
+                    ng-class="{ 'export-file': true, 'download-disabled': datasetUploadCtrl.isDownloading('original') }"
+                    ng-if="datasetOneCtrl.dataset.fileName"
+                >
+                    <span ng-class="btn-label" ng-click="datasetUploadCtrl.download('original')">
+                        {{ datasetUploadCtrl.isDownloading('original') ? 'Downloading...' : 'Download Original File' }}
+                    </span>
+                </div>
+                <div
+                    ng-class="{ 'export-file': true, 'download-disabled': datasetUploadCtrl.isDownloading('modified') }"
+                    ng-if="datasetOneCtrl.dataset.contentEdited"
+                >
+                    <span ng-class="btn-label" ng-click="datasetUploadCtrl.download('modified')">
+                        {{ datasetUploadCtrl.isDownloading('modified') ? 'Downloading...' : 'Download Edited File' }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="datasetUploadCtrl.previousDatasets.length > 0" class="dataset-block">
+            <h2>Previous Versions</h2>
+            <div
+                class="previous-versions"
+                ng-repeat="previousDataset in datasetUploadCtrl.previousDatasets"
+                ng-click="datasetUploadCtrl.openPrevious(previousDataset)"
+            >
+                <div class="previous-versions-column">
+                    <span class="user-initial-inline">{{ previousDataset.importRevision }}</span>
+                </div>
+                <div class="previous-versions-column">
+                    <div class="previous-versions-author">
+                        <span class="previous-versions__version-number">Version {{ previousDataset.importRevision }}</span> by {{ previousDataset.author }}
+                    </div>
+                    <span class="previous-versions-date-time">{{ previousDataset.date }} {{ previousDataset.time }}</span>
+                </div>
+                <div class="previous-versions-column previous-versions-column--last">
+                    <button
+                        class="md-button md-dashboard confirm"
+                        ng-click="datasetUploadCtrl.revertPrevious(previousDataset, $event)"
+                    >
+                        <span class="btn-label">Revert</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="team.isEnterprise" class="dataset-block">
+            <h2>Additional Data Files</h2>
+            <h4>Supporting Files</h4>
+            <ul class="dashboard-list user-list no-padding" ng-if="datasetOneCtrl.dataset.ancillaryFile">
+                <li layout layout-align="space-between center">
+                    <div flex="50">
+                        <strong>{{ datasetOneCtrl.dataset.ancillaryFile }}</strong>
+                    </div>
+                </li>
+            </ul>
+            <a class="md-button md-dashboard confirm dataset-button-offset" ui-sref=".ancillary">
+                <span class="btn-label">
+                    {{ datasetOneCtrl.dataset.ancillaryFile ? 'Replace File' : 'Upload File' }}
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <div ng-if="!datasetUploadCtrl.isHome()">
+        <div ui-view />
+        <p class="aa-file-select-close">
+            <a class="pointer" ui-sref="dashboard.dataset.one.upload">Go back</a>
+        </p>
+    </div>
+</md-content>

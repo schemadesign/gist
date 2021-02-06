@@ -1,0 +1,75 @@
+/* @override
+	http://austenblokker.local.arrays.co:9080/stylesheets/views/array-header.css */
+
+/* @group Array Header */
+
+.array-header {
+    position: relative;
+    padding: 5px 0 15px;
+    text-align: center;
+    background-color: var(--color-background);
+    z-index: 1;
+}
+
+.preview .array-header {
+    display: none;
+}
+
+.preview .array-header.has-description {
+    display: block;
+}
+
+.gist-title {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #404040;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+@media (min-width: 768px) {
+    .array-header {
+        padding: 5px 0 20px;
+    }
+
+    .gist-title {
+        font-size: 2.5em;
+    }
+}
+
+.array-link-reset {
+    color: inherit;
+}
+
+.array-link-reset:hover,
+.array-link-reset:focus,
+.array-link-reset:active {
+    text-decoration: none;
+}
+
+.preview-indicator {
+    font-weight: 500;
+}
+.gist-title .preview-indicator {
+    font-size: 85%;
+}
+
+.array-meta {
+    color: var(--color-text-light);
+    font-size: 1.125em;
+    display: none;
+}
+
+/*.array-meta-divider:before {
+    padding-right: 0.25em;
+    padding-left: 0.25em;
+    content: "|";
+}*/
+
+.preview.gist-site-content {
+    margin-top: 0;
+    min-height: 100%;
+    display: flex;
+}
+
+/* @end Array Header */

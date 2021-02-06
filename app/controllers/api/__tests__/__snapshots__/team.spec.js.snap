@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Team controller addAdmin should add admin 1`] = `
+Object {
+  "statusCode": 204,
+  "text": "",
+}
+`;
+
+exports[`Team controller addAdmin should not allow to perform action when not an admin 1`] = `
+Object {
+  "body": Object {
+    "error": "Non-public error: Not an admin of the team",
+  },
+  "statusCode": 403,
+}
+`;
+
+exports[`Team controller addAdmin should not allow to perform action when user doesn't belong to the team 1`] = `
+Object {
+  "body": Object {
+    "error": "Non-public error: User doesn't belong to the team",
+  },
+  "statusCode": 400,
+}
+`;
+
+exports[`Team controller addAdmin should not allow to perform action when user is already an admin 1`] = `
+Object {
+  "body": Object {
+    "error": "Non-public error: User is already an admin",
+  },
+  "statusCode": 400,
+}
+`;
+
+exports[`Team controller deleteAdmin should not allow to perform action when not an admin 1`] = `
+Object {
+  "body": Object {
+    "error": "Non-public error: Not an admin of the team",
+  },
+  "statusCode": 403,
+}
+`;
+
+exports[`Team controller deleteAdmin should not allow to perform action when only one admin is in the team 1`] = `
+Object {
+  "body": Object {
+    "error": "Team needs to have at least one admin",
+  },
+  "statusCode": 400,
+}
+`;
+
+exports[`Team controller deleteAdmin should not allow to perform action when selected user is not an admin 1`] = `
+Object {
+  "body": Object {
+    "error": "Non-public error: User isn't an admin",
+  },
+  "statusCode": 400,
+}
+`;
+
+exports[`Team controller deleteAdmin should not allow to perform action when user doesn't belong to the team 1`] = `
+Object {
+  "body": Object {
+    "error": "Non-public error: User isn't an admin",
+  },
+  "statusCode": 400,
+}
+`;
+
+exports[`Team controller deleteAdmin should remove admin 1`] = `
+Object {
+  "statusCode": 204,
+  "text": "",
+}
+`;

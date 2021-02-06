@@ -1,0 +1,101 @@
+<md-dialog aria-label="Format Filter: {{ dataset.fe_displayTitleOverrides[fieldName] ? dataset.fe_displayTitleOverrides[fieldName] + ' (' + fieldName + ')' : fieldName || 'New field' }}" class="field-dialog" md-no-ink>
+    <aa-toolbar title="Format Filter: {{ dataset.fe_displayTitleOverrides[fieldName] ? dataset.fe_displayTitleOverrides[fieldName] + ' (' + fieldName + ')' : fieldName || 'New field' }}"></aa-toolbar>
+    <md-dialog-content>
+        <form name="dialog.form">
+            <md-tabs md-dynamic-height md-no-ink>
+                <md-tab label="Filter Group Settings">
+                    <md-content layout-padding>
+                        <p>Filters are displayed in groups, based on the fields in your data source. For example, if your group was called "Genre", your filters might be "Action", "Drama", etc.</p>
+                        <md-input-container layout="column">
+                            <div class="pad-bottom-2x" ng-if="dataset.raw_rowObjects_coercionScheme[fieldName].operation === 'ToDate' || dataset.raw_rowObjects_coercionScheme[fieldName].operation === 'ToInteger' || dataset.raw_rowObjects_coercionScheme[fieldName].operation === 'ToFloat' || dataset.raw_rowObjects_coercionScheme[fieldName].operation === 'ToPercent'">
+                                <md-switch name="rangeSlider" ng-model="data.rangeSlider" aria-label="Display filter group as a range slider">
+                                    Display filter group as a range slider
+                                </md-switch>
+                            </div>
+                            <div ng-hide="data.rangeSlider">
+                                <div class="pad-bottom-2x">
+                                    <p>By default, Gist lets users select one filter per group of filters.</p>
+                                    <md-checkbox name="multipleSelection" ng-model="data.multipleSelection"
+                                                 aria-label="Allow multiple filter selection" ng-disabled="data.rangeSlider">
+                                        Allow the user to select multiple filters per group
+                                    </md-checkbox>
+                                </div>
+                                <div class="pad-bottom-2x">
+                                    <p>By default, Gist displays filters in alphabetical order.</p>
+                                    <md-checkbox name="sortableInReverse" ng-model="data.sortableInReverse"
+                                                 aria-label="Allow sort in reverse order" ng-disabled="data.rangeSlider">
+                                        Display filters in reverse alphabetical order
+                                    </md-checkbox>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </md-content>
+                </md-tab>
+
+                <md-tab label="Individual Filter Settings">
+                    <md-content layout-padding>
+                        <fieldset class="standard" ng-if="customFieldIndex === undefined">
+                            <div>
+                                <p>You can rename any filter. For example, instead of "Alternative", you might want to use "Indie". Start by clicking the button below to edit your filter name.</p>
+                            </div>
+                            <div
+                                layout="row"
+                                layout-align="space-between start"
+                                ng-repeat="valueByOverride in dataset.fe_filters.oneToOneOverrideWithValuesByTitleByFieldName[fieldName] track by $index"
+                            >
+                                <md-input-container flex="40">
+                                    <label>Original filter name</label>
+                                    <input type="text" name="overrideValue_{{$index}}"
+                                           ng-model="valueByOverride.value"
+                                           ng-change="verifyUniqueValueOverride(valueByOverride, $index)" required>
+                                    <div ng-messages="dialog.form['overrideValue_' + $index].$error">
+                                        <div ng-message="required">This is required.</div>
+                                        <div ng-message="unique">Must be unique.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container flex="40">
+                                    <label>New filter name</label>
+                                    <input type="text" name="overrideValueTitle_{{$index}}" ng-model="valueByOverride.override"
+                                           ng-change="verifyUniqueValueOverride(valueByOverride, $index)" required>
+                                    <div ng-messages="dialog.form['overrideValueTitle_' + $index].$error">
+                                        <div ng-message="required">This is required.</div>
+                                        <div ng-message="unique">Must be unique.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <div flex="5">
+                                    <span class="fa fa-remove" ng-click="removeOneToOneOverride(valueByOverride)"></span>
+                                </div>
+                            </div>
+                            <md-button class="md-dashboard" ng-click="addOneToOneOverride()">
+                                Add a filter to rename
+                            </md-button>
+                        </fieldset>
+
+                        <md-input-container class="md-block" flex-gt-sm ng-if="customFieldIndex === undefined">
+                            <label></label>
+                            <p>You can also exclude any filters. Simply enter your filter names below and press ENTER after each keyword.</p>
+                            <md-chips
+                                ng-model="dataset.fe_filters.valuesToExcludeByOriginalKey[fieldName]"
+                                name="valuesToExcludeSelf"
+                                md-enable-chip-edit="true"
+                                placeholder="Add a filter name"
+                                secondary-placeholder="Add a filter name"
+                            ></md-chips>
+                        </md-input-container>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+
+            <md-dialog-actions layout="row" layout-align="end center">
+                <md-button class="md-dashboard cancel" ng-click="cancel()">
+                    <span class="btn-label">Cancel</span>
+                </md-button>
+                <md-button class="md-dashboard confirm" ng-click="save()" ng-disabled="dialog.form.$invalid">
+                    <span class="btn-label">Save</span>
+                </md-button>
+            </md-dialog-actions>
+        </form>
+    </md-dialog-content>
+</md-dialog>

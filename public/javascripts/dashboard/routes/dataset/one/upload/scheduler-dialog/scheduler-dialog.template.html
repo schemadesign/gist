@@ -1,0 +1,34 @@
+<md-dialog style="width:45em;" aria-label="Scheduler">
+    <aa-toolbar title="Scheduler"></aa-toolbar>
+    <md-dialog-content md-no-link>
+        <form name="scheduler.form">
+            <md-content layout-padding>
+                <p class="pad-bottom-0">You can schedule an upate to occur on an hourly, daily, weekly, or monthly
+                                        basis.</p>
+                <p>First, select an option below for how often auto updates should occur. Then select the specific time
+                   the update should take place.</p>
+                <cron-selection
+                    template="javascripts/dashboard/routes/dataset/one/upload/scheduler-dialog/time-selection.template.html"
+                    ng-model="cronTime" config="config"></cron-selection>
+            </md-content>
+
+            <md-dialog-actions layout="row" layout-align="end center">
+                <md-button class="md-dashboard cancel" ng-click="cancel()">
+                    <span class="btn-label">Cancel</span>
+                </md-button>
+                <md-button class="md-dashboard confirm" ng-click="save('time')"
+                           ng-disabled="!scheduler.form.$dirty || scheduler.form.$invalid || (scheduledJob && scheduledJob.status=='pause') ">
+                    <span class="btn-label">Save</span>
+                </md-button>
+                <md-button class="md-dashboard warn" ng-click="save('schedule')"
+                           ng-if="scheduledJob && scheduledJob._id">
+                    <span class="btn-label"> {{scheduledJob.status == 'running' ? 'Pause' : 'Resume'}}</span>
+                </md-button>
+                <md-button class="md-dashboard md-warn" ng-click="save('remove')"
+                           ng-if="scheduledJob && scheduledJob._id">
+                    <span class="btn-label">Remove</span>
+                </md-button>
+            </md-dialog-actions>
+        </form>
+    </md-dialog-content>
+</md-dialog>

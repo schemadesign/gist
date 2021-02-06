@@ -1,0 +1,13 @@
+<label class="margin-bottom-3x d-block">{{::setting.displayAs}}</label>
+<p ng-if="::setting.description && !setting.bottomDescription">{{::setting.description}}</p>
+
+<ng-include ng-if="::setting.name === 'simpleChart'" src="'javascripts/dashboard/routes/dataset/one/views/view/inputs/simple-advanced-message/simple-advanced-message.template.html'"></ng-include>
+<ng-include ng-if="::setting.name === 'galleryStyle'" src="'javascripts/dashboard/routes/dataset/one/views/view/inputs/gallery-style-message/gallery-style-message.template.html'"></ng-include>
+<ng-include ng-if="::setting.name === 'mapStyle'" src="'javascripts/dashboard/routes/dataset/one/views/view/inputs/map-style-message/map-style-message.template.html'"></ng-include>
+
+<md-radio-group ng-model="viewCtrl.data[setting.name]" md-no-ink>
+    <md-radio-button ng-repeat="option in setting.options track by $index" ng-value="option.value" aria-label="{{option.label}}">
+        {{option.label}}
+    </md-radio-button>
+</md-radio-group>
+<p ng-if="::setting.description && setting.bottomDescription">{{::setting.description}}</p>

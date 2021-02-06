@@ -1,0 +1,544 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dataset download "All Data Types" (JSON, private, glitter team) should download modified as editor 1`] = `
+Object {
+  "body": Array [
+    Object {
+      "Date": "2018-01-02T00:00:00.000Z",
+      "Number_overridden": 2,
+      "String": "IAmEditedString2",
+    },
+    Object {
+      "Date": "2018-01-03T00:00:00.000Z",
+      "Number_overridden": 3,
+      "String": "IAmString3",
+    },
+    Object {
+      "Date": "2018-01-01T00:00:00.000Z",
+      "Number_overridden": 1,
+      "String": "IAmString1",
+    },
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`Dataset download "All Data Types" (JSON, private, glitter team) should download modified as super admin 1`] = `
+Object {
+  "body": Array [
+    Object {
+      "Date": "2018-01-02T00:00:00.000Z",
+      "Number_overridden": 2,
+      "String": "IAmEditedString2",
+    },
+    Object {
+      "Date": "2018-01-03T00:00:00.000Z",
+      "Number_overridden": 3,
+      "String": "IAmString3",
+    },
+    Object {
+      "Date": "2018-01-01T00:00:00.000Z",
+      "Number_overridden": 1,
+      "String": "IAmString1",
+    },
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`Dataset download "All Data Types" (JSON, private, glitter team) should download modified as team admin 1`] = `
+Object {
+  "body": Array [
+    Object {
+      "Date": "2018-01-02T00:00:00.000Z",
+      "Number_overridden": 2,
+      "String": "IAmEditedString2",
+    },
+    Object {
+      "Date": "2018-01-03T00:00:00.000Z",
+      "Number_overridden": 3,
+      "String": "IAmString3",
+    },
+    Object {
+      "Date": "2018-01-01T00:00:00.000Z",
+      "Number_overridden": 1,
+      "String": "IAmString1",
+    },
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`Dataset download "All Data Types" (JSON, private, glitter team) should download modified as viewer 1`] = `
+Object {
+  "body": Array [
+    Object {
+      "Date": "2018-01-02T00:00:00.000Z",
+      "Number_overridden": 2,
+      "String": "IAmEditedString2",
+    },
+    Object {
+      "Date": "2018-01-03T00:00:00.000Z",
+      "Number_overridden": 3,
+      "String": "IAmString3",
+    },
+    Object {
+      "Date": "2018-01-01T00:00:00.000Z",
+      "Number_overridden": 1,
+      "String": "IAmString1",
+    },
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`Dataset download "All Data Types" (JSON, private, glitter team) should download original as editor 1`] = `
+Object {
+  "body": Array [
+    Object {
+      "Date": "2018-01-01",
+      "Number": "1",
+      "String": "IAmString1",
+    },
+    Object {
+      "Date": "2018-01-02",
+      "Number": "2",
+      "String": "IAmString2",
+    },
+    Object {
+      "Date": "2018-01-03",
+      "Number": "3",
+      "String": "IAmString3",
+    },
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`Dataset download "All Data Types" (JSON, private, glitter team) should download original as super admin 1`] = `
+Object {
+  "body": Array [
+    Object {
+      "Date": "2018-01-01",
+      "Number": "1",
+      "String": "IAmString1",
+    },
+    Object {
+      "Date": "2018-01-02",
+      "Number": "2",
+      "String": "IAmString2",
+    },
+    Object {
+      "Date": "2018-01-03",
+      "Number": "3",
+      "String": "IAmString3",
+    },
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`Dataset download "All Data Types" (JSON, private, glitter team) should download original as team admin 1`] = `
+Object {
+  "body": Array [
+    Object {
+      "Date": "2018-01-01",
+      "Number": "1",
+      "String": "IAmString1",
+    },
+    Object {
+      "Date": "2018-01-02",
+      "Number": "2",
+      "String": "IAmString2",
+    },
+    Object {
+      "Date": "2018-01-03",
+      "Number": "3",
+      "String": "IAmString3",
+    },
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`Dataset download "All Data Types" (JSON, private, glitter team) should download original as viewer 1`] = `
+Object {
+  "body": Array [
+    Object {
+      "Date": "2018-01-01",
+      "Number": "1",
+      "String": "IAmString1",
+    },
+    Object {
+      "Date": "2018-01-02",
+      "Number": "2",
+      "String": "IAmString2",
+    },
+    Object {
+      "Date": "2018-01-03",
+      "Number": "3",
+      "String": "IAmString3",
+    },
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`Dataset download "All Data Types" (JSON, private, glitter team) should return 403 when trying to download modified as non-team member 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 403,
+}
+`;
+
+exports[`Dataset download "All Data Types" (JSON, private, glitter team) should return 403 when trying to download modified as non-viewing and non-editing team member 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 403,
+}
+`;
+
+exports[`Dataset download "All Data Types" (JSON, private, glitter team) should return 403 when trying to download modified as unathorized user 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 403,
+}
+`;
+
+exports[`Dataset download "All Data Types" (JSON, private, glitter team) should return 403 when trying to download original as non-team member 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 403,
+}
+`;
+
+exports[`Dataset download "All Data Types" (JSON, private, glitter team) should return 403 when trying to download original as non-viewing and non-editing team member 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 403,
+}
+`;
+
+exports[`Dataset download "All Data Types" (JSON, private, glitter team) should return 403 when trying to download original as unathorized user 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 403,
+}
+`;
+
+exports[`Dataset download "Pokemon 1" (CSV, private, glitter team) should download modified as super admin 1`] = `
+Object {
+  "statusCode": 200,
+  "text": "Pokemon No_,Name,Type1_overridden,Type 2,Max CP,Max HP,Image URL
+1,Bulbasaur,Grass,Poison,1079,83,http://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png
+2,Ivysaur,Grass,Poison,1643,107,http://cdn.bulbagarden.net/upload/thumb/7/73/002Ivysaur.png/250px-002Ivysaur.png
+3,Venusaur,Grass,Poison,2598,138,http://cdn.bulbagarden.net/upload/thumb/a/ae/003Venusaur.png/250px-003Venusaur.png
+4,Charmander,Fire,None,962,73,http://cdn.bulbagarden.net/upload/thumb/7/73/004Charmander.png/250px-004Charmander.png
+5,Charmeleon,Fire,None,1568,103,http://cdn.bulbagarden.net/upload/thumb/4/4a/005Charmeleon.png/250px-005Charmeleon.png
+6,Charizard,Fire,Flying,2620,135,http://cdn.bulbagarden.net/upload/thumb/7/7e/006Charizard.png/250px-006Charizard.png
+7,Squirtle,Water,None,1015,81,http://cdn.bulbagarden.net/upload/thumb/3/39/007Squirtle.png/250px-007Squirtle.png
+8,Wartortle,Water,None,1594,105,http://cdn.bulbagarden.net/upload/thumb/0/0c/008Wartortle.png/250px-008Wartortle.png
+9,Blastoise,Water,None,2560,137,http://cdn.bulbagarden.net/upload/thumb/0/02/009Blastoise.png/250px-009Blastoise.png
+",
+}
+`;
+
+exports[`Dataset download "Pokemon 1" (CSV, private, glitter team) should download modified as team admin 1`] = `
+Object {
+  "statusCode": 200,
+  "text": "Pokemon No_,Name,Type1_overridden,Type 2,Max CP,Max HP,Image URL
+1,Bulbasaur,Grass,Poison,1079,83,http://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png
+2,Ivysaur,Grass,Poison,1643,107,http://cdn.bulbagarden.net/upload/thumb/7/73/002Ivysaur.png/250px-002Ivysaur.png
+3,Venusaur,Grass,Poison,2598,138,http://cdn.bulbagarden.net/upload/thumb/a/ae/003Venusaur.png/250px-003Venusaur.png
+4,Charmander,Fire,None,962,73,http://cdn.bulbagarden.net/upload/thumb/7/73/004Charmander.png/250px-004Charmander.png
+5,Charmeleon,Fire,None,1568,103,http://cdn.bulbagarden.net/upload/thumb/4/4a/005Charmeleon.png/250px-005Charmeleon.png
+6,Charizard,Fire,Flying,2620,135,http://cdn.bulbagarden.net/upload/thumb/7/7e/006Charizard.png/250px-006Charizard.png
+7,Squirtle,Water,None,1015,81,http://cdn.bulbagarden.net/upload/thumb/3/39/007Squirtle.png/250px-007Squirtle.png
+8,Wartortle,Water,None,1594,105,http://cdn.bulbagarden.net/upload/thumb/0/0c/008Wartortle.png/250px-008Wartortle.png
+9,Blastoise,Water,None,2560,137,http://cdn.bulbagarden.net/upload/thumb/0/02/009Blastoise.png/250px-009Blastoise.png
+",
+}
+`;
+
+exports[`Dataset download "Pokemon 1" (CSV, private, glitter team) should download original as super admin 1`] = `
+Object {
+  "statusCode": 200,
+  "text": "Pokemon No.,Name,Type 1,Type 2,Max CP,Max HP,Image URL
+1,Bulbasaur,Grass,Poison,1079,83,http://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png
+2,Ivysaur,Grass,Poison,1643,107,http://cdn.bulbagarden.net/upload/thumb/7/73/002Ivysaur.png/250px-002Ivysaur.png
+3,Venusaur,Grass,Poison,2598,138,http://cdn.bulbagarden.net/upload/thumb/a/ae/003Venusaur.png/250px-003Venusaur.png
+4,Charmander,Fire,None,962,73,http://cdn.bulbagarden.net/upload/thumb/7/73/004Charmander.png/250px-004Charmander.png
+5,Charmeleon,Fire,None,1568,103,http://cdn.bulbagarden.net/upload/thumb/4/4a/005Charmeleon.png/250px-005Charmeleon.png
+6,Charizard,Fire,Flying,2620,135,http://cdn.bulbagarden.net/upload/thumb/7/7e/006Charizard.png/250px-006Charizard.png
+7,Squirtle,Water,None,1015,81,http://cdn.bulbagarden.net/upload/thumb/3/39/007Squirtle.png/250px-007Squirtle.png
+8,Wartortle,Water,None,1594,105,http://cdn.bulbagarden.net/upload/thumb/0/0c/008Wartortle.png/250px-008Wartortle.png
+9,Blastoise,Water,None,2560,137,http://cdn.bulbagarden.net/upload/thumb/0/02/009Blastoise.png/250px-009Blastoise.png",
+}
+`;
+
+exports[`Dataset download "Pokemon 1" (CSV, private, glitter team) should download original as team admin 1`] = `
+Object {
+  "statusCode": 200,
+  "text": "Pokemon No.,Name,Type 1,Type 2,Max CP,Max HP,Image URL
+1,Bulbasaur,Grass,Poison,1079,83,http://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png
+2,Ivysaur,Grass,Poison,1643,107,http://cdn.bulbagarden.net/upload/thumb/7/73/002Ivysaur.png/250px-002Ivysaur.png
+3,Venusaur,Grass,Poison,2598,138,http://cdn.bulbagarden.net/upload/thumb/a/ae/003Venusaur.png/250px-003Venusaur.png
+4,Charmander,Fire,None,962,73,http://cdn.bulbagarden.net/upload/thumb/7/73/004Charmander.png/250px-004Charmander.png
+5,Charmeleon,Fire,None,1568,103,http://cdn.bulbagarden.net/upload/thumb/4/4a/005Charmeleon.png/250px-005Charmeleon.png
+6,Charizard,Fire,Flying,2620,135,http://cdn.bulbagarden.net/upload/thumb/7/7e/006Charizard.png/250px-006Charizard.png
+7,Squirtle,Water,None,1015,81,http://cdn.bulbagarden.net/upload/thumb/3/39/007Squirtle.png/250px-007Squirtle.png
+8,Wartortle,Water,None,1594,105,http://cdn.bulbagarden.net/upload/thumb/0/0c/008Wartortle.png/250px-008Wartortle.png
+9,Blastoise,Water,None,2560,137,http://cdn.bulbagarden.net/upload/thumb/0/02/009Blastoise.png/250px-009Blastoise.png",
+}
+`;
+
+exports[`Dataset download "Pokemon 1" (CSV, private, glitter team) should return 403 when trying to download modified as non-team member 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 403,
+}
+`;
+
+exports[`Dataset download "Pokemon 1" (CSV, private, glitter team) should return 403 when trying to download modified as non-viewing and non-editing team member 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 403,
+}
+`;
+
+exports[`Dataset download "Pokemon 1" (CSV, private, glitter team) should return 403 when trying to download modified as unathorized user 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 403,
+}
+`;
+
+exports[`Dataset download "Pokemon 1" (CSV, private, glitter team) should return 403 when trying to download original as non-team member 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 403,
+}
+`;
+
+exports[`Dataset download "Pokemon 1" (CSV, private, glitter team) should return 403 when trying to download original as non-viewing and non-editing team member 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 403,
+}
+`;
+
+exports[`Dataset download "Pokemon 1" (CSV, private, glitter team) should return 403 when trying to download original as unathorized user 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 403,
+}
+`;
+
+exports[`Dataset download "Private Viz With Editor" (CSV, private, user team) should download modified as editor 1`] = `
+Object {
+  "statusCode": 200,
+  "text": "Pokemon No_,Name,Type 1,Type2_overridden,Max CP,Max HP,Image URL
+1,Bulbasaur,Grass,Poison,1079,83,http://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png
+2,Ivysaur,Grass,Poison,1643,107,http://cdn.bulbagarden.net/upload/thumb/7/73/002Ivysaur.png/250px-002Ivysaur.png
+3,Venusaur,Grass,Poison,2598,138,http://cdn.bulbagarden.net/upload/thumb/a/ae/003Venusaur.png/250px-003Venusaur.png
+4,Charmander,Fire,None,962,73,http://cdn.bulbagarden.net/upload/thumb/7/73/004Charmander.png/250px-004Charmander.png
+5,Charmeleon,Fire,None,1568,103,http://cdn.bulbagarden.net/upload/thumb/4/4a/005Charmeleon.png/250px-005Charmeleon.png
+6,Charizard,Fire,Flying,2620,135,http://cdn.bulbagarden.net/upload/thumb/7/7e/006Charizard.png/250px-006Charizard.png
+7,Squirtle,Water,None,1015,81,http://cdn.bulbagarden.net/upload/thumb/3/39/007Squirtle.png/250px-007Squirtle.png
+8,Wartortle,Water,None,1594,105,http://cdn.bulbagarden.net/upload/thumb/0/0c/008Wartortle.png/250px-008Wartortle.png
+9,Blastoise,Water,None,2560,137,http://cdn.bulbagarden.net/upload/thumb/0/02/009Blastoise.png/250px-009Blastoise.png
+",
+}
+`;
+
+exports[`Dataset download "Private Viz With Editor" (CSV, private, user team) should download modified as viewer 1`] = `
+Object {
+  "statusCode": 200,
+  "text": "Pokemon No_,Name,Type 1,Type2_overridden,Max CP,Max HP,Image URL
+1,Bulbasaur,Grass,Poison,1079,83,http://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png
+2,Ivysaur,Grass,Poison,1643,107,http://cdn.bulbagarden.net/upload/thumb/7/73/002Ivysaur.png/250px-002Ivysaur.png
+3,Venusaur,Grass,Poison,2598,138,http://cdn.bulbagarden.net/upload/thumb/a/ae/003Venusaur.png/250px-003Venusaur.png
+4,Charmander,Fire,None,962,73,http://cdn.bulbagarden.net/upload/thumb/7/73/004Charmander.png/250px-004Charmander.png
+5,Charmeleon,Fire,None,1568,103,http://cdn.bulbagarden.net/upload/thumb/4/4a/005Charmeleon.png/250px-005Charmeleon.png
+6,Charizard,Fire,Flying,2620,135,http://cdn.bulbagarden.net/upload/thumb/7/7e/006Charizard.png/250px-006Charizard.png
+7,Squirtle,Water,None,1015,81,http://cdn.bulbagarden.net/upload/thumb/3/39/007Squirtle.png/250px-007Squirtle.png
+8,Wartortle,Water,None,1594,105,http://cdn.bulbagarden.net/upload/thumb/0/0c/008Wartortle.png/250px-008Wartortle.png
+9,Blastoise,Water,None,2560,137,http://cdn.bulbagarden.net/upload/thumb/0/02/009Blastoise.png/250px-009Blastoise.png
+",
+}
+`;
+
+exports[`Dataset download "Private Viz With Editor" (CSV, private, user team) should download original as editor 1`] = `
+Object {
+  "statusCode": 200,
+  "text": "Pokemon No.,Name,Type 1,Type 2,Max CP,Max HP,Image URL
+1,Bulbasaur,Grass,Poison,1079,83,http://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png
+2,Ivysaur,Grass,Poison,1643,107,http://cdn.bulbagarden.net/upload/thumb/7/73/002Ivysaur.png/250px-002Ivysaur.png
+3,Venusaur,Grass,Poison,2598,138,http://cdn.bulbagarden.net/upload/thumb/a/ae/003Venusaur.png/250px-003Venusaur.png
+4,Charmander,Fire,None,962,73,http://cdn.bulbagarden.net/upload/thumb/7/73/004Charmander.png/250px-004Charmander.png
+5,Charmeleon,Fire,None,1568,103,http://cdn.bulbagarden.net/upload/thumb/4/4a/005Charmeleon.png/250px-005Charmeleon.png
+6,Charizard,Fire,Flying,2620,135,http://cdn.bulbagarden.net/upload/thumb/7/7e/006Charizard.png/250px-006Charizard.png
+7,Squirtle,Water,None,1015,81,http://cdn.bulbagarden.net/upload/thumb/3/39/007Squirtle.png/250px-007Squirtle.png
+8,Wartortle,Water,None,1594,105,http://cdn.bulbagarden.net/upload/thumb/0/0c/008Wartortle.png/250px-008Wartortle.png
+9,Blastoise,Water,None,2560,137,http://cdn.bulbagarden.net/upload/thumb/0/02/009Blastoise.png/250px-009Blastoise.png",
+}
+`;
+
+exports[`Dataset download "Private Viz With Editor" (CSV, private, user team) should download original as viewer 1`] = `
+Object {
+  "statusCode": 200,
+  "text": "Pokemon No.,Name,Type 1,Type 2,Max CP,Max HP,Image URL
+1,Bulbasaur,Grass,Poison,1079,83,http://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png
+2,Ivysaur,Grass,Poison,1643,107,http://cdn.bulbagarden.net/upload/thumb/7/73/002Ivysaur.png/250px-002Ivysaur.png
+3,Venusaur,Grass,Poison,2598,138,http://cdn.bulbagarden.net/upload/thumb/a/ae/003Venusaur.png/250px-003Venusaur.png
+4,Charmander,Fire,None,962,73,http://cdn.bulbagarden.net/upload/thumb/7/73/004Charmander.png/250px-004Charmander.png
+5,Charmeleon,Fire,None,1568,103,http://cdn.bulbagarden.net/upload/thumb/4/4a/005Charmeleon.png/250px-005Charmeleon.png
+6,Charizard,Fire,Flying,2620,135,http://cdn.bulbagarden.net/upload/thumb/7/7e/006Charizard.png/250px-006Charizard.png
+7,Squirtle,Water,None,1015,81,http://cdn.bulbagarden.net/upload/thumb/3/39/007Squirtle.png/250px-007Squirtle.png
+8,Wartortle,Water,None,1594,105,http://cdn.bulbagarden.net/upload/thumb/0/0c/008Wartortle.png/250px-008Wartortle.png
+9,Blastoise,Water,None,2560,137,http://cdn.bulbagarden.net/upload/thumb/0/02/009Blastoise.png/250px-009Blastoise.png",
+}
+`;
+
+exports[`Dataset download "Public Dataset" (CSV, public, user team) should download modified as non-team member 1`] = `
+Object {
+  "statusCode": 200,
+  "text": "String,Number,Date
+IAmEditedString2,2,2018-01-02T00:00:00.000Z
+IAmString3,3,2018-01-03T00:00:00.000Z
+IAmString1,1,2018-01-01T00:00:00.000Z
+",
+}
+`;
+
+exports[`Dataset download "Public Dataset" (CSV, public, user team) should download modified as unathorized user 1`] = `
+Object {
+  "statusCode": 200,
+  "text": "String,Number,Date
+IAmEditedString2,2,2018-01-02T00:00:00.000Z
+IAmString3,3,2018-01-03T00:00:00.000Z
+IAmString1,1,2018-01-01T00:00:00.000Z
+",
+}
+`;
+
+exports[`Dataset download "Public Dataset" (CSV, public, user team) should download original as non-team member 1`] = `
+Object {
+  "statusCode": 200,
+  "text": "﻿Pokemon No,Name
+152,Maitland
+153,Lilly
+154,Rudi
+155,Xoe",
+}
+`;
+
+exports[`Dataset download "Public Dataset" (CSV, public, user team) should download original as unathorized user 1`] = `
+Object {
+  "statusCode": 200,
+  "text": "﻿Pokemon No,Name
+152,Maitland
+153,Lilly
+154,Rudi
+155,Xoe",
+}
+`;
+
+exports[`Dataset download should download a modified dataset that was imported via API connection 1`] = `
+Object {
+  "body": Array [
+    Object {
+      "_links": Object {
+        "self": Object {
+          "href": "http://api.tvmaze.com/episodes/4952",
+        },
+      },
+      "airdate": "2011-04-17T00:00:00.000Z",
+      "airstamp": "2011-04-18T01:00:00.000Z",
+      "airtime": "21:00",
+      "id": 4952,
+      "image": Object {
+        "medium": "http://static.tvmaze.com/uploads/images/medium_landscape/1/2668.jpg",
+        "original": "http://static.tvmaze.com/uploads/images/original_untouched/1/2668.jpg",
+      },
+      "name": "Winter is Coming",
+      "number": 1,
+      "runtime": 60,
+      "season": 1,
+      "summary": "<p>Lord Eddard Stark, ruler of the North, is summoned to court by his old friend, King Robert Baratheon, to serve as the King's Hand. Eddard reluctantly agrees after learning of a possible threat to the King's life. Eddard's bastard son Jon Snow must make a painful decision about his own future, while in the distant east Viserys Targaryen plots to reclaim his father's throne, usurped by Robert, by selling his sister in marriage.</p>",
+      "url": "http://www.tvmaze.com/episodes/4952/game-of-thrones-1x01-winter-is-coming",
+    },
+    Object {
+      "_links": Object {
+        "self": Object {
+          "href": "http://api.tvmaze.com/episodes/4953",
+        },
+      },
+      "airdate": "2011-04-24T00:00:00.000Z",
+      "airstamp": "2011-04-25T01:00:00.000Z",
+      "airtime": "21:00",
+      "id": 4953,
+      "image": Object {
+        "medium": "http://static.tvmaze.com/uploads/images/medium_landscape/1/2669.jpg",
+        "original": "http://static.tvmaze.com/uploads/images/original_untouched/1/2669.jpg",
+      },
+      "name": "The Kingsroad",
+      "number": 2,
+      "runtime": 60,
+      "season": 1,
+      "summary": "<p>An incident on the Kingsroad threatens Eddard and Robert's friendship. Jon and Tyrion travel to the Wall, where they discover that the reality of the Night's Watch may not match the heroic image of it.</p>",
+      "url": "http://www.tvmaze.com/episodes/4953/game-of-thrones-1x02-the-kingsroad",
+    },
+    Object {
+      "_links": Object {
+        "self": Object {
+          "href": "http://api.tvmaze.com/episodes/4962",
+        },
+      },
+      "airdate": "2012-04-01T00:00:00.000Z",
+      "airstamp": "2012-04-02T01:00:00.000Z",
+      "airtime": "21:00",
+      "id": 4962,
+      "image": Object {
+        "medium": "http://static.tvmaze.com/uploads/images/medium_landscape/1/3174.jpg",
+        "original": "http://static.tvmaze.com/uploads/images/original_untouched/1/3174.jpg",
+      },
+      "name": "The North Remembers",
+      "number": 1,
+      "runtime": 60,
+      "season": 2,
+      "summary": "<p>War grips the continent of Westeros. As Tyrion Lannister tries to take his strong-willed nephew in hand in King's Landing, Stannis Baratheon launches his own campaign to take the Iron Throne with the help of a mysterious priestess. In the east, Daenerys must lead her retinue through a desolate wasteland whilst beyond the Wall the Night's Watch seeks the aid of a wildling.</p>",
+      "url": "http://www.tvmaze.com/episodes/4962/game-of-thrones-2x01-the-north-remembers",
+    },
+    Object {
+      "_links": Object {
+        "self": Object {
+          "href": "http://api.tvmaze.com/episodes/4963",
+        },
+      },
+      "airdate": "2012-04-08T00:00:00.000Z",
+      "airstamp": "2012-04-09T01:00:00.000Z",
+      "airtime": "21:00",
+      "id": 4963,
+      "image": Object {
+        "medium": "http://static.tvmaze.com/uploads/images/medium_landscape/1/3175.jpg",
+        "original": "http://static.tvmaze.com/uploads/images/original_untouched/1/3175.jpg",
+      },
+      "name": "The Night Lands",
+      "number": 2,
+      "runtime": 60,
+      "season": 2,
+      "summary": "<p>Stannis uses Ser Davos to seek out new allies for his war with the Lannisters. On the road north, Arya confides in Gendry. Robb Stark sends Theon Greyjoy to win an alliance with his father and the fierce warriors of the Iron Islands. Cersei and Tyrion clash on how to rule in King's Landing.</p>",
+      "url": "http://www.tvmaze.com/episodes/4963/game-of-thrones-2x02-the-night-lands",
+    },
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`Dataset download should return 404 status when dataset id not in database 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 404,
+}
+`;

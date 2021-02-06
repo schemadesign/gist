@@ -1,0 +1,77 @@
+<div class="preview-zone" ng-show="datasetViewsCtrl.previewLoaded">
+    <div class="field-dialog">
+        <aa-toolbar title="{{viewCtrl.viewDisplayName}} Configuration" cancel="viewCtrl.cancel()"></aa-toolbar>
+        <div layout="column" class="preview-view-container">
+            <div layout="column" class="settings-subwindow">
+                <div class="preview-subheader">
+                    <h3>
+                        Settings
+                        <md-button class="md-dashboard btn-right" ng-click="viewCtrl.hide()">
+                            <span class="btn-label">Done</span>
+                        </md-button>
+                    </h3>
+                    <div ng-view></div>
+                </div>
+                <div flex layout="column" ng-form="viewCtrl.form" id="view-settings-dialog-content" gist-isolate-form>
+                    <md-tabs flex md-selected="selectedIndex" md-border-bottom>
+                        <md-tab ng-repeat="tab in ::viewCtrl.viewTabs track by tab" label="{{::tab}}">
+                            <md-content layout-margin>
+                                <div class="dashboard-scrollable-content">
+                                    <ng-include
+                                        ng-if="tab === 'Descriptions'"
+                                        src="'javascripts/dashboard/routes/dataset/one/views/view/descriptions-tab.template.html'"
+                                        class="d-block"
+                                    ></ng-include>
+
+                                    <div ng-repeat="setting in viewCtrl.viewSettings | filter:{tab: tab} | filter:{inputType: '!menu'} track by $index">
+                                        <gist-view-input-annotations-benchmarks ng-if="setting.inputType === 'annotationsBenchmarks'" />
+                                        <gist-view-input-annotations-overlay-text ng-if="setting.inputType === 'annotationsOverlayText'" />
+                                        <gist-view-input-background-color-mapping ng-if="setting.inputType === 'backgroundColorMapping'" />
+                                        <gist-view-input-colorpicker ng-if="setting.inputType === 'colorpicker'" />
+                                        <gist-view-input-dataset-mapping ng-if="setting.inputType === 'datasetMapping'" />
+                                        <gist-view-input-icon-mapping ng-if="setting.inputType === 'iconMapping'" />
+                                        <gist-view-input-key-value ng-if="setting.inputType === 'keyValue'" />
+                                        <gist-view-input-keywords ng-if="setting.inputType === 'keywords'" />
+                                        <gist-view-input-multiselect ng-if="setting.inputType === 'multiselect'" />
+                                        <gist-view-input-number-input ng-if="setting.inputType === 'numberInput'" />
+                                        <gist-view-input-region-match-by ng-if="setting.inputType === 'regionMatchBy'" />
+                                        <gist-view-input-select ng-if="setting.inputType === 'select'" />
+                                        <gist-view-input-select-secondary-column ng-if="setting.inputType === 'selectSecondaryColumn'" />
+                                        <gist-view-input-slider ng-if="setting.inputType === 'slider'" />
+                                        <gist-view-input-textbox ng-if="setting.inputType === 'textbox'" />
+                                        <gist-view-input-toggle ng-if="setting.inputType === 'toggle'" />
+                                        <gist-view-input-checkbox ng-if="setting.inputType === 'checkbox'" />
+                                        <gist-view-input-toggle-radio ng-if="setting.inputType === 'toggleRadio'" />
+                                        <gist-view-input-width-mapping ng-if="setting.inputType === 'widthMapping'" />
+
+                                        <hr ng-if="setting.borderBottom" class="margin-bottom-2x">
+                                    </div>
+
+                                    <ng-include
+                                        ng-if="tab === 'Controls'"
+                                        src="'javascripts/dashboard/routes/dataset/one/views/view/controls-tab.template.html'"
+                                        class="d-block"
+                                    ></ng-include>
+                                </div>
+                            </md-content>
+                        </md-tab>
+                    </md-tabs>
+                </div>
+            </div>
+
+            <div class="preview-subwindow">
+                <div class="preview-subheader">
+                    <h3>
+                        Preview
+                        <md-button class="md-dashboard btn-right" ng-click="viewCtrl.updatePreview()">
+                            <span class="btn-label">Refresh</span>
+                        </md-button>
+                    </h3>
+                </div>
+                <div class="preview-wrapper">
+                    <iframe name="previewFrame" id="previewFrame" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

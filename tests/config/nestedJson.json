@@ -1,0 +1,26 @@
+{
+    "values": [
+        {
+            "Date": "2018-01-01",
+            "Number": "1",
+            "SuperNested": {
+                "Nested": {
+                    "Value": "IAmString1"
+                }
+            },
+            "Nested": {
+                "Value": "IAmString1A"
+            }
+        },
+        {
+            "Date": "2018-01-02",
+            "String": "IAmString2",
+            "Number": "2"
+        },
+        {
+            "String": "IAmString3",
+            "Date": "2018-01-03",
+            "Number": "3"
+        }
+    ]
+}

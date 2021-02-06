@@ -1,0 +1,67 @@
+<div ng-form="connectSalesforceCtrl.form" gist-isolate-form>
+    <h4>Select Salesforce section to import data from:</h4>
+    <md-input-container class="md-block" md-no-float>
+        <md-autocomplete
+            md-no-cache="true"
+            md-selected-item="connectSalesforceCtrl.selectedTable"
+            md-search-text="connectSalesforceCtrl.tableSearchText"
+            md-selected-item-change="connectSalesforceCtrl.getFields()"
+            md-items="item in connectSalesforceCtrl.tableQuerySearch()"
+            md-item-text="item"
+            input-aria-describedby="input tables"
+            placeholder="Search for a table"
+            md-autoselect="true"
+            md-min-length="1"
+            required
+        >
+            <md-item-template>
+                <span md-highlight-text="connectSalesforceCtrl.tableSearchText" md-highlight-flags="i">
+                    {{item}}
+                </span>
+            </md-item-template>
+            <md-not-found>
+                No table matching "{{connectSalesforceCtrl.tableSearchText}}" were found.
+            </md-not-found>
+        </md-autocomplete>
+    </md-input-container>
+    <h4>Section fields to import:</h4>
+    <md-input-container class="md-block" md-no-float>
+        <md-chips
+            ng-model="connectSalesforceCtrl.selectedFields"
+            md-autocomplete-snap
+            md-require-match="true"
+            input-aria-label="Fields"
+            ng-disabled="!connectSalesforceCtrl.selectedTable"
+        >
+            <md-autocomplete
+                md-no-cache="true"
+                md-selected-item="connectSalesforceCtrl.selectedField"
+                md-search-text="connectSalesforceCtrl.fieldSearchText"
+                md-items="item in connectSalesforceCtrl.fieldQuerySearch()"
+                md-item-text="item"
+                input-aria-describedby="input fields"
+                ng-disabled="!connectSalesforceCtrl.selectedTable"
+                placeholder="Search for a field"
+                md-autoselect="true"
+                required
+            >
+                <span md-highlight-text="connectSalesforceCtrl.fieldSearchText" md-highlight-flags="i">
+                    {{item}}
+                </span>
+                <md-not-found>
+                    No fields matching.
+                </md-not-found>
+            </md-autocomplete>
+            <md-chip-template>
+                <span>{{$chip}}</span>
+            </md-chip-template>
+        </md-chips>
+    </md-input-container>
+    <md-button
+        class="md-dashboard confirm"
+        ng-click="connectSalesforceCtrl.connect()"
+        ng-disabled="!connectSalesforceCtrl.selectedFields.length || !connectSalesforceCtrl.selectedTable"
+        id="connectButton">
+        <span class="btn-label">Connect</span>
+    </md-button>
+</div>

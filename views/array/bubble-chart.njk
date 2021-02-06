@@ -1,0 +1,206 @@
+{% set currentView = "bubble-chart" %}
+
+{% extends "../layout/array.njk" %}
+
+{% import "../partials/array-header.njk" as header %}
+
+{% import "../partials/dropdown.njk" as dropdown %}
+{% import "../partials/search.njk" as search %}
+{% import "../partials/filter.njk" as filter %}
+
+{% block content %}
+    <section class="gist-section gist-legend-opened">
+
+        {{ header.default(arrayTitle, array_source_key, defaultView, team, isPreview, embedded, sharedPage, routePath_base, view_description, revision, defaultFilterObj, isEmbed, showInsightsExplorer, stories, subdomain, env, sharedPageId, lastUpdated) }}
+
+        {% include "../partials/modal/info.njk" %}
+        {% include "../partials/modal/detail-view-modal.njk" %}
+
+        <div class="gist-content" longDesc="{{metaDescription}}">
+            <div class="gist-chart-container">
+                <div class="gist-container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="gist-stick"></div>
+                            <div class="gist-controls gist-sort-bar clearfix">
+                                {% if viewOptions.viewControls %}
+                                    <nav class="sort-bar-left pull-left" role="navigation">
+                                        {{
+                                        dropdown.sortbar(
+                                            'Bubble size',
+                                            'radius',
+                                            radius.urlQuery if radius.urlQuery else radius.default,
+                                            radius.colNames,
+                                            routePath_base | constructedRoutePath(filterObj, {
+                                                searchCol: searchCol,
+                                                searchQ: searchQ,
+                                                xAxis: xAxis,
+                                                yAxis: yAxis,
+                                                chartBy: chartBy,
+                                                radius: ''
+                                            })
+                                        )
+                                        }}
+                                        {{
+                                        dropdown.sortbar(
+                                            'X Axis',
+                                            'xAxis',
+                                            xAxis if xAxis else xAxis_humanReadable,
+                                            colNames_orderedForXAxisDropdown,
+                                            routePath_base | constructedRoutePath(filterObj, {
+                                                searchCol: searchCol,
+                                                searchQ: searchQ,
+                                                yAxis: yAxis,
+                                                radius: radius.urlQuery,
+                                                chartBy: chartBy,
+                                                xAxis: ''
+                                            })
+                                        )
+                                        }}
+                                        {{
+                                        dropdown.sortbar(
+                                            'Y Axis',
+                                            'yAxis',
+                                            yAxis if yAxis else yAxis_humanReadable,
+                                            colNames_orderedForYAxisDropdown,
+                                            routePath_base | constructedRoutePath(filterObj, {
+                                                searchCol: searchCol,
+                                                searchQ: searchQ,
+                                                xAxis: xAxis,
+                                                radius: radius.urlQuery,
+                                                chartBy: chartBy,
+                                                yAxis: ''
+                                            })
+                                        )
+                                        }}
+                                    </nav>
+                                {% endif %}
+
+                                {% include "../partials/accessibility/skip-to-page-bottom.njk" %}
+
+                                {% if viewOptions.search %}
+                                    <div class="sort-bar-right gist-pull-right">
+                                        {{
+                                        search.default(
+                                            routePath_base,
+                                            searchCol if searchCol else 'All Fields',
+                                            cols_orderedForSearchByDropdown,
+                                            searchQ if searchQ else "",
+                                            sortBy,
+                                            sortDirection,
+                                            revision,
+                                            filterObj
+                                        )
+                                        }}
+
+                                        {% include "../partials/legend-toggle.njk" %}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                        <div class="filter-count gist-pull-right"><span></span></div>
+                    </div><!-- .row -->
+                </div><!-- .gist-container-fluid -->
+
+
+                <div class="gist-container-fluid">
+                    <div class="gist-loading">
+                        {% include "../partials/loading.njk" %}
+                    </div>
+
+                    <div class="gist-no-data" style="display:none">
+                        {% include "../partials/no-data.njk" %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="bubble-chart" class="bubble-chart"></div>
+                            <div class="timeline-control" style="height: 75px"></div>
+                            {% include "../partials/accessibility/skip-to-page-top.njk" %}
+                        </div>
+                    </div><!-- .row -->
+
+                </div><!-- .gist-container-fluid -->
+
+                {% if isFilterActive %}
+                    {{
+                    filter.default(displayTitleOverrides,
+                        routePath_base | constructedRoutePath(null, {
+                            searchCol: searchCol,
+                            searchQ: searchQ
+                        }),
+                        filterObj,
+                        truesByFilterValueByFilterColumnName_forWhichNotToOutputColumnNameInPill,
+                        sharedPage,
+                        false
+                    )
+                    }}
+                {% endif %}
+
+            </div><!-- .gist-chart-container -->
+
+            <nav class="gist-legend" role="navigation">
+                <button type="button" class="gist-close gist-legend-close" aria-label="Close"><span class="gist-icon-close-big" aria-hidden="true"></span></button>
+                <h3 class="gist-legend-title">{{ humanReadableColumnName_objectTitle }}</h3>
+                <ul class="gist-legend-list"></ul>
+            </nav>
+
+        </div><!-- .gist-content -->
+
+    </section>
+{% endblock %}
+
+{% block inlineScript %}
+    {{ super() }}
+
+    <script type="text/javascript" src="/vendors/d3/d3.min.js"></script>
+    <script type="text/javascript" src="/vendors/nunjucks/browser/nunjucks-slim.min.js"></script>
+
+    <script type="text/javascript" src="/javascripts/build/fe-templates.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/d3-visualization.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/timeline-control.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/legend-list.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/cartesian-chart/cartesian-chart.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/cartesian-chart/scatterplot/scatterplot.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/cartesian-chart/bubble-chart/bubble-chart.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/cartesian-chart/bubble-chart/core-bubble-chart.js"></script>
+
+    <script>
+        var options = {
+            viewOptions: {{ viewOptions | dump | safe }},
+            xAxisLabel: "{{ xAxis if xAxis else xAxis_humanReadable }}",
+            yAxisLabel: "{{ yAxis if yAxis else yAxis_humanReadable }}",
+            radiusLabel: "{{ radius.urlQuery if radius.urlQuery else radius.defaultHumanReadable }}",
+            routePath_base: '{{routePath_base}}',
+            routePath_withoutFilter: '{{routePath_withoutFilter}}',
+            array_source_key: '{{array_source_key}}',
+            radiusRealName: '{{radius.realName}}',
+            filterObj: {{ filterObj | dump | safe }},
+            searchQ: '{{searchQ}}',
+            searchCol: '{{searchCol}}',
+            xAxis: '{{xAxis}}',
+            yAxis: '{{yAxis}}',
+            defaultXAxisField: '{{ defaultXAxisField | replace(r/_/g, " ") }}',
+            defaultYAxisField: '{{ defaultYAxisField | replace(r/_/g, " ") }}',
+            brandColor: {{brandColor | dump | safe}},
+            galleryView: {{ hasGalleryView }},
+            sharedPage: {{ sharedPage }},
+            sharedPageId: '{{sharedPageId}}',
+            timeValue: {{ timeValue | dump | safe }},
+            datasetId: '{{datasetId}}',
+            title: '{{arrayTitle}}',
+            format: '{{format}}',
+            subdomain: '{{subdomain}}',
+            puppeteer: {{ (puppeteer and not puppeteerScreenshot) | default(false) }},
+            environment: '{{ env.NODE_ENV }}',
+            isEmbed: {{ isEmbed }},
+        };
+
+    </script>
+
+    <script type="text/javascript" src="/javascripts/build/core-views/bubble-chart/main.js"></script>
+
+    {% include "../partials/analytics.njk" %}
+
+{% endblock %}

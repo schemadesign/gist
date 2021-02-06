@@ -1,0 +1,153 @@
+<nav id="gist-filter-menu" class="filter-menu" role="navigation" aria-multiselectable="true">
+    <ul class="gist-filter-menu-group dropdown-menu">
+
+        {% set filterMenuOptions = {
+            searchQ: searchQ,
+            searchCol: searchCol,
+            sortBy: sortBy,
+            sortDirection: sortDirection,
+            groupBy: groupBy,
+            mapBy: mapBy,
+            aggregateBy: aggregateBy,
+            nested: nestedArray,
+            accessibility: sortbarOptions.accessibility,
+            normalize: sortbarOptions.normalize
+        } %}
+
+        {% for field in uniqueFieldValuesByFieldName %}
+
+            {% set isColFilter = field.name == 'colFilter' %}
+            {% set filterFieldName = filterObjWithColFilter[field.name] | unescapeValue %}
+            {% if not isColFilter %}
+                {% set filterMenuOptions = filterMenuOptions | merge({ colFilter: colFilter }) %}
+            {% endif %}
+
+            {% if isColFilter %}
+                {% set isThisAnActiveFilterColumn = false %}
+                {% if isFilterActive or isColFilterActive %}
+                    {% if filterFieldName %}
+                        {% set isThisAnActiveFilterColumn = true %}
+                    {% endif %}
+                {% endif %}
+                {% set isMultiselectable = isColFilter %}
+
+                {% for fieldValue in field.values %}
+                {% set isThisAnActiveFilter = false %}
+                {% if isThisAnActiveFilterColumn %}
+                    {% if filterFieldName | doesArrayContain(fieldValue) %}
+                        {% set isThisAnActiveFilter = true %}
+                    {% endif %}
+                {% endif %}
+                <li class="gist-filter-menu-group-item filter-menu-is-toggle{{ " filter-menu-item-active" if isThisAnActiveFilter }}">
+                    {% set filterObjForThisFilterColVal = filterObjWithColFilter | constructedFilterObj(field.name, fieldValue, isThisAnActiveFilter, isMultiselectable) %}
+                    {% set urlForFilterValue = routePath_base | constructedRoutePath(filterObjForThisFilterColVal, filterMenuOptions, sharedPage) %}
+                    {% if filterObjForThisFilterColVal | isObjectEmpty %}
+                        {% set urlForFilterValue = routePath_base | constructedRoutePath(null, filterMenuOptions, sharedPage) %}
+                    {% endif %}
+                    <a href="{{ urlForFilterValue }}">
+                         <span class="gist-filter-menu-toggle-title">{{ fieldValue }}</span> <span class="gist-filter-menu-toggle-check {{ "gist-icon-circle-check-on" if isThisAnActiveFilter else "gist-icon-circle-check-off" }}" aria-hidden="true"></span>
+                    </a>
+                </li>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        {% for field in uniqueFieldValuesByFieldName %}
+
+            {% set isColFilter = field.name == 'colFilter' %}
+            {% set filterField = filterObj[field.name] | unescapeValue %}
+
+            {% set isThisAnActiveFilterColumn = false %}
+            {% if isFilterActive %}
+                {% if filterField %}
+                    {% set isThisAnActiveFilterColumn = true %}
+                {% endif %}
+            {% endif %}
+            {% set isMultiselectable = multiselectableFilterFields | doesArrayContain(field.name) %}
+            {% set isRangeSlider = rangeSliderFilterFields | doesArrayContain(field.name) %}
+
+            {% if field.values and not isColFilter %}
+                {% if isRangeSlider and field.coercionScheme.operation and (field.coercionScheme.operation === 'ToDate' or field.coercionScheme.operation === 'ToInteger' or field.coercionScheme.operation === 'ToFloat' or field.coercionScheme.operation === 'ToPercent') %}
+
+                    <li class="filter-menu-subgroup-item filter-menu-subgroup-item-range-slider">
+
+                        {% set filterObjForThisFilterColVal = filterObj | constructedFilterObj(field.name, fieldValue) %}
+                        {% set urlForFilterValue = routePath_base | constructedRoutePath(filterObjForThisFilterColVal, filterMenuOptions, sharedPage) %}
+
+                        {% set filterFieldParsed = filterField | JSONparse %}
+
+                        <div class="filter-menu-range-slider-fieldname">{{ displayTitleOverrides[field.name] or field.name }}</div>
+                        <div class="gist-filter-menu-range-slider" data-column="{{ field.name }}" data-type-operation="{{ field.coercionScheme.operation }}" data-min="{{ field.values | first | removeComma }}" data-max="{{ field.values | last | removeComma }}" data-filter-min="{{ filterFieldParsed.min | default(filterFieldParsed) }}" data-filter-max="{{ filterFieldParsed.max | default(filterFieldParsed) }}" data-format="{{ field.coercionScheme.format }}" data-output-format="{{ field.coercionScheme.outputFormat }}"></div>
+                        <div class="gist-filter-menu-range-slider-val-min">{{ field.values | first }}</div><!-- space remover
+                        --><div class="gist-filter-menu-range-slider-val-max">{{ field.values | last }}</div>
+                        <a href="{{ urlForFilterValue }}" class="gist-filter-menu-range-slider-button background-color-brand-hover">Filter</a>
+                    </li>
+                {% else %}
+
+                    <li class="gist-filter-menu-group-item filter-menu-has-submenu{{ ' filter-menu-item-active' if isThisAnActiveFilterColumn }}">
+                        <a class="gist-slideout-trigger" role="button" href="#column-{{ loop.index }}" aria-haspopup="true" aria-expanded="false" aria-controls="column-{{ loop.index }}" title="{{ displayTitleOverrides[field.name] or field.name }}" tabindex="0" id="column-{{ loop.index }}-link">
+                            {% if displayTitleOverrides[field.name] == "Object Title" %}
+                                <span class="filter-menu-fieldname">{{ field.name }}</span>
+                            {% else %}
+                                <span class="filter-menu-fieldname">{{ displayTitleOverrides[field.name] or field.name }}</span>
+                            {% endif %}
+
+                            {% if isThisAnActiveFilterColumn %}
+                                {% if isMultiselectable %}
+                                    <span class="badge background-color-brand text-color-brand">{{ filterField | filterCount }}</span>
+                                {% else %}
+                                    <span class="filter-menu-toggle-check gist-icon-circle-check-on gist-icon-circle-check-on--space-right"></span>
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                        <div class="filter-menu-subgroup-positioner">
+                            <ul id="column-{{ loop.index }}" class="gist-filter-menu-subgroup dropdown-menu{{ ' filter-menu-subgroup-multiselect' if isMultiselectable }}">
+                                {% for fieldValue in field.values %}
+                                    {% set isThisAnActiveFilter = false %}
+                                    {% if isThisAnActiveFilterColumn %}
+                                        {% if filterField | doesArrayContain(fieldValue) %}
+                                            {% set isThisAnActiveFilter = true %}
+                                        {% endif %}
+                                    {% endif %}
+
+                                    <li class="filter-menu-subgroup-item{{ " filter-menu-item-active" if isThisAnActiveFilter }}">
+                                        {% set filterObjForThisFilterColVal = filterObj | constructedFilterObj(field.name, fieldValue, isThisAnActiveFilter, isMultiselectable) %}
+                                        {% set urlForFilterValue = routePath_base | constructedRoutePath(filterObjForThisFilterColVal, filterMenuOptions, sharedPage) %}
+                                        {% set formattedFieldValue = fieldValue | formatIntegerWithCommas if field.coercionScheme.operation === 'ToInteger' or field.coercionScheme.operation === 'ToFloat' else fieldValue %}
+
+                                        {% if isMultiselectable %}
+                                            <a href="{{ urlForFilterValue }}" title="{{ formattedFieldValue }}">
+                                                <span class="filter-menu-toggle-title">{{ formattedFieldValue }}</span><span class="filter-menu-toggle-check {{ "gist-icon-circle-check-on" if isThisAnActiveFilter else "gist-icon-circle-check-off" }}" aria-hidden="true"></span>
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ urlForFilterValue }}" title="{{ formattedFieldValue }}">
+                                                {{ formattedFieldValue }}{% if isThisAnActiveFilter %} <span class="filter-menu-toggle-check gist-icon-circle-check-on" aria-hidden="true"></span>{% endif %}
+                                            </a>
+                                        {% endif %}
+                                    </li>
+                                {% else %}
+                                    <li class="filter-menu-no-matches">No matching filters found.</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </li>
+                {% endif %}
+
+            {% elseif field.toggleable %}
+                <!-- If the field has one value and is toggleable no need to add a submenu -->
+                {% set filterObjForThisFilterColVal = filterObj | constructedFilterObj(field.name, field.name, isThisAnActiveFilterColumn, isMultiselectable) %}
+                {% set urlForFilterValue = routePath_base | constructedRoutePath(filterObjForThisFilterColVal, filterMenuOptions, sharedPage) %}
+
+                <li class="filter-menu-subgroup-item{{ ' filter-menu-item-active' if isThisAnActiveFilterColumn }}">
+                    <a href="{{ urlForFilterValue }}" role="button" aria-haspopup="true" aria-expanded="false" aria-controls="column-{{ loop.index }}" title="{{ displayTitleOverrides[field.name] or field.name }}" tabindex="0" id="column-{{ loop.index }}-link">
+                        <span class="filter-menu-fieldname">{{ field.name }}</span>
+                        <span class="filter-menu-toggle-check gist-icon-circle-check-on gist-icon-circle-check-on--space-right"></span>
+                    </a>
+                </li>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </ul>
+</nav>

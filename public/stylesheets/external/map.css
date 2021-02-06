@@ -1,0 +1,9 @@
+@import url('../views/map.css');
+
+.gist-map-container, .gist-map--full-height {
+  height: 100%;
+}
+
+.gist-map-container .gist-legend-dot--icon img {
+  max-width: inherit;
+}

@@ -1,0 +1,5 @@
+<md-switch md-invert ng-model="viewCtrl.data[setting.name]" aria-label="Switch 1">
+    <label>{{::setting.displayAs}}</label>
+</md-switch>
+
+<p class="margin-bottom-3x" ng-if="::setting.description">{{::setting.description}}</p>

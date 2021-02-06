@@ -1,0 +1,144 @@
+<md-content layout-padding md-no-ink ng-form="datasetDataCtrl.form">
+    <h3 id="reviewYourDataFieldsHeader">Review Your Data Fields</h3>
+    <div>
+        <div
+            ng-if="(user.role === 'superAdmin' || team.customAccess.indexOf('contentMenu') > -1) && !datasetOneCtrl.dataset.connection && datasetDataCtrl.canEditFields">
+            <md-menu>
+                <md-button class="md-dashboard" aria-label="More actions menu" ng-click="$mdMenu.open()">
+                    <span class="btn-label">More&ensp;<i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                    <span class="md-select-icon" aria-hidden="true"></span>
+                </md-button>
+                <md-menu-content width="4">
+                    <md-menu-item>
+                        <md-button
+                            ng-click="datasetDataCtrl.openFieldDialog('', null, true, datasetOneCtrl.dataset.customFieldsToProcess ? datasetOneCtrl.dataset.customFieldsToProcess.length : 0)">
+                            Add a new delimited field
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item ng-if="user.role === 'superAdmin'">
+                        <md-button ng-click="datasetDataCtrl.openNestedDialog()">
+                            Group data together
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="datasetDataCtrl.openJoinDialog()">
+                            Join with another dataset
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </div>
+
+        <md-input-container>
+            <md-button class="md-dashboard md-button" ng-click="datasetDataCtrl.addField()">
+                <span class="btn-label">Add a Field</span>
+            </md-button>
+        </md-input-container>
+    </div>
+
+    <div layout="row" layout-align="space-between center" class="no-padding">
+        <p>We found these fields in your data source. View a data sample for each field, or click the edit button to
+            change the display name and data type.</p>
+    </div>
+
+    <div ng-if="datasetOneCtrl.additionalDatasources.length > 0" style="cursor:pointer;" layout="row"
+         layout-align="space-between center" class="no-padding">
+        <md-select aria-label="Source Name Filter" flex="50" ng-model="datasetDataCtrl.fieldFilter.sourceDisplay">
+            <md-option
+                ng-click="datasetDataCtrl.changeSourceNameFilter(datasetOneCtrl.dataset)"
+                value="{{datasetOneCtrl.dataset.fileName || datasetOneCtrl.dataset.apiEndPoint || datasetOneCtrl.dataset.connection.tableName}}"
+                ng-option="datasetDataCtrl.changeSourceNameFilter(datasetOneCtrl.dataset)"
+            >
+                {{datasetOneCtrl.dataset.fileName || datasetOneCtrl.dataset.apiEndPoint ||
+                datasetOneCtrl.dataset.connection.tableName}}
+            </md-option>
+
+            <md-option
+                ng-repeat="otherSource in datasetOneCtrl.additionalDatasources track by $index"
+                ng-click="datasetDataCtrl.changeSourceNameFilter(otherSource)"
+                value="{{otherSource.fileName || otherSource.connection.tableName}}"
+            >
+                {{otherSource.fileName || otherSource.connection.tableName}}
+            </md-option>
+
+        </md-select>
+    </div>
+
+    <div layout="row" ng-if="datasetOneCtrl.dataset.fileName && datasetDataCtrl.canEditFields"
+         layout-align="space-between center" class="no-padding" ng-if="user.role === 'superAdmin'">
+        <md-button class="md-dashboard" ng-click="datasetDataCtrl.toggleExclude()">
+            <span class="btn-label">{{datasetDataCtrl.excludeAll ? 'Exclude' : 'Include'}} all fields</span>
+        </md-button>
+        <md-switch ng-model="datasetOneCtrl.dataset.includeEmptyFields" aria-label="Include empty field values">
+            Include empty field values
+        </md-switch>
+    </div>
+
+    <ul
+        class="dashboard-list user-list"
+        ui-sortable="datasetDataCtrl.fieldSortableOptions"
+        ng-model="datasetDataCtrl.filteredFields"
+        style="padding-top: 24px;"
+    >
+        <li
+            ng-repeat="field in datasetDataCtrl.filteredFields track by $index"
+            ng-class="{custom: field.custom}"
+            layout="row"
+            layout-align="space-between center"
+        >
+            <div class="order dashboard-list-icon"
+                 ng-if="datasetOneCtrl.dataset.fileName && datasetDataCtrl.canEditFields" aa-tooltip="Drag to re-order"
+                 flex="10">
+                <span class="glyphicon glyphicon-move"></span>
+            </div>
+
+            <div
+                aa-tooltip="{{datasetOneCtrl.dataset.fe_excludeFields[field.name] ? 'Include field' : 'Exclude field'}}"
+                flex="5"
+                ng-if="datasetDataCtrl.canEditFields"
+            >
+                <md-checkbox
+                    name="fe_excludeFields_{{$index}}"
+                    ng-model="datasetOneCtrl.dataset.fe_excludeFields[field.name]"
+                    ng-true-value="false"
+                    ng-false-value="true"
+                    ng-click="datasetDataCtrl.validateExclusion($event, field.name)"
+                    aria-label="Exclude {{field.name}}"
+                ></md-checkbox>
+            </div>
+
+            <div
+                flex
+                ng-class="{'no-pointer': datasetDataCtrl.fieldSortableOptions.disabled}"
+                ng-click="field.sourceType === 'spreadsheet' && datasetDataCtrl.openFieldDialog(field.name, field.sample, field.custom, field.customFieldIndex)"
+                style="padding-left: 15px;"
+                class="field-container"
+            >
+                {{datasetOneCtrl.dataset.fe_displayTitleOverrides[field.name] || field.displayName || field.name}}
+                <span class="sample" ng-if="!field.custom">(Sample: {{field.sample | formatField:field | limitTo: datasetDataCtrl.maxSampleDataLength}})</span>
+            </div>
+
+            <div ng-if="datasetOneCtrl.dataset.connection" flex>
+                {{datasetOneCtrl.dataset.fe_displayTitleOverrides[field.name] || field.name}}
+                <span class="sample" ng-if="!field.custom">(Sample: {{field.sample | formatField:field | limitTo: datasetDataCtrl.maxSampleDataLength}})</span>
+            </div>
+
+            <div ng-if="datasetDataCtrl.canEditFields" flex="5" class="field-data-type">
+                <span ng-if="::field.custom">Array</span>
+                <span ng-if="::!field.custom">{{datasetDataCtrl.coercionScheme[field.name] | typeCoercionToString: field.data_type}}</span>
+            </div>
+
+            <div flex="10"></div>
+
+            <div
+                ng-if="datasetDataCtrl.canEditFields"
+                class="dashboard-list-icon"
+                flex="5"
+                aa-tooltip="Edit field"
+                ng-click="datasetDataCtrl.openFieldDialog(field.name, field.sample, field.custom, field.customFieldIndex)"
+            >
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+            </div>
+        </li>
+    </ul>
+</md-content>

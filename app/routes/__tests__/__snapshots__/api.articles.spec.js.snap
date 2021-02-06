@@ -1,0 +1,357 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Articles API should automatically create a website if none exists 1`] = `
+Object {
+  "body": Object {
+    "brandColor": Object {
+      "accent": "#005CB5",
+    },
+    "pages": Array [],
+    "published": false,
+    "slug": "user",
+    "team": "5a42fba8999d2a26d50fea64",
+    "title": "Maitland McConnell",
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Articles API should create a new article (page) with the website that was previously created 1`] = `
+Object {
+  "body": Object {
+    "createdBy": Object {
+      "_articleEditors": Array [],
+      "_articleViewers": Array [],
+      "_editors": Array [],
+      "_siteEditors": Array [],
+      "_siteViewers": Array [],
+      "_team": Array [
+        "5a42fba8999d2a26d50fea64",
+      ],
+      "_viewers": Array [],
+      "activated": true,
+      "active": true,
+      "canCreateNewArticle": Array [],
+      "canCreateNewSite": Array [],
+      "canCreateNewViz": Array [],
+      "datadotworldToken": Object {
+        "access_token": "reaaaLY_SAfE_TOOOKEN",
+        "expires_at": 1e+25,
+      },
+      "defaultLoginTeam": "5a42fba8999d2a26d50fea64",
+      "email": "user+user2@schemadesign.com",
+      "firstName": "Maitland",
+      "hash": "dc449e96c930ca46653ec867c448719fab39dd85c4b91c1643d2faad140f24e711da13133e34ee4da0d3a5a2ca154edd4bfaeb9cf80cb9af57bce4d7ea1b94ce",
+      "lastName": "McConnell",
+      "lockUntil": 1,
+      "loginAttempts": 0,
+      "pipedriveToken": Object {
+        "access_token": "exTRa_SEeeciT_token",
+        "expires_at": 1e+25,
+      },
+      "profileImageUrl": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50",
+      "provider": "local",
+      "salesforceToken": Object {
+        "access_token": "simple_token",
+        "instance_url": "http://instance_url",
+      },
+      "salt": "test",
+      "sampleImported": false,
+      "signedUp": false,
+      "smartsheetToken": Object {
+        "access_token": "sUpEr_sECriT_ToKEN",
+        "expires_at": 1e+25,
+      },
+    },
+    "displayOnExplorePage": false,
+    "displayOnTeamPage": false,
+    "pageTitle": "First Article",
+    "published": false,
+    "slug": "first-article",
+    "team": Object {
+      "admin": Array [
+        "5a42fb9e29232d26d47136dc",
+      ],
+      "brandColor": Object {
+        "label": "#2A2A2A",
+        "select": "#2A2A2A",
+      },
+      "colorPalette": Array [
+        "#1B6DFC",
+        "#0CB7FA",
+        "#FA79FC",
+        "#FB3705",
+        "#F9D307",
+        "#FA9007",
+        "#7D5807",
+        "#B2E606",
+        "#069908",
+        "#7B07FD",
+      ],
+      "datasourceDescriptions": Array [
+        "5a42fd33999d2a26d50fea65",
+        "5a42fdca29232d26d47136dd",
+        "5a42fe1629232d26d4713775",
+        "5b07033050f5c886278b6d2d",
+      ],
+      "font": "calibre",
+      "hasEnterpriseLicense": false,
+      "sites": Array [],
+      "subdomain": "user",
+      "superTeam": true,
+      "title": "Maitland McConnell",
+    },
+    "website": Object {
+      "brandColor": Object {
+        "accent": "#005CB5",
+      },
+      "createdBy": "5a42fb9e29232d26d47136dc",
+      "published": true,
+      "slug": "user",
+      "team": "5a42fba8999d2a26d50fea64",
+      "title": "Some title",
+    },
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Articles API should delete a page 1`] = `
+Object {
+  "body": Object {
+    "brandColor": Object {
+      "accent": "#005CB5",
+    },
+    "createdBy": "5a42fb9e29232d26d47136dc",
+    "published": true,
+    "slug": "user",
+    "team": "5a42fba8999d2a26d50fea64",
+    "title": "Some title",
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Articles API should delete another article 1`] = `
+Object {
+  "body": Object {
+    "brandColor": Object {
+      "accent": "#FEB600",
+    },
+    "createdBy": "5a42fb9e29232d26d47136dc",
+    "homepage": Object {
+      "createdBy": "5a42bf07d3bc0b20648290e0",
+      "displayOnExplorePage": false,
+      "displayOnTeamPage": true,
+      "pageTitle": "homepage",
+      "parsedBody": "<p>Snake head sea holly sweet pea cuckooflower anemone flower. Scarlet plume obedient plant flamingo flower primrose. Feverfew amaryllis bloom cosmos china aster. Spurge larkspur bloody crane&#39;s-bill marguerite sweet sultan. Blossom cowbane grass of parnassus, bellflower. Bearberry, singapore orchid chickweed Kansas feather loose strife tuberose. Lisianthus, rosebay willowherb round-leaved sundew peony tasmanian blue gum foxtail lily. Love lies bleeding.</p>
+",
+      "published": true,
+      "rawBody": "Snake head sea holly sweet pea cuckooflower anemone flower. Scarlet plume obedient plant flamingo flower primrose. Feverfew amaryllis bloom cosmos china aster. Spurge larkspur bloody crane's-bill marguerite sweet sultan. Blossom cowbane grass of parnassus, bellflower. Bearberry, singapore orchid chickweed Kansas feather loose strife tuberose. Lisianthus, rosebay willowherb round-leaved sundew peony tasmanian blue gum foxtail lily. Love lies bleeding.",
+      "slug": "homepage",
+      "team": "5a42bf30d3bc0b20648290e1",
+      "website": "5abeac00ef9ae15d1647721b",
+    },
+    "published": false,
+    "slug": "user",
+    "team": "5a42bf30d3bc0b20648290e1",
+    "title": "user",
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Articles API should escape parsedBody if sent without rawBody 1`] = `
+Object {
+  "body": Object {
+    "createdBy": "5a42fb9e29232d26d47136dc",
+    "displayOnExplorePage": false,
+    "displayOnTeamPage": false,
+    "pageTitle": "First Article",
+    "parsedBody": "&lt;script&gt;alert(&#x27;xss&#x27;)&lt;&#x2F;script&gt;",
+    "published": false,
+    "slug": "first-article",
+    "team": "5a42fba8999d2a26d50fea64",
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Articles API should make a copy 1`] = `
+Object {
+  "body": Object {
+    "createdBy": Object {
+      "_articleEditors": Array [],
+      "_articleViewers": Array [],
+      "_editors": Array [],
+      "_siteEditors": Array [],
+      "_siteViewers": Array [],
+      "_team": Array [
+        "5a42fba8999d2a26d50fea64",
+      ],
+      "_viewers": Array [],
+      "activated": true,
+      "active": true,
+      "canCreateNewArticle": Array [],
+      "canCreateNewSite": Array [],
+      "canCreateNewViz": Array [],
+      "datadotworldToken": Object {
+        "access_token": "reaaaLY_SAfE_TOOOKEN",
+        "expires_at": 1e+25,
+      },
+      "defaultLoginTeam": "5a42fba8999d2a26d50fea64",
+      "email": "user+user2@schemadesign.com",
+      "firstName": "Maitland",
+      "hash": "dc449e96c930ca46653ec867c448719fab39dd85c4b91c1643d2faad140f24e711da13133e34ee4da0d3a5a2ca154edd4bfaeb9cf80cb9af57bce4d7ea1b94ce",
+      "lastName": "McConnell",
+      "lockUntil": 1,
+      "loginAttempts": 0,
+      "pipedriveToken": Object {
+        "access_token": "exTRa_SEeeciT_token",
+        "expires_at": 1e+25,
+      },
+      "profileImageUrl": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50",
+      "provider": "local",
+      "salesforceToken": Object {
+        "access_token": "simple_token",
+        "instance_url": "http://instance_url",
+      },
+      "salt": "test",
+      "sampleImported": false,
+      "signedUp": false,
+      "smartsheetToken": Object {
+        "access_token": "sUpEr_sECriT_ToKEN",
+        "expires_at": 1e+25,
+      },
+    },
+    "displayOnExplorePage": false,
+    "displayOnTeamPage": false,
+    "pageTitle": "First Article copy",
+    "published": false,
+    "slug": "first-article-copy",
+    "team": Object {
+      "admin": Array [
+        "5a42fb9e29232d26d47136dc",
+      ],
+      "brandColor": Object {
+        "label": "#2A2A2A",
+        "select": "#2A2A2A",
+      },
+      "colorPalette": Array [
+        "#1B6DFC",
+        "#0CB7FA",
+        "#FA79FC",
+        "#FB3705",
+        "#F9D307",
+        "#FA9007",
+        "#7D5807",
+        "#B2E606",
+        "#069908",
+        "#7B07FD",
+      ],
+      "datasourceDescriptions": Array [
+        "5a42fd33999d2a26d50fea65",
+        "5a42fdca29232d26d47136dd",
+        "5a42fe1629232d26d4713775",
+        "5b07033050f5c886278b6d2d",
+      ],
+      "font": "calibre",
+      "hasEnterpriseLicense": false,
+      "sites": Array [],
+      "subdomain": "user",
+      "superTeam": true,
+      "title": "Maitland McConnell",
+    },
+    "website": Object {
+      "brandColor": Object {
+        "accent": "#005CB5",
+      },
+      "createdBy": "5a42fb9e29232d26d47136dc",
+      "published": true,
+      "slug": "user",
+      "team": "5a42fba8999d2a26d50fea64",
+      "title": "Some title",
+    },
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Articles API should retrieve a website if already created 1`] = `
+Object {
+  "body": Object {
+    "brandColor": Object {
+      "accent": "#005CB5",
+    },
+    "createdBy": "5a42fb9e29232d26d47136dc",
+    "pages": Array [],
+    "published": true,
+    "slug": "user",
+    "team": "5a42fba8999d2a26d50fea64",
+    "title": "Some title",
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Articles API should return 500 when no website in req.body when creating a new article 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 500,
+}
+`;
+
+exports[`Articles API should update markdown and update updatedAt field 1`] = `
+Object {
+  "body": Object {
+    "createdBy": "5a42fb9e29232d26d47136dc",
+    "displayOnExplorePage": false,
+    "displayOnTeamPage": false,
+    "pageTitle": "First Article",
+    "parsedBody": "<p>This is a test</p>
+<ul>
+<li>unordered list item 1</li>
+</ul>
+<ol>
+<li>ordered list item 1
+<strong>strong text</strong>
+<em>emphasized text</em><h3 id=\\"heading-text\\">heading text</h3>
+</li>
+</ol>
+<pre><code>code text here</code></pre><blockquote>
+<p>quote here</p>
+</blockquote>
+",
+    "published": false,
+    "rawBody": "This is a test
+- unordered list item 1
+1. ordered list item 1
+**strong text**
+_emphasized text_
+### heading text
+
+\`\`\`
+code text here
+\`\`\`
+> quote here",
+    "slug": "first-article",
+    "team": "5a42fba8999d2a26d50fea64",
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Articles API should update published prop 1`] = `
+Object {
+  "body": Object {
+    "createdBy": "5a42fb9e29232d26d47136dc",
+    "displayOnExplorePage": false,
+    "displayOnTeamPage": false,
+    "pageTitle": "First Article",
+    "published": true,
+    "slug": "first-article",
+    "team": "5a42fba8999d2a26d50fea64",
+  },
+  "statusCode": 200,
+}
+`;

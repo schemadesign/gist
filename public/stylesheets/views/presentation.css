@@ -1,0 +1,294 @@
+@font-face {
+    font-family: 'CentraNo2';
+    src: url('/fonts/centrano2/CentraNo2-Book.eot?#iefix');
+    src: url('/fonts/centrano2/CentraNo2-Book.eot?#iefix') format('eot'),
+    url('/fonts/centrano2/CentraNo2-Book.woff2') format('woff2'),
+    url('/fonts/centrano2/CentraNo2-Book.woff') format('woff');
+    font-weight: 400; /* Book */
+}
+@font-face {
+    font-family: 'CentraNo2';
+    src: url('/fonts/centrano2/CentraNo2-Bold.eot?#iefix');
+    src: url('/fonts/centrano2/CentraNo2-Bold.eot?#iefix') format('eot'),
+    url('/fonts/centrano2/CentraNo2-Bold.woff2') format('woff2'),
+    url('/fonts/centrano2/CentraNo2-Bold.woff') format('woff');
+    font-weight: bold;
+}
+
+html{
+    padding:0;
+    margin:0;
+}
+ body {
+    font-family: CentraNo2, Sans-Serif;
+    font-weight: 400;
+    font-size: 1.25em;
+    line-height: 1.75em;
+    letter-spacing: 0.02em;
+    margin:0;
+    padding:0;
+    width:100%;
+ }
+
+ ul, li {
+    list-style: none;
+}
+ div {
+    display: block;
+}
+ table, tr, td {
+    margin:0;
+    padding:0;
+}
+ #page, #header, #content, #fullscreen,  #footer {
+    margin:0;
+    padding:0;
+    overflow-x: hidden;
+}
+ /* Header */
+#header {
+    width: 100vw;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: #FFF;
+    overflow: hidden;
+    background-color: #000;
+}
+ #header-inner {
+    width: 96vw;
+    margin: 0 auto;
+}
+ #header-top {
+    width: 100vw;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000;
+}
+ #fullscreen-top {
+    position: fixed;
+    top: 28px;
+    right: 0px;
+    width: 60px;
+    height: 60px;
+    z-index: 100;
+    display: none;
+}
+ #minimize-icon {
+    width: 32px;
+}
+ #minimize-icon img {
+    width: 20px;
+}
+ #logo {
+    width: 32px;
+    float: left;
+}
+ #logo-center {
+    width: 40px;
+    margin: 0 auto;
+    margin-top: 22px;
+}
+ #logo img, #logo-center img {
+    width: 32px;
+}
+ #info {
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 2em;
+}
+ #icons {
+    height: 40px;
+    padding-top: 7px;
+}
+ #icons-inner {
+    float: right;
+    margin: 0;
+}
+ #title {
+    margin-right: 20px;
+}
+ #author, #separator, #date {
+    color: gray;
+}
+ #icons img {
+    height: 20px;
+    width: 20px;
+}
+ #info ul, #icons ul {
+    padding: 0;
+}
+ #info ul li {
+    margin: 0;
+    padding-right: 15px;
+    float: left;
+}
+  #icons ul li {
+    margin: 0;
+    padding-left: 25px;
+    float: left;
+}
+ #icons ul li a {
+    display: block;
+    margin: 0;
+    text-decoration: none;
+}
+ #icons ul li.active a, #icons ul li a:hover {
+    opacity: 0.5;
+}
+ #logo a:hover {
+    opacity: 0.5;
+}
+
+#fullscreen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    background-color: #000;
+}
+ #fullscreen-inner {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+}
+ .slides {
+    position: relative;
+    height: 85vh;
+    margin-top: 6.5vh;
+    padding: 0 40px;
+}
+ .slide {
+    position: absolute;
+    left: 40px;
+    top: 0;
+    right: 40px;
+    bottom: 0;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+ .text-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #273437;
+    text-align: center;
+    color: white;
+}
+ .text-slide .attribution {
+    margin-bottom: 4vh;
+}
+ .text-slide .title {
+    font-size: 8vh;
+    font-weight: bold;
+}
+ .slide.hidden {
+    display: none;
+}
+ .slide.animate {
+    transition: transform 1s ease; /* If you modify this, also modify slideTime in presentation.js */
+}
+ .slide.off-left {
+    transform: translate(-100vw, 0);
+}
+ .slide.off-right {
+    transform: translate(100vw, 0);
+}
+
+.slick-arrow {
+    z-index: 1;
+    transform: none;
+}
+ .slick-next:before, .slick-prev:before {
+    content: none;
+ }
+ .slick-prev {
+    width: 50vw;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: url(/images/presentation/arrow-left.png), w-resize;
+}
+ .slick-next {
+    width: 50vw;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 50vw;
+    cursor: url(/images/presentation/arrow-right.png), e-resize;
+}
+
+#footer {
+    width: 100vw;
+    position: absolute;
+    top: 95vh;
+    z-index: 2;
+    background:#000;
+}
+ #footer-inner {
+    width: 96vw;
+    margin: 0 auto;
+    border-top: solid 1px white;
+    color: white;
+}
+ .footer-slide .left-column {
+    min-height: 100px;
+}
+ .footer-slide.hidden {
+    display: none;
+}
+ .column {
+    float: left;
+}
+ .column p, .column ul {
+    padding-right: 2%;
+    margin: 0.75em 0;
+}
+ .slide-number {
+    float: right;
+}
+ .slide-number li {
+    float: left;
+    padding-left: 8px;
+}
+ .parameters {
+    font-size: 0.666em
+}
+ .parameter-name {
+    color: gray;
+}
+
+table td {
+    border-top: solid 1px white;
+    width: 16.666%;
+    height: 40px;
+    padding-top: 2px;
+}
+
+.columns-1 { width: 8.333%; }
+.columns-2 { width: 16.666%; }
+.columns-3 { width: 25%; }
+.columns-4 { width: 33.333%; }
+.columns-5 { width: 41.666%; }
+.columns-6 { width: 50%; }
+.columns-7 { width: 58.333%; }
+.columns-8 { width: 66.666%; }
+.columns-9 { width: 75%; }
+.columns-10 { width: 83.333%; }
+.columns-11 { width: 91.666%; }
+.columns-12 { width: 100%; }
+
+.clr {
+    clear:both;
+    padding:0;
+    margin:0;
+    width:100%;
+    font-size:0px;
+    line-height:0px;
+}

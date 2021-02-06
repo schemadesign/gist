@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pie set should return graph data 1`] = `
+Object {
+  "body": Object {
+    "colors": Array [
+      "#1B6DFC",
+      "#0CB7FA",
+      "#FA79FC",
+      "#FB3705",
+      "#F9D307",
+      "#FA9007",
+      "#7D5807",
+      "#B2E606",
+      "#069908",
+      "#7B07FD",
+    ],
+    "docs": Array [
+      Object {
+        "data": Array [
+          Object {
+            "color": "#1B6DFC",
+            "label": "Fire",
+            "value": 135,
+          },
+        ],
+        "isPercentage": false,
+        "sum": 135,
+        "title": "Flying",
+      },
+      Object {
+        "data": Array [
+          Object {
+            "color": "#FA79FC",
+            "label": "Water",
+            "value": 323,
+          },
+          Object {
+            "color": "#1B6DFC",
+            "label": "Fire",
+            "value": 176,
+          },
+        ],
+        "isPercentage": false,
+        "sum": 499,
+        "title": "None",
+      },
+      Object {
+        "data": Array [
+          Object {
+            "color": "#0CB7FA",
+            "label": "Grass",
+            "value": 328,
+          },
+        ],
+        "isPercentage": false,
+        "sum": 328,
+        "title": "Poison",
+      },
+    ],
+    "flatResults": Array [
+      Object {
+        "color": "#1B6DFC",
+        "label": "Fire",
+        "value": 135,
+      },
+      Object {
+        "color": "#0CB7FA",
+        "label": "Grass",
+        "value": 328,
+      },
+      Object {
+        "color": "#FA79FC",
+        "label": "Water",
+        "value": 323,
+      },
+    ],
+    "meta": Object {
+      "filterObj": Object {},
+      "isAggregateByPercent": false,
+      "isChartByPercent": false,
+      "nonpagedCount": 3,
+      "numPages": 1,
+      "numberOfResults": 3,
+      "onPageNum": 1,
+      "pageRanges": Array [
+        3,
+      ],
+      "pageSize": 3,
+      "resultsOffset": 0,
+      "routePath_base": "/pokemon/pie-set",
+    },
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Pie set should return graph data group by is equal to chart by 1`] = `
+Object {
+  "body": Object {
+    "colors": Array [
+      "#1B6DFC",
+      "#0CB7FA",
+      "#FA79FC",
+      "#FB3705",
+      "#F9D307",
+      "#FA9007",
+      "#7D5807",
+      "#B2E606",
+      "#069908",
+      "#7B07FD",
+    ],
+    "docs": Array [
+      Object {
+        "data": Array [
+          Object {
+            "color": "#1B6DFC",
+            "label": "Fire",
+            "value": 1,
+          },
+        ],
+        "isPercentage": false,
+        "sum": 1,
+        "title": "Flying",
+      },
+      Object {
+        "data": Array [
+          Object {
+            "color": "#FA79FC",
+            "label": "Water",
+            "value": 3,
+          },
+          Object {
+            "color": "#1B6DFC",
+            "label": "Fire",
+            "value": 2,
+          },
+        ],
+        "isPercentage": false,
+        "sum": 5,
+        "title": "None",
+      },
+      Object {
+        "data": Array [
+          Object {
+            "color": "#0CB7FA",
+            "label": "Grass",
+            "value": 3,
+          },
+        ],
+        "isPercentage": false,
+        "sum": 3,
+        "title": "Poison",
+      },
+    ],
+    "flatResults": Array [
+      Object {
+        "color": "#1B6DFC",
+        "label": "Fire",
+        "value": 1,
+      },
+      Object {
+        "color": "#0CB7FA",
+        "label": "Grass",
+        "value": 3,
+      },
+      Object {
+        "color": "#FA79FC",
+        "label": "Water",
+        "value": 3,
+      },
+    ],
+    "meta": Object {
+      "filterObj": Object {},
+      "isAggregateByPercent": false,
+      "isChartByPercent": false,
+      "nonpagedCount": 3,
+      "numPages": 1,
+      "numberOfResults": 3,
+      "onPageNum": 1,
+      "pageRanges": Array [
+        3,
+      ],
+      "pageSize": 3,
+      "resultsOffset": 0,
+      "routePath_base": "/pokemon/pie-set",
+    },
+  },
+  "statusCode": 200,
+}
+`;

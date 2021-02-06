@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+        {% include "../partials/base_header.njk" %}
+
+        {% block headSuffix %}{% endblock %}
+    </head>
+
+    <body class="object-show source-{{ array_source_key }} {{ "view-embedded" if embedded == "true" }} font-{{ team.font }}">
+
+
+        <div id="page" class="site">
+            {% include "../partials/header-bar/object-detail.njk" %}
+
+
+            <div id="content" class="gist-site-content {{ 'preview' if isPreview }}">
+
+                {% block content %}{% endblock %}
+
+            </div><!-- #content -->
+
+            {% block footer %}{% endblock %}
+        </div><!-- #page -->
+
+        {% include "../partials/survicate.njk" %}
+
+        {% include "../partials/modal/share.njk" %}
+
+        <div id="gist-page-loading">
+            <div class="three-balls">
+                <div class="ball ball1"></div>
+                <div class="ball ball2"></div>
+                <div class="ball ball3"></div>
+            </div>
+        </div>
+
+        {% block inlineScript %}
+            <script type="text/javascript" src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="/vendors/sharrre/jquery.sharrre.min.js"></script>
+            <script type="text/javascript" src="/vendors/noty/lib/noty.min.js"></script>
+            <script type="text/javascript" src="/vendors/file-saver/dist/FileSaver.min.js"></script>
+            <script type="text/javascript" src="/javascripts/build/main/namespaces.js"></script>
+            <script type="text/javascript" src="/javascripts/build/main/utils.js"></script>
+            <script type="text/javascript" src="/javascripts/build/main/banner.js"></script>
+            <script type="text/javascript" src="/javascripts/build/main/main.js"></script>
+        {% endblock %}
+    </body>
+
+    {% if env.FE_LIVERELOAD == "true" %}
+    <script src="//localhost:35729/livereload.js"></script>
+    {% endif %}
+
+    <script type="text/javascript">
+
+        var loggedIn = {{"true" if user._id else "false"}};
+
+    </script>
+</html>
+

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Flatten Helpers should flat the array of objects 1`] = `
+Array [
+  Object {
+    "a": 1,
+    "b": 2,
+  },
+  Object {
+    "a": 3,
+    "b": 4,
+  },
+]
+`;

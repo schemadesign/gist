@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Permissions API should get all dataset permissions 1`] = `
+Object {
+  "body": Object {
+    "permissions": Array [
+      "seeFields",
+      "seeFilters",
+      "seeContent",
+      "seeViews",
+      "seeStandardViews",
+      "seeSettings",
+      "editFields",
+      "editViews",
+      "editGeneralSettings",
+      "editObjectDetail",
+      "useStandardImport",
+      "useStandardSaveColumns",
+      "useStandardGet",
+    ],
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Permissions API should get all user permissions for admin user 1`] = `
+Object {
+  "body": Object {
+    "permissions": Array [
+      "manageTeams",
+      "createViz",
+      "seeViz",
+      "editViz",
+      "seeArticles",
+      "createArticles",
+      "editArticles",
+      "manageAllArticles",
+      "seeInsights",
+      "editInsights",
+      "createInsights",
+      "seePerformance",
+      "manageUsers",
+    ],
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Permissions API should get all user permissions for superAdmin 1`] = `
+Object {
+  "body": Object {
+    "permissions": Array [
+      "createViz",
+      "seeViz",
+      "editViz",
+      "manageTeams",
+      "seeArticles",
+      "createArticles",
+      "editArticles",
+      "manageAllArticles",
+      "seeSites",
+      "editSites",
+      "createSites",
+      "seeInsights",
+      "editInsights",
+      "createInsights",
+      "seePerformance",
+      "manageUsers",
+    ],
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Permissions API should get all user permissions for viz editor user 1`] = `
+Object {
+  "body": Object {
+    "permissions": Array [
+      "createViz",
+      "seeViz",
+      "editViz",
+      "manageTeams",
+      "seeArticles",
+      "createArticles",
+      "editArticles",
+      "manageAllArticles",
+      "seeSites",
+      "editSites",
+      "createSites",
+      "seeInsights",
+      "editInsights",
+      "createInsights",
+      "seePerformance",
+      "manageUsers",
+    ],
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Permissions API should set all dataset permissions and return them 1`] = `
+Object {
+  "body": Object {
+    "permissions": Array [
+      "seeFields",
+      "seeFilters",
+      "seeContent",
+      "seeViews",
+      "seeStandardViews",
+      "seeSettings",
+      "editFields",
+      "editViews",
+      "editGeneralSettings",
+      "editObjectDetail",
+      "useStandardImport",
+      "useStandardSaveColumns",
+      "useStandardGet",
+    ],
+  },
+  "statusCode": 200,
+}
+`;

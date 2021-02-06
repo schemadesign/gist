@@ -1,0 +1,144 @@
+<md-content layout-padding>
+    <fieldset class="standard">
+        <legend>Global filters</legend>
+        <div
+            ng-repeat="fabricated in datasetFiltersCtrl.fabricatedFilters track by $index"
+            style="border-top: 1px solid #EEE; padding: 16px 0;"
+            layout="row" layout-align="space-between start"
+        >
+            <div layout="row" layout-align="space-between start" flex="90" layout-wrap>
+                <md-input-container flex="45">
+                    <label>Title</label>
+                    <input type="text" name="fabricatedTitle_{{$index}}" ng-model="fabricated.title"
+                           ng-change="datasetFiltersCtrl.verifyUniqueFabricated(fabricated, $index)" required>
+                    <div ng-messages="datasetFiltersCtrl.form['fabricatedTitle_' + $index].$error">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="unique">Must be unique.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex="45">
+                    <label>Value</label>
+                    <input type="text" name="fabricatedValue_{{$index}}"
+                           ng-model="fabricated.choices[0].title"
+                           ng-change="datasetFiltersCtrl.verifyUniqueFabricated(fabricated, $index)" required>
+                    <div ng-messages="datasetFiltersCtrl.form['fabricatedValue_' + $index].$error">
+                        <div ng-message="required">This is required.</div>
+                        <div ng-message="unique">Must be unique.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex="45">
+                    <label>Field</label>
+                    <md-select required name="field_{{$index}}" ng-model="fabricated.choices[0].match.field">
+                        <md-option ng-repeat="column in datasetFiltersCtrl.colsAvailable track by $index" ng-value="column">
+                            {{dataset.fe_displayTitleOverrides[column] || column}}
+                        </md-option>
+                        <md-option ng-repeat="customField in customFieldsToProcess track by $index" ng-value="customField.fieldName">
+                            {{customField.fieldName}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="datasetFiltersCtrl.form['field_' + $index].$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex="45">
+                    <label>Exclude Values</label>
+                    <md-chips
+                        required
+                        ng-model="fabricated.choices[0].match.nin"
+                        name="fabricatedExcludeValues_{{$index}}"
+                        md-enable-chip-edit="true"
+                        placeholder="Add value to exclude"
+                    ></md-chips>
+                    <div ng-messages="datasetFiltersCtrl.form['fabricatedExcludeValues_' + $index].$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <span class="fa fa-remove warn" ng-click="datasetFiltersCtrl.removeFabricated(fabricated)"></span>
+        </div>
+
+        <md-button class="md-dashboard" ng-click="datasetFiltersCtrl.addFabricated()">
+            Add filter
+        </md-button>
+    </fieldset>
+</md-content>
+
+<md-content layout-padding>
+    <fieldset class="standard">
+        <legend>Default Filter(s)</legend>
+        <div
+            layout="row"
+            layout-align="space-between start"
+            ng-repeat="defaultFilter in datasetFiltersCtrl.defaultFilters track by $index"
+        >
+            <md-input-container flex="40">
+                <label>Name</label>
+                <md-select
+                    name="defaultName_{{$index}}"
+                    ng-model="defaultFilter.name"
+                    required
+                >
+                    <md-option ng-repeat="fabricatedFilter in datasetFiltersCtrl.fabricatedFilters track by fabricatedFilter.title" ng-value="fabricatedFilter.title">
+                        {{fabricatedFilter.title}}
+                    </md-option>
+                </md-select>
+                <div ng-messages="datasetFiltersCtrl.form['defaultName_' + $index].$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container flex="40">
+                <label>Value</label>
+                <md-select
+                    name="defaultValue_{{$index}}"
+                    ng-model="defaultFilter.value"
+                    ng-change="datasetFiltersCtrl.verifyUniqueDefaultFilter(defaultFilter, $index)"
+                    required
+                >
+                    <md-option ng-repeat="filterChoice in datasetFiltersCtrl.getFabricatedChoices(defaultFilter.name) track by filterChoice.title" ng-value="filterChoice.title">
+                        {{filterChoice.title}}
+                    </md-option>
+                </md-select>
+
+                <div ng-messages="datasetFiltersCtrl.form['defaultValue_' + $index].$error">
+                    <div ng-message="required">This is required.</div>
+                    <div ng-message="unique">Must be unique.</div>
+                </div>
+            </md-input-container>
+
+            <div flex="5">
+                <span class="fa fa-remove warn" ng-click="datasetFiltersCtrl.removeDefaultFilter(defaultFilter)"></span>
+            </div>
+        </div>
+
+        <md-button class="md-dashboard" ng-click="datasetFiltersCtrl.addDefaultFilter()">
+            Add filter
+        </md-button>
+    </fieldset>
+</md-content>
+
+<md-content layout-padding>
+    <fieldset class="standard">
+        <legend>Values to Exclude by Original Key</legend>
+        <md-input-container class="md-block">
+            <label>All fields</label>
+            <md-chips
+                ng-model="datasetOneCtrl.dataset.fe_filters.valuesToExcludeByOriginalKey._all"
+                name="valuesToExcludeAll"
+                md-enable-chip-edit="true"
+                placeholder="Enter a Value"
+                secondary-placeholder="+Value"
+                ng-trim="false"
+            >
+                <md-chip-template>
+                    {{$chip}}
+                    <em>(All)</em>
+                </md-chip-template>
+            </md-chips>
+        </md-input-container>
+    </fieldset>
+</md-content>

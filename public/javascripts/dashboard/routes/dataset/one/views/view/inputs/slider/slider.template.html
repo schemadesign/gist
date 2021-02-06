@@ -1,0 +1,8 @@
+<label class="margin-bottom-3x d-block">{{::setting.displayAs}}</label>
+<p ng-if="::setting.description">{{::setting.description}}</p>
+
+<md-input-container layout="row" layout-align="space-between center">
+    <md-slider ng-model="viewCtrl.data[setting.name]" min="{{setting.min}}" max="{{setting.max}}" step="{{setting.step}}" flex></md-slider>
+    <span flex="5"></span>
+    <span flex="5">{{viewCtrl.data[setting.name]}}</span>
+</md-input-container>

@@ -1,0 +1,26 @@
+<md-dialog md-no-ink aria-label="Generate Register Link">
+    <aa-toolbar title="Generate Signup Link"></aa-toolbar>
+    <md-dialog-content layout-padding>
+        <md-content layout="column">
+            <div class="warn-message" ng-if="!!error.length">
+                {{error}}
+            </div>
+            <span class="angular-spinner" us-spinner="{radius: 5, width: 2, length: 5}" spinner-on="!error.length && !link.length"></span>
+            <div ng-if="!!link.length">
+                <label class="control-label">Link</label>
+                <div class="embed-code__container">
+                    <div class="embed-code__wrapper">
+                        <pre>{{link}}</pre>
+                    </div>
+                    <i
+                        class="embed-code__icon fa fa-clipboard"
+                        ng-click="copyToClipboard(link)"
+                        aria-hidden="true"
+                    >
+                        <md-tooltip md-direction="top">Copy to clipboard</md-tooltip>
+                    </i>
+                </div>
+            </div>
+        </md-content>
+    </md-dialog-content>
+</md-dialog>

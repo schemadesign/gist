@@ -1,0 +1,104 @@
+{% if galleryStyle === 'heatmap' %}
+    {% set linkClassName = 'gallery-item-link--heatmap' %}
+    {% set innerClassName = 'gallery-item-inner--blank' if doc.colors.backgroundColor === '#FFF' %}
+{% elseif galleryStyle === 'icon' %}
+    {% set itemClassName = 'gallery-item--medium-size' %}
+    {% if doc.fe_galleryItem_htmlForIconFromRowObjWhenMissingImage %}
+        {% set linkClassName = 'gallery-item-link--narrow' %}
+    {% else %}
+        {% set linkClassName = 'gallery-item-link--narrow gallery-item-link--initial' %}
+    {% endif %}
+{% elseif meta.hasImages %}
+    {% if viewType === 'timeline' %}
+        {% set linkClassName = 'gallery-item-link--heatmap' %}
+        {% set innerClassName = 'gallery-item-inner--blank' %}
+    {% else %}
+        {% set linkClassName = 'gallery-item-link--initial' %}
+    {% endif %}
+{% else %}
+    {% set linkClassName = 'gallery-item-link--plain' %}
+{% endif %}
+
+<li
+    class="gallery-item gallery-item--text {{ 'has-tooltip' if hasTooltip }} {{ itemClassName }}"
+    data-tooltip-key="{{ tooltipKey }}"
+    data-tooltip-value="{{ tooltipValue }}"
+    role="listitem"
+    aria-describedby="gallery-tooltip"
+    aria-label="{{ tooltipKey }}"
+>
+    <button
+        onclick="window.arrays.showDetailViewModal('{{ doc._id }}', '{{ loop.index0 }}', '{{ viewType }}')"
+        class="gallery-item-link {{ linkClassName }}"
+        aria-describedby="gallery-tooltip"
+    >
+        <div class="gallery-item-inner {{ innerClassName }}">
+            {% if galleryStyle === 'heatmap' %}
+                <div class="gallery-secondary-column-item"
+                     style="background-color: {{ doc.colors.backgroundColor | safe }};">
+                    {% if secondaryColumnTileDisplay and secondaryColumnTileShow %}
+                        <h2 style="color: {{ doc.colors.contentColor | safe }};"
+                            class="gallery-secondary-column-text">
+                            {% if coercionScheme[secondaryCol].operation == 'ToDate' %}
+                                {{ doc.rowParams[secondaryCol] | dateFormat(coercionScheme[secondaryCol].outputFormat)}}
+                            {% elseif  coercionScheme[secondaryCol].operation == 'ToPercent' %}
+                                {{ doc.rowParams[secondaryCol] | formatPercent}}
+                            {% else %}
+                                {{ doc.rowParams[secondaryCol] }}
+                            {% endif %}
+                            </h2>
+                    {% else %}
+                        <h2 style="color: {{ doc.colors.contentColor | safe }};"
+                            class="gallery-secondary-column-initial">{{ doc.rowParams[fieldKey_objectTitle] | initial }}</h2>
+                    {% endif %}
+                </div>
+            {% elseif galleryStyle === 'icon' %}
+                {% if doc.fe_galleryItem_htmlForIconFromRowObjWhenMissingImage %}
+                    {{ doc.fe_galleryItem_htmlForIconFromRowObjWhenMissingImage | safe }}
+                {% else %}
+                    <div class="gallery-item-initial-wrapper">
+                        <span class="gallery-item-initial">{{ doc.rowParams[fieldKey_objectTitle] | initial }}</span>
+                    </div>
+                {% endif %}
+            {% elseif meta.hasImages %}
+                {% if viewType === 'timeline' %}
+                    <div class="gallery-secondary-column-item">
+                        <h2 class="gallery-secondary-column-initial">{{ doc.rowParams[fieldKey_objectTitle] | initial }}</h2>
+                    </div>
+                {% else %}
+                    <div class="gallery-item-initial-wrapper">
+                        <span class="gallery-item-initial">{{ doc.rowParams[fieldKey_objectTitle] | initial }}</span>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        {% if imageCaption %}
+            <div class="gallery-description {{ 'gallery-description--long' if displaySortFieldText }}">
+                <h2 class="gallery-title">
+                    <span class="gallery-title-wrapper">
+                        {% set titleKey = dataSource.fe_displayTitleOverrides[fieldKey_objectTitle] if dataSource.fe_displayTitleOverrides[fieldKey_objectTitle] else fieldKey_objectTitle %}
+                        {% set titleValue = doc.rowParams[fieldKey_objectTitle] if doc.rowParams[fieldKey_objectTitle] else "(Title not specified)" %}
+                        {% if displayFieldTitles %}
+                            {{ titleKey }}: {{ titleValue }}
+                        {% else %}
+                            {{ titleValue }}
+                        {% endif %}
+                    </span>
+                </h2>
+
+                {% if displaySortFieldText %}
+                    <h5 class="gallery-secondary-title">
+                        {% set sortKey = dataSource.fe_displayTitleOverrides[textField] if dataSource.fe_displayTitleOverrides[textField] else textField %}
+                        {% set sortValue = doc.rowParams[textField] | formatGallerySubtitle %}
+                        {% if displayFieldTitles %}
+                            {{ sortKey }}: {{sortValue }}
+                        {% else %}
+                            {{sortValue }}
+                        {% endif %}
+                    </h5>
+                {% endif %}
+            </div>
+        {% endif %}
+    </button>
+</li>

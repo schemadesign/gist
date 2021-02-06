@@ -1,0 +1,215 @@
+<div ng-show="loading" layout layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<form name="emailForm" class="signup col-xs-12" ng-submit="createUser()" novalidate ng-show="!loading">
+    <div class="form-group" ng-class="{ 'has-error': emailForm.email.$touched && emailForm.email.$invalid}">
+        <header>
+            <h1>Create a new account</h1>
+        </header>
+
+        <div class="form-group">
+            <label for="email" class="control-label">Email</label>
+
+            <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Email Address"
+                class="form-control"
+                ng-model="user.email"
+                unique-email
+                required
+            />
+
+            <div class="help-block" ng-messages="emailForm.email.$error" ng-if="emailForm.email.$touched">
+                <p ng-message="required">Your email is required.</p>
+                <p ng-message="email">Your email is not valid.</p>
+                <p ng-message="emailAvailable">
+                    This email address is already associated with an account.
+                    <a href="/auth/login" target="_blank">Login?</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error': emailForm.firstName.$touched && emailForm.firstName.$invalid}">
+            <label for="firstName" class="control-label">First Name</label>
+            <input
+                name="firstName"
+                ng-model="user.firstName"
+                type="text"
+                class="form-control"
+                required
+                autofocus="true"
+                placeholder="First Name"
+                id="firstName"
+            />
+            <div
+                class="help-block"
+                ng-messages="emailForm.firstName.$error"
+                ng-if="emailForm.firstName.$touched && emailForm.firstName.$invalid"
+            >
+                <p ng-message="required">First Name is required.</p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error': emailForm.lastName.$touched && emailForm.lastName.$invalid}">
+            <label for="lastName" class="control-label">Last Name</label>
+            <input
+                name="lastName"
+                ng-model="user.lastName"
+                type="text"
+                class="form-control"
+                required
+                placeholder="Last Name"
+                id="lastName"
+            />
+
+            <div
+                class="help-block"
+                ng-messages="emailForm.lastName.$error"
+                ng-if="emailForm.lastName.$touched && emailForm.lastName.$invalid"
+            >
+                <p ng-message="required">Last Name is required.</p>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': emailForm.password.$touched && emailForm.password.$invalid}">
+            <label for="password" class="control-label">Password</label>
+            <input
+                type="password"
+                name="password"
+                autocomplete="off"
+                ng-model="user.password"
+                class="form-control"
+                ng-minlength="8"
+                ng-maxlength="20"
+                ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/"
+                placeholder="Password"
+                id="password"
+            />
+
+            <div
+                class="help-block"
+                ng-messages="emailForm.password.$error"
+                ng-if="emailForm.password.$touched && emailForm.password.$invalid"
+            >
+                <p ng-message="minlength || maxlength">Password must be between 8&ndash;20 characters.</p>
+                <p ng-message="pattern">
+                    Password must contain at least one uppercase letter, one lowercase letter, and one number or symbol.
+                </p>
+            </div>
+        </div>
+
+        <div
+            class="form-group"
+            ng-class="{ 'has-error': emailForm.verifyPassword.$touched && emailForm.verifyPassword.$invalid}"
+        >
+            <label for="verifyPassword" class="control-label">Verify Password</label>
+            <input
+                type="password"
+                name="verifyPassword"
+                autocomplete="off"
+                ng-model="user.verifyPassword"
+                password-checker
+                match-target="user.password"
+                class="form-control"
+                required
+                placeholder="Password"
+                id="verifyPassword"
+            />
+
+            <div
+                class="help-block"
+                ng-messages="emailForm.verifyPassword.$error"
+                ng-if="emailForm.verifyPassword.$touched && emailForm.verifyPassword.$invalid"
+            >
+                <p ng-message="required">Please confirm your password.</p>
+                <p ng-message="match">Password does not match.</p>
+            </div>
+        </div>
+    </div>
+
+    <div
+        ng-if="env.node_env!=='enterprise'"
+        class="form-group"
+        ng-class="{ 'has-error': emailForm.teamTitle.$touched && emailForm.teamTitle.$invalid}"
+    >
+        <label for="teamTitle" class="control-label">Team Title</label>
+        <input
+            required
+            ng-model="user._team.title"
+            name="teamTitle"
+            type="text"
+            class="form-control"
+            placeholder="Team Title  (e.g. your name, group or organization)"
+            id="teamTitle"
+        />
+
+        <div
+            class="help-block"
+            ng-messages="emailForm.teamTitle.$error"
+            ng-if="emailForm.teamTitle.$touched && emailForm.teamTitle.$invalid"
+        >
+            <p ng-message="required">This field is required.</p>
+        </div>
+        <p class="signup-bullets signup-desc-padding">
+            Your team is where you save all of your visualizations. The team name will be visible to anyone you share
+            your visualizations with.
+        </p>
+    </div>
+
+    <div ng-if="env.node_env!=='enterprise'" class="form-group" ng-class="{ 'has-error': emailForm.subdomain.$invalid}">
+        <label for="subdomain" class="control-label">Team Subdomain</label>
+
+        <div class="input-group">
+            <input
+                name="subdomain"
+                ng-model="user._team.subdomain"
+                unique-subdomain
+                type="text"
+                class="form-control"
+                ng-pattern="/^[a-z0-9]*$/"
+                required
+                placeholder="Team Subdomain"
+                id="subdomain"
+            />
+            <span ng-hide="env.node_env=='enterprise'" class="input-group-addon">{{"." + env.host}}</span>
+        </div>
+        <div class="help-block" ng-messages="emailForm.subdomain.$error || emailForm.subdomain.$invalid">
+            <p ng-message="required">This field is required.</p>
+            <p ng-message="subdomainAvailable">This subdomain name is not available.</p>
+            <p ng-message="pattern">
+                Subdomain name must be lowercase and not contain any whitespace or special characters.
+            </p>
+        </div>
+        <p class="signup-bullets signup-desc-padding">
+            Enter a subdomain for your team. This will be your personal domain at {{env.host}}, where others can see any
+            visualizations you have created and shared.
+        </p>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-sm-offset-8">
+                <button
+                    type="submit"
+                    class="btn btn-primary gist-pull-right"
+                    ng-disabled="emailForm.$invalid || user._team && user._team.length > 0"
+                >
+                    Register
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="user._team && user._team.length > 0" class="alert alert-warning reminder-message">
+        <div ng-if="!user.activated">
+            This email address has been registered but the account has not been activated. Would you like to
+            <a ng-click="resendActivationEmail(user)" class="alert-link pointer">resend the activation email</a>?
+        </div>
+
+        <div ng-if="user.activated">
+            This email address is already associated with an account.
+            <a href="#" class="alert-link pointer">Sign in here</a>.
+        </div>
+    </div>
+</form>

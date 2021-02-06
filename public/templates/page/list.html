@@ -1,0 +1,66 @@
+<md-content layout-padding md-no-ink>
+
+<div layout-gt-xs="row" layout-align="space-between center">
+    <div flex-gt-xs="66">
+        <form name="siteTitleForm">
+            <div layout="row" layout-align="start center" flex>
+                <md-input-container flex style="margin-bottom: 0">
+                    <label>Site Title</label>
+                    <input required name="title" ng-model="website.title" submitting-flag="submitting" aria-label="Title" placeholder="Title" ng-change="checkSiteTitle()">
+                    <div ng-messages="siteTitleForm.title.$error">
+                        <p ng-message="unique">This slug name is not available.</p>
+                        <p ng-message="required">This field is required.</p>
+                        <p ng-message="pattern">Slug name must be lowercase and not contain any whitespace or special characters.</p>
+                    </div>
+                </md-input-container>
+                <md-button class="md-dashboard md-button" ng-show="siteTitleForm.title.$dirty" ng-click="saveSiteTitle(website)">Save</md-button>
+            </div>
+        </form>
+    </div>
+
+    <md-select ng-model="sortCriteria.sortLabel" ng-if="pageIsAvailable">
+        <md-option value="Sort By Date" ng-click="updateSort($event, '-createdAt', 1)">Sort By Date</md-option>
+        <md-option value="Sort Alphabetically" ng-click="updateSort($event, 'pageTitle', 2)">Sort Alphabetically</md-option>
+    </md-select>
+</div>
+
+<ul class="dashboard-list user-list" ng-cloak>
+    <li ng-repeat="page in pages | orderBy : sortCriteria.sortValue" layout="row" layout-align="space-between center">
+
+        <span aa-tooltip="{{ page.published == true ? 'Unpublish' : 'Publish' }}" flex="10">
+            <md-checkbox name=""
+                ng-model="page.published"
+                aria-label="Publish {{ page.pageTitle }}"
+                ng-click="$event.stopPropagation();"
+                ng-change="updateStatus(page)"
+                ></md-checkbox>
+        </span>
+
+        <span class="dashboard-list-icon page"
+            flex="10"
+            ng-class="{'default-view': page._id == website.homepage}"
+            aa-tooltip="{{ website.homepage == page._id ? 'Homepage' : 'Set as homepage' }}"
+            ng-click="setHomepage(page, website)"
+            ng-disabled="!page.published">
+            <i class="fa fa-lg fa-home" aria-hidden="true"></i>
+        </span>
+
+        <span flex class="dashboard-list-name" ng-click="select(page)" role="button" tabindex="0">
+                {{page.pageTitle}}
+        </span>
+
+        <span class="dashboard-list-icon" flex="10" aa-tooltip="Copy page" ng-click="copyPage(page)">
+            <i class="fa fa-clone" aria-hidden="true"></i>
+        </span>
+
+        <span class="dashboard-list-icon" ng-click="view(page)" flex="10">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+        </span>
+
+        <span class="dashboard-list-icon warn" ng-click="remove(page, $event)" aria-hidden="true" aria-label="Delete" flex="5">
+            <i class="fa fa-remove" aria-hidden="true"></i>
+        </span>
+    </li>
+</ul>
+
+</md-content>

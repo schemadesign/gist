@@ -1,0 +1,20 @@
+{% extends "../layout/object.njk" %}
+
+{% block headSuffix %}
+    {% set objectTitle = rowObject.rowParams[fieldKey_objectTitle] %}
+    {% set title = objectTitle if objectTitle else "(Title not specified)" %}
+    {% set isTitleIsMarkdown = dataTypesConversion[fieldKey_objectTitle].operation === 'ToMarkdown' %}
+    <title>{{ title | subtractMarkdown if isTitleIsMarkdown else title }} - Gist</title>
+{% endblock %}
+
+{% block content %}
+    {% include "../partials/modal/info.njk" %}
+    {% include "../shared/detail-view-content.njk" %}
+    {% include "../partials/analytics.njk" %}
+{% endblock %}
+
+{% block footer %}
+    {% if not isPreview %}
+        {% include "../partials/footer.njk" %}
+    {% endif %}
+{% endblock %}

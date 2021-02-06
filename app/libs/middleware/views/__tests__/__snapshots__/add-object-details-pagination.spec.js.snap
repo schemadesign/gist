@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add object details pagination middleware should add pagination for another result 1`] = `
+Object {
+  "next": Object {
+    "_id": "5b05346ad7a86407e5ef783e",
+    "id": "5b05346ad7a86407e5ef783e",
+    "title": 2,
+  },
+  "prev": Object {
+    "_id": "5b05346ad7a86407e5ef783d",
+    "id": "5b05346ad7a86407e5ef783d",
+    "title": 1,
+  },
+}
+`;
+
+exports[`Add object details pagination middleware should add pagination for first result 1`] = `
+Object {
+  "next": Object {
+    "_id": "5b05346ad7a86407e5ef783d",
+    "id": "5b05346ad7a86407e5ef783d",
+    "title": 1,
+  },
+}
+`;

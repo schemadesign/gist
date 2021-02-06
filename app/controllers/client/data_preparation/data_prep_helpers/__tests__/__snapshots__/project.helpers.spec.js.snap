@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`project helpers getGalleryProject should return project for gallery 1`] = `
+Object {
+  "rowParams": 1,
+  "size": Object {
+    "$cond": Object {
+      "else": 0,
+      "if": Object {
+        "$isArray": "$rowParams.Name",
+      },
+      "then": Object {
+        "$size": "$rowParams.Name",
+      },
+    },
+  },
+}
+`;
+
+exports[`project helpers getProject should return project for gallery 1`] = `
+Object {
+  "rowParams": 1,
+  "size": Object {
+    "$cond": Object {
+      "else": 0,
+      "if": Object {
+        "$isArray": "$rowParams.Name",
+      },
+      "then": Object {
+        "$size": "$rowParams.Name",
+      },
+    },
+  },
+}
+`;
+
+exports[`project helpers getProject should return project for timeline 1`] = `
+Object {
+  "rowParams": 1,
+}
+`;
+
+exports[`project helpers getTimelineProject should return project for timeline 1`] = `
+Object {
+  "rowParams": 1,
+}
+`;
+
+exports[`project helpers getTimelineProject should return project for timeline when sorting by date 1`] = `
+Object {
+  "rowParams": 1,
+}
+`;

@@ -1,0 +1,20 @@
+<md-dialog md-no-ink aria-label="Delete Team">
+    <aa-toolbar title="Delete Team" class="warn"></aa-toolbar>
+
+    <md-dialog-content layout-padding>
+        <md-content layout="column">
+            <p>
+                Are you sure you want to delete the team
+                <span><strong>{{ teamName }}</strong></span>?
+            </p>
+            <p>
+                All visualizations and resources uploaded by the team will be deleted.
+                Users who belong only to this team will be asked to create a new team when they sign in again.
+            </p>
+        </md-content>
+
+        <aa-dialog-actions warn="Remove Team" cancel=""></aa-dialog-actions>
+
+    </md-dialog-content>
+
+</md-dialog>

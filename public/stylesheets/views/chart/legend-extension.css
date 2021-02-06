@@ -1,0 +1,23 @@
+.gist-legend-title {
+    margin-bottom: 30px;
+    padding-left: 40px;
+    margin-top: 0;
+    font-size: 1.125em;
+    font-weight: normal;
+}
+
+.gist-legend-list-link {
+    display: inline-block;
+    padding: 10px 20px 10px 80px;
+    width: 100%;
+    color: var(--color-text-dark);
+    line-height: 20px;
+}
+
+.gist-legend-open {
+    color: var(--color-text-dark);
+}
+
+.gist-legend-open:hover {
+    color: var(--color-text-dark);
+}

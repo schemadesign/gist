@@ -1,0 +1,58 @@
+.regional-map .gist-visualization-container {
+    position: relative;
+    height: 0;
+    width: 100%;
+    padding: 0;
+
+    /* override this inline for aspect ratio other than square */
+    padding-bottom: 100%;
+}
+
+.regional-map .gist-visualization {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.regional-map .subdivision-path {
+    stroke-width: 1px;
+    transition: opacity .5s ease-in-out;
+}
+
+.regional-map .subdivision-path:hover {
+    opacity: 0.5;
+    transition: opacity .5s ease-in-out;
+}
+
+@media (min-width: 768px) {
+    .gist-regional-map .gist-section {
+        height: 100%;
+    }
+}
+
+.gist-regional-map .gist-content {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.regional-map .subdivision a,
+.regional-map .subdivision a:focus,
+.regional-map .subdivision path:focus {
+    outline: none;
+}
+
+.gist-regional-map .warnings {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    overflow-y: scroll;
+    padding: 0 20px 20px 20px;
+    background-color: #ccc;
+    z-index: 1;
+    opacity: 0.5;
+}

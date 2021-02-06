@@ -1,0 +1,70 @@
+/* @override
+	http://localhost:9080/stylesheets/module/team-show.css */
+
+.team-list {
+    margin-right: -10px;
+    margin-left: -10px;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.team-list-item {
+    padding-right: 10px;
+    padding-left: 10px;
+    width: 100%;
+    vertical-align: top;
+}
+
+.section-team-show .section-header {
+    margin-bottom: 30px;
+    padding-top: 30px;
+}
+
+.team-logo {
+    width: 100%;
+    max-width: 350px;
+}
+
+.team-header-description {
+    font-size: 20px;
+    line-height: 26px;
+    margin: 46px auto 36px;
+    width: 100%;
+    max-width: 620px;
+}
+
+@media (max-width: 767px) {
+    .team-header-description {
+        line-height: 22px;
+        margin: 26px auto 16px;
+    }
+}
+
+.team-no-listings {
+    font-size: 20px;
+    line-height: 26px;
+    margin: 0px auto 34px;
+    text-align: center;
+}
+
+.team-array-logo {
+    margin: auto;
+}
+
+@media (min-width: 768px) {
+    .team-list-item {
+        display: inline-block;
+        margin-left: -0.15em;
+        width: 50%;
+    }
+}
+
+.story-image-wrapper {
+    text-align: center;
+    cursor: pointer;
+}
+
+.story-image {
+    max-height: 400px;
+    max-width: 100%;
+}

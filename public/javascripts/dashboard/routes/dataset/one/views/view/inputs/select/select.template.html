@@ -1,0 +1,39 @@
+<p ng-if="viewCtrl.viewName === 'globe' && setting.name === 'originLatitude'" class="margin-bottom-2x">The Globe view requires that your data includes latitude and longitude coordinates. Select the fields that contain your latitude and longitude coordinates below for the point of origin. In addition, if your dataset includes destinations, you can also optionally select latitude and longitude coordinates for the destinate point. The Globe will draw a connection between both the point of origin and the destination.</p>
+
+<label class="margin-bottom-3x d-block">{{::setting.displayAs}}</label>
+<p ng-if="::setting.description">{{::setting.description}}</p>
+
+<small class="gist-pull-right" ng-if="(setting.restrictColumnDataType | isArray) && (setting.restrictColumnDataType.indexOf('integer') !== -1 || setting.restrictColumnDataType.indexOf('float') !== -1)">
+    (Note that this setting is limited to number fields only.)
+</small>
+
+<small class="gist-pull-right" ng-if="setting.restrictColumnDataType && !(setting.restrictColumnDataType | isArray)">
+    (Note that this setting is limited to {{setting.restrictColumnDataType}} fields only.)
+</small>
+
+<br ng-if="setting.restrictColumnDataType">
+
+<small class="warn" ng-if="setting.require && !viewCtrl.data[setting.name]">
+    This is a required field.
+</small>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <md-select ng-required="setting.require" aria-label="{{setting.name}} for {{viewCtrl.viewName}}" ng-model="viewCtrl.data[setting.name]" placeholder="{{::setting.displayAs}}">
+        <md-option ng-if="setting.selectFrom === 'column'" ng-repeat="column in datasetViewsCtrl.colsAvailable | filter: viewCtrl.dataTypeMatch(setting.restrictColumnDataType) | filter: viewCtrl.excludeBy(setting.selectExcludeBy) track by column" ng-value="column">
+            {{viewCtrl.dataset.fe_displayTitleOverrides[column] || column}}
+        </md-option>
+        <md-option ng-if="setting.selectFrom === 'duration'" ng-repeat="duration in setting.durations track by duration" ng-value="duration">
+            {{duration}}
+        </md-option>
+        <md-option ng-if="setting.selectFrom === 'range'" ng-repeat="range in setting.ranges track by range" ng-value="range">
+            {{range}}
+        </md-option>
+        <md-option ng-if="setting.selectFrom === 'unit'" value="">(none)</md-option>
+        <md-option ng-if="setting.selectFrom === 'unit'" ng-repeat="unit in ::viewCtrl.availableForUnit track by unit" ng-value="unit">
+            {{unit}}
+        </md-option>
+        <md-option ng-if="hasDependency" ng-repeat="option in viewCtrl.data[setting.selectFrom]" ng-value="option">
+            {{option}}
+        </md-option>
+    </md-select>
+</md-input-container>

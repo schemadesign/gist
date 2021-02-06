@@ -1,0 +1,67 @@
+<label class="margin-bottom-3x d-block">{{::setting.displayAs}}</label>
+<p ng-if="::setting.description">{{::setting.description}}</p>
+
+<div ng-repeat="item in viewCtrl.data[setting.name] track by $index">
+    <div ng-if="setting.valueInputType !== 'colorpicker'" layout="row" layout-align="space-between start">
+        <md-input-container flex="40" ng-if="setting.keyInputType === 'select' || setting.keyInputType === 'textbox'">
+            <label>Select a Field</label>
+            <md-select
+                ng-if="setting.keyInputType === 'select' && setting.keySelectFrom === 'column'"
+                aria-label="{{setting.name}} for {{viewCtrl.viewName}}"
+                ng-model="item.key"
+                placeholder="Select a Field"
+            >
+                <md-option value="_all" ng-if="notChosen('_all', $index) && !setting.restrictColumnDataType">
+                    All Columns
+                </md-option>
+                <md-option ng-repeat="column in datasetViewsCtrl.colsAvailable | filter: checkDuplicateKeyInValues($index) && viewCtrl.dataTypeMatch(setting.restrictColumnDataType) track by column" ng-value="column">
+                    {{viewCtrl.dataset.fe_displayTitleOverrides[column] || column}}
+                </md-option>
+            </md-select>
+
+            <input ng-if="setting.keyInputType === 'textbox'" type="text" ng-model="item.key" aria-label="Display Name {{viewCtrl.viewName}}">
+        </md-input-container>
+
+        <md-input-container flex="45" ng-if="setting.valueInputType === 'multivalueTextbox'">
+            <md-chips
+                ng-model="item.value"
+                md-enable-chip-edit="true"
+                placeholder="Enter a Value"
+                secondary-placeholder="+Value"
+            >
+                <md-chip-template>
+                    {{$chip}}
+                </md-chip-template>
+            </md-chips>
+        </md-input-container>
+
+        <md-input-container flex="45" ng-if="setting.valueInputType === 'select' && setting.valueSelectFrom === 'column'">
+            <md-select aria-label="{{setting.name}} for {{viewCtrl.viewName}}" ng-model="item.value">
+                <md-option ng-repeat="column in datasetViewsCtrl.colsAvailable | filter: viewCtrl.dataTypeMatch(setting.restrictColumnDataType) track by column" ng-value="column">
+                    {{viewCtrl.dataset.fe_displayTitleOverrides[column] || column}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container flex="45" ng-if="setting.valueInputType === 'textbox'">
+            <input type="text" ng-model="item.value" aria-label="Display Name {{viewCtrl.viewName}}">
+        </md-input-container>
+
+        <span
+            class="dashboard-list-icon warn"
+            ng-click="removeCondition($index)"
+            aria-hidden="true"
+            aria-label="Delete"
+            style="margin: 5px 15px 0;"
+            flex="5"
+        >
+            <i class="fa fa-remove" aria-hidden="true"></i>
+        </span>
+    </div>
+
+    <aa-color-picker selected="item.value" ng-if="setting.valueInputType === 'colorpicker'"></aa-color-picker>
+</div>
+
+<md-button class="md-dashboard" ng-click="addNewKey()">
+    <span class="btn-label">Add more</span>
+</md-button>

@@ -1,0 +1,6 @@
+--exit
+--timeout=600000
+--file=tests/setup.js
+--recursive
+--no-deprecation
+--no-warnings

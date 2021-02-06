@@ -1,0 +1,1998 @@
+[
+    {
+        "_id": {
+            "$oid": "5893845230cb8a407e6c66c4"
+        },
+        "name": "wordCloud",
+        "displayAs": "Word Cloud",
+        "icon": "icon-word-cloud",
+        "thumbnail": "word-cloud.png",
+        "tabs": ["Mappings", "Descriptions"],
+        "scaffold": {
+            "keywords": []
+        },
+        "settings": [
+            {
+                "name": "defaultGroupByColumnName",
+                "displayAs": "Select a Field",
+                "inputType": "select",
+                "description": "The Word Cloud looks for specific keywords with a specific field. For example, if you had field called \"Genre\", a keyword to track might be \"Action\". In this example, the Word Cloud would count the number of times \"Action\" appears. You can also use keywords to track the number of times words appear within a text, e.g. the number of times \"Homer\" appears in a Simpsons episode title.",
+                "selectFrom": "column",
+                "require": true,
+                "tab": "Mappings"
+            },
+            {
+                "name": "keywords",
+                "displayAs": "Enter Keywords to Track",
+                "inputType": "keywords",
+                "description": "Click to select the keywords from your selected field",
+                "tab": "Mappings"
+            }
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "5893847b30cb8a407e6c66c7"
+        },
+        "name": "pieSet",
+        "displayAs": "Pie Set",
+        "icon": "icon-pie-set",
+        "thumbnail": "pie-set.png",
+        "tabs": ["Controls", "Descriptions", "Advanced"],
+        "scaffold": {
+            "simpleChart": false,
+            "valuesToExcludeByOriginalKey": [],
+            "defaultAggregateByColumnName": "Number of Items",
+            "defaultSortOrderDescending": false,
+            "defaultSegmentByDuration": "None",
+            "durationsAvailableForSegmentBy": ["None", "Year", "Month", "Day"]
+        },
+        "settings": [
+            {
+                "name": "defaultSortOrderDescending",
+                "displayAs": "Default Sort Order",
+                "inputType": "toggleRadio",
+                "options": [
+                    {
+                        "label": "Ascending",
+                        "value": false
+                    },
+                    {
+                        "label": "Descending",
+                        "value": true
+                    }
+                ],
+                "description": "Change the default order that items in Pie Set are displayed in.",
+                "tab": "Controls"
+            },
+            {
+                "name": "simpleChart",
+                "displayAs": "Data Format",
+                "inputType": "toggleRadio",
+                "bottomDescription": true,
+                "borderBottom": true,
+                "options": [
+                    {
+                        "label": "Yes",
+                        "value": false
+                    },
+                    {
+                        "label": "No",
+                        "value": true
+                    }
+                ],
+                "tab": "Controls"
+            },
+            {
+                "name": "showPercentage",
+                "displayAs": "Show Percentage",
+                "inputType": "toggle",
+                "tab": "Controls"
+            },
+            {
+                "name": "pies",
+                "displayAs": "Pies",
+                "inputType": "multiselect",
+                "selectFrom": "column",
+                "description": "Select the fields to display pies.",
+                "selectExcludeBy": "fieldsNotAvailableAsPieColumns",
+                "tab": "Controls",
+                "type": "simple",
+                "restrictColumnDataType": ["integer", "float", "percent", "currency"]
+            },
+            {
+                "name": "fieldsNotAvailableAsPieColumns",
+                "displayAs": "Exclude from 'Pies' Display"
+            },
+            {
+                "name": "defaultGroupByColumnName",
+                "displayAs": "Group By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "selectExcludeBy": "fieldsNotAvailableAsGroupByColumns",
+                "tab": "Controls"
+            },
+            {
+                "name": "fieldsNotAvailableAsGroupByColumns",
+                "displayAs": "Exclude from 'Group By' Display"
+            },
+            {
+                "name": "defaultChartByColumnName",
+                "displayAs": "Chart By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "selectExcludeBy": "fieldsNotAvailableAsChartByColumns",
+                "tab": "Controls",
+                "type": "stacked"
+            },
+            {
+                "name": "fieldsNotAvailableAsChartByColumns",
+                "displayAs": "Exclude from 'Chart By' Display"
+            },
+            {
+                "name": "valuesToExcludeByOriginalKey",
+                "displayAs": "Exclude the Following Values",
+                "inputType": "keyValue",
+                "keyInputType": "select",
+                "keySelectFrom": "column",
+                "valueInputType": "multivalueTextbox",
+                "tab": "Advanced"
+            },
+            {
+                "name": "defaultAggregateByColumnName",
+                "displayAs": "Aggregate By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "currency", "float", "percent"],
+                "selectExcludeBy": "fieldsNotAvailableAsAggregateByColumns",
+                "tab": "Controls",
+                "type": "stacked"
+            },
+            {
+                "name": "fieldsNotAvailableAsAggregateByColumns",
+                "displayAs": "Exclude from 'Aggregate By' Display"
+            },
+            {
+                "name": "defaultSegmentByDuration",
+                "displayAs": "Segment By",
+                "inputType": "menu",
+                "selectFrom": "duration",
+                "selectExcludeBy": "durationsAvailableForSegmentBy",
+                "tab": "Controls",
+                "durations": ["None", "Year", "Month", "Day"]
+            }
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "5893848930cb8a407e6c66c8"
+        },
+        "name": "pieChart",
+        "displayAs": "Pie Chart",
+        "icon": "icon-pie-chart",
+        "thumbnail": "pie-chart.png",
+        "tabs": ["Controls", "Descriptions", "Advanced"],
+        "scaffold": {
+            "valuesToExcludeByOriginalKey": [],
+            "defaultAggregateByColumnName": "Number of Items",
+            "defaultSegmentByDuration": "None",
+            "durationsAvailableForSegmentBy": ["None", "Year", "Month", "Day"]
+        },
+        "settings": [
+            {
+                "name": "showPercentage",
+                "displayAs": "Show Percentage",
+                "inputType": "toggle",
+                "tab": "Controls"
+            },
+            {
+                "name": "defaultGroupByColumnName",
+                "displayAs": "Chart By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "selectExcludeBy": "fieldsNotAvailableAsGroupByColumns",
+                "tab": "Controls"
+            },
+            {
+                "name": "fieldsNotAvailableAsGroupByColumns",
+                "displayAs": "Exclude from 'Chart By' Display"
+            },
+            {
+                "name": "defaultAggregateByColumnName",
+                "displayAs": "Aggregate By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "float", "percent", "currency"],
+                "selectExcludeBy": "fieldsNotAvailableAsAggregateByColumns",
+                "tab": "Controls"
+            },
+            {
+                "name": "fieldsNotAvailableAsAggregateByColumns",
+                "displayAs": "Exclude from 'Aggregate By' Display"
+            },
+            {
+                "name": "defaultSegmentByDuration",
+                "displayAs": "Segment By",
+                "inputType": "menu",
+                "selectFrom": "duration",
+                "selectExcludeBy": "durationsAvailableForSegmentBy",
+                "tab": "Controls",
+                "durations": ["None", "Year", "Month", "Day"]
+            },
+            {
+                "name": "valuesToExcludeByOriginalKey",
+                "displayAs": "Values to Exclude In Display",
+                "inputType": "keyValue",
+                "keyInputType": "select",
+                "keySelectFrom": "column",
+                "valueInputType": "multivalueTextbox",
+                "tab": "Advanced"
+            }
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "589384b430cb8a407e6c66ca"
+        },
+        "name": "lineGraph",
+        "displayAs": "Line Graph",
+        "icon": "icon-line-graph",
+        "thumbnail": "line-graph.png",
+        "tabs": ["Controls", "Annotations", "Descriptions", "Advanced"],
+        "scaffold": {
+            "valuesToExcludeByOriginalKey": [],
+            "outputInFormat": [],
+            "simpleChart": false,
+            "datasourceMappings": {
+                "mappings": [
+                    {
+                        "key": "",
+                        "value": ""
+                    }
+                ]
+            },
+            "annotations": {
+                "benchmarks": [],
+                "overlayText": {
+                    "text": ""
+                }
+            },
+            "displayNavigationChart": true,
+            "defaultGroupByDuration": "None",
+            "durationsAvailableForGroupBy": ["None", "Year", "Month", "Day"]
+        },
+        "settings": [
+            {
+                "name": "defaultGroupByColumnName",
+                "displayAs": "Chart By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "date", "float", "percent", "currency"],
+                "selectExcludeBy": "fieldsNotAvailableAsGroupByColumns",
+                "tab": "Controls"
+            },
+            {
+                "name": "fieldsNotAvailableAsGroupByColumns",
+                "displayAs": "Exclude from 'Chart By' Display"
+            },
+            {
+                "name": "defaultStackByColumnName",
+                "displayAs": "Stack By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "selectExcludeBy": "fieldsNotAvailableAsStackByColumns",
+                "tab": "Controls",
+                "type": "stacked"
+            },
+            {
+                "name": "fieldsNotAvailableAsStackByColumns",
+                "displayAs": "Exclude from 'Stack By' Display"
+            },
+            {
+                "name": "defaultAggregateByColumnName",
+                "displayAs": "Aggregate By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "currency", "float"],
+                "selectExcludeBy": "fieldsNotAvailableAsAggregateByColumns",
+                "tab": "Controls",
+                "type": "stacked"
+            },
+            {
+                "name": "fieldsNotAvailableAsAggregateByColumns",
+                "displayAs": "Exclude from 'Aggregate By' Display"
+            },
+            {
+                "name": "valuesToExcludeByOriginalKey",
+                "displayAs": "Values to Exclude in Display",
+                "inputType": "keyValue",
+                "keyInputType": "select",
+                "keySelectFrom": "column",
+                "valueInputType": "multivalueTextbox",
+                "tab": "Advanced"
+            },
+            {
+                "name": "outputInFormat",
+                "displayAs": "Override Coercion Scheme Output Format",
+                "inputType": "keyValue",
+                "keyInputType": "select",
+                "keySelectFrom": "column",
+                "valueInputType": "textbox",
+                "valueNestedField": "format",
+                "restrictColumnDataType": "date",
+                "tab": "Advanced"
+            },
+            {
+                "name": "datasourceMappings",
+                "displayAs": "Redirecting Dataset on Click",
+                "inputType": "datasetMapping",
+                "mappingType": "dataset",
+                "tab": "Advanced"
+            },
+            {
+                "name": "datasourceMappings",
+                "displayAs": "Mapping Field",
+                "inputType": "datasetMapping",
+                "mappingType": "fields",
+                "keyExcludeBy": "fieldsNotAvailableAsGroupByColumns",
+                "tab": "Advanced"
+            },
+            {
+                "name": "simpleChart",
+                "displayAs": "Data Format",
+                "inputType": "toggleRadio",
+                "bottomDescription": true,
+                "borderBottom": true,
+                "options": [
+                    {
+                        "label": "Yes",
+                        "value": false
+                    },
+                    {
+                        "label": "No",
+                        "value": true
+                    }
+                ],
+                "tab": "Controls"
+            },
+            {
+                "name": "lines",
+                "displayAs": "Lines",
+                "restrictColumnDataType": ["integer", "float", "percent", "currency"],
+                "inputType": "multiselect",
+                "selectFrom": "column",
+                "tab": "Controls",
+                "type": "simple",
+                "description": "Select the fields to display in the line graph.",
+                "borderBottom": true
+            },
+            {
+                "inputType": "annotationsOverlayText",
+                "tab": "Annotations"
+            },
+            {
+                "inputType": "annotationsBenchmarks",
+                "tab": "Annotations"
+            },
+            {
+                "name": "units",
+                "displayAs": "Display Units",
+                "description": "Enter the unit of measure to use in the visualization overall.",
+                "inputType": "select",
+                "selectFrom": "unit",
+                "tab": "Controls",
+                "borderBottom": true
+            },
+            {
+                "name": "displayNavigationChart",
+                "displayAs": "Display Navigation Chart",
+                "inputType": "toggle",
+                "tab": "Controls",
+                "description": "Displays a navigation control to focus on a subset of the chart",
+                "borderBottom": true
+            },
+            {
+                "name": "renameMultipleText",
+                "displayAs": "Multiple selected Y axis label",
+                "tab": "Controls",
+                "type": "simple",
+                "inputType": "textbox",
+                "placeholder": "(multiple selected)",
+                "condition": {
+                    "type": "setting",
+                    "name": "lines",
+                    "minLength": 2
+                }
+            },
+            {
+                "name": "defaultSegmentByDuration",
+                "displayAs": "Segment By",
+                "inputType": "menu",
+                "selectFrom": "duration",
+                "selectExcludeBy": "durationsAvailableForSegmentBy",
+                "tab": "Controls",
+                "durations": ["None", "Year", "Month", "Day"]
+            }
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "589384d530cb8a407e6c66cc"
+        },
+        "name": "barChart",
+        "displayAs": "Bar Chart",
+        "icon": "icon-bar-chart",
+        "thumbnail": "bar-chart.png",
+        "tabs": ["Controls", "Annotations", "Descriptions", "Advanced"],
+        "scaffold": {
+            "valuesToExcludeByOriginalKey": [],
+            "outputInFormat": [],
+            "orientation": "vertical",
+            "simpleChart": false,
+            "defaultAxisSort": "X Axis",
+            "defaultAxisAvailableForSortBy": ["X Axis", "Y Axis"],
+            "defaultAggregateByColumnName": "Number of Items",
+            "annotations": {
+                "benchmarks": [],
+                "overlayText": {
+                    "text": ""
+                }
+            },
+            "defaultGroupByDuration": "None",
+            "durationsAvailableForGroupBy": ["None", "Year", "Month", "Day"]
+        },
+        "settings": [
+            {
+                "name": "simpleChart",
+                "displayAs": "Data Format",
+                "inputType": "toggleRadio",
+                "bottomDescription": true,
+                "borderBottom": true,
+                "options": [
+                    {
+                        "label": "Yes",
+                        "value": false
+                    },
+                    {
+                        "label": "No",
+                        "value": true
+                    }
+                ],
+                "tab": "Controls"
+            },
+            {
+                "name": "orientation",
+                "displayAs": "Chart Orientation",
+                "inputType": "toggleRadio",
+                "options": [
+                    {
+                        "label": "Column",
+                        "value": "vertical",
+                        "displayAsOverrides": {
+                            "defaultGroupByColumnName": "X Axis",
+                            "defaultAggregateByColumnName": "Y Axis"
+                        }
+                    },
+                    {
+                        "label": "Bar",
+                        "value": "horizontal",
+                        "displayAsOverrides": {
+                            "defaultGroupByColumnName": "Y Axis",
+                            "defaultAggregateByColumnName": "X Axis"
+                        }
+                    }
+                ],
+                "tab": "Controls"
+            },
+            {
+                "name": "groupedBars",
+                "displayAs": "Group Bars",
+                "inputType": "toggle",
+                "tab": "Controls",
+                "description": "Toggle between a stacked bar chart (default) or a grouped bar chart."
+            },
+            {
+                "name": "hideNormalize",
+                "displayAs": "Hide normalize",
+                "inputType": "toggle",
+                "tab": "Controls",
+                "description": "Hide option to toggle between absolute or relative mode."
+            },
+            {
+                "name": "bars",
+                "displayAs": "Bars",
+                "inputType": "multiselect",
+                "selectFrom": "column",
+                "description": "Select the fields to display in the bar chart. Multiple fields will either be stacked or grouped.",
+                "restrictColumnDataType": ["integer", "float", "percent", "currency"],
+                "tab": "Controls",
+                "type": "simple"
+            },
+            {
+                "name": "defaultGroupByColumnName",
+                "displayAs": "X Axis",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "selectExcludeBy": "fieldsNotAvailableAsGroupByColumns",
+                "tab": "Controls"
+            },
+            {
+                "name": "fieldsNotAvailableAsGroupByColumns",
+                "displayAs": "Exclude from 'X Axis' Display"
+            },
+            {
+                "name": "units",
+                "displayAs": "Display Units",
+                "description": "Enter the unit of measure to use in the visualization overall.",
+                "inputType": "select",
+                "selectFrom": "unit",
+                "tab": "Controls",
+                "borderBottom": true
+            },
+            {
+                "name": "defaultAggregateByColumnName",
+                "displayAs": "Y Axis",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "float", "percent", "currency"],
+                "selectExcludeBy": "fieldsNotAvailableAsAggregateByColumns",
+                "tab": "Controls",
+                "type": "stacked"
+            },
+            {
+                "name": "fieldsNotAvailableAsAggregateByColumns",
+                "displayAs": "Exclude from 'Y Axis' Display"
+            },
+            {
+                "name": "defaultStackByColumnName",
+                "displayAs": "Stack By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "selectExcludeBy": "fieldsNotAvailableAsStackByColumns",
+                "tab": "Controls",
+                "type": "stacked",
+                "condition": {
+                    "type": "setting",
+                    "name": "groupedBars",
+                    "value": false
+                }
+            },
+            {
+                "name": "defaultStackByColumnName",
+                "displayAs": "Group By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "selectExcludeBy": "fieldsNotAvailableAsStackByColumns",
+                "tab": "Controls",
+                "type": "stacked",
+                "condition": {
+                    "type": "setting",
+                    "name": "groupedBars",
+                    "value": true
+                }
+            },
+            {
+                "name": "fieldsNotAvailableAsStackByColumns",
+                "displayAs": "Exclude from 'Stack By' Display"
+            },
+            {
+                "name": "valuesToExcludeByOriginalKey",
+                "displayAs": "Exclude the Following Values",
+                "inputType": "keyValue",
+                "keyInputType": "select",
+                "keySelectFrom": "column",
+                "valueInputType": "multivalueTextbox",
+                "tab": "Advanced"
+            },
+            {
+                "name": "outputInFormat",
+                "displayAs": "Override Coercion Scheme Format",
+                "inputType": "keyValue",
+                "keyInputType": "select",
+                "keySelectFrom": "column",
+                "valueInputType": "textbox",
+                "tab": "Advanced"
+            },
+            {
+                "name": "defaultGroupByDuration",
+                "displayAs": "Segment By",
+                "inputType": "menu",
+                "selectFrom": "duration",
+                "selectExcludeBy": "durationsAvailableForGroupBy",
+                "tab": "Controls",
+                "type": "stacked",
+                "durations": ["None", "Year", "Month", "Day"]
+            },
+            {
+                "name": "durationsAvailableForGroupBy",
+                "displayAs": "Exclude from 'Group By' Display"
+            },
+            {
+                "name": "defaultAxisSort",
+                "displayAs": "Sort By",
+                "inputType": "menu",
+                "selectFrom": "defaultAxis",
+                "selectExcludeBy": "defaultAxisAvailableForSortBy",
+                "tab": "Controls"
+            },
+            {
+                "name": "defaultAxisAvailableForSortBy",
+                "displayAs": "Exclude from 'Sort By' Display"
+            },
+            {
+                "inputType": "annotationsOverlayText",
+                "tab": "Annotations"
+            },
+            {
+                "inputType": "annotationsBenchmarks",
+                "tab": "Annotations"
+            },
+            {
+                "name": "renameMultipleText",
+                "displayAs": "Multiple selected Y axis label",
+                "tab": "Controls",
+                "type": "simple",
+                "inputType": "textbox",
+                "placeholder": "(multiple selected)",
+                "condition": {
+                    "type": "setting",
+                    "name": "bars",
+                    "minLength": 2
+                }
+            }
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "589384a430cb8a407e6c66c9"
+        },
+        "name": "map",
+        "displayAs": "Map",
+        "icon": "icon-map",
+        "thumbnail": "map.png",
+        "tabs": ["Controls", "Visuals", "Descriptions"],
+        "scaffold": {
+            "displayLegend": true,
+            "displayAggregate": true,
+            "colorByField": false,
+            "defaultZoom": 1.5,
+            "defaultAggregateByColumnName": "Number of Items",
+            "mapStyle": "country"
+        },
+        "settings": [
+            {
+                "name": "mapStyle",
+                "displayAs": "Map Style",
+                "inputType": "toggleRadio",
+                "borderBottom": true,
+                "options": [
+                    {
+                        "label": "Country Map",
+                        "value": "country"
+                    },
+                    {
+                        "label": "Pin Map",
+                        "value": "pin"
+                    },
+                    {
+                        "label": "Bubble Map",
+                        "value": "bubble"
+                    },
+                    {
+                        "label": "Heatmap",
+                        "value": "heatmap"
+                    }
+                ],
+                "tab": "Visuals"
+            },
+            {
+                "name": "latitudeField",
+                "displayAs": "Latitude",
+                "description": "Select a field to use for latitude",
+                "inputType": "select",
+                "selectFrom": "column",
+                "tab": "Visuals",
+                "condition": {
+                    "type": "setting",
+                    "name": "mapStyle",
+                    "value": ["pin", "bubble"]
+                }
+            },
+            {
+                "name": "longitudeField",
+                "displayAs": "Longitude",
+                "description": "Select a field to use for longitude",
+                "inputType": "select",
+                "selectFrom": "column",
+                "tab": "Visuals",
+                "condition": {
+                    "type": "setting",
+                    "name": "mapStyle",
+                    "value": ["pin", "bubble"]
+                }
+            },
+            {
+                "name": "defaultZoom",
+                "displayAs": "Default Zoom Level",
+                "inputType": "slider",
+                "min": 0,
+                "max": 10,
+                "step": 0.1,
+                "tab": "Visuals"
+            },
+            {
+                "name": "defaultLatitude",
+                "displayAs": "Default Latitude",
+                "description": "Enter a number between -90 and 90",
+                "inputType": "numberInput",
+                "min": -90,
+                "max": 90,
+                "default": 0,
+                "tab": "Visuals"
+            },
+            {
+                "name": "defaultLongitude",
+                "displayAs": "Default Longitude",
+                "description": "Enter a number between -180 and 180",
+                "inputType": "numberInput",
+                "min": -180,
+                "max": 180,
+                "default": 0,
+                "tab": "Visuals"
+            },
+            {
+                "name": "mapScaleType",
+                "displayAs": "Scale Type",
+                "inputType": "toggleRadio",
+                "borderBottom": true,
+                "options": [
+                    {
+                        "label": "Linear",
+                        "value": "linear"
+                    },
+                    {
+                        "label": "Square Root",
+                        "value": "sqrt"
+                    }
+                ],
+                "condition": {
+                    "type": "setting",
+                    "name": "mapStyle",
+                    "value": ["bubble"]
+                },
+                "default": "linear",
+                "tab": "Visuals"
+            },
+            {
+                "name": "defaultMapByColumnName",
+                "displayAs": "Map By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "selectExcludeBy": "fieldsNotAvailableAsMapByColumns",
+                "tab": "Controls",
+                "condition": {
+                    "type": "setting",
+                    "name": "mapStyle",
+                    "value": ["country", "heatmap"]
+                }
+            },
+            {
+                "name": "defaultColorByColumnName",
+                "displayAs": "Color By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "selectExcludeBy": "fieldsNotAvailableAsColorByColumns",
+                "tab": "Controls",
+                "conditions": [
+                    {
+                        "type": "setting",
+                        "name": "mapStyle",
+                        "value": ["heatmap"]
+                    },
+                    {
+                        "type": "setting",
+                        "name": "colorByField",
+                        "value": true
+                    }
+                ]
+            },
+            {
+                "name": "fieldsNotAvailableAsMapByColumns",
+                "displayAs": "Exclude from 'Map By' Display"
+            },
+            {
+                "name": "defaultAggregateByColumnName",
+                "displayAs": "Aggregate By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "float", "currency"],
+                "selectExcludeBy": "fieldsNotAvailableAsAggregateByColumns",
+                "tab": "Controls",
+                "conditionsType": "some",
+                "conditions": [
+                    [
+                        {
+                            "type": "setting",
+                            "name": "displayAggregate",
+                            "value": true
+                        },
+                        {
+                            "type": "setting",
+                            "name": "mapStyle",
+                            "value": ["pin"]
+                        }
+                    ],
+                    {
+                        "type": "setting",
+                        "name": "mapStyle",
+                        "value": ["country", "bubble"]
+                    }
+                ]
+            },
+            {
+                "name": "fieldsNotAvailableAsAggregateByColumns",
+                "displayAs": "Exclude from 'Aggregate By' Display"
+            },
+            {
+                "name": "displayLegend",
+                "displayAs": "Display Legend",
+                "inputType": "toggleRadio",
+                "options": [
+                    {
+                        "label": "Show",
+                        "value": true
+                    },
+                    {
+                        "label": "Hide",
+                        "value": false
+                    }
+                ],
+                "tab": "Controls"
+            },
+            {
+                "name": "sortAlphabetically",
+                "displayAs": "Sort legend alphabetically",
+                "description": "Toggle between sort by weight or sort alphabetically items in legend.",
+                "inputType": "toggle",
+                "tab": "Controls",
+                "condition": {
+                    "type": "setting",
+                    "name": "displayLegend",
+                    "value": true
+                }
+            },
+            {
+                "name": "colorByField",
+                "displayAs": "Color by field",
+                "description": "Mapping Country color to field value. (Heatmap View would only work correctly with the dataset which contain unique countries)",
+                "inputType": "toggle",
+                "tab": "Controls",
+                "condition": {
+                    "type": "setting",
+                    "name": "mapStyle",
+                    "value": "heatmap"
+                }
+            },
+            {
+                "name": "displayAggregate",
+                "displayAs": "Show Aggregate By Menu",
+                "inputType": "toggleRadio",
+                "options": [
+                    {
+                        "label": "Show",
+                        "value": true
+                    },
+                    {
+                        "label": "Hide",
+                        "value": false
+                    }
+                ],
+                "tab": "Controls",
+                "condition": {
+                    "type": "setting",
+                    "name": "mapStyle",
+                    "value": "pin"
+                }
+            }
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "5893845f30cb8a407e6c66c5"
+        },
+        "name": "timeline",
+        "displayAs": "Grouped Gallery",
+        "icon": "icon-grouped-gallery",
+        "thumbnail": "timeline.png",
+        "tabs": ["Controls", "Visuals", "Descriptions"],
+        "scaffold": {
+            "galleryItemConditionsForIconWhenMissingImage": {
+                "conditions": []
+            },
+            "galleryItemConditionsForBackgroundColor": {
+                "conditions": []
+            },
+            "defaultGroupByDuration": "Year",
+            "durationsAvailableForGroupBy": ["Decade", "Year", "Month", "Week", "Day"],
+            "defaultGroupByRange": "1000s",
+            "rangesAvailableForGroupBy": ["10000s", "1000s", "100s", "10s"],
+            "defaultSortOrderDescending": false,
+            "displayFieldTitles": false,
+            "galleryStyle": "image"
+        },
+        "settings": [
+            {
+                "name": "defaultSortOrderDescending",
+                "displayAs": "Default Sort Order",
+                "inputType": "toggleRadio",
+                "options": [
+                    {
+                        "label": "Ascending",
+                        "value": false
+                    },
+                    {
+                        "label": "Descending",
+                        "value": true
+                    }
+                ],
+                "description": "Change the default order that items in Gallery are displayed in.",
+                "tab": "Controls"
+            },
+            {
+                "name": "largeTilesWithCaptions",
+                "displayAs": "Display Large Tiles with Captions",
+                "inputType": "toggle",
+                "tab": "Controls"
+            },
+            {
+                "name": "defaultSortByColumnName",
+                "displayAs": "Sort By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "selectExcludeBy": "fieldsNotAvailableAsSortByColumns",
+                "tab": "Controls"
+            },
+            {
+                "name": "fieldsNotAvailableAsSortByColumns",
+                "displayAs": "Exclude from 'Sort By' Display"
+            },
+            {
+                "name": "defaultGroupByColumnName",
+                "displayAs": "Group By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "selectExcludeBy": "fieldsNotAvailableAsGroupByColumns",
+                "tab": "Controls",
+                "dependsOnSortBy": true
+            },
+            {
+                "name": "fieldsNotAvailableAsGroupByColumns",
+                "displayAs": "Exclude from 'Group By Column' Display"
+            },
+            {
+                "name": "defaultGroupByDuration",
+                "displayAs": "Segment By Duration",
+                "inputType": "menu",
+                "selectFrom": "duration",
+                "selectExcludeBy": "durationsAvailableForGroupBy",
+                "tab": "Controls",
+                "durations": ["Decade", "Year", "Month", "Week", "Day"]
+            },
+            {
+                "name": "durationsAvailableForGroupBy",
+                "displayAs": "Exclude from 'Group By Duration' Display"
+            },
+            {
+                "name": "defaultGroupByRange",
+                "displayAs": "Segment By Range",
+                "inputType": "menu",
+                "selectFrom": "range",
+                "selectExcludeBy": "rangesAvailableForGroupBy",
+                "tab": "Controls",
+                "ranges": ["10000s", "1000s", "100s", "10s"]
+            },
+            {
+                "name": "rangesAvailableForGroupBy",
+                "displayAs": "Exclude from 'Group By Range' Display"
+            },
+            {
+                "name": "displayFieldTitles",
+                "displayAs": "Display Field Titles",
+                "inputType": "toggle",
+                "tab": "Controls",
+                "condition": {
+                    "type": "setting",
+                    "name": "largeTilesWithCaptions",
+                    "value": true
+                }
+            },
+            {
+                "name": "displaySortFieldText",
+                "displayAs": "Display Sort Field Text",
+                "inputType": "toggle",
+                "borderBottom": true,
+                "tab": "Controls",
+                "description": "Display the value for the field being sorted on in the tile.",
+                "condition": {
+                    "type": "setting",
+                    "name": "largeTilesWithCaptions",
+                    "value": true
+                }
+            },
+            {
+                "name": "galleryStyle",
+                "displayAs": "Gallery Style",
+                "inputType": "toggleRadio",
+                "bottomDescription": true,
+                "borderBottom": true,
+                "options": [
+                    {
+                        "label": "Image Gallery",
+                        "value": "image"
+                    },
+                    {
+                        "label": "Icon Gallery",
+                        "value": "icon"
+                    },
+                    {
+                        "label": "Heatmap Gallery",
+                        "value": "heatmap"
+                    }
+                ],
+                "tab": "Visuals"
+            },
+            {
+                "name": "galleryItemConditionsForBackgroundColor",
+                "displayAs": "Mapping Background Color to Field Value",
+                "inputType": "backgroundColorMapping",
+                "tab": "Visuals",
+                "condition": {
+                    "type": "setting",
+                    "name": "galleryStyle",
+                    "value": "heatmap"
+                }
+            },
+            {
+                "name": "galleryItemConditionsForIconWhenMissingImage",
+                "displayAs": "Display Icons in Tiles",
+                "description": "You can assign icons corresponding with fields in your data to display in your tiles. Start by selecting a field below. Then, enter the name of the item you want to assign and icon to (e.g. if your field is \"Genre\", you could enter \"Action\"). Finally, choose an icon to match. (Note that icons need to be uploaded through your <a href=\"/dashboard/team/icons\" target=\"_blank\">Team Settings panel</a>.)",
+                "inputType": "iconMapping",
+                "tab": "Visuals",
+                "condition": {
+                    "type": "setting",
+                    "name": "galleryStyle",
+                    "value": "icon"
+                }
+            }
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "58a389e40fd415ec0cf784f2"
+        },
+        "name": "globe",
+        "displayAs": "Globe",
+        "icon": "icon-globe",
+        "thumbnail": "globe.png",
+        "tabs": ["Controls", "Descriptions"],
+        "scaffold": {
+            "pointColor": "#005CB5"
+        },
+        "settings": [
+            {
+                "name": "pointColor",
+                "displayAs": "Continent Color",
+                "description": "Select a color for the continents",
+                "inputType": "colorpicker",
+                "tab": "Descriptions"
+            },
+            {
+                "name": "originLatitude",
+                "displayAs": "Origin Latitude",
+                "inputType": "select",
+                "selectFrom": "column",
+                "tab": "Controls"
+            },
+            {
+                "name": "originLongitude",
+                "displayAs": "Origin Longitude",
+                "inputType": "select",
+                "selectFrom": "column",
+                "tab": "Controls"
+            },
+            {
+                "name": "destinationLatitude",
+                "displayAs": "Destination Latitude (optional)",
+                "inputType": "select",
+                "selectFrom": "column",
+                "tab": "Controls"
+            },
+            {
+                "name": "destinationLongitude",
+                "displayAs": "Destination Longitude (optional)",
+                "inputType": "select",
+                "selectFrom": "column",
+                "tab": "Controls"
+            }
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "58cc6ad39fe3ed5c3af420e0"
+        },
+        "name": "scatterplot",
+        "displayAs": "Scatterplot",
+        "icon": "icon-scatterplot",
+        "thumbnail": "scatterplot.png",
+        "tabs": ["Controls", "Descriptions"],
+        "settings": [
+            {
+                "name": "defaultXAxisField",
+                "displayAs": "X Axis",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "float", "date", "percent", "currency"],
+                "tab": "Controls",
+                "selectExcludeBy": "fieldsNotAvailableAsdefaultXAxisFieldColumns"
+            },
+            {
+                "name": "fieldsNotAvailableAsdefaultXAxisFieldColumns",
+                "displayAs": "Exclude from 'X Axis' Display"
+            },
+            {
+                "name": "defaultYAxisField",
+                "displayAs": "Y Axis",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "float", "date", "percent", "currency"],
+                "tab": "Controls",
+                "selectExcludeBy": "fieldsNotAvailableAsdefaultYAxisFieldColumns"
+            },
+            {
+                "name": "fieldsNotAvailableAsdefaultYAxisFieldColumns",
+                "displayAs": "Exclude from 'Y Axis' Display"
+            },
+            {
+                "name": "defaultAggregateByColumnName",
+                "displayAs": "Bubble Size",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "float", "percent", "currency"],
+                "selectExcludeBy": "fieldsNotAvailableAsAggregateByColumns",
+                "tab": "Controls"
+            },
+            {
+                "name": "fieldsNotAvailableAsAggregateByColumns",
+                "displayAs": "Exclude from 'Bubble Size' Display"
+            }
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "592f64090fd415ec0cf787ba"
+        },
+        "name": "table",
+        "displayAs": "Table",
+        "icon": "icon-table",
+        "thumbnail": "table.png",
+        "tabs": ["Controls", "Descriptions"],
+        "scaffold": {
+            "defaultSortOrderDescending": false
+        },
+        "settings": [
+            {
+                "name": "defaultSortByColumnName",
+                "displayAs": "Default Sort By Column",
+                "inputType": "select",
+                "selectFrom": "column",
+                "tab": "Controls"
+            },
+            {
+                "name": "defaultSortOrderDescending",
+                "displayAs": "Default Sort Order",
+                "inputType": "toggleRadio",
+                "options": [
+                    {
+                        "label": "Ascending",
+                        "value": false
+                    },
+                    {
+                        "label": "Descending",
+                        "value": true
+                    }
+                ],
+                "description": "Change the default order that rows in the table are displayed in.",
+                "tab": "Controls"
+            },
+            {
+                "name": "fieldsNotAvailable",
+                "displayAs": "Exclude the Following Columns",
+                "inputType": "multiselect",
+                "selectFrom": "column",
+                "tab": "Controls"
+            },
+            {
+                "name": "columnWidths",
+                "displayAs": "Specify Table Column Widths",
+                "description": "By default, the columns in the table are all the same width. You can assign widths corresponding with fields in your data. Start by selecting a field below. Then, enter the width as a percentage. Any columns without a specified width will be evenly spaced out.",
+                "inputType": "widthMapping",
+                "tab": "Controls"
+            }
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "589384c330cb8a407e6c66cb"
+        },
+        "name": "gallery",
+        "displayAs": "Gallery",
+        "icon": "icon-gallery",
+        "thumbnail": "gallery.png",
+        "tabs": ["Controls", "Visuals", "Descriptions"],
+        "scaffold": {
+            "defaultSortOrderDescending": false,
+            "displayFieldTitles": false,
+            "galleryItemConditionsForIconWhenMissingImage": {
+                "conditions": []
+            },
+            "galleryItemConditionsForBackgroundColor": {
+                "conditions": []
+            },
+            "galleryStyle": "image"
+        },
+        "settings": [
+            {
+                "name": "defaultSortOrderDescending",
+                "displayAs": "Default Sort Order",
+                "inputType": "toggleRadio",
+                "options": [
+                    {
+                        "label": "Ascending",
+                        "value": false
+                    },
+                    {
+                        "label": "Descending",
+                        "value": true
+                    }
+                ],
+                "description": "Change the default order that items in Gallery are displayed in.",
+                "tab": "Controls"
+            },
+            {
+                "name": "fieldsNotAvailableAsSortByColumns",
+                "displayAs": "Exclude from 'Sort By' and 'Display Additional Text' Displays"
+            },
+            {
+                "name": "displayFieldTitles",
+                "displayAs": "Display Field Titles",
+                "inputType": "toggle",
+                "tab": "Controls"
+            },
+            {
+                "name": "displaySortFieldText",
+                "displayAs": "Display Sort Field Text",
+                "inputType": "toggle",
+                "borderBottom": true,
+                "tab": "Controls",
+                "description": "Display the value for the field being sorted on in the tile."
+            },
+            {
+                "name": "defaultSortByColumnName",
+                "displayAs": "Sort By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "selectExcludeBy": "fieldsNotAvailableAsSortByColumns",
+                "tab": "Controls"
+            },
+            {
+                "name": "galleryStyle",
+                "displayAs": "Gallery Style",
+                "inputType": "toggleRadio",
+                "bottomDescription": true,
+                "borderBottom": true,
+                "options": [
+                    {
+                        "label": "Image Gallery",
+                        "value": "image"
+                    },
+                    {
+                        "label": "Icon Gallery",
+                        "value": "icon"
+                    },
+                    {
+                        "label": "Heatmap Gallery",
+                        "value": "heatmap"
+                    }
+                ],
+                "tab": "Visuals"
+            },
+            {
+                "name": "galleryItemConditionsForBackgroundColor",
+                "displayAs": "Mapping Background Color to Field Value",
+                "inputType": "backgroundColorMapping",
+                "tab": "Visuals",
+                "condition": {
+                    "type": "setting",
+                    "name": "galleryStyle",
+                    "value": "heatmap"
+                }
+            },
+            {
+                "name": "secondaryColumnTileShow",
+                "displayAs": "Display Additional Text",
+                "inputType": "toggle",
+                "tab": "Visuals",
+                "condition": {
+                    "type": "setting",
+                    "name": "galleryStyle",
+                    "value": "heatmap"
+                }
+            },
+            {
+                "name": "secondaryColumnTileDisplay",
+                "selectFrom": "column",
+                "inputType": "checkbox",
+                "selectExcludeBy": "fieldsNotAvailableAsTileDisplayColumns",
+                "tab": "Visuals",
+                "condition": [
+                    {
+                        "type": "setting",
+                        "name": "galleryStyle",
+                        "value": "heatmap"
+                    },
+                    {
+                        "type": "setting",
+                        "name": "secondaryColumnTileShow",
+                        "value": true
+                    }
+                ]
+            },
+            {
+                "name": "galleryItemConditionsForIconWhenMissingImage",
+                "displayAs": "Display Icons in Tiles",
+                "description": "You can assign icons corresponding with fields in your data to display in your tiles. Start by selecting a field below. Then, enter the name of the item you want to assign and icon to (e.g. if your field is \"Genre\", you could enter \"Action\"). Finally, choose an icon to match. (Note that icons need to be uploaded through your <a href=\"/dashboard/team/icons\" target=\"_blank\">Team Settings panel</a>.)",
+                "inputType": "iconMapping",
+                "tab": "Visuals",
+                "condition": {
+                    "type": "setting",
+                    "name": "galleryStyle",
+                    "value": "icon"
+                }
+            }
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "5a383fb0e27fb85faffffe42"
+        },
+        "name": "areaChart",
+        "displayAs": "Area Chart",
+        "icon": "icon-area-chart",
+        "thumbnail": "area-chart.png",
+        "tabs": ["Controls", "Annotations", "Descriptions", "Advanced"],
+        "scaffold": {
+            "valuesToExcludeByOriginalKey": [],
+            "simpleChart": false,
+            "outputInFormat": [],
+            "annotations": {
+                "benchmarks": [],
+                "overlayText": {
+                    "text": ""
+                }
+            },
+            "displayNavigationChart": true,
+            "defaultGroupByDuration": "None",
+            "durationsAvailableForGroupBy": ["None", "Year", "Month", "Day"]
+        },
+        "settings": [
+            {
+                "name": "simpleChart",
+                "displayAs": "Data Format",
+                "inputType": "toggleRadio",
+                "bottomDescription": true,
+                "borderBottom": true,
+                "options": [
+                    {
+                        "label": "Yes",
+                        "value": false
+                    },
+                    {
+                        "label": "No",
+                        "value": true
+                    }
+                ],
+                "tab": "Controls"
+            },
+            {
+                "name": "defaultGroupByColumnName",
+                "displayAs": "Chart By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "date", "float", "percent", "currency"],
+                "selectExcludeBy": "fieldsNotAvailableAsGroupByColumns",
+                "tab": "Controls"
+            },
+            {
+                "name": "fieldsNotAvailableAsGroupByColumns",
+                "displayAs": "Exclude from 'Chart By' Display"
+            },
+            {
+                "name": "defaultStackByColumnName",
+                "displayAs": "Stack By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "selectExcludeBy": "fieldsNotAvailableAsStackByColumns",
+                "tab": "Controls",
+                "type": "stacked"
+            },
+            {
+                "name": "fieldsNotAvailableAsStackByColumns",
+                "displayAs": "Exclude from 'Stack By' Display"
+            },
+            {
+                "name": "defaultAggregateByColumnName",
+                "displayAs": "Aggregate By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "currency", "float"],
+                "selectExcludeBy": "fieldsNotAvailableAsAggregateByColumns",
+                "tab": "Controls",
+                "type": "stacked"
+            },
+            {
+                "name": "fieldsNotAvailableAsAggregateByColumns",
+                "displayAs": "Exclude from 'Aggregate By' Display"
+            },
+            {
+                "name": "areas",
+                "displayAs": "Areas",
+                "inputType": "multiselect",
+                "selectFrom": "column",
+                "description": "Select the fields to display in the area graph.",
+                "restrictColumnDataType": ["integer", "float", "percent", "currency"],
+                "selectExcludeBy": "fieldsNotAvailableAsAreaColumns",
+                "tab": "Controls",
+                "type": "simple"
+            },
+            {
+                "name": "fieldsNotAvailableAsAreaColumns",
+                "displayAs": "Exclude from 'Areas' Display"
+            },
+            {
+                "name": "valuesToExcludeByOriginalKey",
+                "displayAs": "Values to Exclude in Display",
+                "inputType": "keyValue",
+                "keyInputType": "select",
+                "keySelectFrom": "column",
+                "valueInputType": "multivalueTextbox",
+                "tab": "Advanced"
+            },
+            {
+                "name": "outputInFormat",
+                "displayAs": "Override Coercion Scheme Output Format",
+                "inputType": "keyValue",
+                "keyInputType": "select",
+                "keySelectFrom": "column",
+                "valueInputType": "textbox",
+                "valueNestedField": "format",
+                "restrictColumnDataType": "date",
+                "tab": "Advanced"
+            },
+            {
+                "inputType": "annotationsOverlayText",
+                "tab": "Annotations"
+            },
+            {
+                "inputType": "annotationsBenchmarks",
+                "tab": "Annotations"
+            },
+            {
+                "name": "units",
+                "displayAs": "Display Units",
+                "description": "Enter the unit of measure to use in the visualization overall.",
+                "inputType": "select",
+                "selectFrom": "unit",
+                "tab": "Controls"
+            },
+            {
+                "name": "displayNavigationChart",
+                "displayAs": "Display Navigation Chart",
+                "inputType": "toggle",
+                "tab": "Controls",
+                "description": "Displays a navigation control to focus on a subset of the chart",
+                "borderBottom": true
+            },
+            {
+                "name": "renameMultipleText",
+                "displayAs": "Multiple selected Y axis label",
+                "tab": "Controls",
+                "type": "simple",
+                "inputType": "textbox",
+                "placeholder": "(multiple selected)",
+                "condition": {
+                    "type": "setting",
+                    "name": "areas",
+                    "minLength": 2
+                }
+            },
+            {
+                "name": "defaultSegmentByDuration",
+                "displayAs": "Segment By",
+                "inputType": "menu",
+                "selectFrom": "duration",
+                "selectExcludeBy": "durationsAvailableForSegmentBy",
+                "tab": "Controls",
+                "durations": ["None", "Year", "Month", "Day"]
+            }
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "5a751238176777ce7078e018"
+        },
+        "name": "regionalMap",
+        "displayAs": "Regional Map",
+        "icon": "icon-regional-map",
+        "thumbnail": "regional-map.png",
+        "tabs": ["Controls", "Mappings", "Visuals", "Descriptions"],
+        "scaffold": {
+            "region": "US/state",
+            "regionField": "",
+            "parentRegionField": "",
+            "grandparentRegionField": "",
+            "displayLegend": true,
+            "colorScheme": "default"
+        },
+        "settings": [
+            {
+                "name": "defaultAggregateByColumnName",
+                "displayAs": "Aggregate By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "float", "percent", "currency"],
+                "selectExcludeBy": "fieldsNotAvailableAsAggregateByColumns",
+                "tab": "Controls"
+            },
+            {
+                "name": "fieldsNotAvailableAsAggregateByColumns",
+                "displayAs": "Exclude from 'Aggregate By' Display"
+            },
+            {
+                "name": "displayLegend",
+                "displayAs": "Display Legend",
+                "inputType": "toggleRadio",
+                "options": [
+                    {
+                        "label": "Show",
+                        "value": true
+                    },
+                    {
+                        "label": "Hide",
+                        "value": false
+                    }
+                ],
+                "tab": "Mappings"
+            },
+            {
+                "inputType": "regionMatchBy",
+                "tab": "Mappings"
+            },
+            {
+                "name": "colorScheme",
+                "displayAs": "Color Scheme",
+                "description": "Select the color scheme",
+                "inputType": "toggleRadio",
+                "borderBottom": true,
+                "options": [
+                    {
+                        "label": "Default (White to Accent Color)",
+                        "value": "default"
+                    },
+                    {
+                        "label": "Brown to Blue/Green (Diverging)",
+                        "value": "interpolateBrBG"
+                    },
+                    {
+                        "label": "Purple to Green (Diverging)",
+                        "value": "interpolatePRGn"
+                    },
+                    {
+                        "label": "Pink to Yellow/Green (Diverging)",
+                        "value": "interpolatePiYG"
+                    },
+                    {
+                        "label": "Purple to Orange (Diverging)",
+                        "value": "interpolatePuOr"
+                    },
+                    {
+                        "label": "Red to Blue (Diverging)",
+                        "value": "interpolateRdBu"
+                    },
+                    {
+                        "label": "Red to Gray (Diverging)",
+                        "value": "interpolateRdGy"
+                    },
+                    {
+                        "label": "Red to Yellow to Blue (Diverging)",
+                        "value": "interpolateRdYlBu"
+                    },
+                    {
+                        "label": "Red to Yellow to Green (Diverging)",
+                        "value": "interpolateRdYlGn"
+                    },
+                    {
+                        "label": "Blue to Green (Sequential)",
+                        "value": "interpolateBuGn"
+                    },
+                    {
+                        "label": "Blue to Purple (Sequential)",
+                        "value": "interpolateBuPu"
+                    },
+                    {
+                        "label": "Green to Blue (Sequential)",
+                        "value": "interpolateGnBu"
+                    },
+                    {
+                        "label": "Orange to Red (Sequential)",
+                        "value": "interpolateOrRd"
+                    },
+                    {
+                        "label": "Purple to Blue to Green (Sequential)",
+                        "value": "interpolatePuBuGn"
+                    },
+                    {
+                        "label": "Purple to Blue (Sequential)",
+                        "value": "interpolatePuBu"
+                    },
+                    {
+                        "label": "Purple to Red (Sequential)",
+                        "value": "interpolatePuRd"
+                    },
+                    {
+                        "label": "Red to Purple (Sequential)",
+                        "value": "interpolateRdPu"
+                    },
+                    {
+                        "label": "Yellow to Green to Blue (Sequential)",
+                        "value": "interpolateYlGnBu"
+                    },
+                    {
+                        "label": "Yellow to Green (Sequential)",
+                        "value": "interpolateYlGn"
+                    },
+                    {
+                        "label": "Yellow to Orange to Brown (Sequential)",
+                        "value": "interpolateYlOrBr"
+                    },
+                    {
+                        "label": "Yellow to Orange to Red (Sequential)",
+                        "value": "interpolateYlOrRd"
+                    }
+                ],
+                "tab": "Visuals"
+            },
+            {
+                "name": "useLogScale",
+                "displayAs": "Use Logarithmic Scale",
+                "inputType": "toggle",
+                "tab": "Visuals",
+                "description": "Select this option to map colors logarithmically as opposed to linearly. Use the logarithmic scale to exaggerate the color differences between regions."
+            }
+        ],
+        "lookup": {
+            "regionDefinitions": [
+                {
+                    "name": "US (States)",
+                    "id": "US/state",
+                    "matchByOptions": [
+                        {
+                            "name": "Name",
+                            "description": "",
+                            "property": "name",
+                            "example": "Florida, FL",
+                            "unique": true
+                        }
+                    ]
+                },
+                {
+                    "name": "US (Counties)",
+                    "id": "US/county",
+                    "matchByOptions": [
+                        {
+                            "name": "Name",
+                            "description": "",
+                            "property": "name",
+                            "example": "Broward, Broward County",
+                            "unique": false
+                        }
+                    ],
+                    "parent": "US/state"
+                },
+                {
+                    "name": "China (Provinces)",
+                    "id": "CN/province",
+                    "matchByOptions": [
+                        {
+                            "name": "Name",
+                            "description": "",
+                            "property": "name",
+                            "example": "Inner Mongolia, Inner Mongol, Nèi Měnggǔ, 内蒙古",
+                            "unique": true
+                        }
+                    ]
+                },
+                {
+                    "name": "China (Prefectures)",
+                    "id": "CN/prefecture",
+                    "matchByOptions": [
+                        {
+                            "name": "Name",
+                            "description": "",
+                            "property": "name",
+                            "example": "Anqing, Anqing Prefecture City, Ānqìng, Ānqìng Dìjíshì, 安庆市",
+                            "unique": false
+                        }
+                    ],
+                    "parent": "CN/province"
+                },
+                {
+                    "name": "China (Counties)",
+                    "id": "CN/county",
+                    "matchByOptions": [
+                        {
+                            "name": "Name",
+                            "description": "",
+                            "property": "name",
+                            "example": "Yingjiang, Yingjiang County",
+                            "unique": false,
+                            "useGrandparent": true
+                        }
+                    ],
+                    "parent": "CN/prefecture",
+                    "grandparent": "CN/province"
+                },
+                {
+                    "name": "Europe (Countries)",
+                    "id": "EU",
+                    "matchByOptions": [
+                        {
+                            "name": "Name",
+                            "description": "",
+                            "property": "name",
+                            "example": "France",
+                            "unique": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ASEAN (Countries)",
+                    "id": "ASEAN",
+                    "matchByOptions": [
+                        {
+                            "name": "Name",
+                            "description": "",
+                            "property": "name",
+                            "example": "Indonesia",
+                            "unique": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Asia Pacific (Countries)",
+                    "id": "APAC",
+                    "matchByOptions": [
+                        {
+                            "name": "Name",
+                            "description": "",
+                            "property": "name",
+                            "example": "Australia",
+                            "unique": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Japan (Prefectures)",
+                    "id": "JP/prefecture",
+                    "matchByOptions": [
+                        {
+                            "name": "Name",
+                            "description": "",
+                            "property": "name",
+                            "example": "Hokkaidō, 北海道",
+                            "unique": true
+                        }
+                    ]
+                },
+                {
+                    "name": "South Korea (Provinces)",
+                    "id": "KR/province",
+                    "matchByOptions": [
+                        {
+                            "name": "Name",
+                            "description": "",
+                            "property": "name",
+                            "example": "Incheon, 인천광역시",
+                            "unique": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Australia (States and Territories)",
+                    "id": "AU/state",
+                    "matchByOptions": [
+                        {
+                            "name": "Name",
+                            "description": "",
+                            "property": "name",
+                            "example": "New South Wales",
+                            "unique": true
+                        }
+                    ]
+                },
+                {
+                    "name": "India (States and Union Territories)",
+                    "id": "IN/state",
+                    "matchByOptions": [
+                        {
+                            "name": "Name",
+                            "description": "",
+                            "property": "name",
+                            "example": "Haryana",
+                            "unique": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Taiwan (Special municipalities, cities and counties)",
+                    "id": "TW/county",
+                    "matchByOptions": [
+                        {
+                            "name": "Name",
+                            "description": "",
+                            "property": "name",
+                            "example": "Kinmen County, Jīnmén Xiàn, 金門縣",
+                            "unique": true
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "_id": {
+            "$oid": "5a9f13c2a36fdf0b571d54e0"
+        },
+        "name": "bubbleChart",
+        "displayAs": "Bubble Chart",
+        "icon": "icon-bubble-chart",
+        "thumbnail": "bubble-chart.png",
+        "tabs": ["Controls", "Descriptions"],
+        "settings": [
+            {
+                "name": "defaultXAxisField",
+                "displayAs": "X Axis",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "float", "percent", "currency"],
+                "tab": "Controls",
+                "selectExcludeBy": "fieldsNotAvailableAsdefaultXAxisFieldColumns"
+            },
+            {
+                "name": "fieldsNotAvailableAsdefaultXAxisFieldColumns",
+                "displayAs": "Exclude from 'X Axis' Display"
+            },
+            {
+                "name": "defaultYAxisField",
+                "displayAs": "Y Axis",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "float", "percent", "currency"],
+                "tab": "Controls",
+                "selectExcludeBy": "fieldsNotAvailableAsdefaultYAxisFieldColumns"
+            },
+            {
+                "name": "fieldsNotAvailableAsdefaultYAxisFieldColumns",
+                "displayAs": "Exclude from 'Y Axis' Display"
+            },
+            {
+                "name": "defaultRadiusField",
+                "displayAs": "Bubble Size",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "float", "percent", "currency"],
+                "tab": "Controls",
+                "selectExcludeBy": "fieldsNotAvailableAsdefaultRadiusFieldColumns"
+            },
+            {
+                "name": "fieldsNotAvailableAsdefaultRadiusFieldColumns",
+                "displayAs": "Exclude from 'Bubble Size' Display"
+            },
+            {
+                "name": "defaultGroupByColumnName",
+                "displayAs": "Group By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["date"],
+                "tab": "Controls",
+                "selectExcludeBy": "fieldsNotAvailableAsGroupByColumns"
+            },
+            {
+                "name": "fieldsNotAvailableAsGroupByColumns",
+                "displayAs": "Exclude from 'Group By' Display"
+            }
+        ]
+    },
+    {
+        "_id": {
+            "$oid": "5c41df9f0e35d500544a46c1"
+        },
+        "name": "treemap",
+        "displayAs": "Treemap",
+        "icon": "icon-treemap",
+        "thumbnail": "treemap.png",
+        "tabs": ["Controls", "Descriptions", "Advanced"],
+        "scaffold": {
+            "defaultAggregateByColumnName": "Number of Items",
+            "valuesToExcludeByOriginalKey": [],
+            "defaultSegmentByDuration": "None",
+            "durationsAvailableForSegmentBy": ["None", "Year", "Month", "Day"]
+        },
+        "settings": [
+            {
+                "name": "defaultChartByColumnName",
+                "displayAs": "Chart By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "selectExcludeBy": "fieldsNotAvailableAsChartByColumns",
+                "tab": "Controls"
+            },
+            {
+                "name": "fieldsNotAvailableAsChartByColumns",
+                "displayAs": "Exclude from 'Chart By' Display"
+            },
+            {
+                "name": "defaultAggregateByColumnName",
+                "displayAs": "Aggregate By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "restrictColumnDataType": ["integer", "float", "percent", "currency"],
+                "selectExcludeBy": "fieldsNotAvailableAsAggregateByColumns",
+                "tab": "Controls"
+            },
+            {
+                "name": "fieldsNotAvailableAsAggregateByColumns",
+                "displayAs": "Exclude from 'Aggregate By' Display"
+            },
+            {
+                "name": "defaultGroupByColumnName",
+                "displayAs": "Group By",
+                "inputType": "menu",
+                "selectFrom": "column",
+                "tab": "Controls",
+                "selectExcludeBy": "fieldsNotAvailableAsGroupByColumns"
+            },
+            {
+                "name": "fieldsNotAvailableAsGroupByColumns",
+                "displayAs": "Exclude from 'Group By' Display"
+            },
+            {
+                "name": "defaultSegmentByDuration",
+                "displayAs": "Segment By",
+                "inputType": "menu",
+                "selectFrom": "duration",
+                "selectExcludeBy": "durationsAvailableForSegmentBy",
+                "tab": "Controls",
+                "durations": ["None", "Year", "Month", "Day"]
+            },
+            {
+                "name": "valuesToExcludeByOriginalKey",
+                "displayAs": "Exclude the Following Values",
+                "inputType": "keyValue",
+                "keyInputType": "select",
+                "keySelectFrom": "column",
+                "valueInputType": "multivalueTextbox",
+                "tab": "Advanced"
+            }
+        ]
+    }
+]

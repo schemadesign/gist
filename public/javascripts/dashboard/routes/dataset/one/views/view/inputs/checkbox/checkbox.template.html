@@ -1,0 +1,27 @@
+<ul class="dashboard-list user-list form-element">
+    <li
+        ng-repeat="field in ::viewCtrl.availableCheckboxFields[setting.name] track by field"
+        layout="row"
+        layout-align="start center"
+    >
+        <md-checkbox
+            name="Include/exclude"
+            ng-checked="viewCtrl.isFieldIncluded(setting.selectExcludeBy, field, setting.selectFrom)"
+            ng-click="viewCtrl.includeExcludeField(field, setting.selectExcludeBy, setting.selectFrom, viewCtrl.data[setting.name] === field)"
+            aria-label="Include/exclude"
+            flex="10"
+        ></md-checkbox>
+        <span
+            flex="10"
+            class="dashboard-list-icon view"
+            ng-class="{ 'default-view': viewCtrl.data[setting.name] === field }"
+            ng-click="viewCtrl.setDefaultSetting(setting.selectExcludeBy, setting.name, setting.selectFrom, field)"
+        >
+                    <i class="fa fa-lg fa-home" aria-hidden="true"></i>
+                </span>
+        <span ng-if="::setting.selectFrom === 'column'">{{viewCtrl.dataset.fe_displayTitleOverrides[field] || field}}</span>
+        <span ng-if="::['duration', 'range'].includes(setting.selectFrom)">{{field}}</span>
+        <span ng-if="::setting.selectFrom === 'defaultAxis'">{{viewCtrl.defaultAxisLabels[field]}}</span>
+    </li>
+</ul>
+

@@ -1,0 +1,42 @@
+{% if has_google_analytics and not puppeteer %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ env.GOOGLE_ANALYTICS_ID }}"></script>
+    <script>
+        const google_analytics_id = '{{ env.GOOGLE_ANALYTICS_ID }}';
+        const team_analytics_id = '{{ team_analytics_id }}';
+
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {dataLayer.push(arguments);}
+
+        gtag('js', new Date());
+
+        gtag('config', google_analytics_id);
+        if (team_analytics_id) {
+            gtag('config', team_analytics_id);
+        }
+    </script>
+{% endif %}
+<script>
+    if (window.mixpanel) {
+        mixpanel.track('page load');
+
+        var user_id = '{{ user._id }}';
+
+        if (user_id) {
+            mixpanel.identify(user_id);
+
+            mixpanel.people.set({
+                'provider': '{{ user.provider }}',
+            });
+
+            mixpanel.people.increment('page viewed');
+        }
+
+        mixpanel.track('page viewed', {
+            'page name': document.title,
+            'url': window.location.pathname,
+            'vizTitle': '{{ arrayTitle }}',
+            'teamTitle': '{{ team.title }}',
+        });
+    }
+</script>

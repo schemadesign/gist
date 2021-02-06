@@ -1,0 +1,39 @@
+<md-dialog aria-label="Detail View" class="field-dialog">
+    <aa-toolbar title="Detail View Configuration"></aa-toolbar>
+
+    <md-dialog-content>
+        <form name="viewForm">
+            <md-content md-no-ink layout-margin>
+                <p>The Detail View lists all fields for a specific item in your dataset. It appears when clicking on individual items in unit visualizations, such as the Gallery, the Timeline, and the Scatterplot, among others. Select the fields you want to display in the Detail View below.</p>
+
+                <ul class="dashboard-list user-list">
+                    <li
+                        ng-repeat="column in colsAvailable track by column"
+                        layout="row"
+                        layout-align="start center"
+                    >
+                        <md-checkbox
+                            name="Include/exclude"
+                            ng-true-value="false"
+                            ng-false-value="true"
+                            ng-model="data.fe_excludeFieldsObjDetail[column]"
+                            aria-label="Include/exclude"
+                            flex="10"
+                        ></md-checkbox>
+                        <span>{{dataset.fe_displayTitleOverrides[column] || column}}</span>
+                    </li>
+                </ul>
+            </md-content>
+        </form>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="end center">
+        <md-button class="md-dashboard" ng-click="cancel()">
+            <span class="btn-label">Cancel</span>
+        </md-button>
+
+        <md-button class="md-dashboard confirm" ng-click="save()">
+            <span class="btn-label">Save</span>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

@@ -1,0 +1,123 @@
+{% set currentView = "word-cloud" %}
+
+{% extends "../layout/array.njk" %}
+
+{% import "../partials/array-header.njk" as header %}
+
+{% import "../partials/dropdown.njk" as dropdown %}
+{% import "../partials/search.njk" as search %}
+{% import "../partials/filter.njk" as filter %}
+
+{% block content %}
+    <section class="gist-section">
+
+        {{ header.default(arrayTitle, array_source_key, defaultView, team, isPreview, embedded, sharedPage, routePath_base, view_description, revision, defaultFilterObj, isEmbed, showInsightsExplorer, stories, subdomain, env, sharedPageId, lastUpdated) }}
+
+        {% include "../partials/modal/info.njk" %}
+
+        <div class="gist-content" longDesc="{{metaDescription}}">
+
+            <div class="gist-container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="gist-stick"></div>
+                        <div class="gist-controls gist-sort-bar clearfix" style="display:none">
+                            {% include "../partials/accessibility/skip-to-page-bottom.njk" %}
+
+                            {% if viewOptions.search %}
+                                <div class="sort-bar-right gist-pull-right">
+                                    {{
+                                    search.default(
+                                        routePath_base,
+                                        searchCol if searchCol else 'All Fields',
+                                        cols_orderedForSearchByDropdown,
+                                        searchQ if searchQ else "",
+                                        null,
+                                        null,
+                                        revision,
+                                        filterObj
+                                    )
+                                    }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div><!-- .row -->
+            </div><!-- .gist-container-fluid -->
+
+            {% if isFilterActive %}
+                {{
+                filter.default(displayTitleOverrides,
+                    routePath_base | constructedRoutePath(null, {
+                        searchQ: searchQ,
+                        searchCol: searchCol,
+                        sortDirection: sortDirection,
+                        sortBy: sortBy}),
+                    filterObj,
+                    truesByFilterValueByFilterColumnName_forWhichNotToOutputColumnNameInPill,
+                    sharedPage,
+                    false,
+                    'filter-bar-fixed-bottom'
+                )
+                }}
+            {% endif %}
+
+            <div class="gist-container-fluid">
+                <div class="gist-loading">
+                    {% include "../partials/loading.njk" %}
+                </div>
+
+                <div class="gist-no-data" style="display:none">
+                    {% include "../partials/no-data.njk" %}
+                </div>
+
+                <div class="gist-undisplayable-data" style="display:none">
+                    {% include "../partials/undisplayable-data.njk" %}
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="word-cloud"></div>
+                        {% include "../partials/accessibility/skip-to-page-top.njk" %}
+                    </div>
+                </div><!-- .row -->
+
+            </div><!-- .gist-container-fluid -->
+
+        </div><!-- .gist-content -->
+
+    </section>
+
+    {% include "../partials/analytics.njk" %}
+
+{% endblock %}
+
+{% block inlineScript %}
+    {{ super() }}
+
+    <script type="text/javascript" src="/vendors/nunjucks/browser/nunjucks-slim.min.js"></script>
+    <script type="text/javascript" src="/javascripts/build/fe-templates.js"></script>
+
+    <script type="text/javascript" src="/javascripts/build/visualizations/html-visualization/html-visualization.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/html-visualization/word-cloud/word-cloud.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/html-visualization/word-cloud/core-word-cloud.js"></script>
+
+    <script>
+        var options = {
+            viewOptions: {{ viewOptions | dump | safe }},
+            array_source_key: '{{array_source_key}}',
+            sharedPage: {{ sharedPage }},
+            sharedPageId: '{{sharedPageId}}',
+            preview: '{{ isPreview }}',
+            revision: '{{ revision }}',
+            datasetId: '{{datasetId}}',
+            title: '{{arrayTitle}}',
+            format: '{{format}}',
+            puppeteer: {{ (puppeteer and not puppeteerScreenshot) | default(false) }},
+            isEmbed: {{ isEmbed }},
+        };
+    </script>
+
+    <script type="text/javascript" src="/javascripts/build/core-views/word-cloud/main.js"></script>
+{% endblock %}

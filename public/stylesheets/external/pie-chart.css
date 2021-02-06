@@ -1,0 +1,10 @@
+@import url('../views/pie-chart.css');
+
+.gist-pie-chart-main {
+  padding-top: 0;
+}
+
+.gist-pie-chart-main .gist-visualization {
+  width: 100%;
+  height: 100%;
+}

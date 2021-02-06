@@ -1,0 +1,18 @@
+<md-dialog md-no-ink aria-label="Delete Visualization">
+    <aa-toolbar title="Delete Visualization" class="warn" />
+
+    <md-dialog-content layout-padding>
+        <md-content layout="column">
+            <p>
+                Are you sure you want to delete the visualization
+                <strong>{{title}}</strong>?
+            </p>
+            <p>
+                Visualization will be deleted permanently and any visualizations with merged fields dependent on this visualization will not display properly.
+                Please re-configure and re-import any dependent visualizations as needed.
+            </p>
+        </md-content>
+
+        <aa-dialog-actions warn="Remove Visualization" />
+    </md-dialog-content>
+</md-dialog>

@@ -1,0 +1,266 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Object details should return 404 1`] = `
+Object {
+  "body": Object {},
+  "statusCode": 404,
+}
+`;
+
+exports[`Object details should return graph data 1`] = `
+Object {
+  "body": Object {
+    "arrayTitle": "Pokemon",
+    "arrayTitleEscaped": "Pokemon",
+    "array_source_key": "pokemon",
+    "brandColor": Object {
+      "accent": "#005CB5",
+    },
+    "brandWhiteText": true,
+    "dataTypesConversion": Object {
+      "Image URL": Object {
+        "operation": "ToString",
+      },
+      "Max CP": Object {
+        "operation": "ToInteger",
+      },
+      "Max HP": Object {
+        "operation": "ToInteger",
+      },
+      "Name": Object {
+        "operation": "ToString",
+      },
+      "Pokemon No_": Object {
+        "operation": "ToInteger",
+      },
+      "Type 1": Object {
+        "operation": "ToString",
+      },
+      "Type 2": Object {
+        "operation": "ToString",
+      },
+    },
+    "datasetId": "5a42c26e303770207ce8f83b",
+    "defaultFilterObj": Object {},
+    "defaultView": "gallery",
+    "description": "",
+    "fe_galleryItem_htmlForIconFromRowObjWhenMissingImage": null,
+    "fieldKey_objectSubtitle": "",
+    "fieldKey_objectTitle": "Pokemon No_",
+    "fieldKey_originalImageURL": null,
+    "fieldsNotToLinkAsGalleryFilter_byColName": Object {},
+    "filterObj": Object {},
+    "format": "CSV",
+    "globalLibraries": Array [
+      "vendors/jquery/dist/jquery.min.js",
+    ],
+    "hasOriginalImage": false,
+    "has_google_analytics": false,
+    "isPublic": true,
+    "objectDetailsPagination": Object {
+      "next": Object {
+        "id": "5b05346ad7a86407e5ef7841",
+        "title": 5,
+      },
+      "prev": Object {
+        "id": "5b05346ad7a86407e5ef7845",
+        "title": 9,
+      },
+    },
+    "objectIndex": 1,
+    "openDownload": false,
+    "ordered_colNames_sansObjectTitleAndImages": Array [
+      Object {
+        "name": "Image URL",
+        "operation": "ToString",
+        "originalName": "Image URL",
+      },
+      Object {
+        "name": "Max CP",
+        "operation": "ToInteger",
+        "originalName": "Max CP",
+      },
+      Object {
+        "name": "Max HP",
+        "operation": "ToInteger",
+        "originalName": "Max HP",
+      },
+      Object {
+        "name": "Name",
+        "operation": "ToString",
+        "originalName": "Name",
+      },
+      Object {
+        "name": "Type 2",
+        "operation": "ToString",
+        "originalName": "Type 2",
+      },
+      Object {
+        "name": "Type1_overridden",
+        "operation": "ToString",
+        "originalName": "Type 1",
+      },
+    ],
+    "rowObject": Object {
+      "pKey": "2",
+      "published": true,
+      "rowParams": Object {
+        "Image URL": "http://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png",
+        "Max CP": "1,079",
+        "Max HP": "83",
+        "Name": "Bulbasaur",
+        "Pokemon No_": "1",
+        "Type 1": "Grass",
+        "Type 2": "Poison",
+      },
+      "srcDocPKey": "5a42c26e303770207ce8f83b",
+    },
+    "s3Bucket": "arraystesting",
+    "scrapedImages": null,
+    "sharedPage": false,
+    "sourceDoc": Object {
+      "dateOfLastImport": "2019-01-24T09:52:35.201Z",
+      "numberOfRows": 250,
+      "primaryKey": "5a42c26e303770207ce8f83b",
+    },
+    "storiesCount": 1,
+    "team": Object {
+      "admin": Array [
+        "5a42bf07d3bc0b20648290e0",
+      ],
+      "brandColor": Object {
+        "label": "#2A2A2A",
+        "select": "#2A2A2A",
+      },
+      "colorPalette": Array [
+        "#1B6DFC",
+        "#0CB7FA",
+        "#FA79FC",
+        "#FB3705",
+        "#F9D307",
+        "#FA9007",
+        "#7D5807",
+        "#B2E606",
+        "#069908",
+        "#7B07FD",
+      ],
+      "datasourceDescriptions": Array [
+        "5a42c26e303770207ce8f83b",
+        "5b033d64ef29594d18bb18aa",
+      ],
+      "font": "calibre",
+      "hasEnterpriseLicense": false,
+      "pages": Array [
+        "5ac26b456f8073766713bcee",
+        "5ac26b3d6f8073766713bced",
+        "5ac26b506f8073766713bcef",
+        "5ac26b636f8073766713bcf0",
+        "aaa26b456f8073766713bcee",
+      ],
+      "sites": Array [],
+      "subdomain": "glitter",
+      "superTeam": true,
+      "title": "Glitter",
+    },
+    "uid": "pokemon",
+    "user": Object {
+      "_articleEditors": Array [],
+      "_articleViewers": Array [],
+      "_editors": Array [],
+      "_siteEditors": Array [],
+      "_siteViewers": Array [],
+      "_team": Array [
+        "5a42bf30d3bc0b20648290e1",
+      ],
+      "_viewers": Array [],
+      "activated": true,
+      "active": true,
+      "canCreateNewArticle": Array [],
+      "canCreateNewSite": Array [],
+      "canCreateNewViz": Array [],
+      "defaultLoginTeam": Object {
+        "admin": Array [
+          "5a42bf07d3bc0b20648290e0",
+        ],
+        "brandColor": Object {
+          "label": "#2A2A2A",
+          "select": "#2A2A2A",
+        },
+        "colorPalette": Array [
+          "#1B6DFC",
+          "#0CB7FA",
+          "#FA79FC",
+          "#FB3705",
+          "#F9D307",
+          "#FA9007",
+          "#7D5807",
+          "#B2E606",
+          "#069908",
+          "#7B07FD",
+        ],
+        "datasourceDescriptions": Array [
+          "5a42c26e303770207ce8f83b",
+          "5b033d64ef29594d18bb18aa",
+        ],
+        "font": "calibre",
+        "hasEnterpriseLicense": false,
+        "pages": Array [
+          "5ac26b456f8073766713bcee",
+          "5ac26b3d6f8073766713bced",
+          "5ac26b506f8073766713bcef",
+          "5ac26b636f8073766713bcf0",
+          "aaa26b456f8073766713bcee",
+        ],
+        "sites": Array [],
+        "subdomain": "glitter",
+        "superTeam": true,
+        "title": "Glitter",
+      },
+      "email": "user@schemadesign.com",
+      "firstName": "Maitland",
+      "hash": "dc449e96c930ca46653ec867c448719fab39dd85c4b91c1643d2faad140f24e711da13133e34ee4da0d3a5a2ca154edd4bfaeb9cf80cb9af57bce4d7ea1b94ce",
+      "lastName": "McConnell",
+      "lockUntil": 1,
+      "loginAttempts": 0,
+      "provider": "local",
+      "salt": "test",
+      "sampleImported": false,
+      "signedUp": false,
+    },
+    "viewType": "gallery",
+    "view_visibility": Object {
+      "gallery": Object {
+        "defaultSortByColumnName": "Image URL",
+        "visible": true,
+      },
+      "pieChart": Object {
+        "defaultGroupByColumnName": "Name",
+        "visible": true,
+      },
+      "pieSet": Object {
+        "defaultAggregateByColumnName": "Max HP",
+        "defaultChartByColumnName": "Type 1",
+        "defaultGroupByColumnName": "Type 2",
+        "fieldsNotAvailableAsAggregateByColumns": Array [],
+        "fieldsNotAvailableAsChartByColumns": Array [],
+        "fieldsNotAvailableAsGroupByColumns": Array [],
+        "valuesToExcludeByOriginalKey": Array [],
+        "visible": true,
+      },
+      "timeline": Object {
+        "visible": true,
+      },
+      "treemap": Object {
+        "defaultAggregateByColumnName": "Max HP",
+        "defaultChartByColumnName": "Name",
+        "defaultGroupByColumnName": "Type 1",
+        "fieldsNotAvailableAsAggregateByColumns": Array [],
+        "fieldsNotAvailableAsChartByColumns": Array [],
+        "fieldsNotAvailableAsGroupByColumns": Array [],
+        "visible": true,
+      },
+    },
+  },
+  "statusCode": 200,
+}
+`;

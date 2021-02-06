@@ -1,0 +1,13 @@
+<p class="data-format-question">
+    Select the visual style of your gallery below.
+    <a ng-click="showExplanation = !showExplanation">
+        <span ng-if="!showExplanation">Learn more</span>
+        <span ng-if="showExplanation">Close</span>
+    </a>
+</p>
+
+<div ng-if="showExplanation" class="data-format-explanation">
+    <p>
+        Your gallery can have different styles. The <strong>Image Gallery</strong> is the default, and will display either text only or images specified in your data source. The <strong>Icon Gallery</strong> will let you choose images to represent specific categories of data that repeat for each tile, for example images for Male and Female. Finally, the <strong>Heatmap Gallery</strong> lets you display tiles with color backgrounds, mapped to fields in your data. Color mappings are defined in General Settings.
+    </p>
+</div>

@@ -1,0 +1,11 @@
+<footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="site-info col-sm-12">
+                <span>&copy; {{ copyrightYear }} Schema Design, LLC</span>
+                <span><a href="mailto:Schema Design<info@schemadesign.com>">info@schemadesign.com</a></span>
+                <span ng-if="env.node_env === 'development' || user.role === 'superAdmin'">{{env.git.branch|lowercase}}.{{env.git.commit}} v{{env.version}}</span>
+            </div>
+        </div>
+    </div>
+</footer>

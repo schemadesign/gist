@@ -1,0 +1,24 @@
+{% set currentView = "map" %}
+
+{% extends "../layout/array.njk" %}
+
+{% import "../partials/array-header.njk" as header %}
+
+{% import "../partials/dropdown.njk" as dropdown %}
+{% import "../partials/search.njk" as search %}
+{% import "../partials/filter.njk" as filter %}
+
+{% block headSuffix %}
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+{% endblock %}
+
+{% block content %}
+    {% include "./content/map-content.njk" %}
+    {% include "../partials/analytics.njk" %}
+{% endblock %}
+
+{% block inlineScript %}
+    {{ super() }}
+
+    <script type="text/javascript" src="/javascripts/build/core-views/map/map-init.js"></script>
+{% endblock %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js page-signup" ng-app="signupModule">
+    <head>
+
+        {% block headSuffix %}
+            <title>Signup - Gist</title>
+        {% endblock %}
+
+        {% include "../partials/base_header.njk" %}
+        {% include "../partials/analytics.njk" %}
+        <base href="/">
+
+        <script type="text/javascript" src="/vendors/babel-polyfill/dist/polyfill.min.js"></script>
+        <script type="text/javascript" src="/vendors/angular/angular.min.js"></script>
+        <script type="text/javascript" src="/vendors/@uirouter/core/_bundles/ui-router-core.min.js"></script>
+        <script type="text/javascript" src="/vendors/@uirouter/angularjs/release/ui-router-angularjs.min.js"></script>
+        <script type="text/javascript" src="/vendors/@uirouter/angularjs/release/stateEvents.min.js"></script>
+        <script type="text/javascript" src="/vendors/angular-messages/angular-messages.min.js"></script>
+        <script type="text/javascript" src="/vendors/angular-resource/angular-resource.min.js"></script>
+        <script type="text/javascript" src="/vendors/angular-animate/angular-animate.min.js"></script>
+        <script type="text/javascript" src="/vendors/angular-aria/angular-aria.min.js"></script>
+        <script type="text/javascript" src="/vendors/angular-material/angular-material.min.js"></script>
+        <script type="text/javascript" src="/javascripts/build/signup/signup.js"></script>
+        <script type="text/javascript" src="/javascripts/build/signup/signup.ctrl.js"></script>
+        <script type="text/javascript" src="/javascripts/build/signup/signup.dir.js"></script>
+        <script type="text/javascript" src="/javascripts/build/signup/signup.ftry.js"></script>
+
+    </head>
+
+    <body>
+        <div class="container-fluid" style="margin-top: 30px">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                    <img src="/images/Gist-1-V-Color.svg" alt="Gist logo" class="login-logo img-responsive"/>
+                </div>
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" ui-view></div>
+            </div>
+        </div>
+    </body>
+
+    {% if env.FE_LIVERELOAD == "true" %}
+    <script src="//localhost:35729/livereload.js"></script>
+    {% endif %}
+
+</html>

@@ -1,0 +1,39 @@
+<md-dialog aria-label="General Settings" class="field-dialog">
+    <aa-toolbar title="General Settings"></aa-toolbar>
+
+    <md-dialog-content>
+        <form name="generalSettingsForm">
+            <md-content md-no-ink>
+                <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom>
+                    <md-tab label="View Options">
+                        <md-content layout-margin>
+                            <ng-include src="'javascripts/dashboard/routes/dataset/one/views/general-settings-dialog/view-options.template.html'" class="d-block"></ng-include>
+                        </md-content>
+                    </md-tab>
+
+                    <md-tab label="Controls">
+                        <md-content layout-margin>
+                            <ng-include src="'javascripts/dashboard/routes/dataset/one/views/general-settings-dialog/controls.template.html'" class="d-block"></ng-include>
+                        </md-content>
+                    </md-tab>
+
+                    <md-tab label="Colors">
+                        <md-content layout-margin>
+                            <ng-include src="'javascripts/dashboard/routes/dataset/one/views/general-settings-dialog/colors.template.html'" class="d-block"></ng-include>
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
+        </form>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="end center">
+        <md-button class="md-dashboard" ng-click="cancel()">
+            <span class="btn-label">Cancel</span>
+        </md-button>
+
+        <md-button class="md-dashboard confirm" ng-click="save()" ng-disabled="viewForm.$invalid">
+            <span class="btn-label">Save</span>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

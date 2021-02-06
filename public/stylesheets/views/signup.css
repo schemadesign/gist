@@ -1,0 +1,75 @@
+.page-signup,
+.page-password-reset {
+    background-color: #fff;
+}
+
+h1.signup {
+    margin-bottom: 60px;
+}
+
+form.signup {
+    margin-bottom: 60px;
+}
+
+form.signup .control-label {
+	font-size: 18px;
+}
+
+.red {
+	color:red;
+}
+
+a.gist-pointer {
+	cursor: pointer;
+}
+div.float-parent {
+	overflow: hidden;
+}
+
+div.reminder-message {
+	margin-top: 30px;
+}
+
+.signupOr {
+	margin:50px;
+}
+
+.customButtons {
+	padding: 15px;
+}
+
+div.signup_btn_group {
+	overflow: hidden;
+}
+
+button.signupstep {
+	min-width:100px;
+}
+
+.label-tos {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.signup-bullets {
+	font-size: 18px;
+    font-weight: 400;
+	color: var(--color-text-med);
+    line-height: 20px;
+}
+
+.signup-bullets strong {
+    font-weight: 600;
+}
+
+.signup-desc-padding.signup-bullets {
+    padding-top: 10px;
+}
+
+.sign-up-container .form-group {
+    padding-bottom: 7px;
+}
+
+.help-block, .help-block p {
+    margin-bottom: 0;
+}

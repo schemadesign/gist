@@ -1,0 +1,278 @@
+{% set currentView = "pie-set" %}
+
+{% extends "../layout/array.njk" %}
+
+{% import "../partials/array-header.njk" as header %}
+
+{% import "../partials/dropdown.njk" as dropdown %}
+{% import "../partials/search.njk" as search %}
+{% import "../partials/filter.njk" as filter %}
+
+{% block content %}
+    <section class="gist-section gist-legend-opened">
+
+        {{ header.default(arrayTitle, array_source_key, defaultView, team, isPreview, embedded, sharedPage, routePath_base, view_description, revision, defaultFilterObj, isEmbed, showInsightsExplorer, stories, subdomain, env, sharedPageId, lastUpdated) }}
+
+        {% include "../partials/modal/info.njk" %}
+
+        <div class="gist-content gist-chart" longDesc="{{ metaDescription }}">
+
+            <div class="gist-controls gist-sort-bar clearfix" style="display: none;">
+                <div class="gist-float-controls">
+                    <div class="gist-container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                {% if viewOptions.viewControls %}
+                                    <nav class="sort-bar-left pull-left" role="navigation">
+                                        {{ dropdown.sortbar(
+                                            'Group By',
+                                            'groupBy',
+                                            groupBy if groupBy else defaultGroupByColumnName_humanReadable,
+                                            colNames_orderedForGroupByDropdown,
+                                            routePath_base | constructedRoutePath(filterObj, {
+                                                searchCol: searchCol,
+                                                searchQ: searchQ,
+                                                aggregateBy: aggregateBy,
+                                                chartBy: chartBy,
+                                                segmentBy: segmentBy.querySegmentBy,
+                                                groupBy: ''
+                                            })
+                                        ) }}
+
+                                        {% if not simpleChart %}
+
+                                            {{ dropdown.sortbar(
+                                                'Chart By',
+                                                'chartBy',
+                                                chartBy if chartBy else defaultChartByColumnName_humanReadable,
+                                                colNames_orderedForChartByDropdown,
+                                                routePath_base | constructedRoutePath(filterObj, {
+                                                    searchCol: searchCol,
+                                                    searchQ: searchQ,
+                                                    aggregateBy: aggregateBy,
+                                                    groupBy: groupBy,
+                                                    segmentBy: segmentBy.querySegmentBy,
+                                                    chartBy: ''
+                                                })
+                                            ) }}
+
+                                            {{ dropdown.sortbar(
+                                                'Aggregate By',
+                                                'aggregateBy',
+                                                aggregateBy if aggregateBy else defaultAggregateByColumnName_humanReadable,
+                                                colNames_orderedForAggregateByDropdown,
+                                                routePath_base | constructedRoutePath(filterObj, {
+                                                    searchCol: searchCol,
+                                                    searchQ: searchQ,
+                                                    groupBy: groupBy,
+                                                    chartBy: chartBy,
+                                                    segmentBy: segmentBy.querySegmentBy,
+                                                    aggregateBy: ''
+                                                })
+                                            ) }}
+
+                                            {% if segmentBy.chartByIsDate %}
+                                                {{ dropdown.sortbar(
+                                                    'Segment By',
+                                                    'segmentBy',
+                                                    segmentBy.segmentBy,
+                                                    segmentBy.segmentByOptions,
+                                                    routePath_base | constructedRoutePath(filterObj,
+                                                        {
+                                                            searchCol: searchCol,
+                                                            searchQ: searchQ,
+                                                            groupBy: groupBy,
+                                                            chartBy: chartBy,
+                                                            aggregateBy: aggregateBy,
+                                                            segmentBy: ''
+                                                        })
+                                                ) }}
+                                            {% endif %}
+                                        {% endif %}
+                                    </nav>
+
+                                {% endif %}
+
+                                <div class="gist-pull-right sort-bar-right">
+                                    {% include "../partials/accessibility/toggle-pattern.njk" %}
+
+                                    {% include "../partials/accessibility/skip-to-legend.njk" %}
+
+                                    {% if viewOptions.search %}
+                                        {{ search.default(
+                                            routePath_base,
+                                            searchCol if searchCol else 'All Fields',
+                                            cols_orderedForSearchByDropdown,
+                                            searchQ if searchQ else "",
+                                            null,
+                                            null,
+                                            revision,
+                                            filterObj
+                                        ) }}
+
+                                        {% include "../partials/legend-toggle.njk" %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div><!-- .row -->
+                    </div><!-- .gist-container-fluid -->
+                </div>
+                <nav class="gist-legend gist-legend--desktop" role="navigation">
+                    <button type="button" class="gist-close gist-legend-close" aria-label="Close"><span class="gist-icon-close-big"
+                                                                                              aria-hidden="true"></span>
+                    </button>
+                    {% if simpleChart %}
+                        <h3 class="gist-legend-title" data-l10n-id="legend">Legend</h3>
+                    {% else %}
+                        <h3 class="gist-legend-title">{{ chartBy or defaultChartByColumnName_humanReadable }}</h3>
+                    {% endif %}
+
+                    {% include "../partials/accessibility/skip-back-to-top.njk" %}
+
+                    <ul class="gist-legend-list"></ul>
+                </nav>
+            </div>
+
+            <div class="gist-chart-container">
+
+                {% if isFilterActive %}
+                    {{ filter.default(displayTitleOverrides,
+                        routePath_base | constructedRoutePath(null, {
+                            searchCol: searchCol,
+                            searchQ: searchQ,
+                            groupBy: groupBy,
+                            chartBy: chartBy,
+                            aggregateBy: aggregateBy,
+                            segmentBy: segmentBy.querySegmentBy
+                        }),
+                        filterObj,
+                        truesByFilterValueByFilterColumnName_forWhichNotToOutputColumnNameInPill,
+                        sharedPage,
+                        false,
+                        'filter-bar-fixed-bottom'
+                    ) }}
+                {% endif %}
+
+                <script type="text/javascript">
+                    var viewOptions = {{ viewOptions | dump | safe }};
+
+                    var filterObj = {{ filterObj | dump | safe }};
+                    var routePath_withoutFilter = "{{ routePath_base | constructedRoutePath(null, {
+                        searchCol: searchCol,
+                        searchQ: searchQ,
+                        groupBy: groupBy,
+                        chartBy: chartBy,
+                        aggregateBy: aggregateBy,
+                        segmentBy: segmentBy.querySegmentBy
+                    }) | safe }}";
+                    var groupBy = '{{ groupBy if groupBy else
+                    defaultGroupByColumnName_humanReadable }}';
+                    var chartBy = '{{ chartBy if chartBy else defaultChartByColumnName_humanReadable }}';
+                    var aggregateBy = '{{ aggregateBy if aggregateBy else defaultAggregateByColumnName_humanReadable }}';
+                    var segmentBy = '{{ segmentBy.querySegmentBy }}';
+                    var accessibility = {{ sortbarOptions.accessibility or false }};
+
+                    // options for PieChart initialization
+                    var options = {
+                        chartBy: chartBy,
+                        groupBy: groupBy,
+                        aggregateBy: aggregateBy,
+                        segmentBy: segmentBy,
+                        viewOptions: viewOptions,
+                        routePath_withoutFilter: routePath_withoutFilter,
+                        filterObj: {{ filterObj | dump | safe }},
+                        array_source_key: '{{ array_source_key }}',
+                        sharedPage: {{ sharedPage }},
+                        sharedPageId: '{{ sharedPageId }}',
+                        accessibility: accessibility,
+                        datasetId: '{{ datasetId }}',
+                        title: '{{ arrayTitle }}',
+                        format: '{{ format }}',
+                        revision: '{{ revision }}',
+                        limit: '{{ limit }}',
+                        simpleChart: {{ simpleChart }},
+                        puppeteer: {{ (puppeteer and not puppeteerScreenshot) | default(false) }},
+                        clickThroughView: '{{clickThroughView}}',
+                        showPercentage: {{showPercentage}},
+                        isEmbed: {{ isEmbed }},
+                        isPieSet: true
+                    };
+                </script>
+
+                <div class="gist-container-fluid">
+                    <div class="gist-loading">
+                        {% include "../partials/loading.njk" %}
+                    </div>
+
+                    <div class="gist-no-data" style="display:none">
+                        {% include "../partials/no-data.njk" %}
+                    </div>
+
+
+                    <div class="gist-undisplayable-data" style="display:none">
+                        {% include "../partials/undisplayable-data.njk" %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="pagination-page-dropdown pull-left"></div>
+                            <div class="pagination-limit-dropdown filter-count gist-pull-right"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="gallery">
+                                <ul id="pie-set" class="gallery-grid gallery-grid--center"></ul>
+                            </div>
+                            <nav class="pie-set-pagination"></nav>
+                        </div>
+                    </div><!-- .row -->
+                </div><!-- .gist-container-fluid -->
+            </div><!-- .gist-chart-container -->
+            <nav class="legend gist-legend--mobile" role="navigation">
+                {% if simpleChart %}
+                    <h3 class="gist-legend-title" data-l10n-id="legend">Legend</h3>
+                {% else %}
+                    <h3 class="gist-legend-title">{{ chartBy or defaultChartByColumnName_humanReadable }}</h3>
+                {% endif %}
+                <ul class="gist-legend-list"></ul>
+            </nav>
+        </div><!-- .gist-content -->
+    </section>
+
+    {% include "../partials/analytics.njk" %}
+
+{% endblock %}
+
+{% block inlineScript %}
+    {{ super() }}
+
+    <script type="text/javascript" src="/vendors/d3/d3.min.js"></script>
+    <script type="text/javascript" src="/vendors/scrollmagic/scrollmagic/minified/ScrollMagic.min.js"></script>
+    <script type="text/javascript" src="/vendors/textures/dist/textures.js"></script>
+    <script type="text/javascript" src="/javascripts/build/main/scroll-header.js"></script>
+
+    <script type="text/javascript" src="/vendors/nunjucks/browser/nunjucks-slim.min.js"></script>
+    <script type="text/javascript" src="/javascripts/build/fe-templates.js"></script>
+
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/html-visualization.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/pagination.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/limit-dropdown.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/page-dropdown.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/nav.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/legend-list.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/d3-visualization/d3-visualization.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/d3-visualization/pie-chart/pie-chart.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/d3-visualization/pie-chart/pie-set.js"></script>
+
+    <script type="text/javascript" src="/javascripts/build/core-views/pie-set/main.js"></script>
+{% endblock %}

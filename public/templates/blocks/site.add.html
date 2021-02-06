@@ -1,0 +1,35 @@
+<md-dialog md-no-ink aria-label="New Site">
+    <aa-toolbar title="New Site"></aa-toolbar>
+
+    <form name="vm.addSiteForm" ng-submit="addSite()" autocomplete="off">
+        <md-dialog-content layout-padding>
+            <md-content>
+
+                <md-input-container class="md-block" flex="100" flex-gt-sm="65">
+                    <label>Title</label>
+                    <input required name="title" ng-model="newSite.title" ng-blur="checkSlug()" />
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Slug (optional)</label>
+                    <input ng-model-options="{ updateOn: 'default blur' }" ng-change="checkSlug()" required name="slug" ng-model="newSite.slug" flex="65">
+                    <div ng-messages="vm.addSiteForm.slug.$error">
+                        <p ng-message="unique">This slug name is not available.</p>
+                        <p ng-message="required">This field is required.</p>
+                        <p ng-message="pattern">Slug name must be lowercase and not contain any whitespace or special characters.</p>
+                    </div>
+                </md-input-container>
+            </md-content>
+
+
+            <md-dialog-actions layout="row" layout-align="end center">
+                <md-button class="md-dashboard" ng-click="cancel()">
+                    Cancel
+                </md-button>
+                <md-button md-no-ink ng-disabled="vm.addSiteForm.$invalid || !vm.addSiteForm.$dirty" class="md-dashboard confirm" type="submit">
+                    <span class="btn-label">Create</span>
+                </md-button>
+            </md-dialog-actions>
+        </md-dialog-content>
+    </form>
+</md-dialog>

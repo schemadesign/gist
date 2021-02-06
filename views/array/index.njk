@@ -1,0 +1,33 @@
+{% set currentView = "create" %}
+
+{% extends "../layout/create.njk" %}
+
+{% block headSuffix %}
+    <title>Showcase - Gist</title>
+{% endblock %}
+
+{% import "../partials/filter.njk" as filter %}
+
+{% block content %}
+    <div class="gist-container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                {% include "../partials/app-alert.njk" %}
+                <section class="section section-array-create">
+                    <form id="form-source" class="form-source">
+                        <header class="section-header explore-header">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h2 data-l10n-id="showcase" class="section-title">Showcase</h2>
+                                </div>
+                            </div><!-- .row -->
+                        </header>
+                       {% include "../partials/viz.njk" %}
+                    </form>
+                </section>
+            </div>
+        </div><!-- .row -->
+    </div>
+
+    {% include "../partials/analytics.njk" %}
+{% endblock %}

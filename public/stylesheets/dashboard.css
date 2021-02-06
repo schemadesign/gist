@@ -1,0 +1,45 @@
+/* @override
+	http://app.local.arrays.co:9080/stylesheets/dashboard.css */
+
+/* @group Base */
+@import url('base/bootstrap.css');
+@import url('base/fontello-embedded.css');
+@import url('base/variables.css');
+@import url('base/typography/base.css');
+/* @end Base */
+
+/* @group Layout */
+@import url('layout/body.css');
+/* @end Layout */
+
+/* @group Lib */
+@import url('../../vendors/font-awesome/css/font-awesome.min.css');
+@import url('../../vendors/angular-material/angular-material.min.css');
+@import url('../../vendors/jquery-minicolors/jquery.minicolors.css');
+@import url('../../vendors/angular-cron-jobs/dist/angular-cron-jobs.min.css');
+@import url('../../vendors/bootstrap-markdown/css/bootstrap-markdown.min.css');
+@import url('../../vendors/angular-markdown-editor/styles/angular-markdown-editor.css');
+/* @end Lib */
+
+/* @group Module */
+@import url('module/header-bar.css');
+@import url('module/pagination.css');
+@import url('module/tooltip.css');
+/* @end Module */
+
+/* @group Dashboard */
+@import url('dashboard/dashboard.css');
+@import url('dashboard/dashboard-dataset.css');
+@import url('dashboard/dashboard-story.css');
+@import url('dashboard/dashboard-performance.css');
+@import url('dashboard/dashboard-pages.css');
+@import url('dashboard/sidebar-menu.css');
+/* @end Dashboard */
+
+/* @group Views */
+@import url('views/svg-chart-base.css');
+@import url('views/chart/main.css');
+@import url('views/chart/legend-extension.css');
+@import url('views/linechart.css');
+@import url('views/pie-chart.css');
+/* @end Views */

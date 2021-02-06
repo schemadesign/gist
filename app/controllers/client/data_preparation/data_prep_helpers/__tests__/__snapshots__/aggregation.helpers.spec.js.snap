@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`group helpers addDefaultAggregationOperators should add aggregation operators 1`] = `
+Array [
+  Object {
+    "$match": Object {
+      "published": Object {
+        "$ne": false,
+      },
+    },
+  },
+  Object {
+    "$match": Object {
+      "rowParams.Type 1": Object {
+        "$options": "i",
+        "$regex": "^Water$",
+      },
+    },
+  },
+  Object {
+    "$group": Object {
+      "_id": "$_id",
+      "pKey": Object {
+        "$first": "$pKey",
+      },
+      "rowParams": Object {
+        "$first": "$rowParams",
+      },
+      "srcDocPKey": Object {
+        "$first": "$srcDocPKey",
+      },
+    },
+  },
+  Object {
+    "$match": Object {
+      "rowParams.Name": Object {
+        "$options": "i",
+        "$regex": "Blastoise",
+      },
+    },
+  },
+  Object {
+    "$group": Object {
+      "_id": "$_id",
+      "pKey": Object {
+        "$first": "$pKey",
+      },
+      "rowParams": Object {
+        "$first": "$rowParams",
+      },
+      "srcDocPKey": Object {
+        "$first": "$srcDocPKey",
+      },
+    },
+  },
+]
+`;
+
+exports[`group helpers aggregateProcessedRowObjects should aggregate data from the db 1`] = `
+Array [
+  Object {
+    "_id": "Water",
+    "name": Array [
+      "Blastoise",
+      "Wartortle",
+      "Squirtle",
+    ],
+  },
+  Object {
+    "_id": "Fire",
+    "name": Array [
+      "Charizard",
+      "Charmeleon",
+      "Charmander",
+    ],
+  },
+  Object {
+    "_id": "Grass",
+    "name": Array [
+      "Venusaur",
+      "Ivysaur",
+      "Bulbasaur",
+    ],
+  },
+]
+`;
+
+exports[`group helpers getFieldTypeAggregationOperators should return aggregation operators for date 1`] = `
+Object {
+  "$match": Object {
+    "$and": Array [
+      Object {
+        "First": Object {
+          "$exists": true,
+        },
+      },
+      Object {
+        "First": Object {
+          "$ne": null,
+        },
+      },
+      Object {
+        "First": Object {
+          "$type": "date",
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`group helpers getFieldTypeAggregationOperators should return aggregation operators for number 1`] = `
+Object {
+  "$match": Object {
+    "$and": Array [
+      Object {
+        "Second": Object {
+          "$exists": true,
+        },
+      },
+      Object {
+        "Second": Object {
+          "$ne": null,
+        },
+      },
+      Object {
+        "$or": Array [
+          Object {
+            "Second": Object {
+              "$type": "double",
+            },
+          },
+          Object {
+            "Second": Object {
+              "$type": "int",
+            },
+          },
+          Object {
+            "Second": Object {
+              "$type": "long",
+            },
+          },
+          Object {
+            "Second": Object {
+              "$type": "decimal",
+            },
+          },
+        ],
+      },
+    ],
+  },
+}
+`;
+
+exports[`group helpers getFieldTypeAggregationOperators should return aggregation operators for other type 1`] = `
+Object {
+  "$match": Object {
+    "$and": Array [
+      Object {
+        "Third": Object {
+          "$exists": true,
+        },
+      },
+      Object {
+        "Third": Object {
+          "$ne": null,
+        },
+      },
+    ],
+  },
+}
+`;

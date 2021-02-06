@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sort helpers getGallerySort should return sort for gallery 1`] = `
+Object {
+  "_id": 1,
+  "rowParams.Name": 1,
+  "size": -1,
+}
+`;
+
+exports[`sort helpers getSort should return sort for bubble chart 1`] = `
+Object {
+  "rowParams.Data 1": 1,
+  "rowParams.Data 2": 1,
+  "rowParams.Date": 1,
+}
+`;
+
+exports[`sort helpers getSort should return sort for gallery 1`] = `
+Object {
+  "_id": 1,
+  "rowParams.Name": 1,
+  "size": -1,
+}
+`;
+
+exports[`sort helpers getSort should return sort for scatterplot 1`] = `
+Object {
+  "_id": 1,
+  "rowParams.Data 1": 1,
+  "rowParams.Data 2": 1,
+}
+`;
+
+exports[`sort helpers getSort should return sort for table 1`] = `
+Object {
+  "rowParams.Name": -1,
+}
+`;
+
+exports[`sort helpers getSort should return sort for timeline 1`] = `
+Object {
+  "_id": -1,
+  "rowParams.Name": -1,
+}
+`;
+
+exports[`sort helpers getTimelineSort should return sort for timeline 1`] = `
+Object {
+  "_id": 1,
+  "rowParams.Name": 1,
+}
+`;

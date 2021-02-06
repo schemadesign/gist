@@ -1,0 +1,75 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      args:
+        - MONGODB_NAME=arraysdb
+        - NODE_ENV=development
+
+    depends_on:
+      - mongodb
+      - redis
+
+    networks:
+      app_net:
+        aliases:
+          - web
+          - web.local.arrays.co
+          - local.arrays.co
+          - .local.arrays.co
+          - app.local.arrays.co
+          - web_selenium
+          - local.gist.com
+          - .local.gist.com
+          - app.local.gist.com
+
+    volumes:
+      - ./docker/seed.json:/src/seed.json
+      - .:/src
+      - /src/node_modules
+      - /src/bower_components
+
+    environment:
+      - NODE_ENV=development
+      - REDIS_URL=redis://redis:6379
+      - MONGODB_URI=${MONGODB_URI}
+
+    ports:
+      - "9080:9080"
+      - "9229:9229"
+      - "35729:35729"
+
+    command: ["./bin/start_app"]
+
+    restart: always
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:3.6.17
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      app_net:
+
+    volumes:
+      - ./data/db:/data/db
+
+  redis:
+    container_name: redis
+    image: redis:3.2.4
+    restart: always
+    # ports:
+    #   - "6379:6379"
+    networks:
+      app_net:
+
+    volumes:
+      - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
+
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+
+networks:
+  app_net:

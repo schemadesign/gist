@@ -1,0 +1,5 @@
+/__mocks__
+/internals
+/tests
+/tmp
+**/__tests__/

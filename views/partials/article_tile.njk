@@ -1,0 +1,38 @@
+<div class="explore-tile col-md-4 col-sm-6 col-xs-12">
+    <a href="{{ article.baseUrl }}/{{ article.website.slug }}/page/{{ article.slug }}" target="_blank">
+        <div class="panel panel-default panel-source mobile-max-width gist-article-header">
+            <style scoped>
+                .gist-article-header {
+                    background-color: #005CB5
+                }
+            </style>
+            <div class="explore-tile-body">
+                <div class="gist-explore-tile-header">
+                    <div class="explore-tile__title-wrapper"><h2>{{ article.pageTitle }}</h2></div>
+                    <div class="explore-tile-meta-wrapper">
+                        <div class="explore-tile-meta">
+                            <span>
+                                <object>
+                                    <a href="{{ article.baseUrl }}" class="gist-team-link team-underline"> {{ article.createdBy.firstName }} {{ article.createdBy.lastName }}</a>
+                                </object>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="explore-tile-meta-sub hidden-xs">
+                        <span class="source-updated">{{ article.createdAt | dateFormattedAs_monthDayYear_array }}</span>
+                    </div>
+
+                    <div class="explore-tile-meta-views hidden-xs">
+                        <ul class="meta-views-list">
+                            <li class="meta-views-item" viz-icon-tooltip="Article">
+                                <span class="gist-icon-article meta-views-icon" aria-hidden="true"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% set tileImage = article.thumbnail or '/images/explore/default_pattern.png' %}
+            <div class="explore-tile-banner-image" style="background-image:url('{{tileImage}}'); background-color:{{ source.brandColor.accent }}"></div>
+        </div>
+    </a>
+</div>

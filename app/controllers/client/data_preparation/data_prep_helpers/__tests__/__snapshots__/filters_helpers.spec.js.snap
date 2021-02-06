@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Filters addDefaultFilters should add image filters 1`] = `
+Array [
+  Object {
+    "fe_filters": Object {
+      "default": Object {
+        "Has Image": "Has Image",
+        "Has Title": "Has Title",
+      },
+      "fabricated": Array [
+        Object {
+          "choices": Array [
+            Object {
+              "match": Object {
+                "exist": true,
+                "field": "rowParams.objectTitle",
+                "nin": Array [
+                  "",
+                  "null",
+                  "NULL",
+                ],
+              },
+              "title": "Has Title",
+            },
+          ],
+          "title": "Has Title",
+        },
+        Object {
+          "choices": Array [
+            Object {
+              "match": Object {
+                "exist": true,
+                "field": "rowParams.image",
+                "nin": Array [
+                  "",
+                  "null",
+                  "NULL",
+                ],
+              },
+              "title": "Has Image",
+            },
+          ],
+          "title": "Has Image",
+        },
+      ],
+    },
+    "fe_image": Object {
+      "field": "image",
+    },
+    "objectTitle": "objectTitle",
+  },
+  Array [
+    Object {
+      "name": "Has Title",
+      "toggleable": true,
+    },
+    Object {
+      "name": "Has Image",
+      "toggleable": true,
+    },
+  ],
+]
+`;
+
+exports[`Filters addDefaultFilters should add title filters 1`] = `
+Array [
+  Object {
+    "fe_filters": Object {
+      "default": Object {
+        "Has Title": "Has Title",
+      },
+      "fabricated": Array [
+        Object {
+          "choices": Array [
+            Object {
+              "match": Object {
+                "exist": true,
+                "field": "rowParams.objectTitle",
+                "nin": Array [
+                  "",
+                  "null",
+                  "NULL",
+                ],
+              },
+              "title": "Has Title",
+            },
+          ],
+          "title": "Has Title",
+        },
+      ],
+    },
+    "fe_image": Object {
+      "field": null,
+    },
+    "objectTitle": "objectTitle",
+  },
+  Array [
+    Object {
+      "name": "Has Title",
+      "toggleable": true,
+    },
+  ],
+]
+`;
+
+exports[`Filters addDefaultFilters should not add any filter 1`] = `
+Array [
+  Object {
+    "fe_filters": Object {
+      "default": Object {},
+      "fabricated": Array [],
+    },
+    "fe_image": Object {
+      "field": null,
+    },
+    "objectTitle": "objectTitle",
+  },
+  Array [],
+]
+`;

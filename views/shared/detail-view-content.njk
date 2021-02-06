@@ -1,0 +1,300 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <article id="object-id" class="object">
+                <header class="object-header">
+                    {% set objectTitle = rowObject.rowParams[fieldKey_objectTitle] %}
+                    {% set title = objectTitle if objectTitle else "(Title not specified)" %}
+                    {% set isSubtitleIsMarkdown = dataTypesConversion[fieldKey_objectSubtitle].operation === 'ToMarkdown' %}
+                    {% set objectSubtitle = rowObject.markdowns[fieldKey_objectSubtitle] if isSubtitleIsMarkdown else rowObject.rowParams[fieldKey_objectSubtitle] %}
+
+                    <h1 class="object-title">
+                        {{ title }}
+                    </h1>
+
+                    {% if objectSubtitle.length %}
+                        <h2 class="object-subtitle">
+                            {% set subtitle = objectSubtitle | markdown | safe if isSubtitleIsMarkdown else objectSubtitle %}
+                            {% set urlizedField = (htmlOverrideFn(rowObject, subtitle, strParams) | safe if htmlOverrideFn else columnValue) | escape | substitutePlainURLs | safe %}
+                            {% set isUrlField = false if urlizedField == subtitle else true %}
+
+                            {% if isUrlField %}
+                                {{ (htmlOverrideFn(rowObject, subtitle, strParams) | safe if htmlOverrideFn else subtitle) | escape | substitutePlainURLs | safe }}
+                            {% else %}
+                                {{subtitle}}
+                            {% endif %}
+                        </h2>
+                    {% endif %}
+
+                    {% if hasOriginalImage %}
+                        {% if scrapedImages %}
+                            {% set subdomain = team.subdomain | lower %}
+                            {% set url = retrieveImageURLFromDoc(subdomain, rowObject.pKey, datasetId, 'objectDetail', rowObject.updatedAt, s3Bucket, s3Domain) %}
+
+                            <img
+                                src="{{ url }}" class="gist-image-with-fallback img-responsive"
+                                scraped
+                                large-image
+                                no-not-found
+                                original-image="{{ rowObject.rowParams[fieldKey_originalImageURL] }}"
+                            />
+                        {% else %}
+                            <img
+                                src="{{ rowObject.rowParams[fieldKey_originalImageURL] }}"
+                                class="gist-image-with-fallback img-responsive"
+                                large-image
+                            />
+                        {% endif %}
+                    {% endif %}
+
+                    {% if not rowObject.rowParams[fieldKey_originalImageURL] and fe_galleryItem_htmlForIconFromRowObjWhenMissingImage %}
+                        <div class="object-header-icons">
+                            {{ fe_galleryItem_htmlForIconFromRowObjWhenMissingImage | safe }}
+                        </div>
+                    {% endif %}
+                </header><!-- .object-header -->
+
+                <div class="object-content">
+                    <dl>
+                        {% for column in ordered_colNames_sansObjectTitleAndImages %}
+                            {% set columnName = column.name %}
+                            {% set htmlOverrideFn = fe_objectShow_customHTMLOverrideFnsByColumnNames[columnName] %}
+                            {% set isMarkdown = column.operation === 'ToMarkdown' %}
+                            {% set columnValue = rowObject.markdowns[column.originalName] if isMarkdown else  rowObject.rowParams[column.originalName] %}
+
+                            {% if columnValue %}
+                                {% if isMarkdown %}
+                                    <dt>{{ columnName }}</dt>
+                                    <dd> {{ columnValue | markdown | safe }}</dd>
+                                {% elseif columnValue | isArray %}
+                                    {% if columnName == relationshipField %}
+                                        {# This bit is for listing the relationship fields #}
+                                        {% set collatedJoinData = collateJoinData(columnName) %}
+
+                                        {% for columnKey, fieldValueArray in collatedJoinData %}
+                                            <dt> {{ columnName + " " + columnKey }} </dt>
+
+                                            {% for value, id in fieldValueArray %}
+                                                <dd>
+                                                    <ul class="object-list">
+                                                        <li class="object-list-item">
+                                                            <a href="{{ buildObjectLink(columnName, value, id) }}"
+                                                               class="field-filter">{{ value }}</a>
+                                                        </li>
+                                                    </ul>
+                                                </dd>
+                                            {% endfor %}
+                                        {% endfor %}
+                                        {# end relationship field list #}
+                                    {% elseif columnValue | isValidDelimited %}
+                                        <dt>{{ columnName }}</dt>
+                                        <dd>
+                                            {% set shouldLink = false if fieldsNotToLinkAsGalleryFilter_byColName[column.originalName] else true %}
+
+                                            {% if columnValue | length %}
+                                                {% set sortedArray = columnValue | alphaSortedArray %}
+
+                                                <ul class="object-list">
+                                                    {% for arrayMember in sortedArray %}
+                                                        {% if arrayMember | isObject %}
+                                                            {# array of objects #}
+                                                            {% set separatedNestedObjects = formatJSONForDisplay(arrayMember) %}
+                                                            {% set nestedObjectTitles = separatedNestedObjects[0] %}
+                                                            {% set nestedColumnNames = separatedNestedObjects[1] %}
+                                                            {% set nestedColumnValues = separatedNestedObjects[2] %}
+
+                                                            {% if nestedObjectTitles | length > 0 %}
+                                                                {% for i in range(0, nestedObjectTitles | length) %}
+                                                                    <li class="nested">
+                                                                        <dl>
+                                                                            <dt class="nested-title">{{ nestedObjectTitles[i] }}</dt>
+                                                                            <dd>
+                                                                                {% for j in range(0, nestedColumnNames[i] | length) %}
+                                                                                    <ul class="object-list nested nested-box">
+                                                                                        {% if nestedColumnNames[i][j] | isArray %}
+                                                                                            {% for k in range(0, nestedColumnNames[i][j] | length) %}
+                                                                                                <li class="object-list-item nested-column-name">{{ nestedColumnNames[i][j][k] }}</li>
+                                                                                                <li class="object-list-item nested-item">
+                                                                                                    {{ nestedColumnValues[i][j][k] }}
+                                                                                                </li>
+                                                                                            {% endfor %}
+                                                                                        {% else %}
+                                                                                            <li class="object-list-item">{{ nestedColumnNames[i][j] }}</li>
+                                                                                            <li class="object-list-item nested-item">{{ nestedColumnValues[i][j] }}</li>
+                                                                                        {% endif %}
+                                                                                    </ul>
+                                                                                {% endfor %}
+                                                                            </dd>
+                                                                        </dl>
+                                                                    </li>
+                                                                {% endfor %}
+                                                            {% else %}
+                                                                <div class="nested">
+                                                                    {% for j in range(0, nestedColumnNames[0] | length) %}
+                                                                        <ul class="object-list nested nested-box">
+                                                                            <li class="object-list-item nested-column-name">
+                                                                                {{ nestedColumnNames[0][j] }}
+                                                                            </li>
+                                                                            <li class="object-list-item nested-item">
+                                                                                {{ nestedColumnValues[0][j] }}
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </div>
+                                                            {% endif %}
+                                                            {# end array of objects #}
+                                                        {% else %}
+                                                            {% set filterObjForThisFilterColVal = {} | constructedFilterObj(columnName, arrayMember, false) %}
+                                                            {% set arrayMemberText = arrayMember %}
+
+                                                            {% if shouldLink %}
+                                                                <li class="object-list-item">
+                                                                    <a href="{{ ('/' + array_source_key + '/' + defaultView) | constructedRoutePath(filterObjForThisFilterColVal, { embed: embedded, preview: isPreview, revision: revision }) }}"
+                                                                       class="field-filter">{{ arrayMemberText }}
+                                                                    </a>
+                                                                </li>
+                                                            {% else %}
+                                                                <li class="object-list-item">{{ arrayMemberText | substitutePlainURLs | safe }}</li>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </dd>
+                                    {% endif %}
+                                {% elseif columnValue | isObject %}
+                                    <dt>{{ columnName }}</dt>
+
+                                    {% set separatedNestedObjects = formatJSONForDisplay(columnValue) %}
+                                    {% set nestedObjectTitles = separatedNestedObjects[0] %}
+                                    {% set nestedColumnNames = separatedNestedObjects[1] %}
+                                    {% set nestedColumnValues = separatedNestedObjects[2] %}
+
+                                    {% if nestedObjectTitles | length > 0 %}
+                                        {% for i in range(0, nestedObjectTitles | length) %}
+                                            <dd>
+                                                <dl class="nested">
+                                                    <dt class="nested-title">{{ nestedObjectTitles[i] }}</dt>
+                                                    <dd>
+                                                        {% for j in range(0, nestedColumnNames[i] | length) %}
+                                                            <ul class="object-list nested nested-box">
+                                                                {% if nestedColumnNames[i][j] | isArray %}
+                                                                    {% for k in range(0, nestedColumnNames[i][j] | length) %}
+                                                                        <li class="object-list-item nested-column-name">{{ nestedColumnNames[i][j][k] }}</li>
+                                                                        <li class="object-list-item nested-item">
+                                                                            {{ nestedColumnValues[i][j][k] }}
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                {% else %}
+                                                                    <li class="object-list-item">{{ nestedColumnNames[i][j] }}</li>
+                                                                    <li class="object-list-item nested-item">{{ nestedColumnValues[i][j] }}</li>
+                                                                {% endif %}
+                                                            </ul>
+                                                        {% endfor %}
+                                                    </dd>
+                                                </dl>
+                                            </dd>
+                                        {% endfor %}
+                                    {% else %}
+                                        <dd class="nested">
+                                            {% for j in range(0, nestedColumnNames[0] | length) %}
+                                                <ul class="object-list nested nested-box">
+                                                    <li class="object-list-item nested-column-name">
+                                                        {{ nestedColumnNames[0][j] }}
+                                                    </li>
+                                                    <li class="object-list-item nested-item">
+                                                        {{ nestedColumnValues[0][j] }}
+                                                    </li>
+                                                </ul>
+                                            {% endfor %}
+                                        </dd>
+                                    {% endif %}
+                                {% else %}
+                                    <dt>{{ columnName }}</dt>
+                                    <dd>
+                                        {% set shouldLink = false if fieldsNotToLinkAsGalleryFilter_byColName[column.originalName] else true %}
+                                        {% set strParams = 'embed=true' if embedded %}
+                                        {% set urlizedField = (htmlOverrideFn(rowObject, columnValue, strParams) | safe if htmlOverrideFn else columnValue) | escape | substitutePlainURLs | safe %}
+                                        {% set isUrlField = false if urlizedField == columnValue else true %}
+
+                                        {% if isUrlField %}
+                                            {% if columnValue.indexOf('embed-responsive') > 0 %}
+                                                {{ columnValue | safe }}
+                                            {% else %}
+                                                <span
+                                                    class="field-filter">{{ (htmlOverrideFn(rowObject, columnValue, strParams) | safe if htmlOverrideFn else columnValue) | escape | substitutePlainURLs | safe }}</span>
+                                            {% endif %}
+                                        {% elseif shouldLink %}
+                                            {% set trueValue = columnValue | removeComma(columnName,dataTypesConversion) %}
+                                            {% set filterObjForThisFilterColVal = {} | constructedFilterObj(columnName, trueValue , false) %}
+
+                                            {% if default_filterJSON %}
+                                                <a href="{{ ('/' + array_source_key + '/' + defaultView + default_filterJSON) | constructedRoutePath(filterObjForThisFilterColVal, { embed: embedded, preview: isPreview, revision: revision }) }}"
+                                                   class="field-filter">{{ (htmlOverrideFn(rowObject, columnValue, strParams) | safe if htmlOverrideFn else columnValue) | substitutePlainURLs | safe }}</a>
+                                            {% else %}
+                                                <a href="{{ ('/' + array_source_key + '/' + defaultView) | constructedRoutePath(filterObjForThisFilterColVal, { embed: embedded, preview: isPreview, revision: revision }) }}"
+                                                   class="field-filter">{{ (htmlOverrideFn(rowObject, columnValue, strParams) | safe if htmlOverrideFn else columnValue) | substitutePlainURLs | safe }}</a>
+                                            {% endif %}
+                                        {% else %}
+                                            {{ urlizedField }}
+                                        {% endif %}
+                                    </dd>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </dl>
+                </div><!-- .object-content -->
+            </article>
+        </div>
+    </div><!-- .row -->
+</div>
+{% if objectDetailsPagination %}
+    {% set options = {
+        searchQ: searchQ,
+        searchCol: searchCol,
+        sortDirection: sortDirection,
+        sortBy: sortBy,
+        embedded: embedded,
+        preview: isPreview,
+        revision: revision,
+        viewType: viewType
+    } %}
+
+    {% if objectDetailsPagination.prev %}
+        {% set urlOptions = options | merge({ objectIndex: objectIndex - 1 }) %}
+        {% set item_url = ('/' + array_source_key + '/' + objectDetailsPagination.prev.id) | constructedRoutePath(filterObj, urlOptions) %}
+
+        <a href="{{ item_url }}"
+           title="{{ objectDetailsPagination.prev.title }}"
+           data-id="{{ objectDetailsPagination.prev.id }}"
+           class="item-arrow item-arrow--left"
+           aria-label="Previous object"
+           style="background-color: {{ brandColor.accent }}"
+        >
+            <span class="gist-icon-back item-arrow__icon" aria-hidden="true"></span>
+        </a>
+    {% endif %}
+
+    {% if objectDetailsPagination.next %}
+        {% set urlOptions = options | merge({ objectIndex: objectIndex + 1 }) %}
+        {% set item_url = ('/' + array_source_key + '/' + objectDetailsPagination.next.id) | constructedRoutePath(filterObj, urlOptions) %}
+
+        <a href="{{ item_url }}"
+           title="{{ objectDetailsPagination.next.title }}"
+           data-id="{{ objectDetailsPagination.next.id }}"
+           class="item-arrow item-arrow--right"
+           aria-label="Next object"
+           style="background-color: {{ brandColor.accent }}"
+        >
+            <span class="gist-icon-back item-arrow__icon" aria-hidden="true"></span>
+        </a>
+    {% endif %}
+{% endif %}
+
+<script type="text/javascript">
+  var options = {
+    datasetId: '{{ datasetId }}',
+    title: '{{ arrayTitle }}',
+    format: '{{ format }}',
+  };
+</script>

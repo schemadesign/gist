@@ -1,0 +1,6 @@
+@import url('../views/areachart.css');
+
+/*** Specific chart styling only for external loaded visualizations (Drupal). ***/
+.gist-area-chart-nav {
+    padding-bottom: 8px;
+}

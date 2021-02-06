@@ -1,0 +1,40 @@
+<md-dialog aria-label="{{editBenchmarkController.title}}" class="field-dialog">
+    <aa-toolbar title="{{editBenchmarkController.title}}"></aa-toolbar>
+
+    <md-dialog-content>
+        <form name="benchmarkForm">
+            <md-content md-no-ink layout-margin>
+                <p>Provide a label for the benchmark line and the y-axis value at which the line should be drawn:</p>
+
+                <div class="pad-top-2x">
+                    <md-input-container>
+                        <label>Label</label>
+                        <input type="text" name="label" ng-model="editBenchmarkController.benchmark.label" required aria-label="Benchmark Label">
+                        <div ng-messages="benchmarkForm.label.$error">
+                            <div ng-message="required">Label is required.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Value</label>
+                        <input type="number" name="value" ng-model="editBenchmarkController.benchmark.value" required ng-pattern="/^\d*\.?\d+$/" aria-label="Benchmark Value">
+                        <div ng-messages="benchmarkForm.value.$error">
+                            <div ng-message="required">Value is required.</div>
+                            <div ng-message="pattern">Value must be numeric.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </md-content>
+        </form>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="end center">
+        <md-button class="md-dashboard" ng-click="editBenchmarkController.cancel()">
+            <span class="btn-label">Cancel</span>
+        </md-button>
+
+        <md-button class="md-dashboard confirm" ng-click="editBenchmarkController.save()" ng-disabled="!benchmarkForm.$dirty || benchmarkForm.$invalid">
+            <span class="btn-label">Save</span>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

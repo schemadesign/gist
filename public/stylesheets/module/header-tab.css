@@ -1,0 +1,21 @@
+#vsTabs.nav {
+	margin-bottom: 35px;
+}
+#vsTabs.nav > li > a {
+	border:none;
+	color: var(--color-text-med-dark);
+	font-size: 20px;
+
+}
+
+#vsTabs.nav > li > a:hover,#vsTabs.nav > li > a:focus {
+	background-color:transparent;
+}
+
+#vsTabs.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+	background-color: transparent;
+}
+
+.nav-tabs > li.active > a {
+	color: var(--color-primary) !important;
+}

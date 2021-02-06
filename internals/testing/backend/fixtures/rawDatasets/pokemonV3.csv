@@ -1,0 +1,12 @@
+Pokemon No.,Name,Type 1,Type 2,Max CP,Max HP,Image URL,letter
+1,Bulbasaur,Grass,Poison,1079,83,http://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png,a
+2,Ivysaur,Grass,Poison,1643,107,http://cdn.bulbagarden.net/upload/thumb/7/73/002Ivysaur.png/250px-002Ivysaur.png,b
+3,Venusaur,Grass,Poison,2598,138,http://cdn.bulbagarden.net/upload/thumb/a/ae/003Venusaur.png/250px-003Venusaur.png,c
+4,Charmander,Fire,None,962,73,http://cdn.bulbagarden.net/upload/thumb/7/73/004Charmander.png/250px-004Charmander.png,d
+5,Charmeleon,Fire,None,1568,103,http://cdn.bulbagarden.net/upload/thumb/4/4a/005Charmeleon.png/250px-005Charmeleon.png,e
+6,Charizard,Fire,Flying,2620,135,http://cdn.bulbagarden.net/upload/thumb/7/7e/006Charizard.png/250px-006Charizard.png,f
+7,Squirtle,Water,None,1015,81,http://cdn.bulbagarden.net/upload/thumb/3/39/007Squirtle.png/250px-007Squirtle.png,g
+8,Wartortle,Water,None,1594,105,http://cdn.bulbagarden.net/upload/thumb/0/0c/008Wartortle.png/250px-008Wartortle.png,h
+9,Blastoise,Water,None,2560,137,http://cdn.bulbagarden.net/upload/thumb/0/02/009Blastoise.png/250px-009Blastoise.png,i
+10,Lilly,Water,Psychic,5000,300,none,j
+11,Xoe,Water,Flying,5000,300,none,k

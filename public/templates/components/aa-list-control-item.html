@@ -1,0 +1,14 @@
+<div layout="row" layout-align="none center">
+    <span class="aa-lc-item-text" flex ng-click="$ctrl.textClickHandler()" ng-class="{disabled: $ctrl.disabled}">
+        <span class="aa-lc-item-text">{{ $ctrl.text }}</span>
+        <span class="aa-lc-item-hint">{{ $ctrl.hint | aaListControlHint }}</span>
+    </span>
+
+    <span ng-repeat="button in $ctrl.buttons track by $index"
+        class="aa-lc-item-icon {{ button.class }}"
+        ng-click="$ctrl.buttonClickHandler($index)"
+        ng-hide="button.hide"
+        aa-tooltip="{{ button.tooltip }}">
+        <i class="fa fa-{{ button.icon }}" aria-hidden="true"></i>
+    </span>
+</div>

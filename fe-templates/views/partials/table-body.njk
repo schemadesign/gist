@@ -1,0 +1,101 @@
+{% set dataSource = included.dataSource %}
+{% set array_source_key = dataSource.uid %}
+{% set embedded = options.embedded %}
+{% set isPreview = options.preview %}
+{% set revision = options.revision %}
+
+{% if docs | length == 0 %}
+    <tr class="table-row">
+        <td class="table-data__no-results">No results</td>
+    </tr>
+{% else %}
+    {% for doc in docs %}
+        {% set docIndex = loop.index0 %}
+        <tr class="table-row">
+            {% for columnName in meta.columnNames %}
+                {% set fieldKey_objectTitle = dataSource.fe_displayTitleOverrides[dataSource.objectTitle] or dataSource.objectTitle %}
+                {% set isObjectTitle = true if fieldKey_objectTitle === columnName.name else false %}
+                {% set isFilter = false if meta.fieldsNotToLinkAsFilter_byColName[columnName.name] else true %}
+
+                {% if options.nestedArray | length > 0 %}
+                    {% set nestedColumnPath = nestedPath + '.' + columnName.originalName %}
+                    {% set isImageField = nestedColumnPath === options.scrapedImageField %}
+                {% else %}
+                    {% set isImageField = columnName.originalName === options.scrapedImageField %}
+                {% endif %}
+
+                {% set viewNestedTable = (doc.rowParams[columnName.name] | isObject and not doc.rowParams[columnName.name] | isArray) or (doc.rowParams[columnName.name] | isArray and doc.rowParams[columnName.name][0] | isObject) %}
+
+                {# <!-- if there are images, add to the data tooltip value instead of the field --> #}
+                {% if isImageField %}
+                    <td class="table-data" style="width: {{ columnName.width }}; min-width: {{ columnName.minWidth }};"
+                        data-tooltip-key="{{ columnName.name }}" data-tooltip-value="{{ doc.url }}"
+                        data-tooltip-scraped="{{ isImageField }}">
+                        {% if doc.url %}
+                            <a class="table-data-link" href="{{ doc.urlForFilterValues[columnName.name] }}"
+                               data-tooltip-key="{{ columnName.name }}"
+                               aria-label="{{ columnName.name }} equals {{ doc.rowParams[columnName.name] }}">
+                                <img src="{{ doc.url }}" alt="{{ doc.rowParams[columnName.name] }}" />
+                            </a>
+                        {% endif %}
+                    </td>
+                {% elseif viewNestedTable %}
+                    <td class="table-data" style="width: {{ columnName.width }}; min-width: {{ columnName.minWidth }};"
+                        data-tooltip-key="{{ columnName.name }}" data-tooltip-value="nested table"
+                        data-tooltip-scraped="{{ isImageField }}">
+                        <a class="table-data-link" href="{{ columnName.link }}" data-tooltip-key="{{ columnName.name }}"
+                           data-tooltip-value="nested object" aria-label="view nested table.">
+                            view {{ columnName.name }} table
+                        </a>
+                    </td>
+                {% elseif options.nestedArray | length > 0 %}
+                    <td class="table-data" style="width: {{ columnName.width }}; min-width: {{ columnName.minWidth }};"
+                        data-tooltip-key="{{ columnName.name }}" data-tooltip-scraped="{{ isImageField }}">
+                        {{ doc.rowParams[columnName.name] | substitutePlainURLs | safe }}
+                    </td>
+                {% elseif not included.dataSource.fe_viewOptions.viewInteractivity %}
+                    <td class="table-data" style="width: {{ columnName.width }}; min-width: {{ columnName.minWidth }};"
+                        data-tooltip-key="{{ columnName.name }}" data-tooltip-scraped="{{ isImageField }}">
+                        {{ doc.rowParams[columnName.name] | substitutePlainURLs | safe }}
+                    </td>
+                {% else %}
+                    <td class="table-data {{ 'color-brand' if isFilter or isObjectTitle }}"
+                        style="width: {{ columnName.width }}; min-width: {{ columnName.minWidth }};"
+                        data-tooltip-key="{{ columnName.name }}" data-tooltip-scraped="{{ isImageField }}">
+                        {% if doc.rowParams[columnName.name] | isArray %}
+                            {% for name in  doc.rowParams[columnName.name] %}
+                                <div>
+                                    <a class="table-data-link color-brand" href="{{ doc.urlForFilterValues[columnName.name][loop.index0] }}"
+                                    data-tooltip-key="{{ name }}"
+                                    aria-label="{{ columnName.name }} equals {{ name }}">
+                                        {{ name }}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        {% elseif isObjectTitle %}
+                            <span class="table-data-link color-brand"
+                               onclick="window.arrays.showDetailViewModal('{{ doc._id }}', '{{ loop.index0 }}', 'table')"
+                               data-tooltip-key="{{ columnName.name }}"
+                               aria-label="{{ columnName.name }} equals {{ doc.rowParams[columnName.name] }}">
+                                {{ doc.rowParams[columnName.name] }}
+                            </span>
+                        {% elseif isFilter %}
+                            <a class="table-data-link color-brand" href="{{ doc.urlForFilterValues[columnName.name] }}"
+                               data-tooltip-key="{{ columnName.name }}"
+                               aria-label="{{ columnName.name }} equals {{ doc.rowParams[columnName.name] }}">
+                                {{ doc.rowParams[columnName.name] }}
+                            </a>
+                        {% else %}
+                            <span class="table-data-link" data-tooltip-key="{{ columnName.name }}"
+                                  aria-label="{{ columnName.name }} equals {{ doc.rowParams[columnName.name] }}">
+                        {{ doc.rowParams[columnName.name] | substitutePlainURLs | safe }}
+                    </span>
+                        {% endif %}
+
+                    </td>
+                {% endif %}
+
+            {% endfor %}
+        </tr>
+    {% endfor %}
+{% endif %}

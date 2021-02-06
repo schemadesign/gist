@@ -1,0 +1,66 @@
+<header layout-xs="col" layout-gt-xs="row" layout-align="space-between start">
+    <h1>Users</h1>
+
+    <div>
+        <md-button class="md-dashboard md-dashboard-header" md-no-ink
+            ng-class="{ 'confirm': !$state.is('dashboard.user.list') }"
+            ng-click="primaryAction.do($event)">
+            <span class="btn-label">{{ primaryAction.text }}</span>
+        </md-button>
+    </div>
+</header>
+
+<div class="gist-content users">
+    <div layout="column" layout-gt-xs="row" layout-align-gt-xs="end center" class="md-button-wide">    
+        <md-input-container flex-xs="100" class="hide-validation-error">
+                <input class="team-search" ng-model="filterUsers" ng-change="updateFilterUser(filterUsers)"
+                        placeholder="Search Users">
+        </md-input-container>
+    </div>
+
+    <p class="pad-bottom-2x">Below is a list of all users in your team. Invite a new user and set their permissions by clicking Invite User above.</p>
+    <p ng-if="users.length == 0">You are the only user on your team. Try inviting additional users to your team.</p>
+
+    <ul class="dashboard-list user-list" ng-cloak>
+
+        <li ng-repeat="person in users track by $index">
+            <aa-list-control-item
+                text="((person.firstName || person.lastName) ? (person.firstName + ' ' + person.lastName) : person.email) + (team.admin.includes(person._id) ? ' (admin)' : '')"
+                hint="user.invited[person._id] ? 'invitation pending' : ''"
+                text-on-click="textClickHandler"
+                text-on-click-args="[$event, person, user, $index]"
+                buttons="[
+                    {
+                        icon: 'pencil',
+                        onClick: openUserDialog,
+                        onClickArgs: [$event, person, $index],
+                        hide: !userIsEditable(person, user),
+                        tooltip: 'Edit user'
+                    },
+                    {
+                        icon: 'refresh',
+                        onClick: resendInvite,
+                        onClickArgs: [$event, $index],
+                        hide: person.activated,
+                        tooltip: 'Resend invitation'
+                    },
+                    {
+                        icon: 'copy',
+                        onClick: copyLink,
+                        onClickArgs: [person],
+                        hide: !person.inviteLink || person.activated,
+                        tooltip: 'Copy invite link to clipboard'
+                    },
+                    {
+                        icon: 'remove',
+                        onClick: remove,
+                        onClickArgs: [$event, $index],
+                        class: 'warn',
+                        tooltip: 'Remove User'
+                    }
+                ]"
+            ></aa-list-control-item>
+        </li>
+
+    </ul>
+</div>

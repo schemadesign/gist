@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApiKey generate should generate new key 1`] = `
+Object {
+  "active": true,
+  "key": Any<String>,
+  "requestDomains": Any<Array>,
+}
+`;
+
+exports[`ApiKey generate should generate new key if user is super admin 1`] = `
+Object {
+  "active": true,
+  "key": Any<String>,
+  "requestDomains": Any<Array>,
+}
+`;
+
+exports[`ApiKey getKey should return 400 if it is not admin or super admin 1`] = `
+Object {
+  "error": "Only team admin can get the API key.",
+}
+`;
+
+exports[`ApiKey getKey should return null if key does not exist for team 1`] = `
+Object {
+  "active": false,
+  "key": null,
+}
+`;

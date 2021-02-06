@@ -1,0 +1,11 @@
+<md-dialog-actions layout="row" layout-align="end center">
+    <md-button ng-if="warn" class="md-dashboard md-warn" ng-click="$parent.$parent.hide()" md-autofocus>
+        <span class="btn-label">{{warn}}</span>
+    </md-button>
+    <md-button ng-if="confirm" ng-disabled="isConfirmDisabled" class="md-dashboard confirm" ng-click="$parent.$parent.hide()" md-autofocus>
+        <span class="btn-label">{{confirm}}</span>
+    </md-button>
+    <md-button class="md-dashboard cancel" ng-if="!hideCancel" ng-click="$parent.$parent.cancel()">
+        <span class="btn-label">{{ cancel || 'Cancel' }}</span>
+    </md-button>
+</md-dialog-actions>

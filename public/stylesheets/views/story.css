@@ -1,0 +1,124 @@
+/* @override
+	http://app.local.arrays.co:9080/stylesheets/views/story.css */
+
+#stories > .explore-tile {
+	margin-bottom: 50px;
+}
+
+a.stand-out-text {
+	color: black;
+
+}
+
+a.stand-out-text:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+
+.story-info {
+	color: var(--color-sort-bar-label);
+	display:inline-block;
+	float:none;
+    font-size: 1.14em; /* 16px */
+    font-weight: 400;
+    line-height: 1.5em;
+}
+.row.filter {
+	max-height: 100px;
+}
+.user-initial-story {
+	background-color: var(--color-primary);
+	color: white;
+	display: inline-block;
+	font-size:  1.43em; /* 20px */
+    top: -40px;
+    left: -46px;
+}
+.filter-col {
+	display: block;
+    font-size: 16px;
+}
+.story-panel {
+	margin-left: 10px;
+}
+.gist-story-title-text {
+	font-weight: bold;
+	font-size: 1.93em; /* 27px */
+    line-height: 1.5; /* 40px */
+	display: inline-block;
+	cursor: pointer;
+}
+
+.story-content-wrapper .story-header p {
+    font-size: 1.14em; /* 16px */
+    line-height: 1.57em; /* 22px */
+    color: #999;
+    padding-top: 6px;
+}
+
+.story-content-wrapper p {
+    font-size: 1.43em; /* 20px */
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+@media (max-width: 768px) {
+	.gist-story-title-text {
+		font-size: 36px;
+		line-height: 39px;
+	}
+    .user-initial-nav {
+    	margin-right: 0px;
+
+    }
+    #stories > .explore-tile {
+    	margin-bottom: 0px;
+    }
+}
+
+.story-caption-truncate {
+	margin-top: 15px;
+}
+
+.gist-expand-caption {
+    cursor: pointer;
+}
+
+.story-right-side {
+	margin-left: 20px;
+}
+.story-right-side > p {
+	margin-top:5px;
+}
+
+.story-main-content > div {
+	margin-top: 20px;
+}
+.story-main-content > p {
+	max-width: 750px;
+	margin-top: 20px;
+	word-wrap: break-word;
+}
+a.dropdown-toggle.user-initial-nav:hover {
+	color: transparent !important;
+	/*cursor: default;*/
+}
+
+
+.story-content-wrapper {
+	margin-top: 25px;
+}
+
+.story-tile-content-wrapper img {
+    width: 600px;
+    height:420px;
+}
+
+.story-tile-right, .story-tile-left{
+    display: inline-block;
+}
+
+.story-tile-footer {
+    height: 163px !important;
+}

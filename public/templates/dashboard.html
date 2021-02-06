@@ -1,0 +1,23 @@
+<!-- header -->
+<ng-include src="'templates/blocks/header.html'"></ng-include>
+
+<!-- /header -->
+
+<div layout="row" layout-align="center" class="dashboard-container gist-site-content" flex="">
+
+    <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-open="sidenavActive"
+                md-is-locked-open="$mdMedia('gt-sm')" ng-if="::!isVisualizationEditor" md-disable-backdrop>
+        <div flex="" class="sidebar-menu">
+            <ng-include src="'templates/blocks/sidebar-menu.html'"></ng-include>
+        </div>
+    </md-sidenav>
+
+    <div flex="100" flex-gt-sm="65" class="dashboard-content">
+        <div ui-view></div>
+    </div>
+
+</div><!-- #content -->
+
+<!-- footer -->
+<ng-include ng-if="::!isVisualizationEditor" src="'templates/blocks/footer.html'"></ng-include>
+<!-- /footer -->

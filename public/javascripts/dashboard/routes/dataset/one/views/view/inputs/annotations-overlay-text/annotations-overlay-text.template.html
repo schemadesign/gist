@@ -1,0 +1,14 @@
+<label class="margin-bottom-3x">Enter Overlay Text for This View</label>
+<p>
+    The text will appear at the top left of the chart, overlaying the chart visuals.
+    You can use it to further describe or give context to your visualization.
+</p>
+
+<md-input-container class="md-block">
+    <textarea
+        ng-model="viewCtrl.data.annotations.overlayText.text"
+        md-maxlength="500"
+        rows="3"
+        aria-label="{{viewCtrl.viewDisplayName}} Overlay Text"
+    ></textarea>
+</md-input-container>

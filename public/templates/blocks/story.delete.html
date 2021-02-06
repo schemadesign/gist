@@ -1,0 +1,19 @@
+<md-dialog md-no-ink aria-label="Delete Insight">
+    <aa-toolbar title="Delete Insight" class="warn" ng-if="!replacement"></aa-toolbar>
+    <md-dialog-content layout-padding>
+        <md-content layout="column">
+
+            <p>
+                Are you sure you want to delete the insight
+                <span><strong>{{ title }}</strong></span>?
+            </p>
+
+        </md-content>
+
+
+        <aa-dialog-actions warn="Remove Insight" cancel=""></aa-dialog-actions>
+
+
+    </md-dialog-content>
+
+</md-dialog>

@@ -1,0 +1,6 @@
+@import url('../views/linechart.css');
+
+/*** Specific chart styling only for external loaded visualizations (Drupal). ***/
+.gist-line-chart-nav {
+    padding-bottom: 8px;
+}

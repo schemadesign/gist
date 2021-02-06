@@ -1,0 +1,33 @@
+<form name="datasetNewCtrl.form" ng-submit="datasetNewCtrl.submitForm(datasetNewCtrl.form.$valid)" novalidate>
+    <header layout-xs="col" layout-gt-xs="row" layout-align="space-between start">
+        <md-input-container flex="66" md-no-float class="editable-title">
+            <input required name="title" ng-model="datasetNewCtrl.dataset.title" unique-title submitting-flag="datasetNewCtrl.submitting" aria-label="Visualization Title" placeholder="Visualization Name" autofocus>
+            <div ng-messages="datasetNewCtrl.form.title.$error" class="error-messages">
+                <div ng-message="required">This is required.</div>
+                <div ng-message="titleAvailable">This title is reserved.</div>
+            </div>
+        </md-input-container>
+        <div>
+            <md-button class="md-dashboard md-dashboard-header confirm" type="submit" ng-disabled="datasetNewCtrl.form.$invalid || datasetNewCtrl.submitting" md-no-ink>
+                <span class="btn-label">Next</span>
+            </md-button>
+        </div>
+    </header>
+
+    <md-input-container ng-if="datasetNewCtrl.canCreateCustomViz && datasetNewCtrl.canCreateStandardViz">
+        <md-radio-group class="api-options" ng-model="datasetNewCtrl.dataset.vizType">
+            <md-radio-button value="customViz">
+                Custom
+            </md-radio-button>
+            <md-radio-button value="standardViz">
+                Standard View
+            </md-radio-button>
+        </md-radio-group>
+    </md-input-container>
+
+    <div class="gist-content dataset">
+        <a href="http://thedogapi.com" ng-if="datasetNewCtrl.dogsRule()"><img src="https://api.thedogapi.com/v1/images/search?format=src&mime_types=image/gif"></a>
+        <a href="http://thecatapi.com" ng-if="datasetNewCtrl.catsRule()"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a>
+        <div class="ext-content"></div>
+    </div>
+</form>

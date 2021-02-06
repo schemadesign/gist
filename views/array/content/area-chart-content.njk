@@ -1,0 +1,199 @@
+<section id="gist-view-{{ viewInstanceId }}" class="gist-section">
+
+    {% if header %}
+        {{ header.default(arrayTitle, array_source_key, defaultView, team, isPreview, embedded, sharedPage, routePath_base, view_description, revision, defaultFilterObj, isEmbed, showInsightsExplorer, stories, subdomain, env, sharedPageId, lastUpdated) }}
+        {% include "../../partials/modal/info.njk" %}
+    {% endif %}
+
+    <div class="gist-content" longDesc="{{ metaDescription }}">
+
+        {% if dropdown %}
+            <div class="gist-container-fluid">
+                <div class="gist-row">
+                    <div class="gist-block">
+
+                        <div class="gist-controls gist-sort-bar clearfix" style="display:none">
+                            {% if viewOptions.viewControls %}
+                                <nav class="sort-bar-left pull-left" role="navigation">
+                                    {{ dropdown.default(
+                                        'Chart by',
+                                        'groupBy',
+                                        groupBy if groupBy else defaultGroupByColumnName_humanReadable,
+                                        colNames_orderedForGroupByDropdown,
+                                        routePath_base | constructedRoutePath(filterObj, {
+                                            searchCol: searchCol,
+                                            searchQ: searchQ,
+                                            aggregateBy: aggregateBy,
+                                            segmentBy: segmentBy.querySegmentBy,
+                                            groupBy: ''
+                                        })
+                                    ) }}
+                                    {% if simpleChart %}
+                                        {{ dropdown.sortbar(
+                                            'Y Axis',
+                                            'aggregateBy',
+                                            humanReadableOrPlaceholder(areas, renameMultipleText)
+                                        ) }}
+                                    {% else %}
+                                        {{ dropdown.default(
+                                            'Stack By',
+                                            'stackBy',
+                                            stackBy if stackBy else defaultStackByColumnName_humanReadable,
+                                            colNames_orderedForStackByDropdown,
+                                            routePath_base | constructedRoutePath(filterObj, {
+                                                colFilter: colFilter,
+                                                searchCol: searchCol,
+                                                searchQ: searchQ,
+                                                aggregateBy: aggregateBy,
+                                                groupBy: groupBy,
+                                                segmentBy: segmentBy.querySegmentBy,
+                                                stackBy: ''
+                                            })
+                                        ) }}
+
+                                        {{ dropdown.default(
+                                            'Aggregate By',
+                                            'aggregateBy',
+                                            aggregateBy if aggregateBy else defaultAggregateByColumnName_humanReadable,
+                                            colNames_orderedForAggregateByDropdown,
+                                            routePath_base | constructedRoutePath(filterObj, {
+                                                colFilter: colFilter,
+                                                searchCol: searchCol,
+                                                searchQ: searchQ,
+                                                groupBy: groupBy,
+                                                stackBy: stackBy,
+                                                segmentBy: segmentBy.querySegmentBy,
+                                                aggregateBy: ''
+                                            })
+                                        ) }}
+
+                                        {% if segmentBy.chartByIsDate %}
+                                            {{ dropdown.sortbar(
+                                                'Segment By',
+                                                'segmentBy',
+                                                segmentBy.segmentBy,
+                                                segmentBy.segmentByOptions,
+                                                routePath_base | constructedRoutePath(filterObj,
+                                                    {
+                                                        colFilter: colFilter,
+                                                        searchCol: searchCol,
+                                                        searchQ: searchQ,
+                                                        groupBy: groupBy,
+                                                        stackBy: stackBy,
+                                                        aggregateBy: aggregateBy,
+                                                        segmentBy: ''
+                                                    })
+                                            ) }}
+                                        {% endif %}
+                                    {% endif %}
+                                </nav>
+                            {% endif %}
+                            {% if search %}
+                                <div class="sort-bar-right gist-pull-right">
+                                    {% include "../../partials/accessibility/toggle-pattern.njk" %}
+                                    {% if viewOptions.search %}
+                                        {{ search.default(
+                                            routePath_base,
+                                            searchCol if searchCol else 'All Fields',
+                                            cols_orderedForSearchByDropdown,
+                                            searchQ if searchQ else "",
+                                            sortBy,
+                                            sortDirection,
+                                            revision,
+                                            filterObj
+                                        ) }}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div><!-- .gist-row -->
+            </div><!-- .gist-container-fluid -->
+        {% endif %}
+
+        <div class="gist-container-fluid">
+            <div class="gist-loading">
+                {% include "../../partials/loading.njk" %}
+            </div>
+
+            <div class="gist-no-data" style="display:none">
+                {% include "../../partials/no-data.njk" %}
+            </div>
+
+            <div class="gist-row">
+                <div class="gist-block">
+                    <div class="gist-area-chart-container" style="height: 400px">
+                        {% if displayNavigationChart %}
+                            <div class="gist-area-chart-main gist-areachart gist-viewport" style="height:75%;"></div>
+                            <div class="gist-area-chart-nav gist-areachart gist-navigation" style="height:25%;"></div>
+                        {% else %}
+                            <div class="gist-area-chart-main gist-areachart gist-viewport" style="height:100%;"></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div><!-- .gist-row -->
+
+        </div><!-- .gist-container-fluid -->
+
+        {% if isFilterActive and filter %}
+            {{ filter.default(displayTitleOverrides,
+                routePath_base | constructedRoutePath(null, {
+                    searchCol: searchCol,
+                    searchQ: searchQ,
+                    groupBy: groupBy,
+                    aggregateBy: aggregateBy,
+                    segmentBy: segmentBy.querySegmentBy
+                }),
+                filterObj,
+                truesByFilterValueByFilterColumnName_forWhichNotToOutputColumnNameInPill,
+                sharedPage,
+                false,
+                'filter-bar-fixed-bottom'
+            ) }}
+        {% endif %}
+
+    </div><!-- .gist-content -->
+</section>
+
+<script type="text/javascript">
+    (function () {
+        var routePath_withoutFilter = '{{ routePath_base | constructedRoutePath(null, {
+            searchCol: searchCol,
+            searchQ: searchQ,
+            groupBy: groupBy,
+            aggregateBy: aggregateBy,
+            segmentBy: segmentBy.querySegmentBy
+        }) | safe }}';
+        var groupBy_outputInFormat = '{{ groupBy_outputInFormat }}';
+        var accessibility = {{ sortbarOptions.accessibility or false }};
+        var simpleChart = {{ simpleChart or false }};
+        var redirectBaseUrl = undefined;
+
+        window.arrays = window.arrays || {};
+        window.arrays.defaultInstanceId = '{{ viewInstanceId }}';
+        window.arrays.viewOptions = window.arrays.viewOptions || {};
+
+        window.arrays.viewOptions['{{ viewInstanceId }}'] = {
+            routePath_withoutFilter: routePath_withoutFilter,
+            redirectBaseUrl: redirectBaseUrl,
+            outputInFormat: groupBy_outputInFormat,
+            groupBy_isDate: {{ groupBy_isDate }},
+            array_source_key: '{{ array_source_key }}',
+            sharedPage: {{ sharedPage }},
+            sharedPageId: '{{ sharedPageId }}',
+            accessibility: accessibility,
+            datasetId: '{{ datasetId }}',
+            title: '{{ arrayTitle }}',
+            format: '{{ format }}',
+            simpleChart: simpleChart,
+            puppeteer: {{ (puppeteer and not puppeteerScreenshot) | default(false) }},
+            displayNavigationChart: {{ displayNavigationChart }},
+            isCustomInstance: {{ isCustomInstance }},
+            viewSelector: '#gist-view-{{ viewInstanceId }}',
+            subdomain: '{{ subdomain }}',
+            cdnAddress: '{{ cdnAddress }}',
+            environment: '{{ env.NODE_ENV }}',
+            isExternalAccess: {{ isExternalAccess }},
+        };
+    })();
+</script>

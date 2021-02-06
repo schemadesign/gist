@@ -1,0 +1,29 @@
+/* @override
+	http://austenblokker.local.arrays.co:9080/stylesheets/articles/default/main.css */
+
+/* @group Base */
+@import url('../../base/bootstrap.css');
+@import url('../../base/fontello-embedded.css');
+@import url('../../base/variables.css');
+@import url('../../base/typography/base.css');
+/* @end Base */
+
+/* @group Layout */
+@import url('../../layout/body.css');
+@import url('../../layout/embedded.css');
+/* @end Layout */
+
+/* @group Lib */
+@import url('../../../../vendors/noty/lib/noty.css');
+@import url('../../../../vendors/noty/lib/themes/bootstrap-v3.css');
+/* @end Lib */
+
+/* @group Module */
+@import url('../../module/header-bar.css');
+@import url('../../module/header-modal.css');
+@import url('../../module/modal.css');
+/* @end Module */
+
+/* @group Article */
+@import url('./article.css');
+/* @end Article */

@@ -1,0 +1,73 @@
+.dashboard-story-row {
+	display: flex;
+	align-items: flex-start;
+	width: 100%;
+}
+
+.story-dashboard .edit-div {
+	margin-bottom: 20px;
+}
+
+.story-metadata-title {
+	font-weight: bold;
+	margin-bottom: 0px;
+	font-size: 30px !important;
+}
+
+.user-initial-dashboard {
+	background-color: var(--color-primary);
+	color: white;
+	display: inline-block;
+	cursor: default;
+}
+
+form.story-form {
+	margin-top: 80px;
+}
+
+.story-dashboard-title {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+span.story-metadata {
+	display: block;
+}
+
+.story-control {
+	display: inline-block;
+	float: right;
+}
+
+.story-control .dashboard-list-icon {
+	padding-left: 20px;
+}
+
+.story-dashboard-info {
+	align-self: center;
+}
+
+.thumbnail-placeholder {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 64px;
+	width: 128px;
+}
+
+.thumbnail-placeholder img {
+	width: auto;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.detail-image-placeholder {
+	max-width: 600px;
+	overflow: hidden;
+	display: block;
+	box-shadow: var(--box-shadow);
+}
+
+.detail-image-placeholder img {
+	width: 100%;
+}

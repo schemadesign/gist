@@ -1,0 +1,75 @@
+<header layout-xs="col" layout-gt-xs="row" layout-align="space-between start">
+    <h1 class="pad-bottom-2x">Visualizations</h1>
+    <div layout="row" layout-align="start center">
+        <md-button
+            ng-show="datasetListCtrl.canAddNewViz"
+            class="md-dashboard md-dashboard-header"
+            md-no-ink
+            ui-sref="dashboard.dataset.new"
+            id="primaryActionButton"
+        >
+            <span class="btn-label">New Visualization</span>
+        </md-button>
+    </div>
+</header>
+
+<div class="gist-content dataset">
+    <div class="ext-content">
+        <p ng-if="datasetListCtrl.datasets.length" class="pad-bottom-2x">Below is a list of all visualizations for your team. Create a new visualization by clicking New Visualization above.</p>
+
+        <p ng-if="!datasetListCtrl.datasets.length"> You have not created any Visualizations yet.</p>
+
+        <div ng-if="datasetListCtrl.datasets.length" layout="row" layout-align="space-between center">
+            <md-select ng-model="datasetListCtrl.filterBy" aria-label="Filter visualizations">
+                <md-option ng-value="type" ng-click="datasetListCtrl.updateFilterBy(type)" ng-repeat="(type, name) in ::datasetListCtrl.filterOptions track by type">{{name}}</md-option>
+            </md-select>
+
+            <md-select ng-model="datasetListCtrl.sortBy" aria-label="Sort visualizations">
+                <md-option ng-value="type" ng-click="datasetListCtrl.updateSortBy(type)" ng-repeat="(type, name) in ::datasetListCtrl.sortOptions track by type">{{name}}</md-option>
+            </md-select>
+        </div>
+
+        <ul class="dashboard-list user-list visualization-list" ng-cloak>
+            <li ng-repeat="dataset in datasetListCtrl.datasets | filter: datasetListCtrl.filterDataset | orderBy: datasetListCtrl.sortBy track by dataset._id">
+                <span class="user-initial user-initial-dashboard">{{ dataset.author.firstName[0] }}
+                    <md-tooltip ng-if="dataset.author.firstName[0]" md-direction="right">{{ dataset.author.firstName + ' ' + dataset.author.lastName }}</md-tooltip>
+                </span>
+                <!-- TODO consider adding initial as an option in the aa-list-control-item directive -->
+                <div style="margin-left: 60px;">
+                <!-- For now, spacing the list item directive to accomodate for the initial -->
+                <aa-list-control-item
+                    text="dataset.title"
+                    hint="datasetListCtrl.getListHint(dataset)"
+                    disabled="!datasetListCtrl.canEdit(dataset._id)"
+                    text-on-click="datasetListCtrl.open"
+                    text-on-click-args="[dataset._id]"
+                    buttons="[
+                        {
+                            icon: 'eye',
+                            onClick: datasetListCtrl.view,
+                            onClickArgs: [dataset],
+                            hide: dataset.firstImport,
+                            tooltip: 'View visualization'
+                        },
+                        {
+                            icon: 'pencil',
+                            onClick: datasetListCtrl.open,
+                            onClickArgs: [dataset._id],
+                            hide: !datasetListCtrl.canEdit(dataset._id),
+                            tooltip: 'Edit visualization'
+                        },
+                        {
+                            icon: 'remove',
+                            onClick: datasetListCtrl.remove,
+                            onClickArgs: [dataset, $event],
+                            class: 'warn',
+                            hide: !datasetListCtrl.canEdit(dataset._id),
+                            tooltip: 'Delete visualization'
+                        }
+                    ]"
+                ></aa-list-control-item>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,154 @@
+#gist-header-expander {
+    background-color: var(--color-background);
+    width: 100%;
+    transform: translateY(-100%);
+    transition: transform 1s, box-shadow .9s;
+}
+
+.gist-header-expander--embeded {
+    z-index: 5;
+    position: absolute;
+    top: var(--navbar-height-embedded);
+    border-bottom: 1px solid var(--color-divider);
+}
+
+#gist-header-expander.showing {
+    transform: translateY(0);
+}
+
+.showing.gist-header-expander--embeded {
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+}
+
+.gist-header-expander--embeded {
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.0);
+}
+
+#gist-header-expand-button:before {
+    margin: 0 10px;
+}
+
+.view-embedded #gist-header-expand-button:before {
+    margin: 5px 10px;
+}
+
+.gist-header-expand-button--hidden {
+    display: none;
+}
+
+.array-header.has-insights,
+.array-header.has-description,
+.array-header.has-updated-date {
+    padding-bottom: 0;
+}
+
+.view-embedded .gist-header-expand-button-wrapper {
+    position: absolute;
+}
+
+.gist-header-last-updated {
+    text-align: center;
+    font-weight: bold;
+    color: #afafaf;
+    font-size: .9em;
+}
+
+.gist-header-last-updated--embeded {
+    margin: 8px;
+}
+
+.gist-header-expand-button-wrapper {
+    margin: 5px;
+}
+
+.gist-description-wrapper {
+    margin: 15px auto;
+    max-width: 680px;
+    display: flex;
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+    .gist-description-wrapper {
+        margin: 20px auto;
+    }
+}
+
+.gist-description-wrapper--embeded {
+
+}
+.gist-description {
+    margin: 0 auto;
+}
+
+/* INSIGHTS */
+.gist-insights-explorer {
+    visibility: hidden;
+    width: 100vw;
+    height: 0vh;
+    min-height: 0px;
+    transition: height 1s, min-height 0s;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.gist-insights-explorer.showing {
+    visibility: visible;
+    min-height: 120px;
+    height: 210px;
+    max-height: 190px;
+    transition: height 1s, min-height 0s 1s;
+}
+.gist-insights-bar {
+    white-space: nowrap;
+    padding: 0 10px;
+    text-align: center;
+}
+
+.gist-insights-frame {
+    position: relative;
+    border: 1px solid var(--color-divider);
+    margin: 10px 10px;
+    padding: 10px;
+    height: 16vh;
+    max-height: 160px;
+    overflow: hidden;
+    height: 180px;
+    width: 220px;
+}
+
+.gist-insights-frame.highlighted {
+    border: 2px solid var(--brand-color-accent);
+}
+
+.gist-insights-title {
+    min-width: 115px;
+    position: absolute;;
+    left: 10px;
+    right: 10px;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    text-align: center;
+}
+
+.gist-insights-thumbnail-img {
+    width: 200px;
+    height: 115px;
+    object-fit: contain;
+    margin-top: 20px;
+}
+
+@media (max-width: 550px) {
+  .gist-insights-frame {
+    width: 180px;
+  }
+
+  .gist-insights-thumbnail-img {
+    width: 155px;
+    height: 130px;
+  }
+}

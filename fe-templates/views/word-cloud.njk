@@ -1,0 +1,16 @@
+<ul class="word-cloud-list" role="listbox">
+{% for result in docs %}
+    {% if result.count > 0 %}
+    {% if options.viewOptions.viewInteractivity and result.urlForFilterValue %}
+        {% set url = result.urlForFilterValue %}
+    {% else %}
+        {% set url = "javascript:void(0);" %}
+    {% endif %}
+    <li class="word-cloud-item has-tooltip" data-tooltip-key="{{ result.word }}" data-tooltip-value="{{ result.count }}" aria-label="{{ result.word }} has {{ result.count }} occurrences">
+        <a href="{{ url }}" class="word-cloud-link border-color-brand-hover" aria-label="{{ result.word }} has {{ result.count }} occurrences">
+            <span class="word-cloud-label color-brand" style="font-size: {{ (result.count - meta.minCount) / (meta.maxCount - meta.minCount) * 350 + 100 | round() }}%">{{ result.word }}</span>
+        </a>
+    </li>
+    {% endif %}
+{% endfor %}
+</ul>

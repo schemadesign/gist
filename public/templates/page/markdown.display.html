@@ -1,0 +1,56 @@
+<md-content layout-padding md-no-ink>
+    <form id="form-container" name="markdownDisplayForm" ng-submit="submitForm()" autocomplete="off">
+        <div layout-gt-xs="row" layout-xs="column">
+            <md-input-container class="md-block publish-settings">
+                <!-- <label style="margin-bottom: 15px">Privacy settings</label> -->
+
+                <md-switch ng-model="page.published"
+                    ng-disabled="page.displayOnExplorePage"
+                    aria-label="Make dataset public">
+                    Publish this article
+                </md-switch>
+
+                <md-switch ng-model="page.displayOnTeamPage"
+                    ng-disabled="page.displayOnExplorePage"
+                    aria-label="List on team page">
+                    List on your team page
+                </md-switch>
+
+                <md-switch ng-if="user.role === 'superAdmin' && env.node_env !== 'enterprise' "
+                    ng-model="page.displayOnExplorePage"
+                    ng-click="updateListingOnArrays(true)"
+                    ng-disabled="!page.published"
+                    aria-label="List in the Showcase" no-dirty-check>
+                    List article in the Showcase
+                </md-switch>
+
+                <div ng-if="env.node_env !== 'enterprise'">
+
+                    <md-button ng-hide="user.role ==='superAdmin' || team.isEnterprise"
+                        ng-disabled="page.state ==='approved' || page.state === 'pending'"
+                        class="md-dashboard" aria-label="More actions menu"
+                        ng-click="listOnArraysRequest()">
+
+                        <span class="btn-label">Request {{ page.state || 'listing on' + env.host }}</span>
+
+                    </md-button>
+
+                    <p ng-if="!(user | isSuperAdmin) && (!page.state || !page.published || !page.displayOnTeamPage)">Article must be imported and listed on team page before making a request to list on {{ env.host }}.</p>
+
+                </div>
+
+                <div ng-if="user.role === 'superAdmin' && page.state && env.node_env !== 'enterprise' && page.createdBy !== user._id" >
+                    <h3>Request {{page.state}}</h3>
+                    <md-button class="md-dashboard" aria-label="Approve Listing On {{ env.host }}" ng-disabled="page.state === 'approved'"
+                        ng-click="updateListingOnArrays(true)">
+                        Approve
+                    </md-button>
+                    <md-button class="md-dashboard" aria-label="Approve Listing On {{ env.host }}" ng-disabled="page.state === 'disapproved'"
+                        ng-click="updateListingOnArrays(false)">
+                        Disapprove
+                    </md-button>
+                </div>
+            </md-input-container>
+        </div>
+    </form>
+</md-content>

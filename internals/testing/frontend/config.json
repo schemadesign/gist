@@ -1,0 +1,17 @@
+{
+  "setupTestFrameworkScriptFile": "./internals/testing/frontend/setupFramework.js",
+  "testMatch": [
+    "<rootDir>/public/**/__tests__/**/*.spec.js"
+  ],
+  "rootDir": "../../../",
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/contrib/"
+  ],
+  "clearMocks": true,
+  "watchPathIgnorePatterns": [
+    "./__mocks__/tmp",
+    "<rootDir>/node_modules/"
+  ],
+  "testURL": "http://localhost/"
+}

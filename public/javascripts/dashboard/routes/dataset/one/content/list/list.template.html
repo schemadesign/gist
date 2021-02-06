@@ -1,0 +1,133 @@
+<md-content layout-padding md-no-ink>
+    <div ng-form="contentListCtrl.form" gist-isolate-form>
+        <h3>{{contentListCtrl.getFilterName()}} Entries</h3>
+        <p>Showing {{contentListCtrl.entries.length}} of {{contentListCtrl.paging.totalItems}} total entries</p>
+
+        <p>Please select an object to edit its fields. Activate the checkbox to publish.</p>
+
+        <div layout="row" layout-align="space-between center">
+            <md-input-container>
+                <md-button class="md-dashboard md-button" ui-sref="dashboard.dataset.one.content.create">
+                    <span class="btn-label">Add Entry</span>
+                </md-button>
+            </md-input-container>
+
+            <div layout="row" layout-align="end center">
+                <md-input-container>
+                    <span>Filter By&ensp;</span>
+                </md-input-container>
+
+                <md-input-container>
+                    <md-select ng-model="contentListCtrl.filterBy" aria-label="Filter by"
+                               ng-change="contentListCtrl.queryUpdated()">
+                        <md-option value="{{filter.key}}"
+                                   ng-repeat="filter in ::contentListCtrl.filterList track by filter.key">
+                            {{filter.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container class="ml-3">
+                    <span>Sort By&ensp;</span>
+                </md-input-container>
+
+                <md-input-container>
+                    <md-select ng-model="contentListCtrl.sortBy" aria-label="Sort by"
+                               ng-change="contentListCtrl.queryUpdated()">
+                        <md-option value="{{sort.key}}"
+                                   ng-repeat="sort in ::contentListCtrl.sortList track by sort.key">{{sort.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </div>
+
+        <div layout="row" layout-align="space-between center">
+            <div>
+                <md-input-container aria-label="Jump to page" ng-if="contentListCtrl.paging.totalPages > 1">
+                    <input
+                        type="number"
+                        max="{{contentListCtrl.paging.totalPages}}"
+                        class="content-search"
+                        ng-model="contentListCtrl.paging.currentPage"
+                        ng-change="contentListCtrl.queryUpdated()"
+                        placeholder="Jump to page"
+                    >
+                </md-input-container>
+            </div>
+            <md-input-container aria-label="Search by title">
+                <input
+                    class="content-search"
+                    ng-model="contentListCtrl.filterByTitle"
+                    ng-change="contentListCtrl.queryUpdated()"
+                    placeholder="Search by title"
+                >
+            </md-input-container>
+        </div>
+
+        <div class="content-spinner" ng-hide="contentListCtrl.entriesLoaded">
+            <div class="content-spinner-container">
+                <span us-spinner="{ radius:5, width:2, length: 5 }" spinner-on="!contentListCtrl.entriesLoaded"></span>
+            </div>
+
+            <p class="content-spinner-text">Loading entries...</p>
+        </div>
+
+        <p ng-if="!contentListCtrl.entries.length && contentListCtrl.entriesLoaded">
+            No results
+        </p>
+        <ul class="dashboard-list content-list" ng-show="contentListCtrl.entriesLoaded">
+            <li ng-repeat="entry in contentListCtrl.entries track by entry._id" layout="row"
+                layout-align="space-between center">
+                <span aa-tooltip="{{entry.published ? 'Unpublish' : 'Publish'}}" flex="5">
+                    <md-checkbox
+                        name=""
+                        ng-model="entry.published"
+                        aria-label="Publish {{entry.objectTitle}}"
+                        ng-change="contentListCtrl.updateEntryStatus(entry)"
+                    ></md-checkbox>
+                </span>
+
+                <span ng-if="datasetOneCtrl.dataset.fe_image.field" flex>
+                    <img
+                        onerror="this.src='/images/image-not-found-sm.png'"
+                        ng-src="{{contentListCtrl.imageUrl(entry.pKey, entry.updatedAt)}}"
+                    >
+                </span>
+
+                <span flex style="overflow: hidden; text-overflow: ellipsis;">
+                    {{entry.rowParams[datasetOneCtrl.dataset.objectTitle] || '(Title not specified)'}}
+                </span>
+
+                <span class="content-list__date">
+                    Last Updated: {{entry.updatedAt | date}}
+                </span>
+
+                <span class="dashboard-list-icon" flex="5" aa-tooltip="Edit entry"
+                      ng-click="contentListCtrl.editEntry(entry._id)">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </span>
+
+                <span class="dashboard-list-icon warn" flex="5" aa-tooltip="Remove entry"
+                      ng-click="contentListCtrl.removeEntry(entry, $event)">
+                    <i class="fa fa-remove" aria-hidden="true"></i>
+                </span>
+            </li>
+        </ul>
+
+        <ul
+            uib-pagination
+            boundary-links="true"
+            items-per-page="contentListCtrl.paging.itemsPerPage"
+            total-items="contentListCtrl.paging.totalItems"
+            ng-model="contentListCtrl.paging.currentPage"
+            max-size="8"
+            previous-text="&lsaquo;"
+            next-text="&rsaquo;"
+            first-text="&laquo;"
+            last-text="&raquo;"
+            templateUrl="'/javascripts/dashboard/routes/dataset/one/content/list/pagination.template.html'"
+            ng-change="contentListCtrl.queryUpdated()"
+        ></ul>
+    </div>
+</md-content>

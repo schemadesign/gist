@@ -1,0 +1,121 @@
+.dashboard .performance md-input-container {
+    /*width: 100%;*/
+}
+
+/* .dashboard .gist-tooltip is placed outside .performance */
+.dashboard .performance .gist-linechart .tick text,
+.dashboard .gist-tooltip {
+    font-size: 16px;
+}
+
+.dashboard .performance h2 {
+    margin-bottom: 22px;
+}
+
+.dashboard .performance h3 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+/* Performance Tiles */
+.aa-performance-tile {
+    border: 1px solid #ccc;
+    margin-right: 16px;
+
+    font-weight: 600;
+    text-align: center;
+}
+aa-performance-tile:last-child .aa-performance-tile {
+    margin-right: 0;
+}
+
+.aa-performance-tile header {
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    color: #ccc;
+}
+
+.aa-performance-tile .primary {
+    font-size: 42px;
+    line-height: 1;
+}
+
+.aa-performance-tile header,
+.aa-performance-tile .secondary {
+    font-size: 15px;
+    line-height: 2;
+}
+
+.aa-performance-tile .primary,
+.aa-performance-tile .secondary {
+    color: #75A7FF;
+}
+
+.aa-performance-tile.loading .primary,
+.aa-performance-tile.loading .secondary {
+    color: #fff;
+}
+.aa-performance-tile.no-data .primary,
+.aa-performance-tile.no-data .secondary {
+    color: #ccc;
+}
+
+.aa-performance-tile .angular-spinner {
+    position: relative;
+    top: 32px;
+}
+
+/* Performance Header */
+.aa-performance-header {
+    margin-top: 8px;
+    padding: 8px 0;
+    border-top: 1px solid #eeeeee;
+}
+.no-border .aa-performance-header {
+    border-top: 0
+}
+.aa-performance-header .aa-performance-header-tooltip {
+    margin-left: 0.5em;
+    font-size: 0.75em;
+    color: #ccc;
+}
+.aa-performance-header h3 {
+    margin: 0;
+}
+.aa-performance-header label {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+.aa-performance-header md-select {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Custom HorizontalBarChart styles */
+.dashboard .performance .barchart .gist-axis path,
+.dashboard .performance .barchart .gist-axis line {
+    display: none;
+}
+.dashboard .performance .barchart .gist-axis text {
+    font-size: 16px;
+}
+.dashboard .performance .barchart .gist-y-axis text {
+    font-weight: 600;
+}
+
+/* Visualizations */
+/* TODO Place in own file or section? */
+.aa-visualization-no-data {
+    /*TODO color*/
+    /*background-color: #fafafa;*/
+}
+
+.aa-visualization-error-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

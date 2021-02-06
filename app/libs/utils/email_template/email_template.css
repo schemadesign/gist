@@ -1,0 +1,71 @@
+.footer-text,
+.footer-text a,
+.footer-text span a {
+    color:#A5A5A5;
+}
+
+.footer-spacing {
+    margin-top: 40px;
+}
+
+.table-wrapper {
+    background-color:lightgrey;
+    padding:20px;
+}
+
+.table-container {
+    margin:auto;
+    background-color:white;
+    border-top:5px solid #005CB5;
+    width: 55%;
+}
+
+.table-data {
+    padding:0px 40px;
+    text-align:left;
+}
+
+.black-color {
+    color: #000;
+}
+
+.header-compact-line-height {
+    line-height: 2rem;
+}
+
+a.gist-button {
+    padding: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #FFF;
+    text-decoration: none;
+    border-radius: 20px;
+    background-color: #005CB5;
+    font-size: 14px;
+}
+
+.body-text {
+    font-size: 16px;
+}
+
+.gist-logo {
+    margin: 25px 0px;
+    height: 40px;
+    display: block;
+    border: 0 none;
+    outline: none;
+}
+
+.social-media-logo {
+    height: 15px;
+    display: block;
+    border: 0 none;
+    outline: none;
+    float: right;
+    padding: 0px 5px;
+}
+
+.separator-line {
+    width: 100%;
+    border-bottom: 1px solid #E0E0E0;
+}

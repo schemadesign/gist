@@ -1,0 +1,69 @@
+<label class="margin-bottom-3x d-block">{{::setting.displayAs}}</label>
+<p ng-if="::setting.description"  ng-bind-html="::setting.description"></p>
+
+<md-select
+    flex="45"
+    class="md-block"
+    ng-model="viewCtrl.data[setting.name].field"
+    ng-model-options="{ updateOn: 'default' }"
+    placeholder="Select field"
+    ng-change="changeCachedValues(viewCtrl.data[setting.name].field)"
+>
+    <md-option ng-repeat="column in datasetViewsCtrl.colsAvailable | filter: viewCtrl.dataTypeMatch(setting.restrictColumnDataType) track by column" ng-value="column">
+        {{viewCtrl.dataset.fe_displayTitleOverrides[column] || column}}
+    </md-option>
+</md-select>
+
+<div ng-if="viewCtrl.data[setting.name].field" ng-repeat="condition in viewCtrl.data[setting.name].conditions track by $index" class="icon-selector-row">
+    <div layout="row" layout-align="space-between start">
+        <md-input-container flex="65">
+            <label>Item name</label>
+            <md-select aria-label="Display Name {{viewCtrl.viewName}}" data-ng-model="condition.value">
+                <md-option data-ng-repeat="keyword in keywords" data-ng-value="keyword">
+                    {{ keyword === notSpecified ? notSpecifiedLabel : keyword }}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container flex="20">
+            <label>Icon</label>
+            <md-select
+                aria-label="{{setting.name}} for {{viewCtrl.viewName}}"
+                data-ng-model="condition.applyIconFromUrl"
+                md-on-open="handleOpenPicker($index)"
+                md-container-class="icons-md-select-container icons-picker-{{$index}}"
+                class="icons-md-select-{{$index}}">
+                <md-select-header>
+                    <ul class="icons-picker-tabs__container">
+                        <li data-ng-repeat="tab in tabs" class="icons-picker-tabs__tab" >
+                            <span class="icons-picker-tabs__button" title="{{tab.name}}" ng-click="handleTabClick($parent.$index, $index)">
+                                <img class="icons-picker-tabs__icon" ng-src="{{tab.src}}">
+                            </span>
+                        </li>
+                    </ul>
+                </md-select-header>
+                <md-option
+                    ng-if="isOutOfList(condition.applyIconFromUrl)"
+                    data-ng-value="condition.applyIconFromUrl"
+                    class="icons-md-option--invisible">
+                    <img class="icon-map-item" ng-src="{{condition.applyIconFromUrl}}">
+                </md-option>
+                <md-optgroup data-ng-repeat="group in sets track by group.name" label="{{group.name}}">
+                    <md-option data-ng-repeat="icon in group.icons track by icon.name" data-ng-value="makeRelative(icon.src)" ng-click="handleSelectOption($parent.$parent.$index)">
+                        <img class="icon-map-item" ng-src="{{icon.src}}" title="{{icon.name | getFilenameWithoutExt}}">
+                    </md-option>
+                </md-optgroup>
+            </md-select>
+        </md-input-container>
+
+        <div flex="5">
+            <span class="dashboard-list-icon warn" ng-click="removeIconField($index)" aria-hidden="true" aria-label="Remove">
+                <i class="fa fa-remove" aria-hidden="true"></i>
+            </span>
+        </div>
+    </div>
+</div>
+
+<md-button ng-if="viewCtrl.data[setting.name].field" class="md-dashboard" ng-click="addMoreIconMappings()">
+    <span class="btn-label">Add item</span>
+</md-button>

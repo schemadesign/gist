@@ -1,0 +1,19 @@
+<div class="form-group">
+    <label for="{{ imageType }}">{{ uploadText }}</label>
+    <img class="img-responsive" ng-if="existingImage && imageType !== 'pdf'" ng-src="{{ existingImage }}">
+    
+    <input ng-if="imageType !== 'pdf'" type="file" accept="image/svg+xml,image/jpeg,image/png,image/gif,image/bmp" name="{{ imageType }}" id="{{ imageType }}" nv-file-select="" uploader="imageUploader" class="team-uploader">
+
+    <div ng-if="imageType === 'pdf'">
+        <span ng-if="existingImage">{{ existingImage.substring(existingImage.lastIndexOf('/')+1) }}</span>
+        <input ng-if="imageType === 'pdf'" type="file" accept="application/pdf" name="{{ imageType }}" id="{{ imageType }}" nv-file-select="" uploader="imageUploader" class="team-uploader">
+    </div>
+
+    <div class="team-image-actions" layout="row" layout-align="start center">
+        <label for="{{ imageType }}" class="md-button md-dashboard" ng-class="{'disabled': imageUploader.getNotUploadedItems().length}">
+            <span class="btn-label">{{existingImage ? 'Update' : 'Add'}}</span>
+        </label>
+        <span><a href="" ng-if="existingImage" ng-click="deleteFile()" class="warn">Remove</a></span>
+    </div>
+
+</div>

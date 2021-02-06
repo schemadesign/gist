@@ -1,0 +1,24 @@
+{% set currentView = "treemap" %}
+
+{% extends "../layout/array.njk" %}
+
+{% import "../partials/array-header.njk" as header %}
+
+{% import "../partials/dropdown.njk" as dropdown %}
+{% import "../partials/search.njk" as search %}
+{% import "../partials/filter.njk" as filter %}
+
+{% block content %}
+    {% include "./content/treemap-content.njk" %}
+    {% include "../partials/analytics.njk" %}
+{% endblock %}
+
+{% block inlineScript %}
+    {{ super() }}
+
+    {% for path in paginationLibraries %}
+        <script type="text/javascript" src="{{ path }}"></script>
+    {% endfor %}
+
+    <script type="text/javascript" src="/javascripts/build/core-views/treemap/treemap-init.js"></script>
+{% endblock %}

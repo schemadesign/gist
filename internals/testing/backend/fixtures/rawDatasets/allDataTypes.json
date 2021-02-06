@@ -1,0 +1,17 @@
+[
+    {
+        "Date": "2018-01-01",
+        "Number": "1",
+        "String": "IAmString1"
+    },
+    {
+        "Date": "2018-01-02",
+        "Number": "2",
+        "String": "IAmString2"
+    },
+    {
+        "Date": "2018-01-03",
+        "Number": "3",
+        "String": "IAmString3"
+    }
+]

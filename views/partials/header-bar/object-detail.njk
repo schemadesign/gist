@@ -1,0 +1,68 @@
+{% import './hamburger-menu.njk' as menu %}
+
+{% if brandColor %}
+    {% include "./styles.njk" %}
+{% endif %}
+
+{% if sharedPage %}
+    {% set defaultView = routePath_base %}
+{% else %}
+    {% set defaultView = "/" + array_source_key + "/" + defaultView | constructedRoutePath(defaultFilterObj, {
+        preview: isPreview,
+        embed: embedded,
+        revision: revision
+    }) %}
+{% endif %}
+{% set fullViewURL = "/" + array_source_key + "/" + rowObject._id + '' | constructedRoutePath(filterObj, {
+    preview: isPreview,
+    revision: revision
+}) %}
+
+{# Fixed navbar #}
+<header id="masthead" class="site-header hidden-print" role="banner">
+
+    <nav class="navbar navbar-default navbar-fixed-top header-shadow" {% if isPreview %} style="display: none" {% endif %}>
+        <div class="container-fluid container-full-width">
+            <div class="navbar-brand-container">
+                <a class="navbar-brand array-link-reset color-brand-hover" href="{{ defaultView }}" title="Go back to visualization home">
+                    {{ arrayTitle }}
+                    {% if isPreview %}<span class="preview-indicator"> (preview)</span>{% endif %}
+                </a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li>
+                    {% if objectIndex | isDefined %}
+                        {% set options = {
+                            searchQ: searchQ,
+                            searchCol: searchCol,
+                            sortDirection: sortDirection,
+                            sortBy: sortBy,
+                            embedded: embedded,
+                            preview: isPreview,
+                            revision: revision,
+                            timeValue: timeValue
+                        } %}
+                        {% set item_url = ('/' + array_source_key + '/' + viewType) | constructedRoutePath(filterObj, options) %}
+                    {% else %}
+                        {% set item_url = referer if referer else defaultView %}
+                    {% endif %}
+
+                    <a href="{{ item_url }}" class="navbar-back" title="Back to previous view">
+                        <span class="gist-icon-back" aria-hidden="true"></span>
+                        <span data-l10n-id="back" class="navbar-back-label hidden-xs">Back</span>
+                    </a>
+                </li>
+            </ul>
+            <div id="navbar" class="navbar-collapse collapse">
+                {# full page link for embedded view #}
+                <a class="nav navbar-nav navbar-right embedded-new-tab" href="{{ fullViewURL }}" target="_blank" title="Open the full version of this view in a new tab">
+                    <span class="gist-icon-extend" aria-hidden="true"></span>
+                </a>
+                {{ menu.default(user, team, env, isPreview, isPublic, sharedPage, true, storiesCount, arrayTitleEscaped, openDownload, false) }}
+
+            </div><!--/.nav-collapse -->
+        </div>
+        <div id="gist-noty"></div>
+    </nav>
+
+</header>

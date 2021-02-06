@@ -1,0 +1,52 @@
+<!-- handling upload error !-->
+<div ng-if="datasetErrorCtrl.errorCode === 'badFormat'">
+    <h1>Unsupported Dataset Format</h1>
+    <p>
+        There was a problem uploading your data.
+        Please contact support with the following information:
+    </p>
+    <div>
+        <ul>
+            <li>Your Team Subdomain: {{team.subdomain}}</li>
+            <li ng-if="datasetErrorCtrl.errorDatasetId">Your Dataset Id: {{datasetErrorCtrl.errorDatasetId}}</li>
+            <li ng-if="datasetErrorCtrl.errorMessage">Error Message: {{datasetErrorCtrl.errorMessage}}</li>
+        </ul>
+    </div>
+    <p><a class="pointer dashboard-border-bottom-underline" ng-click="datasetErrorCtrl.backToPreviousStep()">Back</a></p>
+</div>
+
+<div ng-if="datasetErrorCtrl.errorCode === 'loggedOut'">
+    <h1>Session expired</h1>
+    <p>
+        Your session has expired.
+    </p>
+
+    <a class="md-dashboard md-button" ng-click="datasetErrorCtrl.logOut()">Log in</a>
+</div>
+
+<!-- handling import error !-->
+<div ng-if="datasetErrorCtrl.errorCode === 'jobFailed'">
+    <h1>Error During Importing Task</h1>
+    <p>
+        There was a problem during your data import process. You could either contact our
+        support to troubleshoot, providing the following information:
+    </p>
+    <div>
+        <ul>
+            <li>Your Team Subdomain: {{team.subdomain}}</li>
+            <li ng-if="datasetErrorCtrl.errorDatasetId">Your Dataset Id: {{datasetErrorCtrl.errorDatasetId}}</li>
+            <li ng-if="datasetErrorCtrl.errorMessage">Error Message: {{datasetErrorCtrl.errorMessage}}</li>
+
+        </ul>
+    </div>
+    <p>
+        or <a class="pointer dashboard-border-bottom-underline" ng-click="datasetErrorCtrl.killTask()">cancel</a>
+        the import task to start over again.
+    </p>
+</div>
+
+<div ng-if="datasetErrorCtrl.errorCode === 'notFound'">
+    <h1>Not found</h1>
+    <p>Dataset you are looking for doesn't exist.</p>
+    <p><a ui-sref="dashboard.dataset.list">Go back to your dashboard.</a></p>
+</div>

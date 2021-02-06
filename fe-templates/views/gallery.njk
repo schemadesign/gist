@@ -1,0 +1,52 @@
+{# TODO: why set all these variables like this? easier initial transition from the existing gallery templates.
+    lots of opportunity to precalculate this stuff in the data_prep controller and slim down the templates. #}
+
+{% set dataSource = included.dataSource %}
+{% set coercionScheme = dataSource.raw_rowObjects_coercionScheme %}
+{% set viewOptions = dataSource.fe_viewOptions %}
+{% set array_source_key = dataSource.uid %}
+{% set fieldKey_objectTitle = options.fieldKey_objectTitle %}
+{% set galleryStyle = options.galleryStyle %}
+{% set secondaryColumnTileDisplay = options.secondaryColumnTileDisplay %}
+{% set secondaryColumnTileShow = options.secondaryColumnTileShow %}
+{% set nonpagedCount = meta.nonpagedCount %}
+{% set scrapedImages = meta.imageMeta.scrapedImages %}
+{% set sharedPage = options.sharedPage %}
+{% set routePath_base = options.routePath_base %}
+{% set embedded = options.embedded %}
+{% set isPreview = options.preview %}
+{% set revision = options.revision %}
+{% set hasThumbs = meta.imageMeta.hasThumbs %}
+{% set galleryViewSettings = dataSource.fe_views.views.gallery %}
+{% set displaySortFieldText = galleryViewSettings.displaySortFieldText %}
+{% set displayFieldTitles = galleryViewSettings.displayFieldTitles %}
+{% set team = dataSource._team if dataSource._team else null %}
+{% set subdomain = team.subdomain | lower %}
+{% set datasetId = dataSource._id %}
+{% set viewType = 'gallery' %}
+{% set sortBy = options.sortBy %}
+{% set sortBy_realColumnName = options.sortBy_realColumnName %}
+{% set defaultSortByColumnName_humanReadable = options.defaultSortByColumnName_humanReadable %}
+{% set secondaryCol = options.secondaryCol %}
+{% set filterObj = options.filterObj %}
+{% set imageCaption = true %}
+
+<ul class="gallery-grid gallery-single">
+    {% for doc in data %}
+        {% if sortBy_realColumnName %}
+            {% set textField = sortBy_realColumnName %}
+        {% else %}
+            {% set textField = defaultSortByColumnName_humanReadable %}
+        {% endif %}
+
+        {% if textField === fieldKey_objectTitle %}
+            {% set displaySortFieldText = false %}
+        {% endif %}
+
+        {% if galleryStyle === 'image' and hasThumbs and doc.nestedImagePath %}
+            {% include 'views/partials/gallery_item_image.njk' %}
+        {% else %}
+            {% include 'views/partials/gallery_item_text.njk' %}
+        {% endif %}
+    {% endfor %}
+</ul>

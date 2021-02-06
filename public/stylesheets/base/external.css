@@ -1,0 +1,18 @@
+@import url('./fontello-embedded.css');
+@import url('./variables.css');
+@import url('./typography/font-faces.css');
+
+.gist-section {
+    font-family: var(--font-family-centrano2);
+    font-size: 14px;
+
+    /* Render fonts thinner and smoother */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* @include './bootstrap.css' */
+}
+
+.gist-section a {
+    border-bottom: none;
+}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    {% include "../partials/base_header.njk" %}
+    {% include "../partials/analytics.njk" %}
+    <script type="text/javascript" src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    {% block headSuffix %}{% endblock %}
+</head>
+<body class="login-page">
+    {% include "../partials/login.njk" %}
+    <script type="text/javascript" src="/javascripts/build/main/namespaces.js"></script>
+    <script type="text/javascript" src="/javascripts/build/main/utils.js"></script>
+    <script type="text/javascript" src="/javascripts/build/main/main.js"></script>
+</body>
+</html>

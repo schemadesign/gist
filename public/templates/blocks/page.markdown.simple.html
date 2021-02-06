@@ -1,0 +1,29 @@
+<div class="form-group">
+    <input id="{{ markdownModel }}-uploader" type="file" nv-file-select="" class="hidden" uploader="markdownUploader"/>
+    <label for="{{ markdownModel }}">{{ markdownLabel }}</label>
+    <textarea name="{{ markdownModel }}" class="content-box"
+            ng-model="rawContent"
+            markdown-editor="{
+                'iconlibrary': 'fa',
+                'hiddenButtons': ['Image', 'Preview'],
+                'resize': 'vertical',
+                'fullscreen': {
+                    'enable': false
+                },
+                'addExtraButtons': true,
+                'additionalButtons': [[{
+                    name: 'groupCustom',
+                    data: [{
+                        name: 'cmdUploadImage',
+                        title: 'uploadImage',
+                        icon: 'fa fa-picture-o',
+                        callback: onImageUploadCallback
+                    }]
+                }]]
+            }",
+            on-fullscreen="onFullScreenCallback()"
+            on-fullscreen-exit="onFullScreenExitCallback()"
+            on-preview="onPreviewCallback()"
+            rows="10">
+    </textarea>
+</div>

@@ -1,0 +1,47 @@
+{% set currentView = "team-show" %}
+
+{% extends "../layout/create.njk" %}
+
+{% block headSuffix %}
+    <title>{{ team.title }} - Gist</title>
+{% endblock %}
+
+{% import "../partials/filter.njk" as filter %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+
+                {% include "../partials/app-alert.njk" %}
+
+                <section class="section section-array-create section-team-show">
+                    <form id="form-source" class="form-source">
+
+                        <header class="section-header explore-header">
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    {% if team.logo %}
+                                    <img src="{{ team.logo }}" class="team-logo" alt="{{ team.title }}"/>
+                                    {% else %}
+                                    <h2 class="section-title">{{ team.title }}</h2>
+                                    {% endif %}
+                                    {% if team.description%}
+                                      <p class="team-header-description">{{ team.description }}</p>
+                                    {% endif %}
+                                </div>
+                            </div><!-- .row -->
+                        </header>
+
+                        {% include "../partials/viz.njk" %}
+
+                    </form>
+                </section>
+
+            </div>
+        </div><!-- .row -->
+    </div>
+
+    {% include "../partials/analytics.njk" %}
+
+{% endblock %}

@@ -1,0 +1,26 @@
+<form name="emailForm" class="signup col-xs-12" ng-submit='sendResetEmail()' novalidate>
+
+    <div class="form-group" ng-class="{ 'has-error': emailForm.email.$touched && emailForm.email.$invalid}">
+        <label>What is your email address?</label>
+
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+          <input name="email" type="email" class="form-control" ng-model="user.email" account-exist required>
+        </div>
+
+         <div class="help-block" ng-messages="emailForm.email.$error" ng-if="emailForm.email.$touched">
+            <p ng-message="required">Email address is required.</p>
+            <p ng-message="exist">This email address is not registered.</p>
+            <p ng-message="email">Please enter a valid email address.</p>
+        </div>
+    </div>
+
+    <div class="float-parent">
+        <button type="submit" class="btn btn-success gist-pull-right" ng-disabled="emailForm.$invalid">Continue</button>
+    </div>
+
+</form>
+
+<div ng-if="err">
+    Error: {{err}}
+</div>

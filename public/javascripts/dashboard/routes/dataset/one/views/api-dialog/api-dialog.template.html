@@ -1,0 +1,20 @@
+<md-dialog aria-label="Detail View" class="field-dialog">
+    <aa-toolbar title="API"></aa-toolbar>
+
+    <md-dialog-content layout-padding>
+        <md-content layout="column">
+            <div class="embed-code__container">
+                <div class="embed-code__wrapper">
+                    <pre><a href="{{link}}" target="_blank" download ng-click="cancel()">{{link}}</a></pre>
+                </div>
+                <i
+                    class="embed-code__icon fa fa-clipboard"
+                    ng-click="copyToClipboard(link)"
+                    aria-hidden="true"
+                >
+                    <md-tooltip md-direction="top">Copy to clipboard</md-tooltip>
+                </i>
+            </div>
+        </md-content>
+    </md-dialog-content>
+</md-dialog>

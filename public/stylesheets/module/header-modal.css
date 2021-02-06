@@ -1,0 +1,40 @@
+/* Header Info Modal */
+.header-modal .modal-body h3 {
+    margin-top: 0;
+}
+
+.header-modal .modal-header .gist-close {
+    margin-top: -5px;
+    margin-right: -10px;
+}
+
+.header-modal .modal-body {
+    font-size: 1.25em;
+}
+
+.header-modal p,
+.header-modal li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header-modal a {
+    width: 100%;
+    white-space: nowrap;
+}
+
+.header-modal p {
+    margin-top: 4px;  /* To make consistent with other <li>;Compensate for line-height */
+    line-height: 20px;
+}
+
+.header-modal li.modal-header-label {
+    margin-top: 15px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.header-modal ul {
+    padding: 0;
+    list-style: none;
+}

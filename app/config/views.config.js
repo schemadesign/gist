@@ -1,0 +1,64 @@
+const VIEW_TYPE_OBJECT_DETAILS = 'objectDetail';
+const VIEW_TYPE_AREA_CHART = 'areaChart';
+const VIEW_TYPE_BAR_CHART = 'barChart';
+const VIEW_TYPE_BUBBLE_CHART_BASE = 'bubbleChart';
+const VIEW_TYPE_BUBBLE_CHART = 'bubble-chart';
+const VIEW_TYPE_GALLERY = 'gallery';
+const VIEW_TYPE_GLOBE = 'globe';
+const VIEW_TYPE_LINE_GRAPH = 'lineGraph';
+const VIEW_TYPE_MAP = 'map';
+const VIEW_TYPE_PIE_CHART = 'pieChart';
+const VIEW_TYPE_PIE_SET = 'pieSet';
+const VIEW_TYPE_REGIONAL_MAP = 'regional-map';
+const VIEW_TYPE_SCATTERPLOT = 'scatterplot';
+const VIEW_TYPE_TABLE = 'table';
+const VIEW_TYPE_TIMELINE = 'timeline';
+const VIEW_TYPE_GROUPED_GALLERY = 'grouped-gallery';
+const VIEW_TYPE_TREEMAP = 'treemap';
+const VIEW_TYPE_WORD_CLOUD = 'wordCloud';
+
+const SETTING_DEFAULT_GROUP_BY_DURATION = 'defaultGroupByDuration';
+const SETTING_DEFAULT_GROUP_BY_RANGE = 'defaultGroupByRange';
+const SETTING_DEFAULT_GROUP_BY_COLUMN_NAME = 'defaultGroupByColumnName';
+const SETTING_DEPENDS_ON_SORT_BY = 'dependsOnSortBy';
+
+const GALLERY_STYLE_IMAGE = 'image';
+const GALLERY_STYLE_ICON = 'icon';
+const GALLERY_STYLE_HEATMAP = 'heatmap';
+
+const MAP_STYLE_COUNTRY = 'country';
+const MAP_STYLE_PIN = 'pin';
+const MAP_STYLE_BUBBLE = 'bubble';
+const MAP_STYLE_HEATMAP = 'heatmap';
+
+module.exports = {
+    VIEW_TYPE_OBJECT_DETAILS,
+    VIEW_TYPE_AREA_CHART,
+    VIEW_TYPE_BAR_CHART,
+    VIEW_TYPE_BUBBLE_CHART_BASE,
+    VIEW_TYPE_BUBBLE_CHART,
+    VIEW_TYPE_GALLERY,
+    VIEW_TYPE_GLOBE,
+    VIEW_TYPE_LINE_GRAPH,
+    VIEW_TYPE_MAP,
+    VIEW_TYPE_PIE_CHART,
+    VIEW_TYPE_PIE_SET,
+    VIEW_TYPE_REGIONAL_MAP,
+    VIEW_TYPE_SCATTERPLOT,
+    VIEW_TYPE_TABLE,
+    VIEW_TYPE_TIMELINE,
+    VIEW_TYPE_GROUPED_GALLERY,
+    VIEW_TYPE_TREEMAP,
+    VIEW_TYPE_WORD_CLOUD,
+    SETTING_DEFAULT_GROUP_BY_DURATION,
+    SETTING_DEFAULT_GROUP_BY_RANGE,
+    SETTING_DEFAULT_GROUP_BY_COLUMN_NAME,
+    SETTING_DEPENDS_ON_SORT_BY,
+    GALLERY_STYLE_IMAGE,
+    GALLERY_STYLE_ICON,
+    GALLERY_STYLE_HEATMAP,
+    MAP_STYLE_COUNTRY,
+    MAP_STYLE_PIN,
+    MAP_STYLE_BUBBLE,
+    MAP_STYLE_HEATMAP,
+};

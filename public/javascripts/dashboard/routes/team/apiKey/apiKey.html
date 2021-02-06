@@ -1,0 +1,47 @@
+<md-content layout="column" layout-gt-xs="column" class="tab-content" md-no-ink>
+    <div class="md-block flex-100" flex="100">
+        <md-input-container class="md-block" ng-show="apiKeyCtrl.apiKey.key">
+            <label>API key</label>
+            <input type="text" name="apiKeyValue" ng-model="apiKeyCtrl.apiKey.key" ng-disabled="true">
+        </md-input-container>
+        <div ng-show="apiKey.key && !apiKey.active">
+            <span>Your API key is inactive.</span>
+        </div>
+
+        <div layout="row" layout-align="end center">
+            <md-button form="apiForm" type="button" ng-click="apiKeyCtrl.generateKey()" class="md-dashboard"
+                       ng-show="!apiKeyCtrl.apiKey.key">
+                <span class="btn-label">Generate API key</span>
+            </md-button>
+        </div>
+    </div>
+    <div class="md-block flex-100" flex="100">
+        <form name="apiKeyCtrl.apiKeyForm" ng-submit="apiKeyCtrl.handleApiKeyFormSubmit()">
+            <div class="md-block padding-top-0" ng-show="apiKeyCtrl.apiKey.key">
+                <label class="label-with-tooltip">
+                    <span>Domains</span>
+                    <i class="fa fa-question-circle"></i>
+                    <md-tooltip md-direction="top">Add domain and confirm with enter</md-tooltip>
+                </label>
+
+                <md-chips
+                    ng-model="apiKeyCtrl.apiKey.requestDomains"
+                    name="requestDomains"
+                    md-enable-chip-edit="true"
+                    md-on-add="apiKeyCtrl.onAdd($chip)"
+                    md-on-remove="apiKeyCtrl.onRemove()"
+                    placeholder="Add domains"
+                    secondary-placeholder="+ domain">
+                </md-chips>
+                <div ng-messages="apiKeyCtrl.apiKeyForm.requestDomains.$error">
+                    <div ng-message="duplicate">Duplicate value</div>
+                </div>
+            </div>
+            <div layout="row" layout-align="end center" class="layout-align-end-center layout-row margin-top-2x">
+                <button class="md-dashboard md-button" type="submit">
+                    <span class="btn-label ng-scope">Save Settings</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</md-content>

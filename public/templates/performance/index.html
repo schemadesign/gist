@@ -1,0 +1,12 @@
+<header>
+    <h1>Performance</h1>
+</header>
+
+<div class="gist-content performance">
+    <div ng-if="datasets.length > 0">
+        <ng-include src="'templates/performance/blocks/nav-bar.html'"></ng-include>
+        <div ui-view class="ext-content"></div>
+    </div>
+
+    <ng-include src="'templates/performance/blocks/no-data.html'" ng-if="datasets.length == 0"></ng-include>
+</div>

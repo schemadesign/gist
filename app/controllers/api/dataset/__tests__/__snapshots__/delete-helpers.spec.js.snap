@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Delete helpers deleteSource should delete source of dataset 1`] = `Object {}`;

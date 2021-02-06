@@ -1,0 +1,108 @@
+/* @override
+	http://schema.local.arrays.co:9080/stylesheets/views/bar-chart.css */
+
+.gist-bar-chart .gist-site-content .gist-container-fluid {
+    transition: padding 400ms ease-in-out;
+}
+
+rect.gist-bar {
+    transition: opacity 150ms;
+}
+
+.gist-bar-chart .gist-sort-bar {
+    border-bottom-style: none;
+    padding-bottom: 0;
+}
+
+.gist-bar-chart .gist-sort-direction {
+    display: inline-block;
+    padding-top: 7px;
+}
+
+.gist-bar-chart .gist-content {
+    position: relative;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .gist-bar-chart .gist-sort-direction {
+        /*margin: 12px 0;*/
+    }
+}
+
+.gist-toggle-button {
+    /*border: 1px solid #9C9C9C;*/
+    margin: 4px 7px 0 0px;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 13px 12px 9px;
+    color: var(--color-text-dark);
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+    font-weight: bold;
+}
+
+.gist-normalization {
+    font-weight: bold;
+}
+
+.gist-normalization .gist-relative,
+.gist-sort-direction-control .gist-icon-sort-ascending,
+.gist-sort-direction-control .gist-icon-sort-left {
+    display: none;
+}
+
+.gist-sort-direction-control.gist-sort-horizontally .gist-icon-sort-left,
+.gist-sort-direction-control.gist-sort-vertically .gist-icon-sort-ascending {
+    display: inline-block;
+}
+
+.gist-icon-sort-left,
+.gist-icon-sort-ascending {
+    transition: transform 200ms ease-in-out;
+}
+
+.gist-sort-horizontally[aria-sort="descending"] .gist-icon-sort-left{
+    transform: scaleX(-1);
+}
+
+.gist-sort-vertically[aria-sort="descending"] .gist-icon-sort-ascending {
+    transform: scaleY(-1);
+}
+
+.gist-sort-direction {
+    background-color: inherit;
+}
+
+.gist-sort-direction .sort-direction-icon:before {
+    margin-right: 0;
+}
+
+.gist-sort-direction.toggle-button {
+    padding: 10px 10px 7px;
+}
+
+.gist-bar-chart-main {
+    overflow-y: hidden;
+}
+
+/* 940px is the screen width when the minimum barchart width takes effect */
+@media (min-width: 920px) {
+    .gist-bar-chart-main {
+        overflow: hidden;
+    }
+}
+
+body.puppeteer .gist-bar-chart-main {
+    margin-top: 60px;
+    margin-left: -30px;
+}
+
+.gist-bar-chart-pagination {
+    text-align: center;
+}
+
+.gist-bar-chart-pagination .pagination {
+    margin-top: 0;
+}

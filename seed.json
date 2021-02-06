@@ -1,0 +1,6 @@
+{
+	"testing": "localhost/arraysdb",
+	"development": "localhost/arraysdb",
+	"production": "localhost/arraysdb",
+	"enterprise": "localhost/arraysdb"
+}

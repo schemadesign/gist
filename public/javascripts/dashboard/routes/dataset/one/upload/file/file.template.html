@@ -1,0 +1,73 @@
+<div class="aa-file-select" ng-form="uploadFileCtrl.form" gist-isolate-form>
+    <h4>
+        {{ uploadFileCtrl.getTitle() }}
+    </h4>
+
+    <p>
+        {{ uploadFileCtrl.helpMessage }}
+    </p>
+    <div layout="row" layout-align="space-between center">
+        <img src="/images/exclamation-triangle.svg" alt="warning" class="csv-warning"/>
+        <p>Before you upload your CSV or TSV, make sure it is properly formatted and that it includes a header row.</p>
+    </div>
+
+    <div ng-hide="uploadFileCtrl.uploader.isUploading">
+        <input
+            type="file"
+            id="datafile"
+            class="aa-file-uploader"
+            nv-file-select=""
+            uploader="uploadFileCtrl.uploader"
+            accept="{{ uploadFileCtrl.inputAccept }}"
+        />
+
+        <div layout="row" layout-align="start center">
+            <label for="datafile" class="md-button md-dashboard btn-label" style="min-width: 152px;">
+                <span class="btn-label">{{ uploadFileCtrl.hasFile() ? 'Change' : 'Choose' }} File</span>
+            </label>
+            <span class="aa-file-select-file">
+                {{ uploadFileCtrl.getFileName() }}
+            </span>
+        </div>
+
+        <md-input-container class="md-block flex-gt-sm" ng-if="uploadFileCtrl.getFileType() === 'application/json'">
+            <p>Add a path to your JSON dataset (if applicable)</p>
+            <input name="JSONPath" type="text" ng-model="uploadFileCtrl.JSONPath" aria-label="JSON Path" required />
+            <div ng-messages="uploadFileCtrl.form.JSONPath.$error">
+                <div class="error-message" ng-message="required">This field is required</div>
+            </div>
+            <p>
+                Please select a path to the array of objects you want to use in your JSON dataset, e.g,
+                <code>contacts.*</code>
+                We support some of json path syntax (see more
+                <a target="_blank" href="https://github.com/dominictarr/JSONStream">here</a>).
+            </p>
+        </md-input-container>
+
+        <md-button
+            class="md-block md-dashboard confirm"
+            style="margin-top: 11px;"
+            ng-click="uploadFileCtrl.uploader.uploadAll()"
+            ng-disabled="uploadFileCtrl.form.$invalid || !uploadFileCtrl.hasFile()">
+            <span class="btn-label">Upload Data</span>
+        </md-button>
+    </div>
+
+    <div ng-show="uploadFileCtrl.uploader.isUploading">
+        <div layout="row" layout-align="space-between center">
+            <span flex="45" style="overflow: hidden; text-overflow: ellipsis;">
+                <span class="dashboard-list-name">{{ uploadFileCtrl.getFileName() }}</span>
+            </span>
+            <div flex="5" />
+            <div ng-show="uploadFileCtrl.uploader.isHTML5" ng-hide="uploadFileCtrl.getUploadItem().isSuccess"
+                 class="progress-container" draggable="" flex="50">
+                <md-progress-linear md-mode="{{ uploadFileCtrl.progressMode }}"
+                                    value="{{ uploadFileCtrl.getUploadItem().progress }}"></md-progress-linear>
+            </div>
+        </div>
+        <md-button class="md-block md-dashboard cancel" style="margin-top: 11px;"
+                   ng-click="uploadFileCtrl.getUploadItem().cancel()">
+            <span class="btn-label">Cancel</span>
+        </md-button>
+    </div>
+</div>

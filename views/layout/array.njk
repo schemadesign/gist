@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    {% include "../partials/base_header.njk" %}
+
+    {% if header_script %}
+        {{ header_script | safe }}
+    {% endif %}
+
+    <title>{{ arrayTitle }} - Gist</title>
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ arrayTitle }}" />
+    <meta name="twitter:image" content="{{ makeURLfrom_relativePath(banner, team.subdomain, datasetId, 'banner') }}" />
+
+    <meta property="og:title" content="{{ arrayTitle }}" />
+    <meta property="og:description" content="{{ description }}" />
+    <meta property="og:image" content="{{ makeURLfrom_relativePath(banner, team.subdomain, datasetId, 'banner') }}" />
+
+    {% block headSuffix %}{% endblock %}
+</head>
+
+<body
+    class="gist gist-{{ currentView }} gist-source-{{ array_source_key }} {{ 'gist-legend-opened' if docs.length }} {{ 'view-embedded' if embedded }} {{ 'no-interaction' if not viewOptions.viewInteractivity }} font-{{ team.font }} {{ 'array-no-data' if not docs.length }} {{ 'is-logged-in' if user }} {{ 'is-logged-out' if not user }} {{ 'puppeteer' if puppeteer and not puppeteerScreenshot }} {{ 'puppeteer-full-screenshot' if puppeteerScreenshot }}">
+
+<div id="page" class="site">
+
+    {% set hasPreview = routePath_base | extractPreviewFromBasePath %}
+
+    {% include "../partials/header-bar/array.njk" %}
+
+
+    {% if hasPreview %}
+    <div id="content" class="gist-site-content preview">
+        {% else %}
+        <div id="content" class="gist-site-content">
+            {% endif %}
+
+            {% block content %}{% endblock %}
+
+        </div><!-- #content -->
+
+        <div id="gist-page-loading">
+            <div class="three-balls">
+                <div class="ball ball1"></div>
+                <div class="ball ball2"></div>
+                <div class="ball ball3"></div>
+            </div>
+        </div>
+
+        {% if not hasPreview %}
+            {% block footer %}{% endblock %}
+        {% endif %}
+    </div><!-- #page -->
+    {% include "../partials/modal/alert.njk" %}
+
+    {% include "../partials/modal/share.njk" %}
+
+    {% include "../partials/survicate.njk" %}
+
+        {% block inlineScript %}
+            {% for path in arrayLibraries %}
+                <script type="text/javascript" src="{{ path }}"></script>
+            {% endfor %}
+
+            {% for path in viewLibraries %}
+                <script type="text/javascript" src="{{ path }}"></script>
+            {% endfor %}
+        {% endblock %}
+
+
+</body>
+
+{% if footer_script %}
+    {{ footer_script | safe }}
+{% endif %}
+
+{% if env.FE_LIVERELOAD == "true" %}
+    <script src="//localhost:35729/livereload.js"></script>
+{% endif %}
+
+<script type="text/javascript">
+
+    var loggedIn = {{ "true" if user._id else "false" }};
+
+</script>
+
+</html>

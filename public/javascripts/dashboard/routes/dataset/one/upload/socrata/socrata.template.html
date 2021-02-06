@@ -1,0 +1,58 @@
+<div>
+    <h4>Connect to a Socrata Dataset</h4>
+    <p>Search for an open Socrata dataset below</p>
+
+    <md-input-container class="md-block" md-no-float>
+        <input type="text" placeholder="Search for a dataset.."
+               ng-model="connectSocrataCtrl.searchTerm"
+               ng-model-options="{ debounce: 250 }"
+               ng-change="connectSocrataCtrl.search()"
+        />
+    </md-input-container>
+    <div class="upload-options-wrapper">
+        <a
+            ng-repeat="dataset in connectSocrataCtrl.searchResults"
+            ng-class="{ 'upload-options-wrapper-inset': connectSocrataCtrl.activeBox(dataset.resource) }"
+            ng-click="connectSocrataCtrl.selectDataset(dataset)"
+            class="gist-pointer">
+            <div>
+                <span>{{ dataset.resource.name }}</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="dashboard__information" ng-if="connectSocrataCtrl.resultSetSize === 0">
+        <p>
+            No results
+        </p>
+    </div>
+
+    <div class="dashboard__information" ng-if="connectSocrataCtrl.loading">
+        <span class="gist-loading-message">Loading...</span>
+    </div>
+
+    <div>
+        <ul
+            ng-if="connectSocrataCtrl.searchResults.length"
+            uib-pagination
+            boundary-links="true"
+            items-per-page="connectSocrataCtrl.paginationLimit"
+            total-items="connectSocrataCtrl.resultSetSize"
+            ng-model="connectSocrataCtrl.currentPage"
+            max-size="8"
+            previous-text="&lsaquo;"
+            next-text="&rsaquo;"
+            first-text="&laquo;"
+            last-text="&raquo;"
+            ng-change="connectSocrataCtrl.search()"
+        ></ul>
+    </div>
+
+    <md-button
+        class="md-dashboard confirm"
+        ng-click="connectSocrataCtrl.connect()"
+        ng-disabled="!connectSocrataCtrl.socrata"
+        id="connectButton">
+        <span class="btn-label">Connect</span>
+    </md-button>
+</div>

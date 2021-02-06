@@ -1,0 +1,505 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should parse allDataTypes.csv properly (1) 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Date",
+      "input_format": "YYYY-MM-DD",
+      "name": "Date",
+      "operation": "ToDate",
+      "output_format": "YYYY-MM-DD",
+      "sample": 2018-01-01T00:00:00.000Z,
+      "sourceName": "allDataTypes.csv",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Number",
+      "name": "Number",
+      "operation": "ToInteger",
+      "sample": 1,
+      "sourceName": "allDataTypes.csv",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Text",
+      "name": "String",
+      "operation": "ToString",
+      "sample": "IAmString1",
+      "sourceName": "allDataTypes.csv",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should parse allDataTypes.json properly (2) 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Date",
+      "input_format": "YYYY-MM-DD",
+      "name": "Date",
+      "operation": "ToDate",
+      "output_format": "YYYY-MM-DD",
+      "sample": 2018-01-01T00:00:00.000Z,
+      "sourceName": "allDataTypes.json",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Number",
+      "name": "Number",
+      "operation": "ToInteger",
+      "sample": 1,
+      "sourceName": "allDataTypes.json",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Text",
+      "name": "String",
+      "operation": "ToString",
+      "sample": "IAmString1",
+      "sourceName": "allDataTypes.json",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should parse allDataTypes.json properly (2) 2`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Date",
+      "input_format": "YYYY-MM-DD",
+      "name": "Date",
+      "operation": "ToDate",
+      "output_format": "YYYY-MM-DD",
+      "sample": 2018-01-01T00:00:00.000Z,
+      "sourceName": "allDataTypes.json",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Number",
+      "name": "Number",
+      "operation": "ToInteger",
+      "sample": 1,
+      "sourceName": "allDataTypes.json",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Text",
+      "name": "String",
+      "operation": "ToString",
+      "sample": "IAmString1",
+      "sourceName": "allDataTypes.json",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should parse childPokemon.csv properly (1) 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Number",
+      "name": "Pokemon No",
+      "operation": "ToInteger",
+      "sample": 152,
+      "sourceName": "childPokemon.csv",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Text",
+      "name": "Name",
+      "operation": "ToString",
+      "sample": "Maitland",
+      "sourceName": "childPokemon.csv",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should parse columnNamesOnly.csv properly (1) 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "name": "Col1",
+      "sourceName": "columnNamesOnly.csv",
+    },
+    Object {
+      "name": "Col2",
+      "sourceName": "columnNamesOnly.csv",
+    },
+    Object {
+      "name": "Col3",
+      "sourceName": "columnNamesOnly.csv",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should parse dataIntuition.csv properly (1) 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Number",
+      "name": "Col1",
+      "operation": "ToInteger",
+      "sample": 1,
+      "sourceName": "dataIntuition.csv",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Text",
+      "name": "Col2",
+      "operation": "ToString",
+      "sample": "IAmString",
+      "sourceName": "dataIntuition.csv",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should parse datasetNoColumnNames.csv properly (1) 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Number",
+      "name": "1",
+      "operation": "ToInteger",
+      "sample": 2,
+      "sourceName": "datasetNoColumnNames.csv",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Number",
+      "name": "2",
+      "operation": "ToInteger",
+      "sample": 3,
+      "sourceName": "datasetNoColumnNames.csv",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Number",
+      "name": "3",
+      "operation": "ToInteger",
+      "sample": 4,
+      "sourceName": "datasetNoColumnNames.csv",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Number",
+      "name": "4",
+      "operation": "ToInteger",
+      "sample": 5,
+      "sourceName": "datasetNoColumnNames.csv",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Number",
+      "name": "5",
+      "operation": "ToInteger",
+      "sample": 6,
+      "sourceName": "datasetNoColumnNames.csv",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should parse emptyLines.csv properly (1) 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Number",
+      "name": "Pokemon No",
+      "operation": "ToInteger",
+      "sample": 152,
+      "sourceName": "emptyLines.csv",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Text",
+      "name": "Name",
+      "operation": "ToString",
+      "sample": "Maitland",
+      "sourceName": "emptyLines.csv",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should parse lessThanTwoSamples.csv properly (1) 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Number",
+      "name": "Pokemon No",
+      "operation": "ToInteger",
+      "sample": 152,
+      "sourceName": "lessThanTwoSamples.csv",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Text",
+      "name": "Name",
+      "operation": "ToString",
+      "sample": "Maitland",
+      "sourceName": "lessThanTwoSamples.csv",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should parse lessThanTwoSamples.json properly (2) 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Number",
+      "name": "Pokemon No",
+      "operation": "ToInteger",
+      "sample": 152,
+      "sourceName": "lessThanTwoSamples.json",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Text",
+      "name": "Name",
+      "operation": "ToString",
+      "sample": "Maitland",
+      "sourceName": "lessThanTwoSamples.json",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should parse multiLine.csv properly (1) 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Number",
+      "name": "line",
+      "operation": "ToInteger",
+      "sample": 1,
+      "sourceName": "multiLine.csv",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Text",
+      "name": "text",
+      "operation": "ToString",
+      "sample": "this line has more than one line of text",
+      "sourceName": "multiLine.csv",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should parse nestedJson.json properly (3) 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Date",
+      "input_format": "YYYY-MM-DD",
+      "name": "Date",
+      "operation": "ToDate",
+      "output_format": "YYYY-MM-DD",
+      "sample": 2018-01-01T00:00:00.000Z,
+      "sourceName": "nestedJson.json",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Number",
+      "name": "Number",
+      "operation": "ToInteger",
+      "sample": 1,
+      "sourceName": "nestedJson.json",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Text",
+      "name": "SuperNested_Nested_Value",
+      "operation": "ToString",
+      "sample": "IAmString1",
+      "sourceName": "nestedJson.json",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Text",
+      "name": "Nested_Value",
+      "operation": "ToString",
+      "sample": "IAmString1A",
+      "sourceName": "nestedJson.json",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should parse samplesFarBottom.csv properly (1) 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Number",
+      "name": "Pokemon_No",
+      "operation": "ToInteger",
+      "sample": 152,
+      "sourceName": "samplesFarBottom.csv",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Number",
+      "name": "Name",
+      "operation": "ToInteger",
+      "sample": 1,
+      "sourceName": "samplesFarBottom.csv",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should parse samplesFarBottom.json properly (2) 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Number",
+      "name": "Pokemon_No",
+      "operation": "ToInteger",
+      "sample": 152,
+      "sourceName": "samplesFarBottom.json",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Number",
+      "name": "Name",
+      "operation": "ToInteger",
+      "sample": 1,
+      "sourceName": "samplesFarBottom.json",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should return new columns when new columns have been added in CSV and previous columns match 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Date",
+      "input_format": "YYYY-MM-DD",
+      "name": "Date",
+      "operation": "ToDate",
+      "output_format": "YYYY-MM-DD",
+      "sample": 2018-01-01T00:00:00.000Z,
+      "sourceName": "allDataTypes.csv",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Number",
+      "name": "Number",
+      "operation": "ToInteger",
+      "sample": 1,
+      "sourceName": "allDataTypes.csv",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Text",
+      "name": "String",
+      "operation": "ToString",
+      "sample": "IAmString1",
+      "sourceName": "allDataTypes.csv",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;
+
+exports[`Index Helpers readDatasourceColumnsAndSampleRecords should return new columns when new columns have been added in JSON and previous columns match 1`] = `
+Array [
+  null,
+  Array [
+    Object {
+      "data_type": "Date",
+      "input_format": "YYYY-MM-DD",
+      "name": "Date",
+      "operation": "ToDate",
+      "output_format": "YYYY-MM-DD",
+      "sample": 2018-01-01T00:00:00.000Z,
+      "sourceName": "allDataTypes.json",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Number",
+      "name": "Number",
+      "operation": "ToInteger",
+      "sample": 1,
+      "sourceName": "allDataTypes.json",
+      "sourceType": "spreadsheet",
+    },
+    Object {
+      "data_type": "Text",
+      "name": "String",
+      "operation": "ToString",
+      "sample": "IAmString1",
+      "sourceName": "allDataTypes.json",
+      "sourceType": "spreadsheet",
+    },
+  ],
+  undefined,
+  Array [],
+]
+`;

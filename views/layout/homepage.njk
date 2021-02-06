@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+        {% include "../partials/base_header.njk" %}
+          <!-- bootstrap -->
+        <script type="text/javascript" src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+        <link href="/stylesheets/views/homepage.css" rel="stylesheet">
+
+        {% block headSuffix %}{% endblock %}
+    </head>
+
+    <body class="home splash">
+
+        <div id="page" class="site">
+
+            <div id="content" >
+                {% block content %}{% endblock %}
+            </div><!-- #content -->
+        </div><!-- #page -->
+
+        <script type="text/javascript" src="/javascripts/build/main/namespaces.js"></script>
+        <script type="text/javascript" src="/javascripts/build/main/utils.js"></script>
+        <script type="text/javascript" src="/javascripts/build/main/main.js"></script>
+    </body>
+
+
+    {% if env.FE_LIVERELOAD == "true" %}
+        <script src="//localhost:35729/livereload.js"></script>
+    {% endif %}
+
+</html>

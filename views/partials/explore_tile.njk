@@ -1,0 +1,136 @@
+<div class="explore-tile col-md-4 col-sm-6 col-xs-12">
+    <input type="radio" name="source_key" value="{{ source.key | splitSubdomain }}" class="hidden">
+    <input type="hidden" name="default_filterJSON" value="{{ source.query }}" class="hidden">
+    <input type="hidden" name="default_view" value="{{ source.default_view }}" class="hidden">
+
+    {% if baseUrl %}
+        {% set inputUrl = baseUrl %}
+    {% else %}
+        {% set inputUrl = source.baseUrl %}
+    {% endif %}
+
+    {% set sourceKey = source.key | splitSubdomain %}
+
+    <input type="hidden" name="subdomainUrl" value="{{ inputUrl }}" class="hidden">
+
+    <a class="gist-js-panel-link" href="{{ inputUrl | generatePanelHref(source.default_view, source.query, sourceKey) }}" target="_blank">
+        <div class="panel panel-default panel-source source-{{ source.key }} mobile-max-width">
+        {% if source.brandColor.accent %}
+                <style scoped>
+                    .source-{{ source.key }} .gist-explore-tile-header {
+                        background-color: {{ source.brandColor.accent }};
+                    }
+
+                    {% if source.description %}
+                    .source-{{ source.key }}:hover .explore-tile-description-container {
+                        max-height: 100%;
+                        transition: max-height 300ms ease;
+                    }
+
+                    {% endif %}
+                </style>
+            {% endif %}
+
+            <div class="explore-tile-body">
+                <div class="gist-explore-tile-header">
+                    <div class="explore-tile__title-wrapper"><h2>{{ source.title }}</h2></div>
+                    <div class="explore-tile-meta-wrapper">
+                        <div class="explore-tile-meta">
+                            <span>
+                                <object>
+                                    <a href="{{ source.baseUrl }}" class="gist-team-link team-underline"> {{ source.author | truncate(35) }}</a>
+                                </object>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="explore-tile-meta-sub hidden-xs">
+                        <span class="source-updated">{{ source.createdAt | dateFormattedAs_monthDayYear_array }}</span>
+                        {% if source.insightsCount > 0 %}
+                            <span>|</span>
+                            <span class="source-stories">
+                                <object>
+                                    <a href="/insights?{{ 'vizName=' + source.title if currentView == 'team-show' else 'vizName=' + source.title + '&teamName=' + source.teamTitle }}" class="source-underline gist-insights-link">{{ source.insightsCount }} Insight{{ 's' if source.insightsCount != 1 }}</a>
+                                </object>
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    {% set views_order = ['globe', 'regionalMap', 'treemap', 'bubbleChart', 'areaChart', 'map', 'timeline', 'barChart', 'lineGraph', 'scatterplot', 'pieChart', 'pieSet', 'wordCloud', 'gallery', 'table'] %}
+                    {% set views_sorted = source.view_visibility | sortViews(views_order) %}
+
+                    <div class="explore-tile-meta-views hidden-xs">
+                        <ul class="meta-views-list">
+                            {% if source.vizType === 'customViz' %}
+                                <li class="meta-views-item" viz-icon-tooltip="Custom Visualization">
+                                    <span class="gist-icon-asterisk meta-views-icon" aria-hidden="true"></span>
+                                </li>
+                            {% endif %}
+
+                            {% for view in views_sorted -%}
+                                {% if loop.index <= 3 or (views_sorted | length == 4 and loop.index == 4) %}
+                                    {% if view.name === 'timeline' %}
+                                        {% set viewName = 'groupedGallery' %}
+                                    {% else %}
+                                        {% set viewName = view.name %}
+                                    {% endif %}
+
+                                    {% set view_slug = viewName | kebabCase %}
+                                    {% set view_real_slug = view.name | kebabCase %}
+                                    {% set view_name = viewName | startCase %}
+
+                                    <li class="meta-views-item">
+                                        <span class="gist-icon-{{ view_slug }} meta-views-icon" aria-hidden="true" viz-icon-tooltip="{{ view.displayAs }}"></span>
+                                        <span class="sr-only">{{ view.displayAs }}</span>
+                                    </li>
+                                {% endif %}
+                            {%- endfor %}
+
+                            {% if views_sorted | length > 4 %}
+                                <li class="meta-views-item meta-views-item-has-sublist">
+                                    <span class="gist-icon-meta-sublist meta-views-icon" aria-hidden="true"></span>
+
+                                    <ul class="meta-views-sublist">
+                                        {% for view in views_sorted -%}
+                                            {% if loop.index > 3 %}
+                                                <li class="meta-views-subitem">{{ view.displayAs }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+
+            {% set domain = team.subdomain or source.subdomain %}
+
+            {% if source.banner and domain %}
+                {% set style = 'background-image:url("' + makeURLfrom_relativePath(source.banner, domain, source._id, 'banner') | wrapS3AssetURL + '")' %}
+            {% else %}
+                {% set style = 'background-image:url(\'/images/explore/default_pattern.png\'); background-color:' + source.brandColor.accent %}
+            {% endif %}
+
+                <div class="explore-tile-banner-image" style="{{ style }}">
+                    {% if source.description %}
+                        <div class="explore-tile-description-container team-tile-description">
+                            <div class="explore-tile-description">
+                                {% if source.description.length > 300 %}
+                                    {% set space = source.description.indexOf(' ', 290) %}
+                                    {% if space %}
+                                        {{ source.description.slice(0,space) + '...' }}
+                                    {% elseif source.description.length > 325 %}
+                                        {{ source.description.slice(0,300) + '...' }}
+                                    {% else %}
+                                        {{ source.description }}
+                                    {% endif %}
+                                {% else %}
+                                    {{ source.description }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

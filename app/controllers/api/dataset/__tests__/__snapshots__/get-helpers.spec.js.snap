@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Get helpers getDatasetWithQuery should return dataset with title 1`] = `
+Object {
+  "data": Object {
+    "datasets": Array [
+      Object {
+        "_id": "5a42c26e303770207ce8f83b",
+        "author": Object {
+          "_id": "5a42bf07d3bc0b20648290e0",
+          "firstName": "Maitland",
+          "lastName": "McConnell",
+        },
+        "createdAt": 2017-12-26T21:43:10.707Z,
+        "fe_filters": Object {
+          "default": Object {},
+          "excludeFields": Array [],
+          "fabricated": Array [],
+          "fieldsAsRangeSlider": Array [],
+          "fieldsCommaSeparatedAsIndividual": Array [],
+          "fieldsMultiSelectable": Array [],
+          "fieldsNotAvailable": Array [],
+          "fieldsSortableByInteger": Array [],
+          "fieldsSortableInReverseOrder": Array [],
+          "keywords": Array [],
+          "valuesToExcludeByOriginalKey": Object {
+            "_all": Array [],
+          },
+        },
+        "fe_views": Object {
+          "default_view": "gallery",
+          "views": Object {
+            "gallery": Object {
+              "defaultSortByColumnName": "Image URL",
+              "visible": true,
+            },
+            "pieChart": Object {
+              "defaultGroupByColumnName": "Name",
+              "visible": true,
+            },
+            "pieSet": Object {
+              "defaultAggregateByColumnName": "Max HP",
+              "defaultChartByColumnName": "Type 1",
+              "defaultGroupByColumnName": "Type 2",
+              "fieldsNotAvailableAsAggregateByColumns": Array [],
+              "fieldsNotAvailableAsChartByColumns": Array [],
+              "fieldsNotAvailableAsGroupByColumns": Array [],
+              "valuesToExcludeByOriginalKey": Array [],
+              "visible": true,
+            },
+            "timeline": Object {
+              "visible": true,
+            },
+            "treemap": Object {
+              "defaultAggregateByColumnName": "Max HP",
+              "defaultChartByColumnName": "Name",
+              "defaultGroupByColumnName": "Type 1",
+              "fieldsNotAvailableAsAggregateByColumns": Array [],
+              "fieldsNotAvailableAsChartByColumns": Array [],
+              "fieldsNotAvailableAsGroupByColumns": Array [],
+              "visible": true,
+            },
+          },
+        },
+        "firstImport": 0,
+        "importRevision": 1,
+        "replaced": false,
+        "replacement": false,
+        "sample": false,
+        "title": "Pokemon",
+        "uid": "pokemon",
+      },
+      Object {
+        "_id": "5b033d8d2a54a24d161a9c9b",
+        "createdAt": 2017-12-26T21:43:10.707Z,
+        "fe_filters": Object {
+          "default": Object {},
+          "excludeFields": Array [],
+          "fabricated": Array [],
+          "fieldsAsRangeSlider": Array [],
+          "fieldsCommaSeparatedAsIndividual": Array [],
+          "fieldsMultiSelectable": Array [],
+          "fieldsNotAvailable": Array [],
+          "fieldsSortableByInteger": Array [],
+          "fieldsSortableInReverseOrder": Array [],
+          "keywords": Array [],
+          "valuesToExcludeByOriginalKey": Object {
+            "_all": Array [],
+          },
+        },
+        "fe_views": Object {
+          "default_view": "gallery",
+          "views": Object {
+            "gallery": Object {
+              "defaultSortByColumnName": "Image URL",
+              "visible": true,
+            },
+          },
+        },
+        "firstImport": 0,
+        "importRevision": 1,
+        "replaced": false,
+        "replacement": false,
+        "sample": false,
+        "title": "Pokemon",
+        "uid": "pokemon",
+      },
+    ],
+  },
+  "statusCode": 200,
+}
+`;

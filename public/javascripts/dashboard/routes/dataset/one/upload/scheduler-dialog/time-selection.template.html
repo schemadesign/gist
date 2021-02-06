@@ -1,0 +1,44 @@
+<div layout="row">
+  <md-input-container flex>
+    <label>Occurs every</label>
+    <md-select ng-model="myFrequency.base">
+        <md-option ng-value="item.value" ng-repeat="item in frequency">{{item.label}}</md-option>
+    </md-select>
+  </md-input-container>
+  <md-input-container ng-show="myFrequency.base == 4" flex>
+    <label>on the day</label>
+    <md-select ng-model="myFrequency.dayValues">
+      <md-option ng-value="value" ng-repeat="value in dayValues">{{value | cronDayName}}</md-option>
+    </md-select>
+  </md-input-container>
+  <md-input-container ng-show="myFrequency.base >= 5" flex>
+    <label>on the day</label>
+    <md-select ng-model="myFrequency.dayOfMonthValues">
+      <md-option ng-value="value" ng-repeat="value in dayOfMonthValues">{{value | cronNumeral}}</md-option>
+    </md-select>
+  </md-input-container>
+  <md-input-container ng-show="myFrequency.base == 6" flex>
+    <label>on the day</label>
+    <md-select ng-model="myFrequency.monthValues">
+      <md-option ng-value="value" ng-repeat="value in monthValues">{{value | cronMonthName}}</md-option>
+    </md-select>
+  </md-input-container>
+  <md-input-container ng-show="myFrequency.base >= 3" flex>
+    <label>at the hour</label>
+    <md-select ng-model="myFrequency.hourValues">
+      <md-option ng-value="value" ng-repeat="value in hourValues">{{value}}</md-option>
+    </md-select>
+  </md-input-container>
+  <md-input-container ng-show="myFrequency.base >= 3" flex>
+    <label>on the minute</label>
+    <md-select ng-model="myFrequency.minuteValues">
+      <md-option ng-value="value" ng-repeat="value in minuteValues">{{value}}</md-option>
+    </md-select>
+  </md-input-container>
+  <md-input-container ng-show="myFrequency.base == 2" flex>
+    <label>on the minute</label>
+    <md-select ng-model="myFrequency.minuteValues">
+      <md-option ng-value="value" ng-repeat="value in minuteValues">{{value}}</md-option>
+    </md-select>
+  </md-input-container>
+</div>

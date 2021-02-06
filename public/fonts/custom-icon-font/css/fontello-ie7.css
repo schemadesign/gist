@@ -1,0 +1,63 @@
+[class^="gist-icon-"], [class*=" gist-icon-"] {
+  font-family: 'fontello';
+  font-style: normal;
+  font-weight: normal;
+ 
+  /* fix buttons height */
+  line-height: 1em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+}
+ 
+.gist-icon-pie-chart { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe800;&nbsp;'); }
+.gist-icon-check-off { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe801;&nbsp;'); }
+.gist-icon-check-on { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe802;&nbsp;'); }
+.gist-icon-close-big { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe803;&nbsp;'); }
+.gist-icon-close-filterpill { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe804;&nbsp;'); }
+.gist-icon-expand { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe805;&nbsp;'); }
+.gist-icon-filter { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe806;&nbsp;'); }
+.gist-icon-circle-check-on { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe807;&nbsp;'); }
+.gist-icon-gallery { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe808;&nbsp;'); }
+.gist-icon-menu { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe809;&nbsp;'); }
+.gist-icon-clipboard { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe80a;&nbsp;'); }
+.gist-icon-back { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe80d;&nbsp;'); }
+.gist-icon-globe { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe80e;&nbsp;'); }
+.gist-icon-scatterplot { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe80f;&nbsp;'); }
+.gist-icon-facebook { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe810;&nbsp;'); }
+.gist-icon-twitter { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe811;&nbsp;'); }
+.gist-icon-instagram { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe812;&nbsp;'); }
+.gist-icon-tile-blank { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe813;&nbsp;'); }
+.gist-icon-tile-null { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe814;&nbsp;'); }
+.gist-icon-tile-deceased { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe815;&nbsp;'); }
+.gist-icon-tile-female { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe816;&nbsp;'); }
+.gist-icon-tile-male { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe817;&nbsp;'); }
+.gist-icon-word-cloud { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe819;&nbsp;'); }
+.gist-icon-line-graph { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe81a;&nbsp;'); }
+.gist-icon-pie-set { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe81b;&nbsp;'); }
+.gist-icon-bar-chart { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe81c;&nbsp;'); }
+.gist-icon-map { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe81f;&nbsp;'); }
+.gist-icon-regional-map { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe828;&nbsp;'); }
+.gist-icon-circle-check-off { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe829;&nbsp;'); }
+.gist-icon-object-detail { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe82a;&nbsp;'); }
+.gist-icon-treemap { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe82d;&nbsp;'); }
+.gist-icon-roundedsquare { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe831;&nbsp;'); }
+.gist-icon-accessibility { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe833;&nbsp;'); }
+.gist-icon-bubble-chart { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe854;&nbsp;'); }
+.gist-icon-asterisk { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe866;&nbsp;'); }
+.gist-icon-article { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe869;&nbsp;'); }
+.gist-icon-extend { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe86a;&nbsp;'); }
+.gist-icon-area-chart { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe871;&nbsp;'); }
+.gist-icon-table { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe873;&nbsp;'); }
+.gist-icon-link-ext { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe874;&nbsp;'); }
+.gist-icon-legend { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe875;&nbsp;'); }
+.gist-icon-search { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe876;&nbsp;'); }
+.gist-icon-sort-ascending { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe877;&nbsp;'); }
+.gist-icon-sort-descending { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe878;&nbsp;'); }
+.gist-icon-sort-left { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe879;&nbsp;'); }
+.gist-icon-sort-right { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe87a;&nbsp;'); }
+.gist-icon-pound { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe87b;&nbsp;'); }
+.gist-icon-percent { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe87c;&nbsp;'); }
+.gist-icon-bars-h { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe87d;&nbsp;'); }
+.gist-icon-bars-v { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe87e;&nbsp;'); }
+.gist-icon-grouped-gallery { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe900;&nbsp;'); }

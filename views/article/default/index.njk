@@ -1,0 +1,42 @@
+{% extends "./layout.njk" %}
+
+{% import '../../partials/header-bar/hamburger-menu.njk' as menu %}
+
+{% block meta_title %}{{ article.pageTitle }}{% endblock %}
+{% block meta_team %}{% if team.title %} - {{ team.title }}{% endif %}{% endblock %}
+{% block meta_description %}{{ article.parsedBody | safe | striptags | truncate(320) }}{% endblock %}
+
+{% block body_class %}article-{{ article.slug }} {{ 'view-embedded' if embedded }} font-{{ team.font }}{% endblock %}
+
+{% block site_menu %}{{ menu.default(user, team, env, isPreview, true, false, false) }}{% endblock %}
+
+{% block content %}
+<div id="primary" class="content-area">
+    <main id="main" class="page-main">
+
+        <article>
+            <header class="gist-article-header" style="background-color: {{ team.colorPalette[0] or '#498ef7' }}; {% if article.thumbnail %} background-image: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url({{ article.thumbnail }});{% endif %}">
+                <div class="article-header-spacer"></div>
+                <div class="container-fluid max-width-960">
+                    <div class="article-header-content">
+                        <h1 class="article-title">{{ article.pageTitle }}</h1>
+
+                        <div class="article-meta">
+                            <span class="byline">
+                                <a href="{{ urlBase }}" class="author-badge"><span class="author-initial">{{ author.firstName | first | upper }}</span></a> by <span class="author"><a href="{{ urlBase }}">{{ author.firstName }} {{ author.lastName }}</a></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="container-fluid max-width-1240">
+                <div class="article-content">
+                    {{ article.parsedBody | safe }}
+                </div>
+                <footer class="article-footer"></footer>
+            </div>
+        </article>
+    </main>
+</div>
+{% endblock %}

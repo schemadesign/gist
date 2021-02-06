@@ -1,0 +1,7 @@
+<md-nav-bar md-selected-nav-item="currentNavItem" md-no-ink role="navigation" aria-label="navigation links">
+    
+    <md-nav-item md-nav-sref="dashboard.account.profile" name="profile" value="profile">Profile</md-nav-item>
+    
+    <md-nav-item md-nav-sref="dashboard.account.password" name="password" value="password" ng-if="user.provider === 'local'">Password</md-nav-item>
+    
+</md-nav-bar>

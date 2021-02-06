@@ -1,0 +1,85 @@
+<form class="col-xs-12 signup" name="infoForm" ng-submit="registerUser()" novalidate>
+    <div class="form-group">
+        <label for="email" class="control-label">Email</label>
+        <input name="email" ng-model="user.email" type="text" class="form-control" disabled id="email">
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error': infoForm.firstname.$touched && infoForm.firstname.$invalid}">
+        <label for="firstname" class="control-label">First Name</label>
+        <input name="firstname" ng-model="user.firstName" type="text" class="form-control" required autofocus="true" placeholder="First Name" id="firstname">
+        <div class="help-block" ng-messages="infoForm.firstname.$error" ng-if="infoForm.firstname.$touched && infoForm.firstname.$invalid">
+            <p ng-message="required">First Name is required.</p>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error': infoForm.lastname.$touched && infoForm.lastname.$invalid}">
+        <label for="lastname" class="control-label">Last Name</label>
+        <input name="lastname" ng-model="user.lastName" type="text" class="form-control" required placeholder="Last Name" id="lastname">
+
+        <div class="help-block" ng-messages="infoForm.lastname.$error" ng-if="infoForm.lastname.$touched && infoForm.lastname.$invalid">
+            <p ng-message="required">Last Name is required.</p>
+        </div>
+    </div>
+
+    <div ng-if="user.provider=='local' && (!user.hash || !user.salt)" class="form-group"
+         ng-class="{ 'has-error': infoForm.password.$touched && infoForm.password.$invalid}">
+        <label for="password" class="control-label">Password</label>
+        <input type="password" name="password" autocomplete="off" ng-model="user.password" class="form-control" ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" placeholder="Password" id="password">
+
+        <div class="help-block" ng-messages="infoForm.password.$error" ng-if="infoForm.password.$touched && infoForm.password.$invalid">
+            <p ng-message="minlength || maxlength">Password must be between 8&ndash;20 characters.</p>
+            <p ng-message="pattern">
+                Password must contain at least one uppercase letter, one lowercase letter, and one number or symbol.
+            </p>
+        </div>
+
+    </div>
+
+    <div ng-if="user.provider=='local' && (!user.hash || !user.salt) " class="form-group" ng-class="{ 'has-error': infoForm.verifyPassword.$touched && infoForm.verifyPassword.$invalid}">
+        <label for="verifyPassword" class="control-label">Verify Password</label>
+        <input type="password" name="verifyPassword" autocomplete="off" ng-model="user.verifyPassword" password-checker match-target="user.password" class="form-control" required placeholder="Password" id="verifyPassword">
+
+        <div class="help-block" ng-messages="infoForm.verifyPassword.$error" ng-if="infoForm.verifyPassword.$touched && infoForm.verifyPassword.$invalid">
+            <p ng-message="required">Please confirm your password.</p>
+            <p ng-message="match">Password does not match.</p>
+        </div>
+    </div>
+
+    <div ng-if="env.node_env!=='enterprise'" class="form-group" ng-class="{ 'has-error': infoForm.teamTitle.$touched && infoForm.teamTitle.$invalid}">
+        <label for="teamTitle" class="control-label">Team Title</label>
+        <input required ng-model='user._team.title' name="teamTitle" ng-disabled="invitedUser" type="text" class="form-control" placeholder="Team Title  (e.g. your name, group or organization)" id="teamTitle">
+
+        <div class="help-block" ng-messages="infoForm.teamTitle.$error" ng-if="infoForm.teamTitle.$touched && infoForm.teamTitle.$invalid">
+            <p ng-message="required">This field is required.</p>
+        </div>
+        <p class="signup-bullets signup-desc-padding">Your team is where you save all of your visualizations. The team name will be visible to anyone you share your visualizations with.</p>
+    </div>
+
+    <div ng-if="env.node_env!=='enterprise'" class="form-group" ng-class="{ 'has-error': infoForm.subdomain.$invalid}">
+        <label for="subdomain" class="control-label">Team Subdomain</label>
+
+        <div class="input-group">
+            <input ng-disabled="invitedUser" name="subdomain" ng-model="user._team.subdomain" unique-subdomain
+                   type="text" class="form-control" ng-pattern="/^[a-z0-9]*$/" required placeholder="Team Subdomain" id="subdomain">
+            <span ng-hide="env.node_env=='enterprise'" class="input-group-addon">{{"." + env.host}}</span>
+        </div>
+
+        <div class="help-block" ng-messages="infoForm.subdomain.$error || infoForm.subdomain.$invalid">
+            <p ng-message="required">This field is required.</p>
+            <p ng-message="subdomainAvailable">This subdomain name is not available.</p>
+            <p ng-message="pattern">Subdomain name must be lowercase and not contain any whitespace or special characters.</p>
+        </div>
+        <p class="signup-bullets signup-desc-padding">Enter a subdomain for your team. This will be your personal domain at {{env.host}}, where others can see any visualizations you have created and shared.</p>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success gist-pull-right" ng-disabled="infoForm.$invalid">Continue</button>
+    </div>
+
+    <div class="alert alert-danger" ng-show="error">
+        <p ng-if="error === 'activation pending'">
+            This email address has been registered but the account has not been activated.
+            Would you like to <a ng-click="resendActivationEmail()" class="alert-link pointer">resend the activation email</a>?
+        </p>
+    </div>
+</form>

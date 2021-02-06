@@ -1,0 +1,53 @@
+
+
+<div class="explore-tile col-md-12 col-sm-12 col-xs-12" style="padding-left:0px; padding-right: 0px;">
+     <div class="story-content-wrapper">
+        <div class="row">
+
+            <div class="col-md-10 col-sm-10 col-lg-11 col-xs-10 story-right-side">
+                <div class="row story-header" style="padding-left:15px;">
+                    <span class="gist-story-title-text" share-link="{{'/s/' + story.sharedPages[0]._id}}"
+                     subdomain-url="{{ addSubdomain(story.datasourceDescription._team.subdomain) }}">{{story.title}}</span><br>
+                    <p style="line-height: 20px;">By {{story.createdBy.firstName + ' ' + story.createdBy.lastName}} |  {{ story.createdAt | dateFormattedAs_monthDayYear_array }}</p>
+                    <a href="#" class="dropdown-toggle user-initial-nav col-md-1 col-sm-1 col-xs-1" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false" style="margin-right: 0px; margin-top:2px;">
+                        <span class="user-initial user-initial-story">{{story.createdBy.firstName | initial}}</span>
+                    </a>
+                </div>
+
+                <div class="row story-main-content" id="{{loop.index-1}}">
+                    <div class="row">
+                        <input type="hidden" name="share_url" value="{{'/s/' + story.sharedPages[0]._id}}">
+                        {% set base = addSubdomain(story.datasourceDescription._team.subdomain) %}
+                        <input type="hidden" name="subdomainUrl" value="{{ base }}" class="hidden">
+
+                        <a class="gist-js-panel-link" href="{{base | generatePanelHref('', '', '', '/s/' + story.sharedPages[0]._id)}}" target="_blank">
+                            <div class="story-image-wrapper panel-default col-sm-12 col-md-12 col-lg-8">
+                                <img class="story-image" src="{{ story.sharedPages[0].imageUrl }}">
+                            </div>
+                        </a>
+                        <div class="col-sm-12 col-md-12 col-lg-4 story-info"><a class="stand-out-text" href="{{base + '/' + story.datasourceDescription.uid}}">{{story.datasourceDescription.title}}</a><div></div> by <a class="stand-out-text" href="{{base}}">{{story.datasourceDescription._team.title}} </a>
+
+                            {% set page = story.sharedPages[0].pageType %}
+
+                            {% if page and page !== 'array_view'%}
+                            <br> View: {{story.sharedPages[0].pageType}}
+                            {% endif %}
+
+                            {% if story.sharedPages[0].viewType %}<br>Type: {{story.sharedPages[0].viewType}} {% endif %}<br>
+
+                            <div class="row filter"></div>
+                        </div>
+                        <p class="story-caption-truncate col-sm-12 col-md-12 col-xs-12" originalText="{{story.caption}}">
+                            {{story.caption | truncate(250, true, "...")}}
+                            {% if story.caption.length > 250 %}<a class="gist-expand-caption"> Read more</a> {% endif %}
+                        </p>
+                    </div>
+                    {% if env.INSIGHT %}
+                        <a href="presentation/{{ story._id }}" target="_blank">Presentation</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

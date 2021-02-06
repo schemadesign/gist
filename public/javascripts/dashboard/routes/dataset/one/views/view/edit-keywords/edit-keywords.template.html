@@ -1,0 +1,82 @@
+<md-dialog aria-label="Select Keywords" class="field-dialog">
+    <aa-toolbar title="Select Keywords" cancel="editKeywordsController.cancel()"></aa-toolbar>
+
+    <md-dialog-content class="field-dialog-content">
+        <form name="keywordsForm">
+            <md-content md-no-ink layout-margin>
+                <p>Keywords are shown below with their frequency counts. Select the words you want to add to your word
+                    cloud, then click Save.</p>
+
+                <div ng-hide="!editKeywordsController.loading">
+                    <p>Loading keywords...
+                        <span style="position: relative; margin-left: 1em;" us-spinner="{radius:5, width:2, length: 5}"
+                              spinner-on="editKeywordsController.loading"></span>
+                    </p>
+                </div>
+                <div ng-hide="editKeywordsController.loading">
+                    <div class="pad-top-2x pad-bottom-2x">
+                        <md-button class="md-dashboard pad-bottom-2x" ng-click="editKeywordsController.selectAll()"
+                                   aria-label="Select all keywords">
+                            <span class="btn-label">Select All</span>
+                        </md-button>
+                        <md-button class="md-dashboard pad-bottom-2x" ng-click="editKeywordsController.selectNone()"
+                                   aria-label="Select all keywords">
+                            <span class="btn-label">Select None</span>
+                        </md-button>
+                    </div>
+
+                    <md-input-container class="md-block pad-bottom-0">
+                        <label>Filter</label>
+                        <input
+                            type="text"
+                            ng-model="editKeywordsController.keywordFilter"
+                            ng-change="editKeywordsController.filterKeywords()"
+                        />
+                    </md-input-container>
+                    <md-switch
+                        ng-model="editKeywordsController.excludeStopWords"
+                        aria-label="Exclude stop words"
+                        ng-change="editKeywordsController.filterKeywords()"
+                    >
+                        Exclude stop words
+                    </md-switch>
+                    <div class="pad-top-2x">
+                        <span class="keyword-selector-keyword"
+                              ng-repeat="keyword in editKeywordsController.displayedKeywords"
+                              selection-model
+                              selection-model-type="'checkbox'"
+                              selection-model-mode="'multiple-additive'"
+                              ng-click="editKeywordsController.onClick(keyword)"
+                        >
+                            <input type="checkbox">
+                            <strong>{{ keyword.word }}</strong>
+                            ({{ keyword.count }})
+                        </span>
+                    </div>
+                    <ul
+                        uib-pagination
+                        boundary-links="true"
+                        total-items="editKeywordsController.numberOfItems"
+                        items-per-page="editKeywordsController.paginationLimit"
+                        ng-model="editKeywordsController.currentPage"
+                        max-size="8"
+                        previous-text="&lsaquo;"
+                        next-text="&rsaquo;"
+                        first-text="&laquo;"
+                        last-text="&raquo;"
+                        ng-change="editKeywordsController.changePage(editKeywordsController.currentPage)"
+                    ></ul>
+                </div>
+            </md-content>
+        </form>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="end center">
+        <md-button class="md-dashboard" ng-click="editKeywordsController.cancel()">
+            <span class="btn-label">Cancel</span>
+        </md-button>
+        <md-button class="md-dashboard confirm" ng-click="editKeywordsController.save()">
+            <span class="btn-label">Save</span>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

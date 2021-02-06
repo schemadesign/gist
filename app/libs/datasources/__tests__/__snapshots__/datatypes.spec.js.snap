@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Intuit datatypes Date should parse date 3.20.2014 1`] = `
+Object {
+  "data_type": "Date",
+  "input_format": "M.DD.YYYY",
+  "name": "name",
+  "operation": "ToDate",
+  "output_format": "M.DD.YYYY",
+  "sample": "3.20.2014",
+}
+`;
+
+exports[`Intuit datatypes Date should parse date 10-2019 1`] = `
+Object {
+  "data_type": "Date",
+  "input_format": "MM-YYYY",
+  "name": "name",
+  "operation": "ToDate",
+  "output_format": "MM-YYYY",
+  "sample": "10-2019",
+}
+`;
+
+exports[`Intuit datatypes Date should parse date 2016/02/03 1`] = `
+Object {
+  "data_type": "Date",
+  "input_format": "YYYY/MM/DD",
+  "name": "name",
+  "operation": "ToDate",
+  "output_format": "YYYY/MM/DD",
+  "sample": "2016/02/03",
+}
+`;
+
+exports[`Intuit datatypes Date should parse date 2016-01-01 1`] = `
+Object {
+  "data_type": "Date",
+  "input_format": "YYYY-MM-DD",
+  "name": "name",
+  "operation": "ToDate",
+  "output_format": "YYYY-MM-DD",
+  "sample": "2016-01-01",
+}
+`;
+
+exports[`Intuit datatypes Date should parse date 2016-02-02 15:00 1`] = `
+Object {
+  "data_type": "Date",
+  "input_format": "ISO_8601",
+  "name": "name",
+  "operation": "ToDate",
+  "output_format": "YYYY-MM-DD",
+  "sample": "2016-02-02 15:00",
+}
+`;
+
+exports[`Intuit datatypes Date should parse date 2016-02-03 1`] = `
+Object {
+  "data_type": "Date",
+  "input_format": "YYYY-MM-DD",
+  "name": "name",
+  "operation": "ToDate",
+  "output_format": "YYYY-MM-DD",
+  "sample": "2016-02-03",
+}
+`;
+
+exports[`Intuit datatypes Date should parse date 2016-09-21 1`] = `
+Object {
+  "data_type": "Date",
+  "input_format": "YYYY-MM-DD",
+  "name": "name",
+  "operation": "ToDate",
+  "output_format": "YYYY-MM-DD",
+  "sample": "2016-09-21",
+}
+`;
+
+exports[`Intuit datatypes Date should parse date 2016-10-08 06:00 1`] = `
+Object {
+  "data_type": "Date",
+  "input_format": "ISO_8601",
+  "name": "name",
+  "operation": "ToDate",
+  "output_format": "YYYY-MM-DD",
+  "sample": "2016-10-08 06:00",
+}
+`;
+
+exports[`Intuit datatypes Date should parse date 2017/02/01 1`] = `
+Object {
+  "data_type": "Date",
+  "input_format": "YYYY/MM/DD",
+  "name": "name",
+  "operation": "ToDate",
+  "output_format": "YYYY/MM/DD",
+  "sample": "2017/02/01",
+}
+`;
+
+exports[`Intuit datatypes Date should parse date Jan 1, 2018 1`] = `
+Object {
+  "data_type": "Date",
+  "input_format": "MMM D, YYYY",
+  "name": "name",
+  "operation": "ToDate",
+  "output_format": "MMM D, YYYY",
+  "sample": "Jan 1, 2018",
+}
+`;
+
+exports[`Intuit datatypes Date should parse date Jan 2018 1`] = `
+Object {
+  "data_type": "Date",
+  "input_format": "MMM YYYY",
+  "name": "name",
+  "operation": "ToDate",
+  "output_format": "MMM YYYY",
+  "sample": "Jan 2018",
+}
+`;
+
+exports[`Intuit datatypes Date should parse date Jan-18 1`] = `
+Object {
+  "data_type": "Date",
+  "input_format": "MMM-YY",
+  "name": "name",
+  "operation": "ToDate",
+  "output_format": "MMM-YY",
+  "sample": "Jan-18",
+}
+`;
+
+exports[`Intuit datatypes Date should parse date January 1, 2018 1`] = `
+Object {
+  "data_type": "Date",
+  "input_format": "MMMM D, YYYY",
+  "name": "name",
+  "operation": "ToDate",
+  "output_format": "MMMM D, YYYY",
+  "sample": "January 1, 2018",
+}
+`;
+
+exports[`Intuit datatypes Date should parse date January 2018 1`] = `
+Object {
+  "data_type": "Date",
+  "input_format": "MMMM YYYY",
+  "name": "name",
+  "operation": "ToDate",
+  "output_format": "MMMM YYYY",
+  "sample": "January 2018",
+}
+`;

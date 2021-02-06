@@ -1,0 +1,59 @@
+<!-- array-header-small -->
+{% macro default(arrayTitle, array_source_key, defaultView, team, isPreview, embedded, sharedPage, routePath_base, view_description, revision, defaultFilterObj, isEmbed, showInsightsExplorer, stories, subdomain, env, sharedPageId, lastUpdated) %}
+
+{% set filterObj = defaultFilterObj or {} %}
+
+{% if sharedPage %}
+    {% set visHomeUrl = routePath_base %}
+{% else %}
+    {% set visHomeUrl = "/" + array_source_key + "/" + defaultView | constructedRoutePath(filterObj, {
+        preview: isPreview if isPreview else '',
+        embed: embedded,
+        revision: revision
+    }) %}
+{% endif %}
+
+{% if team.externalWebsite %}
+    {% set teamLink = externalWebsite(team.externalWebsite) %}
+{% elseif team.subdomain | length %}
+    {% set teamLink = addSubdomain(team.subdomain) %}
+{% endif %}
+
+{% if not isPreview and not isEmbed %}
+<header class="array-header header-shadow clearfix {{'has-insights' if showInsightsExplorer}} {{ 'has-description' if view_description }} {{ 'has-updated-date' if lastUpdated }}">
+    <div class="container-fluid">
+        {% if isPreview %}
+            <h1 class="gist-title">{{ arrayTitle }}<span class="preview-indicator"> (preview)</span></h1>
+        {% else %}
+            <h1 class="gist-title">
+              <a href="{{ visHomeUrl }}" class="array-link-reset color-brand-hover" title="Go back to {{ arrayTitle }} home" aria-label="Go back to {{ arrayTitle }} home">{{ arrayTitle }}</a>
+                <span class="gist-header-expand-button-wrapper {{'has-insights' if showInsightsExplorer}} {{ 'has-description' if view_description }} {{ 'has-updated-date' if lastUpdated }}">
+                    <a id="gist-header-expand-button" class="gist-header-expand-button--hidden gist-dropdown-toggle-button-has-caret "></a>
+                </span>
+            </h1>
+        {% endif %}
+    </div>
+{% endif %}
+    {% if not isPreview %}
+    <div id="gist-header-expander" class="{{ 'showing' if not isEmbed }} {{ 'gist-header-expander--embeded' if isEmbed }} {{'has-insights' if showInsightsExplorer}}">
+        <div class="gist-header-expander-container">
+            {% if lastUpdated  %}
+            <div class="gist-header-last-updated {{ 'gist-header-last-updated--embeded' if isEmbed }}">
+                Last Updated on {{ lastUpdated | dateFormat('MMM D, YYYY hh:mm z') }}
+            </div>
+            {% endif %}
+            {% if showInsightsExplorer %}
+                {% include "../partials/insights_explorer.njk" %}
+            {% endif %}
+
+            {% if view_description %}
+            <div class="gist-description-wrapper  {{ 'gist-description-wrapper--embeded' if isEmbed}}">
+                <div class="gist-description">{{ view_description }}</div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+    {% endif %}
+</header>
+{% endmacro %}

@@ -1,0 +1,33 @@
+<div layout-padding ng-init="getTabData()">
+    <div>
+        <h2>Summary</h2>
+
+        <aa-performance-header class="no-border" header-title="Total page views" header-tooltip="Total page views, including repeat views by users"></aa-performance-header>
+        <aa-performance-tiles tiles-data="pageViews"></aa-performance-tiles>
+
+        <aa-performance-header class="no-border" header-title="Unique page views" header-tooltip="Unique page views, excluding repeat views by users"></aa-performance-header>
+        <aa-performance-tiles tiles-data="uniquePageViews"></aa-performance-tiles>
+    </div>
+
+    <div>
+        <h2>History</h2>
+        <aa-performance-header
+            header-title="general" header-titles="[{ display: 'Page views', value: 'general' }, { display: 'Unique page views', value: 'unique' }]"
+            header-time-unit="month" header-time-units="['week', 'month', 'year']"
+            header-update="updateHistory">
+        </aa-performance-header>
+        <aa-visualization viz-type="linechart" viz-id="history"></aa-visualization>
+    </div>
+
+    <div>
+        <h2>Path of Entry</h2>
+        <aa-performance-header header-title="Top five referrers" header-tooltip="Top five referrers" header-time-unit="week" header-update="updateReferrers"></aa-performance-header>
+        <aa-visualization viz-type="horizontalbarchart" viz-id="pathofEntry"></aa-visualization>
+    </div>
+
+    <div>
+        <h2>Technology</h2>
+        <aa-performance-header header-title="browser" header-titles="[{ display: 'Browser', value: 'browser' }, { display: 'OS', value: 'os' }]" header-time-unit="week" header-update="updateTechnology"></aa-performance-header>
+        <aa-visualization viz-type="pieChart" viz-id="technology"></aa-visualization>
+    </div>
+</div>

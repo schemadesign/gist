@@ -1,0 +1,14 @@
+<label class="margin-bottom-3x d-block">{{::setting.displayAs}}</label>
+<p ng-if="::setting.description">{{::setting.description}}</p>
+
+<md-input-container class="md-block" flex-gt-sm>
+    <md-select multiple aria-label="{{setting.name}} for {{viewCtrl.viewName}}" ng-model="viewCtrl.data[setting.name]">
+        <md-option ng-if="setting.selectFrom === 'column'" ng-repeat="column in colsAvailableOfType track by column" ng-value="column" ng-disabled="checkMultiselectLimit(column)">
+            {{viewCtrl.dataset.fe_displayTitleOverrides[column] || column}}
+        </md-option>
+
+        <md-option ng-repeat="option in viewCtrl.data[setting.selectFrom] track by option" ng-value="option">
+            {{option}}
+        </md-option>
+    </md-select>
+</md-input-container>

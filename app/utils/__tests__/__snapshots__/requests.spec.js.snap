@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Requests Utils when #handleError is called should respond with custom error 1`] = `
+Object {
+  "data": Object {
+    "error": "Custom response",
+  },
+  "status": 500,
+}
+`;
+
+exports[`Requests Utils when #handleError is called should respond with public error 1`] = `
+Object {
+  "data": Object {
+    "error": "public error",
+  },
+  "status": 500,
+}
+`;
+
+exports[`Requests Utils when #handleError is called should respond with server error 1`] = `
+Object {
+  "data": Object {
+    "error": "An unexpected error happened during request.",
+  },
+  "status": 500,
+}
+`;

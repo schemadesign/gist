@@ -1,0 +1,43 @@
+{% macro default(displayTitleOverrides, routePath_base, filterObj, truesByFilterValueByFilterColumnName_forWhichNotToOutputColumnNameInPill, sharedPage, label=false, customClassName='', simpleChart=false) %}
+    <div class="filter-bar {{ customClassName }}">
+        <div class="container-fluid">
+            {% if filterObj | isActive %}
+                {% if sharedPage %}
+                    {% set emptyFilterObj = filterObj | removeAllFilters %}
+                    {% set routePath_withoutFilters = routePath_base | constructedRoutePath (emptyFilterObj, emptyFilterObj, sharedPage) %}
+                    <a href="{{ routePath_withoutFilters }}"
+                       class="gist-filter-tag filter-tag-reset border-color-brand color-brand border-color-brand-hover color-brand-hover"
+                       data-l10n-id="remove-all-filters" aria-label="Close all filters">Remove All Filters</a>
+                {% else %}
+                    <a href="{{ routePath_base }}"
+                       class="gist-filter-tag filter-tag-reset border-color-brand color-brand border-color-brand-hover color-brand-hover"
+                       data-l10n-id="remove-all-filters" aria-label="Close all filters">Remove All Filters</a>
+                {% endif %}
+            {% endif %}
+
+            {% for filterCol, filterVals in filterObj %}
+                {% set filterValsForBubbles = filterVals | filterValuesForBubble %}
+
+                {% for filterVal in filterValsForBubbles %}
+                    {% set filterObjForThisFilterColVal = filterObj | constructedFilterObj(filterCol, filterVal, true, true) %}
+                    {% set routePath_withoutThisFilter = routePath_base | constructedRoutePath(filterObjForThisFilterColVal, null, sharedPage) %}
+                    {% set DisplayFilterCol = displayTitleOverrides[filterCol] or filterCol %}
+                    {% set shouldDisplayKey = false if truesByFilterValueByFilterColumnName_forWhichNotToOutputColumnNameInPill[filterCol][filterVal] or filterCol == 'colFilter' else true %}
+                    {% set colDisplay = DisplayFilterCol | safe ~ ': ' if shouldDisplayKey else '' %}
+                    {% if filterVal !== '' and (filterCol != 'colFilter' or simpleChart) %}
+                        <span class="gist-filter-tag" data-filter-column="{{ filterCol }}"
+                              data-filter-value="{{ filterVal }}"
+                              title="{{ colDisplay | filterValToDisplay }}{{ filterVal | filterValToDisplay }}">{{ colDisplay | filterValToDisplay }}{{ filterVal | filterValToDisplay }}
+                    <a tabindex="0" href="{{ routePath_withoutThisFilter }}" class="gist-close filter-tag-close"
+                       aria-label="Close filter">
+                        <span class="gist-icon-close-filterpill"></span>
+                    </a>
+                </span>
+                    {% endif %}
+
+                {% endfor %}
+            {% endfor %}
+
+        </div>
+    </div>
+{% endmacro %}

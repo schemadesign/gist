@@ -1,0 +1,1 @@
+until app/lib/import/cmd/DB_seed__enterImageScrapingDirectly; do echo 'Trying again…' ; sleep 2; done

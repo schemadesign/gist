@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Users delete should not allow to perform action when not an admin 1`] = `
+Object {
+  "body": Object {
+    "error": "Non-public error: Not an admin of the team",
+  },
+  "statusCode": 403,
+}
+`;
+
+exports[`Users delete should not allow to perform action when user doesn't belong to the team 1`] = `
+Object {
+  "body": Object {
+    "error": "Non-public error: Selected user isn't in the team",
+  },
+  "statusCode": 400,
+}
+`;
+
+exports[`Users delete should not allow to remove team admin 1`] = `
+Object {
+  "body": Object {
+    "error": "Can't remove team admin",
+  },
+  "statusCode": 400,
+}
+`;
+
+exports[`Users delete should remove user from the team 1`] = `
+Object {
+  "statusCode": 204,
+  "text": "",
+}
+`;

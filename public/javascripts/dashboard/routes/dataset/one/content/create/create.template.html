@@ -1,0 +1,20 @@
+<div ng-form="contentCreateCtrl.form">
+    <md-content layout-padding md-no-ink>
+        <h2><a ui-sref="dashboard.dataset.one.content.list" class="pointer">Entries</a>&ensp;&rsaquo;&ensp;Add Entry</h2>
+
+        <h3>{{contentCreateCtrl.entry.rowParams[contentCreateCtrl.dataset.objectTitle]}}</h3>
+
+        <div class="editor-fields">
+            <ng-container ng-repeat="field in contentCtrl.fields track by $index" ng-if="field.operation">
+                <md-input-container class="md-block" flex="75">
+                    <label>
+                        {{datasetOneCtrl.dataset.fe_displayTitleOverrides[field.name] || field.name}}
+                        ({{contentCtrl.operationToString(field.operation)}}<span ng-if="field.format"> - {{field.format}}</span>)
+                    </label>
+
+                    <gist-content-field field="field" data="contentCreateCtrl.entry.rowParams[field.name]" />
+                </md-input-container>
+            </ng-container>
+        </div>
+    </md-content>
+</div>

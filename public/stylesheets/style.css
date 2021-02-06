@@ -1,0 +1,72 @@
+/* @override
+  http://austenblokker.local.arrays.co:9080/stylesheets/style.css
+  http://app.local.arrays.co:9080/stylesheets/style.css
+  http://schema.local.arrays.co:9080/stylesheets/style.css */
+
+/* @group Base */
+@import url('base/bootstrap.css');
+@import url('base/fontello-embedded.css');
+@import url('base/variables.css');
+@import url('base/typography/base.css');
+/* @end Base */
+
+/* @group Layout */
+@import url('layout/body.css');
+@import url('layout/embedded.css');
+/* @end Layout */
+
+/* @group Lib */
+@import url('../../vendors/noty/lib/noty.css');
+@import url('../../vendors/noty/lib/themes/bootstrap-v3.css');
+@import url('../../vendors/nouislider/distribute/nouislider.css');
+/* @end Lib */
+
+/* @group Module */
+@import url('module/header-bar.css');
+@import url('module/header-modal.css');
+@import url('module/filter-menu.css');
+@import url('module/sort-bar.css');
+@import url('module/modal.css');
+@import url('module/pagination.css');
+@import url('module/tooltip.css');
+@import url('module/splash.css');
+@import url('module/header-tab.css');
+@import url('module/loader.css');
+/* @end Module */
+
+/* @group Views */
+@import url('views/array.css');
+@import url('views/gist.css');
+@import url('views/array-header.css');
+@import url('views/array-header-expander.css');
+@import url('views/array-create.css');
+@import url('views/icons.css');
+@import url('views/team-show.css');
+@import url('views/object-show.css');
+@import url('views/gallery-grid.css');
+@import url('views/svg-chart-base.css');
+@import url('views/chart/main.css');
+@import url('views/chart/legend-extension.css');
+@import url('views/map.css');
+@import url('views/globe.css');
+@import url('views/grouped-gallery.css');
+@import url('views/treemap.css');
+@import url('views/scatterplot.css');
+@import url('views/linechart.css');
+@import url('views/areachart.css');
+@import url('views/word-cloud.css');
+@import url('views/pie-chart.css');
+@import url('views/pie-set.css');
+@import url('views/bar-chart.css');
+@import url('views/regional-map.css');
+@import url('views/bubble-chart.css');
+@import url('views/timeline-control.css');
+
+@import url('views/story.css');
+@import url('views/table.css');
+
+@import url('views/login.css');
+@import url('views/signup.css');
+
+/* @end Views */
+

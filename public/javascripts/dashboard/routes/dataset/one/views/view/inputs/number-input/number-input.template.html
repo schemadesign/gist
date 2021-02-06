@@ -1,0 +1,6 @@
+<label class="margin-bottom-3x d-block">{{::setting.displayAs}}</label>
+<p ng-if="::setting.description">{{::setting.description}}</p>
+
+<md-input-container>
+    <input type="number" name="value" ng-model="viewCtrl.data[setting.name]" ng-pattern="/^-?\d+(\.\d+)?$/" min="setting.min" max="setting.max" aria-label="{{setting.displayAs}}">
+</md-input-container>

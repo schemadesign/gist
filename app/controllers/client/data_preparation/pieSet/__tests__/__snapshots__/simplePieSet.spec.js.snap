@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Simple pie set should return filtered graph data  1`] = `
+Object {
+  "body": Object {
+    "colors": Array [
+      "#1B6DFC",
+      "#0CB7FA",
+      "#FA79FC",
+      "#FB3705",
+      "#F9D307",
+      "#FA9007",
+      "#7D5807",
+      "#B2E606",
+      "#069908",
+      "#7B07FD",
+    ],
+    "docs": Array [
+      Object {
+        "data": Array [
+          Object {
+            "color": "#0CB7FA",
+            "label": "None",
+            "value": 176,
+          },
+          Object {
+            "color": "#1B6DFC",
+            "label": "Flying",
+            "value": 135,
+          },
+        ],
+        "isPercentage": false,
+        "sum": 311,
+        "title": "Max HP",
+      },
+      Object {
+        "data": Array [
+          Object {
+            "color": "#1B6DFC",
+            "label": "Flying",
+            "value": 2620,
+          },
+          Object {
+            "color": "#0CB7FA",
+            "label": "None",
+            "value": 2530,
+          },
+        ],
+        "isPercentage": false,
+        "sum": 5150,
+        "title": "Max CP",
+      },
+    ],
+    "flatResults": Array [
+      Object {
+        "color": "#1B6DFC",
+        "label": "Flying",
+        "value": 135,
+      },
+      Object {
+        "color": "#0CB7FA",
+        "label": "None",
+        "value": 176,
+      },
+    ],
+    "meta": Object {
+      "filterObj": Object {
+        "Type 1": Array [
+          "Fire",
+        ],
+      },
+      "isAggregateByPercent": false,
+      "isChartByPercent": false,
+      "numberOfResults": 2,
+      "onPageNum": 1,
+      "resultsOffset": 0,
+      "routePath_base": "/pokemon/pie-set",
+    },
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Simple pie set should return graph data 1`] = `
+Object {
+  "body": Object {
+    "colors": Array [
+      "#1B6DFC",
+      "#0CB7FA",
+      "#FA79FC",
+      "#FB3705",
+      "#F9D307",
+      "#FA9007",
+      "#7D5807",
+      "#B2E606",
+      "#069908",
+      "#7B07FD",
+    ],
+    "docs": Array [
+      Object {
+        "data": Array [
+          Object {
+            "color": "#0CB7FA",
+            "label": "None",
+            "value": 499,
+          },
+          Object {
+            "color": "#FA79FC",
+            "label": "Poison",
+            "value": 328,
+          },
+          Object {
+            "color": "#1B6DFC",
+            "label": "Flying",
+            "value": 135,
+          },
+        ],
+        "isPercentage": false,
+        "sum": 962,
+        "title": "Max HP",
+      },
+      Object {
+        "data": Array [
+          Object {
+            "color": "#0CB7FA",
+            "label": "None",
+            "value": 7699,
+          },
+          Object {
+            "color": "#FA79FC",
+            "label": "Poison",
+            "value": 5320,
+          },
+          Object {
+            "color": "#1B6DFC",
+            "label": "Flying",
+            "value": 2620,
+          },
+        ],
+        "isPercentage": false,
+        "sum": 15639,
+        "title": "Max CP",
+      },
+    ],
+    "flatResults": Array [
+      Object {
+        "color": "#1B6DFC",
+        "label": "Flying",
+        "value": 135,
+      },
+      Object {
+        "color": "#0CB7FA",
+        "label": "None",
+        "value": 499,
+      },
+      Object {
+        "color": "#FA79FC",
+        "label": "Poison",
+        "value": 328,
+      },
+    ],
+    "meta": Object {
+      "filterObj": Object {},
+      "isAggregateByPercent": false,
+      "isChartByPercent": false,
+      "numberOfResults": 2,
+      "onPageNum": 1,
+      "resultsOffset": 0,
+      "routePath_base": "/pokemon/pie-set",
+    },
+  },
+  "statusCode": 200,
+}
+`;

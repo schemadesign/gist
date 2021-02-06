@@ -1,0 +1,11 @@
+#!/bin/bash
+
+CONFIG_DIR="$PWD/config/env"
+export NODE_ENV=testing
+echo $CONFIG_DIR
+
+if [ "$ENDONCRASH" = "ON" ]; then
+    node app.js
+else
+    npm run-script monitor
+fi

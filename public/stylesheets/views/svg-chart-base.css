@@ -1,0 +1,16 @@
+.gist-axis path,
+.gist-axis line {
+    fill: none;
+    stroke: #c9c9c9;
+    stroke-width: 1px;
+}
+
+.gist-axis .tick text {
+    fill: var(--color-text-light);
+}
+
+.axis-label {
+    font-size: 1.125em;
+    font-weight: 600;
+    fill: var(--color-text-med);
+}

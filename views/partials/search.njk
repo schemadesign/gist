@@ -1,0 +1,72 @@
+{% macro default(basePath, searchColToOutput, columns, searchQ, sortBy, sortDirection, revision, filterObj, colFilter) %}
+    <form action="{{ basePath | replaceTimeline }}" method="get" class="gist-form-search">
+        <input type="hidden" name="preview" value="{{ basePath | extractPreviewFromBasePath }}">
+        <input type="hidden" name="embed" value="{{ basePath | extractEmbedFromBasePath }}">
+        <input type="hidden" name="searchCol" value="{{ searchColToOutput }}" class="gist-search-colname">
+        <span class="gist-search-column"></span>
+
+        <div class="sort-control visible-xs">
+            <div class="dropdown-toggle gist-search-toggle">
+                <span class="gist-icon-search search-icon"></span>
+            </div>
+        </div>
+
+        <div class="gist-mobile-search-popover dropdown-panel">
+            <div class="sort-control sort-control-right gist-search-control">
+                <div class="nowrap">
+                    {# <span class="search-by-label hidden-xs">Search by {{ searchColToOutput }}:</span> #}
+                    <input data-l10n-id="search-by-arg" data-l10n-args='{"search_name": "{{ searchColToOutput }}"}'
+                           type="text" name="searchQ" id="gist-search-control-input"
+                           class="form-control gist-search-input" placeholder="Search by {{ searchColToOutput }}"
+                           autocomplete="off" value="{{ searchQ }}"
+                           aria-labelledby="search-by" {{ dataOperation | safe }}{# !!not actually safe #}>
+                    <span class="gist-icon-close-big gist-search-close visible-xs" aria-label="Cancel search"
+                          aria-hidden="true"></span>
+                    <a href="javascript:void(0)"
+                       class="btn dropdown-toggle ui-label gist-dropdown-toggle-button-has-caret" data-toggle="dropdown"
+                       id="search-by" role="menu" aria-label="Change the field to search by" aria-haspopup="true">
+                        <span class="screen-reader-text">Change the field to search by</span>
+                        <span class="gist-icon-search search-icon" aria-label="Change the field to search by"
+                              role="menu" aria-hidden="true"></span>
+                    </a>
+                    {% if columns | length %}
+                        <ul class="dropdown-menu dropdown-menu-right search-dropdown-menu" aria-labelledby="search-by">
+                            {% for column in columns %}
+                                <li class="gist-search-dropdown-item background-color-brand-hover {{ "gist-search-dropdown-item-active" if column.name == searchColToOutput }}">
+                                    <a href="#" data-search-col-to-output="{{ searchColToOutput }}"
+                                       data-colname="{{ column.name }}"
+                                       {% if column.operation %}data-operation="{{ column.operation }}"{% endif %} {% if column.outputFormat %}data-output-format="{{ column.outputFormat }}"{% endif %}
+                                       {% if column.name == 'All Fields' %} data-l10n-id="all-fields" {% endif %}>{{ column.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% if sortBy %}
+            <input type="hidden" name="sortBy" value="{{ sortBy }}">
+        {% endif %}
+        {% if sortDirection %}
+            <input type="hidden" name="sortDirection" value="{{ sortDirection }}">
+        {% endif %}
+        {% if revision %}
+            <input type="hidden" name="revision" value="{{ revision }}">
+        {% endif %}
+        {% if filterObj %}
+            {% for filterCol, filterVals in filterObj %}
+                {% if filterVals | isArray %}
+                    {% for filterVal in filterVals %}
+                        <input type="hidden" name="{{ filterCol }}" value="{{ filterVal }}">
+                    {% endfor %}
+                {% else %}
+                    <input type="hidden" name="{{ filterCol }}" value="{{ filterVals }}">
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% if colFilter %}
+            <input type="hidden" name="colFilter" value="{{ colFilter }}">
+        {% endif %}
+    </form>
+{% endmacro %}

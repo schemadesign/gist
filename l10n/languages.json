@@ -1,0 +1,126 @@
+[
+    {
+        "language": "English",
+        "code": "en"
+    },
+    {
+        "language": "Arabic",
+        "code": "ar"
+    },
+    {
+        "language": "Bulgarian",
+        "code": "bg"
+    },
+    {
+        "language": "Chinese (Simplified)",
+        "code": "zh"
+    },
+    {
+        "language": "Chinese (Traditional)",
+        "code": "zh-TW"
+    },
+    {
+        "language": "Czech",
+        "code": "cs"
+    },
+    {
+        "language": "Danish",
+        "code": "da"
+    },
+    {
+        "language": "Dutch",
+        "code": "nl"
+    },
+    {
+        "language": "Finnish",
+        "code": "fi"
+    },
+    {
+        "language": "French",
+        "code": "fr"
+    },
+    {
+        "language": "German",
+        "code": "de"
+    },
+    {
+        "language": "Greek",
+        "code": "el"
+    },
+    {
+        "language": "Hungarian",
+        "code": "hu"
+    },
+    {
+        "language": "Indonesian",
+        "code": "id"
+    },
+    {
+        "language": "Italian",
+        "code": "it"
+    },
+    {
+        "language": "Japanese",
+        "code": "ja"
+    },
+    {
+        "language": "Kazakh",
+        "code": "kk"
+    },
+    {
+        "language": "Korean",
+        "code": "ko"
+    },
+    {
+        "language": "Malay",
+        "code": "ms"
+    },
+    {
+        "language": "Norwegian",
+        "code": "no"
+    },
+    {
+        "language": "Polish",
+        "code": "pl"
+    },
+    {
+        "language": "Portuguese",
+        "code": "pt"
+    },
+    {
+        "language": "Russian",
+        "code": "ru"
+    },
+    {
+        "language": "Slovak",
+        "code": "sk"
+    },
+    {
+        "language": "Slovenian",
+        "code": "sl"
+    },
+    {
+        "language": "Spanish",
+        "code": "es"
+    },
+    {
+        "language": "Swedish",
+        "code": "sv"
+    },
+    {
+        "language": "Thai",
+        "code": "th"
+    },
+    {
+        "language": "Turkish",
+        "code": "tr"
+    },
+    {
+        "language": "Ukrainian",
+        "code": "uk"
+    },
+    {
+        "language": "Vietnamese",
+        "code": "vi"
+    }
+]

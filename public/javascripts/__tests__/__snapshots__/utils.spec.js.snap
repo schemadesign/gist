@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Utils getDetailsViewUrl should return url 1`] = `"/array_source_key/1?Country%5B0%5D=Poland&revision=true&objectIndex=0&viewType=map"`;

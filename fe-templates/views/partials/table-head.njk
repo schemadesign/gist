@@ -1,0 +1,33 @@
+{% for columnName in meta.columnNames %}
+
+    {% if columnName.name == options.sortBy %}
+        {% set sortIconClass = 'down' if meta.sortDirection == 'Descending' else 'up' %}
+        <th class="table-head sorted-by" scope="col" style="width: {{ columnName.width }}; min-width: {{ columnName.minWidth }};" data-tooltip-value="{{ columnName.name }}">
+            <a class="table-head-link" href="{{ columnName.sortNewDirectionUrl }}"  aria-label="toggle sort direction for table column {{ columnName.name }}" data-tooltip-value="{{ columnName.name }}">
+                <i class="fa fa-caret-{{ sortIconClass }}" aria-hidden="true"></i> {{ columnName.name }}
+            </a>
+        </th>
+    {% elseif columnName.hasObjectValue %}
+        {% set columnName = columnName | addProperty(columnName.nestedFilterLink) %}
+        <th class="table-head" scope="col" style="width: {{ columnName.width }}; min-width: {{ columnName.minWidth }};" data-tooltip-value="{{ columnName.name }}">
+            <a class="table-head-link" href="{{ columnName.link }}" data-tooltip-value="{{ columnName.name }}">
+                {{ columnName.name }}
+            </a>
+        </th>
+    {% elseif options.nestedArray | length > 0 and columnName.mainTableKey === false %}
+        <th class="table-head" scope="col" style="width: {{ columnName.width }}; min-width: {{ columnName.minWidth }};" data-tooltip-value="{{ columnName.name }}">
+            {{ columnName.name }}
+        </th>
+    {% elseif not included.dataSource.fe_viewOptions.viewControls %}
+        <th class="table-head" scope="col" style="width: {{ columnName.width }}; min-width: {{ columnName.minWidth }};" data-tooltip-value="{{ columnName.name }}">
+            {{ columnName.name }}
+        </th>
+    {% else %}
+        <th class="table-head" scope="col" style="width: {{ columnName.width }}; min-width: {{ columnName.minWidth }};" data-tooltip-value="{{ columnName.name }}">
+            <a class="table-head-link" href="{{ columnName.sortByBasePath | constructedRoutePath({sortBy: columnName.name}) }}" aria-label="sortable table column {{ columnName.name }}" data-tooltip-value="{{ columnName.name }}">
+                {{ columnName.name }}
+            </a>
+        </th>
+    {% endif %}
+
+{% endfor %}

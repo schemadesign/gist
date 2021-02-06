@@ -1,0 +1,134 @@
+/* @override
+	http://local.arrays.co:9080/stylesheets/views/login.css */
+
+.page-login {
+    background-color: #fff;
+}
+
+
+#login-modal .modal-body {
+    padding-top:10px;
+
+}
+
+#login-modal .splash-logo {
+    margin-top:0px;
+    margin-bottom: 20px;
+}
+
+#login-modal .modal-body .row {
+    padding:5px;
+}
+
+.login .authTitle {
+    text-align: center;
+    line-height: 300%;
+    padding: 0px;
+}
+
+/* Social buttons. This name is in order to prevent blocking by AdBlock. */
+.customButtons a {
+    color: white;
+    opacity:0.9;
+
+}
+.customButtons a:hover {
+    color: white;
+    opacity:1;
+    cursor: pointer;
+}
+.customButtons .btn-facebook {background: #3b5998;}
+.customButtons .btn-twitter {background: #00aced;}
+.customButtons .btn-google {background: #c32f10;}
+.customButtons .btn-custom {background: #005CB5;}
+
+.customButtons .btn-facebook:focus {color:white;}
+.customButtons .btn-twitter:focus {color:white;}
+.customButtons .btn-google:focus {color:white;}
+.customButtons .btn-custom:focus {color:white;}
+
+#login-modal .input-group {
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+#login-modal .modal-dialog {
+    margin:0px auto;
+}
+@media (min-width: 480px) {
+    #login-modal .modal-dialog {
+        margin-top:5%;
+    }
+    .modal-sm {
+        width: 300px;
+    }
+}
+
+.parent-pull-right {
+	overflow: hidden;
+}
+
+#login-modal .input-group button {
+    border-radius: 5px;
+    height:5%;
+    margin-bottom: 10px;
+}
+.loginOr {
+    position: relative;
+    font-size: 1.5em;
+    color: #aaa;
+/*    margin-top: 1em;*/
+    margin-bottom: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-top:10px;
+}
+.loginOr .hrOr {
+    background-color: #cdcdcd;
+    height: 1px;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.loginOr .spanOr {
+    position: absolute;
+    top: -.6em;
+    left: 50%;
+    display: block;
+    padding: 0 1em;
+    background-color: #fff;
+    white-space: nowrap;
+    transform: translateX(-50%);
+}
+
+.login .gist-loginForm .input-group.i {
+    width: 2em;
+}
+.login .gist-loginForm .help-block {
+    color: red;
+}
+
+.block-pull-right {
+    text-align: right;
+    display: block;
+}
+
+#gist-login-submit + span {
+    padding-left: 4px;
+}
+
+/* Dedicated Login Page */
+.login-page #login-modal {
+    display: block !important;
+}
+
+.button-wrapper {
+    margin-bottom: 5px;
+}
+
+.login-logo {
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-left: auto;
+    max-width: 120px;
+}

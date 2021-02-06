@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Users Utils when #getUser is called should return a user 1`] = `
+Object {
+  "__v": 0,
+  "_articleEditors": Array [],
+  "_articleViewers": Array [],
+  "_editors": Array [],
+  "_id": "5a42bf07d3bc0b20648290e0",
+  "_siteEditors": Array [],
+  "_siteViewers": Array [],
+  "_team": Array [
+    "5a42bf30d3bc0b20648290e1",
+  ],
+  "_viewers": Array [],
+  "activated": true,
+  "active": true,
+  "canCreateNewArticle": Array [],
+  "canCreateNewSite": Array [],
+  "canCreateNewViz": Array [],
+  "createdAt": 2017-12-26T21:28:39.946Z,
+  "defaultLoginTeam": "5a42bf30d3bc0b20648290e1",
+  "email": "user@schemadesign.com",
+  "firstName": "Maitland",
+  "hash": "dc449e96c930ca46653ec867c448719fab39dd85c4b91c1643d2faad140f24e711da13133e34ee4da0d3a5a2ca154edd4bfaeb9cf80cb9af57bce4d7ea1b94ce",
+  "lastName": "McConnell",
+  "lockUntil": 1,
+  "loginAttempts": 0,
+  "provider": "local",
+  "salt": "test",
+  "sampleImported": false,
+  "signedUp": false,
+  "updatedAt": 2017-12-26T21:36:31.420Z,
+}
+`;

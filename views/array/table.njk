@@ -1,0 +1,148 @@
+{% set currentView = "table" %}
+
+{% extends "../layout/array.njk" %}
+
+{% import "../partials/array-header.njk" as header %}
+
+{% import "../partials/dropdown.njk" as dropdown %}
+{% import "../partials/search.njk" as search %}
+{% import "../partials/filter.njk" as filter %}
+
+{% block headSuffix %}
+    <link rel="stylesheet" href="/vendors/jquery-ui-dist/jquery-ui.min.css">
+{% endblock %}
+
+{% block content %}
+
+    <section class="gist-section">
+
+        {{ header.default(arrayTitle, array_source_key, defaultView, team, isPreview, embedded, sharedPage, routePath_base, view_description, revision, defaultFilterObj, isEmbed, showInsightsExplorer, stories, subdomain, env, sharedPageId, lastUpdated) }}
+
+        {% include "../partials/modal/info.njk" %}
+        {% include "../partials/modal/detail-view-modal.njk" %}
+
+        <div class="gist-controls" style="display:none">
+            {% include "../partials/accessibility/skip-to-page-bottom.njk" %}
+        </div>
+
+        <div class="gist-content" longDesc="{{ metaDescription }}">
+
+            <div class="gist-container-fluid">
+                <div class="gist-loading">
+                    {% include "../partials/loading.njk" %}
+                </div>
+
+                <div class="gist-no-data" style="display:none">
+                    {% include "../partials/no-data.njk" %}
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="pagination-page-dropdown pull-left"></div>
+                        {% if viewOptions.viewControls %}
+                            <div class="pagination-limit-dropdown filter-count gist-pull-right"></div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="table"></div>
+
+                        {% include "../partials/accessibility/skip-to-page-top.njk" %}
+
+                        <nav class="table-pagination"></nav>
+                    </div>
+                </div><!-- .row -->
+            </div><!-- .gist-container-fluid -->
+
+            {% if isFilterActive %}
+                {{ filter.default(displayTitleOverrides,
+                    routePath_base | constructedRoutePath(null, {
+                        searchQ: searchQ,
+                        searchCol: searchCol,
+                        sortDirection: sortDirection,
+                        sortBy: sortBy,
+                        nested: nestedArray}),
+                    filterObj,
+                    truesByFilterValueByFilterColumnName_forWhichNotToOutputColumnNameInPill,
+                    sharedPage
+                ) }}
+            {% endif %}
+
+        </div><!-- .gist-content -->
+
+    </section>
+    {{ script | safe }}
+
+    {% include "../partials/analytics.njk" %}
+
+{% endblock %}
+
+{% block footer %}
+    {% include "../partials/footer.njk" %}
+{% endblock %}}
+
+{% block inlineScript %}
+    {{ super() }}
+
+    <script type="text/javascript" src="/vendors/jquery-ui-dist/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/vendors/validator/validator.min.js"></script>
+
+    <script type="text/javascript" src="/vendors/scrollmagic/scrollmagic/minified/ScrollMagic.min.js"></script>
+    <script type="text/javascript" src="/javascripts/build/main/scroll-header.js"></script>
+
+    <script type="text/javascript" src="/vendors/nunjucks/browser/nunjucks-slim.min.js"></script>
+    <script type="text/javascript" src="/javascripts/build/fe-templates.js"></script>
+
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/html-visualization.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/pagination.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/limit-dropdown.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/page-dropdown.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/pagination/nav.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/html-visualization/table/table.js"></script>
+    <script type="text/javascript"
+            src="/javascripts/build/visualizations/html-visualization/table/core-table.js"></script>
+
+    <script>
+        (function () {
+            window.arrays = window.arrays || {};
+            window.arrays.defaultInstanceId = '{{ viewInstanceId }}';
+            window.arrays.viewOptions = window.arrays.viewOptions || {};
+
+            window.arrays.viewOptions['{{ viewInstanceId }}'] = {
+                viewOptions: {{ viewOptions | dump | safe }},
+                routePath_base: '{{ routePath_base }}',
+                array_source_key: '{{ array_source_key }}',
+                filterObj: {{ filterObj | dump | safe }},
+                searchQ: '{{ searchQ }}',
+                searchCol: '{{ searchCol }}',
+                sortDirection: '{{ sortDirection }}',
+                sortBy: '{{ sortBy if sortBy else defaultSortByColumnName_humanReadable }}',
+                limit: '{{ limit }}',
+                sharedPage: {{ sharedPage }},
+                sharedPageId: '{{ sharedPageId }}',
+                preview: '{{ isPreview }}',
+                revision: '{{ revision }}',
+                nestedArray: {{ nestedArray | dump | safe }},
+                scrapedImageField: {{ scrapedImageField | dump | safe if scrapedImageField else false }},
+                datasetId: '{{ datasetId }}',
+                title: '{{ arrayTitle }}',
+                format: '{{ format }}',
+                subdomain: '{{ subdomain }}',
+                environment: '{{ env.NODE_ENV }}',
+                puppeteer: {{ (puppeteer and not puppeteerScreenshot) | default(false) }},
+                isEmbed: {{ isEmbed }},
+            };
+        })();
+    </script>
+
+    <script type="text/javascript" src="/javascripts/build/core-views/table/table-main.js"></script>
+    <script type="text/javascript" src="/javascripts/build/core-views/table/table-init.js"></script>
+
+{% endblock %}

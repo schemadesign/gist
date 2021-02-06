@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search and Filter Aggregation Helpers  should return a built filter with filter args passed 1`] = `
+Array [
+  Object {
+    "$match": Object {
+      "rowParams.Type 1": Object {
+        "$options": "i",
+        "$regex": "^Water$",
+      },
+    },
+  },
+  Object {
+    "$group": Object {
+      "_id": "$_id",
+      "pKey": Object {
+        "$first": "$pKey",
+      },
+      "rowParams": Object {
+        "$first": "$rowParams",
+      },
+      "srcDocPKey": Object {
+        "$first": "$srcDocPKey",
+      },
+    },
+  },
+]
+`;
+
+exports[`Search and Filter Aggregation Helpers  should return a built filter with query args passed 1`] = `
+Array [
+  Object {
+    "$match": Object {
+      "$or": Array [
+        Object {
+          "rowParams.Image URL": Object {
+            "$options": "i",
+            "$regex": "Bulbasaur",
+          },
+        },
+        Object {
+          "rowParams.Type 2": Object {
+            "$options": "i",
+            "$regex": "Bulbasaur",
+          },
+        },
+        Object {
+          "rowParams.Type 1": Object {
+            "$options": "i",
+            "$regex": "Bulbasaur",
+          },
+        },
+        Object {
+          "rowParams.Name": Object {
+            "$options": "i",
+            "$regex": "Bulbasaur",
+          },
+        },
+      ],
+    },
+  },
+]
+`;
+
+exports[`Search and Filter Aggregation Helpers  should throw an error with invalid filter params passed 1`] = `[Function]`;

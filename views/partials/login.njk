@@ -1,0 +1,113 @@
+{% block headSuffix %}
+    <title>Login - Gist</title>
+{% endblock %}
+
+<main class="no-js page-login" ng-app="signupModule">
+    <div class="container-fluid" style="margin-top: 30px">
+        <div class="row">
+
+            {% include "../partials/app-alert.njk" %}
+
+            {% if not env.HIDE_BUSINESS_LINKS %}
+            <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                <img src="/images/Gist-1-V-Color.svg" alt="Gist logo" class="login-logo img-responsive "/>
+            </div>
+            {% else %}
+            <h1 class="text-center col-xs-12 signup">Sign in</h1>
+            {% endif %}
+
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">{# col #}
+
+                <div class="tab-content modal-body">
+
+                    {% if flash.error %}
+                    {% set error = flash.error | first %}
+                    <div class="alert alert-danger">
+                    {% if error.message == "Activation pending." %}
+                        Your account has not been activated.
+                        <a class="alert-link pointer" href="{{ error.link }}">Resend the activaton email</a>.
+                    {% else %}
+                        {{ error.message }}
+                    {% endif %}
+                    </div>
+                    {% endif %}
+
+                    {% if flash.success %}
+                    {% set success = flash.success | first %}
+                    <div class="alert alert-success">
+                        <strong><i class="fa fa-check"></i> </strong> {{ success.message }}
+                    </div>
+                    {% endif %}
+
+                    <form id="gist-loginForm" autocomplete="off" method="POST">
+
+                        {% if env.AUTH_PROTOCOL === 'LDAP' %}
+                            <input type="text" class="form-control" name="username" placeholder="Username">
+                        {% else %}
+                            <input type="text" id="email-input" class="form-control" name="email" placeholder="Email Address">
+                        {% endif %}
+
+                        <span class="help-block"></span>
+
+                        {% set passwordPlaceholder = 'Network Password' if env.AUTH_PROTOCOL === 'LDAP' else 'Password' %}
+                        <input id="passwordInput" type="password" class="form-control" name="password" placeholder="{{ passwordPlaceholder }}">
+
+                        <span class="help-block"></span>
+
+                        {% if not env.HIDE_BUSINESS_LINKS %}
+                        <div>
+                            <a href="/reset" class="block-pull-right">Forgot Password?</a>
+                        </div>
+                        {% endif %}
+
+                        <div>
+                            <button data-l10n-id="log-in" id="gist-login-submit" class="btn pill-link pill-filled" type="submit">Log In</button>
+                        </div>
+                    </form>
+
+                    {% if not env.HIDE_BUSINESS_LINKS %}
+                    <div class="row loginOr">
+                        <div class="col-xs-12">
+                            <hr class="hrOr">
+                            <span class="spanOr">or log in with</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 button-wrapper">
+                            <a href="/auth/facebook" class="btn btn-block btn-inverse">
+                                <i class="fa fa-facebook"></i>&nbsp;&nbsp;Facebook
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 button-wrapper">
+                            <a href="/auth/twitter" class="btn btn-block btn-inverse">
+                                <i class="fa fa-twitter"></i>&nbsp;&nbsp;Twitter
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 button-wrapper">
+                            <a href="/auth/google" class="btn btn-block btn-inverse">
+                                <i class="fa fa-google-plus"></i>&nbsp;&nbsp;Google
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                </div>{# .tab-content.modal-body #}
+
+                {# loading animation #}
+                <div id="gist-page-loading">
+                    <div class="three-balls">
+                        <div class="ball ball1"></div>
+                        <div class="ball ball2"></div>
+                        <div class="ball ball3"></div>
+                    </div>
+                </div>
+
+            </div>{# col #}
+        </div>{# .row #}
+    </div>{# .container-fluid #}
+
+    {% if env.FE_LIVERELOAD == "true" %}
+    <script src="//localhost:35729/livereload.js"></script>
+    {% endif %}
+</main>

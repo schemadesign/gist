@@ -1,0 +1,75 @@
+@font-face {
+    font-family: 'CentraNo2';
+    src: url('/fonts/centrano2/CentraNo2-Thin.eot?#iefix');
+    src: url('/fonts/centrano2/CentraNo2-Thin.eot?#iefix') format('eot'),
+    url('/fonts/centrano2/CentraNo2-Thin.woff2') format('woff2'),
+    url('/fonts/centrano2/CentraNo2-Thin.woff') format('woff');
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: 'CentraNo2';
+    src: url('/fonts/centrano2/CentraNo2-ThinItalic.eot?#iefix');
+    src: url('/fonts/centrano2/CentraNo2-ThinItalic.eot?#iefix') format('eot'),
+    url('/fonts/centrano2/CentraNo2-ThinItalic.woff2') format('woff2'),
+    url('/fonts/centrano2/CentraNo2-ThinItalic.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'CentraNo2';
+    src: url('/fonts/centrano2/CentraNo2-Light.eot?#iefix');
+    src: url('/fonts/centrano2/CentraNo2-Light.eot?#iefix') format('eot'),
+    url('/fonts/centrano2/CentraNo2-Light.woff2') format('woff2'),
+    url('/fonts/centrano2/CentraNo2-Light.woff') format('woff');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'CentraNo2';
+    src: url('/fonts/centrano2/CentraNo2-LightItalic.eot?#iefix');
+    src: url('/fonts/centrano2/CentraNo2-LightItalic.eot?#iefix') format('eot'),
+    url('/fonts/centrano2/CentraNo2-LightItalic.woff2') format('woff2'),
+    url('/fonts/centrano2/CentraNo2-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'CentraNo2';
+    src: url('/fonts/centrano2/CentraNo2-Book.eot?#iefix');
+    src: url('/fonts/centrano2/CentraNo2-Book.eot?#iefix') format('eot'),
+    url('/fonts/centrano2/CentraNo2-Book.woff2') format('woff2'),
+    url('/fonts/centrano2/CentraNo2-Book.woff') format('woff');
+    font-weight: 400; /* Book */
+}
+
+@font-face {
+    font-family: 'CentraNo2';
+    src: url('/fonts/centrano2/CentraNo2-BookItalic.eot?#iefix');
+    src: url('/fonts/centrano2/CentraNo2-BookItalic.eot?#iefix') format('eot'),
+    url('/fonts/centrano2/CentraNo2-BookItalic.woff2') format('woff2'),
+    url('/fonts/centrano2/CentraNo2-BookItalic.woff') format('woff');
+    font-weight: 400; /* Book */
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'CentraNo2';
+    src: url('/fonts/centrano2/CentraNo2-Bold.eot?#iefix');
+    src: url('/fonts/centrano2/CentraNo2-Bold.eot?#iefix') format('eot'),
+    url('/fonts/centrano2/CentraNo2-Bold.woff2') format('woff2'),
+    url('/fonts/centrano2/CentraNo2-Bold.woff') format('woff');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'CentraNo2';
+    src: url('/fonts/centrano2/CentraNo2-BoldItalic.eot?#iefix');
+    src: url('/fonts/centrano2/CentraNo2-BoldItalic.eot?#iefix') format('eot'),
+    url('/fonts/centrano2/CentraNo2-BoldItalic.woff2') format('woff2'),
+    url('/fonts/centrano2/CentraNo2-BoldItalic.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
+}

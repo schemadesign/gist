@@ -1,0 +1,34 @@
+import $ from 'jquery';
+import 'angular';
+import 'angular-animate';
+import 'angular-cookies';
+import '@uirouter/angularjs';
+import '@uirouter/angularjs/release/stateEvents';
+import 'angular-minicolors';
+import 'angular-aria';
+import 'angular-resource';
+import 'angular-messages';
+import 'angular-material';
+import 'angular-ui-bootstrap';
+import 'angular-mocks';
+import 'angular-sanitize';
+import 'angular-file-upload';
+import 'angular-ui-sortable';
+import 'angular-cron-jobs';
+import 'angular-spinner';
+import 'angular-markdown-editor/src/angular-markdown-editor';
+import 'oclazyload';
+import 'angular-file-saver';
+import 'selection-model';
+import _ from 'lodash';
+import fitvids from 'fitvids';
+import Qs from 'qs';
+import '../../../public/javascripts/dashboard/app';
+import '../../../public/javascripts/dashboard/services/modal.service';
+
+
+global._ = _;
+global.fitvids = fitvids;
+global.Qs = Qs;
+global.$ = $;
+global.jQuery = $;

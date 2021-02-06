@@ -1,0 +1,43 @@
+<md-dialog md-no-ink aria-label="Add Team">
+    <aa-toolbar title="Add Team"></aa-toolbar>
+
+    <form name="vm.teamForm" ng-submit="createTeam()" autocomplete="off">
+        <md-dialog-content layout-padding>
+            <md-content>
+                <md-input-container class="md-block" flex="100" flex-gt-sm="65">
+                    <label>Team Name</label>
+                    <input required name="title" ng-model="newTeam.title" />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Subdomain</label>
+                    <input ng-model-options="{ updateOn: 'blur' }" ng-change="checkSubdomain()" required name="subdomain" ng-model="newTeam.subdomain" flex="65" />
+                    <span class="subdomain-append" flex="35">.{{ host }}</span>
+                    <div ng-messages="vm.teamForm.subdomain.$error">
+                        <p ng-message="unique">This subdomain name is not available.</p>
+                        <p ng-message="required">This field is required.</p>
+                        <p ng-message="pattern">Subdomain name must be lowercase and not contain any whitespace or special characters.</p>
+                    </div>
+                </md-input-container>
+            </md-content>
+
+
+            <md-input-container class="md-block" flex="100" flex-gt-sm="65">
+
+                <md-checkbox ng-model="newTeam.isEnterprise"
+                    aria-label="Is Enterprise">
+                    is Enterprise?
+                </md-checkbox>
+            </md-input-container>
+
+
+            <md-dialog-actions layout="row" layout-align="end center">
+                <md-button md-no-ink ng-disabled="vm.teamForm.$invalid || !vm.teamForm.$dirty" class="md-dashboard confirm" type="submit">
+                    <span class="btn-label">Create Team</span>
+                </md-button>
+                <md-button class="md-dashboard" ng-click="cancel()">
+                    Cancel
+                </md-button>
+            </md-dialog-actions>
+        </md-dialog-content>
+    </form>
+</md-dialog>

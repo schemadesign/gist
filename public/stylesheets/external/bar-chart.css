@@ -1,0 +1,6 @@
+@import url('../views/bar-chart.css');
+
+/*** Specific chart styling only for external loaded visualizations (Drupal). ***/
+.gist-bar-chart-container+.gist-legend .gist-legend-list-item {
+    margin-right: 4px;
+}

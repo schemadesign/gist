@@ -1,0 +1,30 @@
+<div ng-form="connectGoogleSheetCtrl.form" gist-isolate-form>
+    <h4>Connect to a Google Sheet</h4>
+    <p>
+        First, make your Google Sheet public. To do this, open your Sheet and click "Share" in the upper right. Then,
+        in the popup, select "Advanced". On the next screen, click "Change..." next to the current privacy setting.
+        Finally, select "Anyone with the link" on the next screen.
+    </p>
+    <p>
+        Copy the share link for your Google Sheet in the Sheet's Sharing Settings, and paste the link below:
+    </p>
+
+    <md-input-container class="md-block" md-no-float>
+        <input type="url"
+            name="endpoint"
+            ng-model="connectGoogleSheetCtrl.endpoint"
+            aria-label="Google Sheet URL" />
+        <div ng-messages="connectGoogleSheetCtrl.form.endpoint.$error">
+            <div class="error-message" ng-message="required">This field is required</div>
+            <div class="error-message" ng-message="url">This is not a valid URL</div>
+        </div>
+    </md-input-container>
+
+    <md-button
+        class="md-dashboard confirm"
+        ng-click="connectGoogleSheetCtrl.connect()"
+        ng-disabled="connectGoogleSheetCtrl.form.$invalid"
+        id="connectButton">
+        <span class="btn-label">Connect</span>
+    </md-button>
+</div>

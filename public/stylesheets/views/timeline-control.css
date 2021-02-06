@@ -1,0 +1,43 @@
+.timeline-control .slider {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+    cursor: 'pointer';
+}
+
+.timeline-control .track,
+.timeline-control .track-overlay {
+    stroke-linecap: round;
+}
+
+.timeline-control .track {
+    stroke: #c9c9c9;
+    stroke-width: 1px;
+}
+
+.timeline-control .track-overlay {
+    pointer-events: stroke;
+    stroke-width: 50px;
+    stroke: transparent;
+    cursor: crosshair;
+}
+
+.timeline-control .gist-handle {
+    fill: #fff;
+    stroke: #000;
+    stroke-opacity: 0.5;
+    stroke-width: 1.25px;
+}
+
+.play-control {
+    fill: #000;
+    stroke: none;
+}
+
+.timeline-control .domain {
+    display: none;
+}

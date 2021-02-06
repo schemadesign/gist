@@ -1,0 +1,48 @@
+<div class="dataset-view-tile"
+     ng-class="arraysAppDatasetViewTileCtrl.isVisible ? '' : 'dataset-view-tile-not-visible'">
+
+    <div class="dataset-view-tile-thumbnail-wrapper" ng-click="arraysAppDatasetViewTileCtrl.tileClickHandler()">
+        <div class="dataset-view-tile-thumbnail" ng-style="{{ arraysAppDatasetViewTileCtrl.backgroundStyle }}"></div>
+    </div>
+
+    <div class="dataset-view-tile-footer" layout="row" layout-align="space-between center">
+        <span layout="row" layout-align="space-between center" flex
+              ng-click="arraysAppDatasetViewTileCtrl.tileClickHandler()">
+
+            <span class="dataset-view-tile-name">
+                {{ arraysAppDatasetViewTileCtrl.viewDisplayName }}
+            </span>
+
+            <i class="fa fa-pencil" aria-hidden="true">
+                <md-tooltip md-direction="top">Edit</md-tooltip>
+            </i>
+        </span>
+        <span ng-if="arraysAppDatasetViewTileCtrl.showOptionsMenu">
+            <md-button
+                class="dataset-set-default-view" 
+                aria-hidden="true"   
+                ng-disabled="arraysAppDatasetViewTileCtrl.isDefaultView || !arraysAppDatasetViewTileCtrl.isVisible" 
+                ng-click="arraysAppDatasetViewTileCtrl.setDefault()"
+                aria-label="Set {{ arraysAppDatasetViewTileCtrl.viewDisplayName }} as default view" 
+                md-no-ink
+                ng-class="{ active: arraysAppDatasetViewTileCtrl.isDefaultView }" 
+            >
+                <i class="fa fa-home"></i>
+            </md-button>
+            <md-tooltip md-direction="top">Set Default Visualisation</md-tooltip>
+        </span>
+        <span ng-if="arraysAppDatasetViewTileCtrl.showOptionsMenu">
+            <md-switch
+                ng-model="arraysAppDatasetViewTileCtrl.isVisible"
+                ng-disabled="arraysAppDatasetViewTileCtrl.isDefaultView"
+                ng-change="arraysAppDatasetViewTileCtrl.visibilityChange()"
+                aria-label="{{ arraysAppDatasetViewTileCtrl.viewDisplayName }} visibility" 
+                md-no-ink
+        ></md-switch>
+            <md-tooltip md-direction="top">
+                Turn 
+                <span ng-if="!arraysAppDatasetViewTileCtrl.isVisible">On</span>
+                <span ng-if="arraysAppDatasetViewTileCtrl.isVisible">Off</span></md-tooltip>
+        </span>
+    </div>
+</div>

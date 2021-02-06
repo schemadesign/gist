@@ -1,0 +1,29 @@
+<h2 ng-if="!resent">Account Created</h2>
+
+<div ng-if="!isInvite && !resent">
+	<p>
+        We have sent you an email to activate your account.
+        The link will expire in 48 hours.
+	</p>
+	<p>
+        If you haven't received the email in 10 minutes, you may
+        <a class="pointer" href="{{resendActivationLink}}" target="_self">resend it</a>.
+	</p>
+</div>
+
+<div ng-if="isInvite && !resent">
+	<p>
+        You may <a class="pointer" ng-click="login()">log in</a> to your new account.
+    </p>
+</div>
+
+<h2 ng-if="resent">Email Resent</h2>
+<div ng-if="resent">
+    <p>
+        We have sent you a new activation link. 
+        The link will expire in 48 hours.
+        
+        If you haven't received the email in 10 minutes, you may
+        <a class="pointer" href="{{ resendActivationLink }}" target="_self">resend it</a>.
+    </p>
+</div>

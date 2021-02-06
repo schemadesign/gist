@@ -1,0 +1,7 @@
+#!/bin/bash
+
+CONFIG_DIR="$PWD/config/env"
+export NODE_ENV=development
+echo $CONFIG_DIR
+
+npm run-script monitor

@@ -1,0 +1,194 @@
+<section id="gist-view-{{ viewInstanceId }}" class="gist-section gist-legend-opened">
+    {% if header %}
+        {{ header.default(arrayTitle, array_source_key, defaultView, team, isPreview, embedded, sharedPage, routePath_base, view_description, revision, defaultFilterObj, isEmbed, showInsightsExplorer, stories, subdomain, env, sharedPageId, lastUpdated) }}
+        {% include "../../partials/modal/info.njk" %}
+    {% endif %}
+
+    <div class="gist-content gist-chart view-absolute-bottom" longDesc="{{metaDescription}}">
+
+        <div class="gist-chart-container gist-pie-chart-container">
+            {% if dropdown %}
+                <div class="gist-container-fluid">
+                    <div class="gist-block">
+                        <div class="gist-stick"></div>
+                        <div class="gist-controls gist-sort-bar clearfix">
+                            {% if viewOptions.viewControls %}
+                                <nav class="sort-bar-left pull-left" role="navigation">
+                                    {{
+                                    dropdown.sortbar
+                                        (
+                                            "Chart By",
+                                            'groupBy',
+                                            groupBy if groupBy else defaultGroupByColumnName_humanReadable,
+                                            colNames_orderedForGroupByDropdown,
+                                            routePath_base | constructedRoutePath(filterObj, {
+                                                searchCol: searchCol,
+                                                searchQ: searchQ,
+                                                aggregateBy: aggregateBy,
+                                                segmentBy: segmentBy.querySegmentBy,
+                                                groupBy: ''
+                                            })
+                                        )
+                                    }}
+
+                                    {{
+                                    dropdown.sortbar(
+                                        'Aggregate By',
+                                        'aggregateBy',
+                                        aggregateBy if aggregateBy else defaultAggregateByColumnName_humanReadable,
+                                        colNames_orderedForAggregateByDropdown,
+                                        routePath_base | constructedRoutePath(filterObj, {
+                                            searchCol: searchCol,
+                                            searchQ: searchQ,
+                                            groupBy: groupBy,
+                                            segmentBy: segmentBy.querySegmentBy,
+                                            aggregateBy: ''
+                                        })
+                                    )
+                                    }}
+
+                                    {% if segmentBy.chartByIsDate %}
+                                        {{ dropdown.sortbar(
+                                            'Segment By',
+                                            'segmentBy',
+                                            segmentBy.segmentBy,
+                                            segmentBy.segmentByOptions,
+                                            routePath_base | constructedRoutePath(filterObj,
+                                                {
+                                                    searchCol: searchCol,
+                                                    searchQ: searchQ,
+                                                    groupBy: groupBy,
+                                                    aggregateBy: aggregateBy,
+                                                    segmentBy: ''
+                                                })
+                                        ) }}
+                                    {% endif %}
+                                </nav>
+                            {% endif %}
+                            <div class="sort-bar-right gist-pull-right">
+                                {% include "../../partials/accessibility/toggle-pattern.njk" %}
+
+                                {% if viewOptions.search %}
+                                    {{
+                                    search.default(
+                                        routePath_base,
+                                        searchCol if searchCol else 'All Fields',
+                                        cols_orderedForSearchByDropdown,
+                                        searchQ if searchQ else "",
+                                        null,
+                                        null,
+                                        revision,
+                                        filterObj
+                                    )
+                                    }}
+                                {% endif %}
+
+                                {% include "../../partials/legend-toggle.njk" %}
+                            </div>
+                        </div>
+                    </div><!-- .gist-row -->
+                </div><!-- .gist-container-fluid -->
+            {% endif %}
+
+            {% include "../../partials/accessibility/skip-to-legend.njk" %}
+
+            {% if isFilterActive and filter %}
+                {{
+                filter.default(displayTitleOverrides,
+                    routePath_base | constructedRoutePath(null, {
+                        searchCol: searchCol,
+                        searchQ: searchQ,
+                        groupBy: groupBy,
+                        aggregateBy: aggregateBy,
+                        segmentBy: segmentBy.querySegmentBy
+                    }),
+                    filterObj,
+                    truesByFilterValueByFilterColumnName_forWhichNotToOutputColumnNameInPill,
+                    sharedPage,
+                    false,
+                    'filter-bar-fixed-bottom'
+                )
+                }}
+            {% endif %}
+
+            <div class="gist-container-fluid">
+                <div class="gist-loading">
+                    {% include "../../partials/loading.njk" %}
+                </div>
+
+                <div class="gist-no-data" style="display:none">
+                    {% include "../../partials/no-data.njk" %}
+                </div>
+
+                <div class="gist-row">
+                    <div class="gist-block">
+                        <div width="1000" height="1000" class="gist-pie-chart gist-pie-chart-main"></div>
+                    </div>
+                </div><!-- .gist-row -->
+            </div><!-- .gist-container-fluid -->
+
+        </div><!-- .gist-chart-container -->
+
+        {% if not dropdown %}
+            {% include "../../partials/legend-open-button.njk" %}
+        {% endif %}
+
+        <nav class="gist-legend" role="navigation">
+            <button type="button" class="gist-close gist-legend-close" aria-label="Close">
+                <span class="gist-icon-close-big" aria-hidden="true"></span>
+            </button>
+            <h3 class="gist-legend-title">{{ groupBy or defaultGroupByColumnName_humanReadable }}</h3>
+
+            {% include "../../partials/accessibility/skip-back-to-top.njk" %}
+
+            <ul class="gist-legend-list gist-legend-list-{{ viewInstanceId }}"></ul>
+        </nav>
+    </div><!-- .gist-content -->
+</section>
+
+<script type="text/javascript">
+    (function () {
+        var routePath_withoutFilter = "{{ routePath_base | constructedRoutePath(null, {
+                searchCol: searchCol,
+                searchQ: searchQ,
+                groupBy: groupBy,
+                aggregateBy: aggregateBy,
+                segmentBy: segmentBy.querySegmentBy
+        }) | safe }}";
+        var groupBy = '{{ groupBy if groupBy else defaultGroupByColumnName_humanReadable }}';
+        var aggregateBy = '{{ aggregateBy if aggregateBy else defaultAggregateByColumnName_humanReadable }}';
+        var accessibility = {{ sortbarOptions.accessibility or false}};
+        var segmentBy = '{{ segmentBy.querySegmentBy }}';
+
+        window.arrays = window.arrays || {};
+        window.arrays.defaultInstanceId = '{{ viewInstanceId }}';
+        window.arrays.viewOptions = window.arrays.viewOptions || {};
+
+        // options for PieChart initialization
+        window.arrays.viewOptions['{{ viewInstanceId }}'] = {
+            groupBy: groupBy,
+            aggregateBy: aggregateBy,
+            segmentBy: segmentBy,
+            viewOptions: {{ viewOptions | dump | safe }},
+            routePath_withoutFilter: routePath_withoutFilter,
+            filterObj: {{ filterObj | dump | safe }},
+            array_source_key: '{{array_source_key}}',
+            sharedPage: {{ sharedPage }},
+            sharedPageId: '{{sharedPageId}}',
+            accessibility: accessibility,
+            datasetId: '{{datasetId}}',
+            title: '{{arrayTitle}}',
+            format: '{{format}}',
+            downloadable: '{{openDownload}}',
+            clickThroughView: '{{clickThroughView}}',
+            viewSelector: '#gist-view-{{ viewInstanceId }}',
+            subdomain: '{{ subdomain }}',
+            cdnAddress: '{{ cdnAddress }}',
+            environment: '{{ env.NODE_ENV }}',
+            isExternalAccess: {{ isExternalAccess }},
+            isEmbed: {{ isEmbed }},
+            showPercentage: {{ showPercentage }},
+            isPieSet: false
+        };
+    })();
+</script>

@@ -1,0 +1,66 @@
+{% import "../partials/pagination.njk" as pagination %}
+
+<script>
+    var insights = {{ insights | arrayPick('sharedPages') | dump | safe }};
+</script>
+
+{% if articles | length > 0 or insights | length > 0 %}
+    <ul class="nav nav-tabs" id="vsTabs">
+        <li class="{{ viewBy.visualizations }}"><a href="#visualizations" data-toggle="tab" onclick="history.replaceState({}, null, 'visualizations');">Visualizations</a></li>
+        {% if insights | length > 0 %}
+            <li class="{{ viewBy.insights }}"><a href="#insights" data-toggle="tab" onclick="history.replaceState({}, null, 'insights');">Insights</a></li>
+        {% endif %}
+        {% if articles | length > 0 %}
+            <li class="{{ viewBy.articles }}"><a href="#articles" data-toggle="tab" onclick="history.replaceState({}, null, 'articles');">Articles</a></li>
+        {% endif %}
+    </ul>
+{% endif %}
+
+<script>
+    var filterObj = {{ filterObj | dump | safe }};
+</script>
+
+<div class="tab-content">
+    <div id="visualizations" class="tab-pane fade in {{ viewBy.visualizations }}">
+        <div class='explore-tile-container clearfix{{ ' explore-tile-container-centered' if visualizations | length < 3 }}'>
+            {% if visualizations | length < 1 %}
+                <h3>No Visualizations Available</h3>
+            {% else %}
+                {% for source in visualizations %}
+                    {% include "../partials/explore_tile.njk" %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% if totalVizPages > 1 %}
+            <nav class="gallery-pagination">
+                {{ pagination.default("/visualizations", totalVizPages, currentVizPage) }}
+            </nav>
+        {% endif %}
+    </div>
+
+    <div id="insights" class="tab-pane fade in {{ viewBy.insights }}">
+        {{
+        filter.default(displayTitleOverrides, routePath_base,
+            filterObj,
+            truesByFilterValueByFilterColumnName_forWhichNotToOutputColumnNameInPill
+        )
+        }}
+
+        {% for story in insights %}
+            {% include "../partials/story_tile.njk" %}
+        {% endfor %}
+        {% if totalInsightsPages > 1 %}
+        <nav class="gallery-pagination">
+            {{ pagination.default("/insights", totalInsightsPages, currentInsightsPage) }}
+        </nav>
+        {% endif %}
+    </div>
+
+    <div id="articles" class="tab-pane fade in {{ viewBy.articles }}">
+        <div class='explore-tile-container clearfix{{ ' explore-tile-container-centered' if articles | length < 3 }}'>
+            {% for article in articles %}
+                {% include "../partials/article_tile.njk" %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{ title }} {{ message }}</title>
+    <link rel="stylesheet" href="/stylesheets/base/variables.css">
+    <link rel="stylesheet" href="/stylesheets/base/typography/base.css">
+    <style>
+        body {
+            margin: 3em 2em;
+        }
+        @media (min-width: 480px) {
+            body {
+                margin: 6em 4em;
+            }
+        }
+        @media (min-width: 768px) {
+            body {
+                margin: 12em 8em;
+            }
+        }
+
+        h1 {
+            font-size: 3em;
+        }
+        h2 {
+            font-size: 2em;
+        }
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>{{ title }}</h1>
+
+    <h2>{{ message }}</h2>
+
+    <p>{{ err }}</p>
+
+    {% if not hideLinks %}
+    <a href="/">Go back to showcase</a>
+    {% endif %}
+
+    {% include "partials/analytics.njk" %}
+</body>
+</html>

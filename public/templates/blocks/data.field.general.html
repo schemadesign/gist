@@ -1,0 +1,129 @@
+<md-dialog aria-label="Format Field: {{ dataset.fe_displayTitleOverrides[fieldName] ? dataset.fe_displayTitleOverrides[fieldName] + ' (' + fieldName + ')' : fieldName || 'New field' }}" class="field-dialog" md-no-ink>
+    <aa-toolbar title="Format Field: {{ dataset.fe_displayTitleOverrides[fieldName] ? dataset.fe_displayTitleOverrides[fieldName] + ' (' + fieldName + ')' : fieldName || 'New field' }}"></aa-toolbar>
+    <md-dialog-content>
+        <form name="dialog.form">
+            <md-content layout-padding>
+                <div>
+                    <md-input-container class="md-block" ng-show="customFieldIndex !== undefined">
+                        <label>Field Name</label>
+                        <input type="text" required
+                               ng-model="fieldName" name="fieldName"
+                               ng-change="verifyUniqueFieldName(fieldName)" ng-model-options="{ updateOn: 'blur' }">
+                        <div ng-messages="dialog.form.fieldName.$error">
+                            <div ng-message="required">This is required.</div>
+                            <div ng-message="unique">Must be unique.</div>
+                        </div>
+                    </md-input-container>
+
+                    <p>You can change how this field name appears in your visualization by entering an optional display name below.</p>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Display Name <span class="optional">(optional)</span></label>
+                        <input type="text" name="titleOverride"
+                               ng-model="dataset.fe_displayTitleOverrides[fieldName]">
+                    </md-input-container>
+                </div>
+                <div ng-if="customFieldIndex === undefined || user.role === 'superAdmin'">
+                    <p>Data types are handled differently in your selected views. Please choose the most relevant data type below.</p>
+                    <div layout="row">
+                        <md-input-container class="md-block" flex="45">
+                            <label>Data Type</label>
+                            <md-select
+                                ng-if="!custom"
+                                name="dataType"
+                                ng-model="thisFieldCoercion.operation"
+                                aria-label="Field Type - {{fieldName}}"
+                            >
+                                <md-option ng-repeat="coercion in ::updatedDataTypes track by coercion.data_type" ng-value="coercion.operation">
+                                    {{coercion.data_type}}
+                                </md-option>
+                            </md-select>
+                            <input type="text" value="Array" readonly="readonly" ng-if="custom && customFieldIndex != undefined">
+                            <input type="text" value="Custom" readonly="readonly" ng-if="custom && customFieldIndex == undefined">
+                            <div class="md-errors-spacer"></div>
+                        </md-input-container>
+                        <span flex></span>
+                        <div ng-if="!custom" flex="50">
+                            <label>Data Sample <span class="optional">(first item)</span></label>
+                            <p class="sample-value">{{ firstRecord | formatField:thisFieldCoercion | limitTo: maxSampleDataLength }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="customFieldIndex != undefined && user.role === 'superAdmin'">
+                    <md-input-container class="md-block">
+                        <label>Fields To Merge</label>
+                        <md-select
+                            required
+                            name="fields"
+                            ng-model="customField.fieldsToMergeIntoArray"
+                            multiple
+                            aria-label="fieldToMerge"
+                        >
+                            <md-option ng-repeat="column in dataset.columns track by $index" ng-value="column.name">
+                                {{column.name}}
+                            </md-option>
+                            <md-option ng-repeat="customField in dataset.customFieldsToProcess track by $index" ng-value="customField.fieldName">
+                                {{customField.fieldName}}
+                            </md-option>
+                        </md-select>
+                        <div ng-messages="dialog.form.fields.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div ng-if="customFieldIndex != undefined">
+                    <md-input-container class="md-block">
+                        <label>Delimiter</label>
+                        <md-chips
+                            ng-model="customField.delimiterOnFields"
+                            name="delimiters"
+                            md-enable-chip-edit="true"
+                            placeholder="Enter a delimiter"
+                            secondary-placeholder="Add delimiter"
+                        >
+                        </md-chips>
+                    </md-input-container>
+                </div>
+
+                <div ng-if="!custom && thisFieldCoercion.operation === 'ToDate'">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Data Format</label>
+                        <md-select ng-model="thisFieldCoercion.input_format" name="dataType_format">
+                            <md-option ng-value="dateFormat" ng-repeat="dateFormat in dialog.KNOWN_DATE_FORMATS track by $index">{{ dateFormat }}</md-option>
+                        </md-select>
+                        <div class="md-select-hint" ng-if="thisFieldCoercion.input_format">{{thisFieldCoercion.input_format | formatDateNow}}</div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Display Format</label>
+                        <md-select ng-model="thisFieldCoercion.output_format" name="dataType_outputFormat">
+                            <md-option ng-value="dateFormat" ng-repeat="dateFormat in dialog.KNOWN_DATE_FORMATS track by $index">{{ dateFormat }}</md-option>
+                        </md-select>
+                        <div class="md-select-hint" ng-if="thisFieldCoercion.output_format">{{thisFieldCoercion.output_format | formatDateNow}}</div>
+                    </md-input-container>
+                </div>
+
+                <div ng-if="!custom">
+                    <md-button class="md-dashboard confirm" ng-click="newDelimitedField()">
+                        <span class="btn-label">Create Delimited Field</span>
+                    </md-button>
+                </div>
+            </md-content>
+
+            <md-dialog-actions layout="row" layout-align="end center">
+                <md-button class="md-dashboard warn" ng-click="delete()" ng-if="customFieldIndex != undefined">
+                    <span class="btn-label">Delete field</span>
+                </md-button>
+                <md-button class="md-dashboard warn" ng-click="removeCreatedField()" ng-if="originalColumn.createdField">
+                    <span class="btn-label">Delete field</span>
+                </md-button>
+                <md-button class="md-dashboard cancel" ng-click="cancel()">
+                    <span class="btn-label">Cancel</span>
+                </md-button>
+                <md-button class="md-dashboard confirm" ng-click="save()" ng-disabled="dialog.form.$invalid">
+                    <span class="btn-label">Save</span>
+                </md-button>
+            </md-dialog-actions>
+        </form>
+    </md-dialog-content>
+</md-dialog>

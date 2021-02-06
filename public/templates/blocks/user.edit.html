@@ -1,0 +1,60 @@
+<md-dialog md-no-ink aria-label="Edit User" class="user-dialog">
+    <aa-toolbar cancel="userDialogCtrl.cancel()" title="{{ userDialogCtrl.selectedUser._id ? 'Manage User Permissions' : 'Invite User' }}"></aa-toolbar>
+
+    <form name="userDialogCtrl.vm.userForm" autocomplete="off">
+        <md-dialog-content layout-padding>
+            <md-content layout="column" md-autofocus>
+                <div ng-if="!userDialogCtrl.selectedUser._id">
+                    <p>
+                        Invite a new user to Team:<br />
+                        <strong>{{team.title}}</strong><br /><br />
+                        Enter a person’s email address below to invite them to your team.
+                    </p>
+                    <md-input-container class="md-block" flex="100" flex-gt-xs="65">
+                        <label>Email Address</label>
+                        <input type="email" autocomplete="email" placeholder="Email Address" aria-label="email" required name="email" ng-model="userDialogCtrl.selectedUser.email" ng-model-options="{ debounce: 300 }">
+                        <div ng-messages="userDialogCtrl.vm.userForm.email.$error">
+                            <div ng-message="unique">This user has already been invited.</div>
+                            <div ng-message="email">Your email is not valid.</div>
+                        </div>
+                    </md-input-container>
+                    <label>Manage permissions for this user:</label>
+                </div>
+
+                <div ng-if="userDialogCtrl.selectedUser._id">
+                    <p>
+                        Manage permissions for:<br /><br />
+                        <strong>{{userDialogCtrl.selectedUser.firstName}} {{userDialogCtrl.selectedUser.lastName}}</strong><br />
+                        {{userDialogCtrl.selectedUser.email}}
+                        <div ng-if="team.admin.includes(userDialogCtrl.selectedUser._id)">Team Admin</div>
+                    </p>
+                </div>
+
+                <ng-include
+                    ng-if="!team.admin.includes(userDialogCtrl.selectedUser._id)"
+                    src="'templates/blocks/user.breadcrumb.html'"
+                ></ng-include>
+            </md-content>
+
+            <md-dialog-actions layout="row" layout-align="space-between center" style="border: 0">
+                <a class="warn" ng-if="userDialogCtrl.selectedUser._id && !team.admin.includes(userDialogCtrl.selectedUser._id) && userDialogCtrl.selectedUser.activated" ng-click="userDialogCtrl.makeTeamAdmin($event, userDialogCtrl.selectedUser)" href="#">Make Team Admin</a>
+                <a class="warn" ng-if="userDialogCtrl.selectedUser._id && team.admin.includes(userDialogCtrl.selectedUser._id) && userDialogCtrl.selectedUser.activated" ng-click="userDialogCtrl.revokeTeamAdmin($event, userDialogCtrl.selectedUser)" href="#">Revoke Team Admin</a>
+                <span flex><!-- force end align on invite--></span>
+
+                <div>
+                    <md-button class="md-dashboard" ng-click="userDialogCtrl.cancel()">
+                        <span class="btn-label">Cancel</span>
+                    </md-button>
+
+                    <md-button ng-disabled="userDialogCtrl.vm.userForm['email'].$invalid || !userDialogCtrl.vm.userForm.$dirty" ng-click="userDialogCtrl.inviteUser($event)" class="md-dashboard confirm" type="button" ng-hide="userDialogCtrl.selectedUser._id || userDialogCtrl.selectedUser._team.indexOf(team._id) >= 0">
+                        <span class="btn-label">Invite User</span>
+                    </md-button>
+                    <!-- duplicate found ng-if="userDialogCtrl.selectedUser._id" -->
+                    <md-button ng-if="!(userDialogCtrl.user.invited[person._id] || userDialogCtrl.user.invited[userDialogCtrl.selectedUser._id])" ng-hide="!userDialogCtrl.selectedUser._id" ng-disabled="!userDialogCtrl.vm.userForm.$valid || !userDialogCtrl.vm.userForm.$dirty" ng-click="userDialogCtrl.saveUser()" class="md-dashboard confirm" type="button">
+                        <span class="btn-label">Save Settings</span>
+                    </md-button>
+                </div>
+            </md-dialog-actions>
+        </md-dialog-content>
+    </form>
+</md-dialog>

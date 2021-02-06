@@ -1,0 +1,253 @@
+<style scoped>
+
+    :root {
+        --brand-color-accent: {{ brandColor.accent }};
+    }
+
+    .color-brand,
+    td.color-brand,
+    .navbar .color-brand,
+    a.color-brand:hover,
+    a.color-brand:focus,
+    a.color-brand:active,
+    .gist-filter-menu-toggle .color-brand,
+    .filter-menu-item-active > a .filter-menu-toggle-check,
+    #page .filter-menu-item-active > a,
+    .navbar-nav .navbar-visualization-menu.open .dropdown-toggle .svg-dropdown-toggle-icon {
+        color: {{  brandColor.accent }};
+    }
+
+    .color-brand-hover:hover,
+    .color-brand-hover:focus,
+    .color-brand-hover:active,
+    #masthead .color-brand-hover:hover,
+    #masthead .color-brand-hover:focus,
+    #masthead .color-brand-hover:active,
+    .gist-title a:hover,
+    .gist-title a:focus,
+    .gist-title a:active,
+    .embedded-team-title a:hover,
+    .embedded-team-title a:focus,
+    .embedded-team-title a:active,
+    .navbar-nav .navbar-visualization-menu .dropdown-toggle:hover .dropdown-toggle-icon,
+    .navbar-nav .navbar-visualization-menu .dropdown-toggle:focus .dropdown-toggle-icon,
+    .navbar-nav .navbar-visualization-menu .dropdown-toggle:active .dropdown-toggle-icon,
+    .navbar-nav .navbar-view-item.active span,
+    .navbar-nav .navbar-view-select.open .dropdown-toggle span,
+    .gist-controls-pinned .navbar-nav .navbar-view-item.active span,
+    .navbar-nav .open .gist-filter-menu-toggle .gist-icon-filter,
+    a.field-filter, .field-filter a, .field-filter a:hover,
+    .field-filter a:focus, .field-filter a:active,
+    .navbar-nav .navbar-main-menu.open .dropdown-toggle .gist-icon-menu,
+    .view-embedded a.embedded-new-tab:hover,
+    a#leftNav.w-burger-menu.sidebar-toggle:hover {
+        color: {{ brandColor.accent }};
+    }
+
+    a.array-meta-about.color-brand.source-underline:before,
+    a.color-brand.source-underline:before,
+    .navbar-nav .navbar-main-menu.open .dropdown-toggle .user-initial,
+    .navbar-brand-team-title-underline:before,
+    .user-initial-nav:hover .user-initial,
+    .user-initial-nav:focus .user-initial,
+    .user-initial-nav:active .user-initial,
+    #page .filter-menu-subgroup-item > a.gist-filter-menu-range-slider-button:hover {
+        background-color: {{ brandColor.accent }};
+    }
+
+    .view-embedded .gist-dropdown.open .dropdown-toggle .gist-icon-menu,
+    .view-embedded .navbar-nav .open .gist-filter-menu-toggle span,
+    .view-embedded .navbar-default .navbar-nav > .active > a,
+    .view-embedded .navbar-default .navbar-nav > .active > a:hover,
+    .view-embedded .navbar-default .navbar-nav > .active > a:focus,
+    .view-embedded .navbar-nav .gist-dropdown.open .dropdown-toggle span,
+    .view-embedded .navbar-nav .navbar-view-item.active span,
+    .gist-controls-pinned .navbar-nav .navbar-view-item.active span,
+    .gist-content .legend button.gist-legend-close:focus,
+    .gist-content .legend button.gist-legend-close:hover,
+    .filter-bar .container-fluid .gist-filter-tag a:focus,
+    .filter-bar .container-fluid .gist-filter-tag a:focus {
+        color: {{ brandColor.accent }}
+    }
+
+    .close:hover, .close:focus,
+    .gist-icon-sort-ascending .sort-direction-icon:hover,
+    .sort-control > a:hover, .sort-control > a:focus,
+    .gist-sort-direction > span:hover, .gist-sort-direction > span:focus {
+        color: {{ brandColor.select }};
+        fill: {{ brandColor.select }};
+        opacity: 1;
+    }
+
+    .sort-control.open .dropdown-toggle-label span.label,
+    .sort-control .dropdown-toggle-label span.label,
+    span.dropdown-tail-text,
+    .filter-count,
+
+    .gist .dropdown-menu > li > a {
+        color: {{ brandColor.label  }};
+    }
+
+    .gist-legend-close,
+    .gist-legend-title,
+    .gist-legend-list-link {
+        color: {{ brandColor.label }};
+    }
+
+    .scatterplot circle.bubble {
+        fill: {{ brandColor.accent }};
+    }
+
+    .sort-control .dropdown-toggle-empty .sort-criteria,
+    .sort-control .dropdown-toggle-empty:hover .sort-criteria,
+    /* .gist-controls tag added to maintain brandcolor while dropdown open but not hovered */
+    .gist-controls .sort-control .btn.gist-dropdown-toggle-button-has-caret:hover .sort-criteria,
+    .gist-controls .btn.gist-dropdown-toggle-button-has-caret:hover.ui-label::before,
+    .gist-controls .sort-control > a, .gist-sort-direction > span,
+    .sort-control #search-by.dropdown-toggle,
+    .sort-control #search-by.dropdown-toggle .gist-icon-search,
+    .gist-legend-open,
+    .gist-legend-open:hover {
+        color: {{ brandColor.select }};
+    }
+
+
+    .sort-control > a,
+    .gist-sort-direction > span,
+    .axis-label {
+        fill: {{ brandColor.select }};
+    }
+
+    .axis .tick text {
+        fill: {{ brandColor.label  }};
+    }
+
+    .gist-controls .sort-control .btn.gist-dropdown-toggle-button-has-caret:hover,
+    .gist-controls .sort-control .btn.gist-dropdown-toggle-button-has-caret:focus,
+    .gist-controls .open .btn.gist-dropdown-toggle-button-has-caret,
+    .gist-controls .sort-control.gist-search-control:hover,
+    .gist-controls .sort-control.gist-search-control:focus,
+    .gist-controls .sort-control.gist-search-control:focus-within,
+    .gist-controls .gist-sort-direction:hover,
+    .gist-controls .gist-sort-direction:focus,
+    .gist-controls .gist-search-toggle:hover,
+    .gist-controls .gist-search-toggle:focus,
+    .gist-controls .gist-legend-open:hover,
+    .gist-controls .a:hover {
+        border: 2px solid {{brandColor.accent}};
+    }
+
+    /* Fixes search bar button outline on child click */
+    .gist-controls .gist-search-control .open .btn.gist-dropdown-toggle-button-has-caret {
+        border: solid 2px transparent;
+    }
+
+    @media (max-width: 767px) {
+        .gist-controls .gist-mobile-search-popover .sort-control,
+        .gist-controls .gist-mobile-search-popover.gist-search-open #search-by.dropdown-toggle:hover,
+        .gist-controls .gist-mobile-search-popover.gist-search-open #search-by.dropdown-toggle:focus {
+            border: solid 2px {{brandColor.accent}};
+        }
+    }
+
+    .gist-legend-list-link:hover,
+    .gist-legend-list-link:focus {
+        background: #F2F2F2;
+    }
+
+    /* Override angular button style */
+    button {
+        font-family: inherit;
+    }
+
+    .close:focus:hover {
+        border: none;
+        outline: none;
+    }
+
+    .background-color-brand,
+    #page .background-color-brand-hover:hover,
+    #page .background-color-brand-hover:focus,
+    #page .background-color-brand-hover:active,
+    #page .background-color-brand-hover > a:hover,
+    #page .background-color-brand-hover > a:focus,
+    #page .background-color-brand-hover > a:active,
+    #page .background-color-brand-hover.active > a,
+    #page .gist-filter-menu-range-slider .noUi-handle,
+    #page .gist-filter-menu-range-slider .noUi-connect {
+        background-color: {{ brandColor.accent }};
+        color: {{ '#FFF' if brandWhiteText else brandColor.label }};
+    }
+
+    .border-color-brand,
+    .border-color-brand-hover:hover,
+    .border-color-brand-hover:focus {
+        border-color: {{ brandColor.accent }};
+    }
+
+    .text-color-brand,
+    .text-color-brand-all,
+    .filter-menu a.text-color-brand,
+    .filter-menu a.text-color-brand-all {
+        color: {{ '#FFF' if brandWhiteText else '#000' }};
+    }
+    .text-color-brand-hover:hover,
+    .text-color-brand-all:hover {
+        color: {{ '#FFF' if brandWhiteText else '#000' }};
+    }
+
+    .input-subscribe,
+    .input-subscribe:focus {
+        border-color: {{ '#FFF' if brandWhiteText else '#000' }};
+        color: {{ '#FFF' if brandWhiteText else '#000' }};
+    }
+
+    .btn-inverse {
+        background-color: {{ '#FFF' if brandWhiteText else '#000' }};
+        border-color: {{ '#FFF' if brandWhiteText else '#000' }};
+    }
+
+    .btn-inverse:hover {
+        color: {{ '#000' if brandWhiteText else '#FFF' }};
+    }
+
+    /* Filters menu arrow hover */
+    .filter-menu-has-submenu:hover > a::after,
+    .filter-menu-has-submenu.open > a::after {
+        border-color: transparent transparent transparent {{ brandColor.accent }};
+    }
+
+    /* Log In / Sign Up */
+    .site-header .navbar .navbar-nav .pill-filled {
+        border-color: {{ brandColor.accent }};
+    }
+
+    .site-header .navbar .navbar-nav .pill-link {
+        color: {{ brandColor.accent }};
+    }
+
+    .site-header .navbar .navbar-nav .pill-filled {
+        background-color: {{ brandColor.accent }};
+        color: {{ '#fff' if brandWhiteText else '#333' }};
+    }
+
+    .site-header .navbar .navbar-nav .pill-filled:hover,
+    .site-header .navbar .navbar-nav .pill-filled:focus,
+    .site-header .navbar .navbar-nav .pill-filled:active {
+        background-color: #fff;
+        color: #333;
+    }
+
+    #masthead .color-brand-hover.dropdown-toggle:focus,
+    #masthead .color-brand-hover.dropdown-toggle:active {
+        color: #000;
+    }
+
+    .sort-control.gist-sort-direction:hover,
+    .sort-control.gist-search-control:hover,
+    .gist-controls .gist-dropdown-toggle-button-has-caret:hover,
+    .sort-control.gist-dropdown .dropdown-toggle:not(.dropdown-toggle-empty):hover,
+    .gist-dropdown-toggle-button-has-caret:hover {
+        border: 2px solid {{ brandColor.accent }};
+    }
+</style>

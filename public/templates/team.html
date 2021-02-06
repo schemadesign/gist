@@ -1,0 +1,16 @@
+<header>
+    <h1>Team Settings</h1>
+</header>
+
+<div class="gist-content account">
+    <md-nav-bar md-selected-nav-item="currentNavItem" md-no-ink role="navigation" aria-label="navigation links">
+        <form name="vm.websiteForm" ng-submit="submitForm()" novalidate>
+            <md-nav-item md-nav-sref="dashboard.team.settings" name="settings" value="settings">Settings</md-nav-item>
+        </form>
+        <md-nav-item md-nav-sref="dashboard.team.icons" name="icons" value="icons">Images</md-nav-item>
+        <md-nav-item md-nav-sref="dashboard.team.api" name="api" value="api">API</md-nav-item>
+    </md-nav-bar>
+
+    <div ui-view class="ext-content"></div>
+
+</div>

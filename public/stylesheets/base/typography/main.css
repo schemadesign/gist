@@ -1,0 +1,63 @@
+h1, h2, h3,
+.h1, .h2, .h3 {
+    font-weight: bold;
+}
+
+h4, h5, h6,
+.h4, .h5, .h6 {
+    font-weight: normal;
+}
+
+.font-helvetica {
+    font-family: 'Helvetica Neue', Helvetica, Arial, Geneva, sans-serif;
+    font-size: 14px;
+}
+
+.font-georgia {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 14px;
+}
+
+.font-centrano2 {
+    font-family: 'CentraNo2', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+.font-arial {
+    font-family: Arial;
+    font-size: 14px;
+}
+
+[class^='gist-icon-'] {
+    font-size: 22px;
+}
+
+.ui-label {
+    font-size: 1.125em;
+    /*font-size: 18px;*/
+}
+
+.ui-label,
+.sort-control .ui-label:hover,
+.sort-control .ui-label:focus,
+.sort-control .ui-label:active,
+.sort-control.open > .ui-label,
+.sort-control.open > .ui-label:hover,
+.sort-control.open > .ui-label:focus,
+.sort-control.open > .ui-label:active,
+.dropdown-menu > li > a {
+    color: var(--color-text-dark);
+    text-align: left;
+}
+
+.truncate {
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.to-lower-case {
+    text-transform: lowercase;
+}

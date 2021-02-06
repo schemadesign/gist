@@ -1,0 +1,246 @@
+/* @override
+	http://austenblokker.local.arrays.co:9080/stylesheets/module/modal.css */
+
+.modal-backdrop.in {
+    opacity: .4;
+}
+
+button.gist-create-story,
+button.browse-story,
+button#story-save,
+.btn-stories {
+    width: 40%;
+}
+
+#gist-share-modal .modal-dialog {
+    margin-right: auto;
+    margin-left: auto;
+    width: calc(100% - 20px);
+}
+
+@media (min-width: 768px) {
+    #gist-share-modal .modal-dialog {
+        width: 80%;
+    }
+}
+
+form#gist-share-story-form textarea {
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    resize: none;
+}
+
+.story-alert {
+    display: inline-block;
+    padding: 10px;
+    color: #A94442;
+}
+
+.story-success {
+    display: inline-block;
+    padding: 10px;
+    color: #3C763D;
+}
+
+.story-cancel {
+    color: var(--color-text-ultralight) !important;
+    background: none;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.modal-content {
+    border-color: #FFF;
+    border-radius: 4px;
+    background-color: var(--color-background);
+    box-shadow: var(--box-shadow-dark);
+}
+
+.modal-header {
+    padding: 20px 30px 0;
+    border-bottom-style: none;
+}
+
+.gist-visualization-description {
+    white-space: pre-wrap;
+}
+
+.modal-header .gist-close {
+    width: 1em;
+    /*margin-top: 0.5em;*/
+}
+
+/*#alert-modal .modal-header .gist-close {
+    margin-top: 0;
+}*/
+
+.modal-title {
+    padding-bottom: 20px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--color-text-ultralight);
+    color: #000;
+    font-weight: bold;
+    font-size: 2.25em;
+    line-height: 1.1;
+}
+
+.modal-body {
+    padding: 0 30px 30px;
+}
+
+.modal-body h3 {
+    margin-top: 30px;
+    color: var(--color-text-dark);
+    font-weight: normal;
+    font-size: 1.5em;
+}
+
+.modal-body #gist-facebook,
+.modal-body #gist-twitter {
+    display: inline-block;
+}
+
+.modal-body pre, form#gist-share-story-form input, form#gist-share-story-form textarea {
+    overflow-x: auto;
+    border-radius: 0;
+    background-color: #FFF;
+    white-space: nowrap;
+    font-size: 24px;
+
+}
+
+.btn-action {
+    position: relative;
+    margin-right: 15px;
+    margin-bottom: 5px;
+    border: 1px solid #FFF;
+    box-shadow: var(--box-shadow);
+    color: #FFF;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: 1.25em;
+}
+
+.btn-action:hover {
+    color: white;
+}
+
+.btn-action [class^="gist-icon-"] {
+    margin-right: 20px;
+}
+
+.btn-action [class^="gist-icon-"]:after {
+    position: absolute;
+    top: 0;
+    margin-left: 5px;
+    width: 1px;
+    height: 100%;
+    background-color: #FFF;
+    content: "";
+}
+
+.md-dialog-backdrop.md-opaque {
+    z-index: 1100;
+}
+
+.md-dialog-container {
+    z-index: 1100;
+}
+
+#detailView {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    z-index: 1051;
+}
+
+#detailView .modal-content {
+    height: 90vh;
+    overflow-y: auto;
+}
+
+#detailView .modal-content .container-fluid {
+    max-width: none;
+}
+
+#detailView .modal-dialog {
+    width: 90%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#detailView .modal-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 20px;
+    z-index: 2;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+}
+
+#detailView.modal--ie .modal-header {
+    position: absolute;
+}
+
+#detailView .item-arrow {
+    transform: translate3d(0, -50%, 0);
+}
+
+#detailView.modal--ie .item-arrow {
+    position: absolute;
+}
+
+@media (max-width: 768px) {
+    #detailView .modal-content {
+        border-radius: 0;
+        height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);
+    }
+
+    #detailView .modal-dialog {
+        width: 100%;
+        margin: 0;
+    }
+
+    #detailView .modal-body,
+    #detailView .modal-header {
+        padding: 0 10px;
+    }
+
+    #detailView .modal-header {
+        top: 20px;
+        right: 15px;
+    }
+
+    #detailView .item-arrow {
+        opacity: 0.4;
+    }
+}
+
+.gist-expand {
+    color: black;
+    margin-right: 10px;
+}
+
+.gist-modal-loading {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.gist-modal-loading .three-balls {
+    position: static;
+}

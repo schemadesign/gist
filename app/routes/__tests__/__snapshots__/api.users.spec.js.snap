@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Users API Creating a new account should create a new user 1`] = `
+Object {
+  "body": Object {
+    "_articleEditors": Array [],
+    "_articleViewers": Array [],
+    "_editors": Array [],
+    "_siteEditors": Array [],
+    "_siteViewers": Array [],
+    "_viewers": Array [],
+    "activated": true,
+    "active": true,
+    "canCreateNewArticle": Array [],
+    "canCreateNewSite": Array [],
+    "canCreateNewViz": Array [],
+    "email": "user+newuser@schemadesign.com",
+    "firstName": "Mary",
+    "inviter": "5c6acadf5fbcd004266b2f8c",
+    "lastName": "Totter",
+    "lockUntil": 1,
+    "loginAttempts": 0,
+    "provider": "local",
+    "role": "editor",
+    "sampleImported": false,
+    "signedUp": true,
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Users API Creating a new account should get a user 1`] = `
+Object {
+  "body": Object {
+    "_articleEditors": Array [],
+    "_articleViewers": Array [],
+    "_editors": Array [],
+    "_siteEditors": Array [],
+    "_siteViewers": Array [],
+    "_team": Array [],
+    "_viewers": Array [],
+    "activated": false,
+    "active": true,
+    "canCreateNewArticle": Array [],
+    "canCreateNewSite": Array [],
+    "canCreateNewViz": Array [],
+    "email": "user+200@schemadesign.com",
+    "lockUntil": 1,
+    "loginAttempts": 0,
+    "provider": "local",
+    "sampleImported": false,
+    "signedUp": false,
+    "team": Array [],
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Users API Creating a new account should update a user (invited to a team) 1`] = `
+Object {
+  "body": Object {
+    "_articleEditors": Array [],
+    "_articleViewers": Array [],
+    "_editors": Array [],
+    "_siteEditors": Array [],
+    "_siteViewers": Array [],
+    "_team": Array [
+      "5a42fba8999d2a26d50fea64",
+    ],
+    "_viewers": Array [],
+    "activated": true,
+    "active": true,
+    "canCreateNewArticle": Array [],
+    "canCreateNewSite": Array [],
+    "canCreateNewViz": Array [],
+    "defaultLoginTeam": "5a42fba8999d2a26d50fea64",
+    "email": "user+newuser@schemadesign.com",
+    "firstName": "Oryx",
+    "lastName": "Crake",
+    "lockUntil": 1,
+    "loginAttempts": 0,
+    "provider": "local",
+    "sampleImported": false,
+    "signedUp": true,
+  },
+  "statusCode": 200,
+}
+`;

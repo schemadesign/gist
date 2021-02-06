@@ -1,0 +1,15 @@
+<p class="data-format-question">
+    Does your data include category fields?
+    <a ng-click="showExplanation = !showExplanation">
+        <span ng-if="!showExplanation">Learn more</span>
+        <span ng-if="showExplanation">Close</span>
+    </a>
+</p>
+
+<div ng-if="showExplanation" class="data-format-explanation">
+    <p>
+        Having one or more category fields in your data (e.g. Genre for a dataset about Movies) allows grouping data by repeat values, adding more flexibility to your visualization.
+    </p>
+    <img src="/images/data_format_tables/yes-table.svg">
+    <img src="/images/data_format_tables/no-table.svg">
+</div>

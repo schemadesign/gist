@@ -1,0 +1,9 @@
+{
+    "presets": ["env"],
+    "plugins": ["angularjs-annotate", "transform-object-rest-spread"],
+    "env": {
+        "testing": {
+            "plugins": ["transform-es2015-modules-commonjs"]
+        }
+    }
+}

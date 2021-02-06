@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" ng-app="arraysApp">
+<head>
+    {% include "./dashboard_header.njk" %}
+    {% include "../partials/l20n.njk" %}
+
+    <title>Dashboard - Gist</title>
+</head>
+
+<body class="dashboard" ng-init="init()" md-no-ink>
+    <div id="page" class="site" ui-view></div>
+
+    {% include "../partials/survicate.njk" %}
+
+    <!-- vendors -->
+    <script type="text/javascript" src="/vendors/babel-polyfill/dist/polyfill.min.js"></script>
+    <script type="text/javascript" src="/vendors/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/vendors/jquery-ui-dist/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/vendors/shave/dist/jquery.shave.min.js"></script>
+    <script type="text/javascript" src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/vendors/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="/vendors/fitvids/dist/fitvids.min.js"></script>
+    <script type="text/javascript" src="/vendors/nunjucks/browser/nunjucks-slim.min.js"></script>
+
+    {% if env.NODE_ENV === 'development' %}
+        <script type="text/javascript" src="/vendors/angular/angular.js"></script>
+    {% else %}
+        <script type="text/javascript" src="/vendors/angular/angular.min.js"></script>
+    {% endif %}
+
+    <script type="text/javascript" src="/vendors/angular-animate/angular-animate.min.js"></script>
+    <script type="text/javascript" src="/vendors/angular-cookies/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="/vendors/@uirouter/core/_bundles/ui-router-core.min.js"></script>
+    <script type="text/javascript" src="/vendors/@uirouter/angularjs/release/ui-router-angularjs.min.js"></script>
+    <script type="text/javascript" src="/vendors/@uirouter/angularjs/release/stateEvents.min.js"></script>
+    <script type="text/javascript" src="/vendors/angular-aria/angular-aria.min.js"></script>
+    <script type="text/javascript" src="/vendors/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="/vendors/angular-messages/angular-messages.min.js"></script>
+    {% if env.NODE_ENV === 'development' %}
+        <script type="text/javascript" src="/vendors/angular-material/angular-material.js"></script>
+    {% else %}
+        <script type="text/javascript" src="/vendors/angular-material/angular-material.min.js"></script>
+    {% endif %}
+    <script type="text/javascript" src="/vendors/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="/vendors/oclazyload/dist/ocLazyLoad.min.js"></script>
+
+    <script type="text/javascript" src="/vendors/jquery-minicolors/jquery.minicolors.min.js"></script>
+    <script type="text/javascript" src="/vendors/angular-minicolors/angular-minicolors.js"></script>
+
+    <script type="text/javascript" src="/vendors/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <script type="text/javascript" src="/vendors/angular-ui-sortable/dist/sortable.min.js"></script>
+    <script type="text/javascript" src="/vendors/angular-cron-jobs/dist/angular-cron-jobs.min.js"></script>
+
+    <script type="text/javascript" src="/vendors/angular-sanitize/angular-sanitize.min.js"></script>
+
+    <script type="text/javascript" src="/vendors/angular-markdown-editor/src/angular-markdown-editor.js"></script>
+    <script type="text/javascript" src="/vendors/bootstrap-markdown/js/bootstrap-markdown.js"></script>
+
+    <script type="text/javascript" src="/vendors/angular-spinner/dist/angular-spinner.min.js"></script>
+    <script type="text/javascript" src="/vendors/lodash/lodash.min.js"></script>
+    <script type="text/javascript" src="/vendors/d3/d3.min.js"></script>
+    <script type="text/javascript" src="/vendors/angular-file-saver/dist/angular-file-saver.bundle.min.js"></script>
+    <script type="text/javascript" src="/vendors/selection-model/dist/selection-model.min.js"></script>
+
+    <!-- angular app -->
+    <script type="text/javascript" src="/javascripts/build/main/namespaces.js"></script>
+    <script type="text/javascript" src="/javascripts/build/shared.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/app.js"></script>
+    <script type="text/javascript" src="/javascripts/build/templates.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/config.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/constants.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/router.js"></script>
+
+    <script type="text/javascript" src="/javascripts/build/dashboard/services.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/directives.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/filters.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/components.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/routes.js"></script>
+
+    <script type="text/javascript" src="/javascripts/build/dashboard/controllers/app.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/controllers/account.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/controllers/page.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/controllers/performance.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/controllers/site.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/controllers/article.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/controllers/story.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/controllers/team.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/controllers/team-settings.js"></script>
+    <script type="text/javascript" src="/javascripts/build/dashboard/controllers/user.js"></script>
+
+    <!--- custom view modal controllers -->
+    {% if env.NODE_ENV !== 'enterprise' %}
+        <script type="text/javascript" src="/rhodiumgroup/js/view-modal.js"></script>
+    {% endif %}
+
+    <!--- performance dependencies !-->
+    <script type="text/javascript" src="/javascripts/build/fe-templates.js"></script>
+    <script type="text/javascript" src="/javascripts/build/main/utils.js"></script>
+    <script type="text/javascript" src="/javascripts/build/main/tooltip.js"></script>
+    <script type="text/javascript" src="/javascripts/build/main/formatters.js"></script>
+    <script type="text/javascript" src="/javascripts/build/main/nunjuckFilters.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/utils.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/constants.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/brush.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/visualization.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/d3-visualization.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/cartesian-chart/cartesian-chart.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/cartesian-chart/line-chart/line-chart.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/cartesian-chart/line-chart/core-line-chart.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/cartesian-chart/bar-chart/bar-chart.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/cartesian-chart/bar-chart/horizontal.js"></script>
+    <script type="text/javascript" src="/javascripts/build/visualizations/d3-visualization/pie-chart/pie-chart.js"></script>
+
+    {% if env.FE_LIVERELOAD == 'true' %}
+        <script src="//localhost:35729/livereload.js"></script>
+    {% endif %}
+</body>
+
+</html>

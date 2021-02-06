@@ -1,0 +1,44 @@
+<md-content layout-padding md-no-ink ng-if="sites.length">
+
+    <ul class="dashboard-list user-list">
+
+        <li ng-repeat="site in sites track by $index" layout="row" layout-align="space-between center">
+
+            <span aa-tooltip="{{ site.published == true ? 'Unpublish' : 'Publish' }}" flex="10"
+                  ng-if="canEdit(site._id)">
+                <md-checkbox name=""
+                             ng-model="site.published"
+                             aria-label="Publish {{ site.title }}"
+                             ng-click="$event.stopPropagation();"
+                             ng-change="updateStatus(site)"
+                ></md-checkbox>
+            </span>
+
+            <span flex class="dashboard-list-name" ng-click="select(site._id)" role="button" tabindex="0"
+                  ng-class="{disabled: !canEdit(site._id)}">
+                {{ site.title }}
+            </span>
+
+            <span class="dashboard-list-icon" flex="10" aa-tooltip="Copy site" ng-click="copySite(site)"
+                  ng-if="canEdit(site._id)">
+            <i class="fa fa-clone" aria-hidden="true"></i>
+            </span>
+
+            <span class="dashboard-list-icon" flex="10" aa-tooltip="View site"
+                  ng-click="viewSite(site)">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </span>
+
+            <span class="dashboard-list-icon warn" flex="5" aa-tooltip="Remove site"
+                  ng-click="removeSite(site, $index, $event)" aria-label="Delete" ng-if="canEdit(site._id)">
+                <i class="fa fa-remove" aria-hidden="true"></i>
+            </span>
+
+        </li>
+    </ul>
+
+</md-content>
+
+<md-content layout-padding md-no-ink ng-if="!sites.length">
+    <p class="padding-top-0">You have not created any sites yet.</p>
+</md-content>

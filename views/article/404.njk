@@ -1,0 +1,42 @@
+{% extends './' ~ theme ~ '/layout.njk' %}
+
+{% import '../partials/header-bar/hamburger-menu.njk' as menu %}
+
+{% block meta_title %}Page not found{% endblock %}
+{% block meta_team %}{% if team.title %} - {{ team.title }}{% endif %}{% endblock %}
+{% block meta_description %}{% endblock %}
+
+{% block body_class %}article-not-found {{ 'view-embedded' if isEmbed }} font-{{ team.font }}{% endblock %}
+
+{% block site_menu %}{{ menu.default(user, team, env, isPreview, false, false, false) }}{% endblock %}
+
+{% block content %}
+<div id="primary" class="content-area">
+    <main id="main" class="page-main">
+
+        <article>
+            <header class="gist-article-header" style="background-color: {{ team.colorPalette[0] or '#498ef7' }}; {% if article.thumbnail %} background-image: url({{ article.thumbnail }});{% endif %}">
+                <div class="article-header-spacer"></div>
+                <div class="container-fluid max-width-960">
+                    <div class="article-header-content">
+                        <h1 class="article-title">Oops! That page can't be found.</h1>
+                    </div><!-- .article-header-content -->
+                </div><!-- .container-fluid -->
+            </header><!-- .gist-article-header -->
+
+            <div class="container-fluid max-width-960">
+                <div class="article-content">
+                    <h4>Nothing was found at this location.</h4>
+                    <p>Try going back to the <a href="{{ urlbase }}">{{ team.title }} home page</a>.</p>
+                </div><!-- .article-content -->
+
+
+                <footer class="article-footer">
+
+                </footer><!-- .article-footer -->
+            </div><!-- .container-fluid -->
+       </article>
+
+    </main>
+</div>
+{% endblock %}

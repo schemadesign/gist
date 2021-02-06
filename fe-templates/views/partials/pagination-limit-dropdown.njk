@@ -1,0 +1,38 @@
+{% macro defaultDropdown(label, selectedValue, pageLimits, basePath, tailText, toggleButton=false, hasCaret=true) %}
+    <div class="gist-dropdown sort-control">
+        {% if pageLimits | length > 1 %}
+            <a class="btn dropdown-toggle {{ 'dropdown-toggle-button' if toggleButton }} {{ 'gist-dropdown-toggle-button-has-caret' if hasCaret }} ui-label group-by"
+               type="button" id="{{ label|replace(' ','-') }}" data-toggle="dropdown" aria-haspopup="true"
+               aria-expanded="false" href="javascript:void(0)">
+                <div class="dropdown-toggle-label">
+                    <span class="label" data-l10n-id="{{ label | replace(' ','-') | lower }}">{{ label }}</span>
+                    <span class="sort-criteria color-brand-hover">{{ selectedValue | formatIntegerWithCommas }}</span>
+                </div>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="{{ label|replace(' ','') }}">
+                {% for pageLimit in pageLimits %}
+                    <li class="background-color-brand-hover">
+                        <a href="{{ basePath | constructedRoutePath(null, {limit: pageLimit}) }}">{{ pageLimit }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <span
+                class="btn dropdown-toggle {{ 'dropdown-toggle-button' if toggleButton }} dropdown-toggle-empty ui-label group-by"
+                id="{{ label|replace(' ','-') }}">
+                <div class="dropdown-toggle-label">
+                    <span class="label" data-l10n-id="{{ label | replace(' ','-') | lower }}">{{ label }}</span>
+                    <span class="sort-criteria color-brand-hover">{{ selectedValue | formatIntegerWithCommas }}</span>
+                </div>
+            </span>
+        {% endif %}
+
+        {% if tailText %}
+            <span class="dropdown-tail-text">
+                {{ tailText }}
+            </span>
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{{ defaultDropdown('', limit if limit else 200, pageRanges, basePath, tailText) }}

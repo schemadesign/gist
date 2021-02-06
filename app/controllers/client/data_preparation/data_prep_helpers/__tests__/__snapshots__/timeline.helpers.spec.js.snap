@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`timeline helpers getCountAggregationOperators should return aggregation operators for decade 1`] = `
+Array [
+  Object {
+    "$match": Object {
+      "sample": Object {
+        "$exists": true,
+      },
+    },
+  },
+  Object {
+    "$unwind": "sample",
+  },
+  Object {
+    "$group": Object {
+      "_id": "sample",
+    },
+  },
+]
+`;
+
+exports[`timeline helpers getCountAggregationOperators should return aggregation operators for empty group size 1`] = `
+Array [
+  Object {
+    "$match": Object {
+      "sample": Object {
+        "$exists": true,
+      },
+    },
+  },
+  Object {
+    "$unwind": "sample",
+  },
+  Object {
+    "$group": Object {
+      "_id": "sample",
+      "count": Object {
+        "$sum": 1,
+      },
+    },
+  },
+]
+`;
+
+exports[`timeline helpers getCountAggregationOperators should return default aggregation operators 1`] = `
+Array [
+  Object {
+    "$match": Object {
+      "sample": Object {
+        "$exists": true,
+      },
+    },
+  },
+  Object {
+    "$unwind": "sample",
+  },
+  Object {
+    "$group": Object {
+      "_id": "sample",
+    },
+  },
+]
+`;
+
+exports[`timeline helpers processGroupedResults should return grouped docs when sort by is date 1`] = `
+Array [
+  Object {
+    "endDate": 1995-10-21T03:24:00.000Z,
+    "startDate": 1995-10-17T03:24:00.000Z,
+    "total": 50,
+    "viewAllFilter": Object {
+      "original_air_date": "{\\"min\\":\\"1995-10-01\\",\\"max\\":\\"1995-10-31\\"}",
+    },
+    "viewAllUrl": "/simpsons/gallery?original_air_date=%7B%22min%22%3A%221995-10-01%22%2C%22max%22%3A%221995-10-31%22%7D",
+  },
+  Object {
+    "endDate": 1995-05-10T03:24:00.000Z,
+    "startDate": 1995-05-10T03:24:00.000Z,
+    "total": 30,
+    "viewAllFilter": Object {
+      "original_air_date": "1995-05-10",
+    },
+    "viewAllUrl": "/simpsons/gallery?original_air_date=1995-05-10",
+  },
+  Object {
+    "endDate": 1995-06-21T03:24:00.000Z,
+    "startDate": 1995-05-17T03:24:00.000Z,
+    "total": 2,
+    "viewAllFilter": Object {
+      "original_air_date": "{\\"min\\":\\"1995-05-01\\",\\"max\\":\\"1995-06-30\\"}",
+    },
+  },
+]
+`;
+
+exports[`timeline helpers processGroupedResults should return grouped docs when sort by is number 1`] = `
+Array [
+  Object {
+    "group": 100,
+    "total": 50,
+    "viewAllFilter": Object {
+      "Pokemon No_": 100,
+    },
+    "viewAllUrl": "/pokemon/gallery?Pokemon%20No_=100",
+  },
+  Object {
+    "group": 200,
+    "total": 30,
+    "viewAllFilter": Object {
+      "Pokemon No_": 200,
+    },
+    "viewAllUrl": "/pokemon/gallery?Pokemon%20No_=200",
+  },
+  Object {
+    "group": 500,
+    "total": 2,
+    "viewAllFilter": Object {
+      "Pokemon No_": 500,
+    },
+  },
+]
+`;
+
+exports[`timeline helpers processGroupedResults should return grouped docs when sort by is string 1`] = `
+Array [
+  Object {
+    "group": "Grass",
+    "total": 50,
+    "viewAllFilter": Object {
+      "Type 1": "Grass",
+    },
+    "viewAllUrl": "/pokemon/gallery?Type%201=Grass",
+  },
+  Object {
+    "group": "Water",
+    "total": 30,
+    "viewAllFilter": Object {
+      "Type 1": "Water",
+    },
+    "viewAllUrl": "/pokemon/gallery?Type%201=Water",
+  },
+  Object {
+    "group": "Fire",
+    "total": 2,
+    "viewAllFilter": Object {
+      "Type 1": "Fire",
+    },
+  },
+]
+`;

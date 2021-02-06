@@ -1,0 +1,27 @@
+<div ng-form="connectSmartsheetCtrl.form" gist-isolate-form>
+    <h4>Connect to a Smartsheet</h4>
+    <div>
+        <p>
+            Choose a smartsheet below to connect to.
+        </p>
+        <div class="upload-options-wrapper">
+            <a
+                class="gist-pointer"
+                ng-class="{ 'upload-options-wrapper-inset': connectSmartsheetCtrl.activeBox(sheet.name) }"
+                ng-repeat="sheet in connectSmartsheetCtrl.smartsheets"
+                ng-click="connectSmartsheetCtrl.selectSheet(sheet)">
+                <div>
+                    <img src="/images/source_tab_data_format/spreadsheet.svg" />
+                    <span>{{ sheet.name }}</span>
+                </div>
+            </a>
+        </div>
+        <md-button
+            class="md-dashboard confirm"
+            ng-click="connectSmartsheetCtrl.connect()"
+            ng-disabled="!connectSmartsheetCtrl.sheet"
+            id="connectButton">
+            <span class="btn-label">Connect</span>
+        </md-button>
+    </div>
+</div>

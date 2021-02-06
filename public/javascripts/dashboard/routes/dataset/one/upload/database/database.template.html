@@ -1,0 +1,49 @@
+<div ng-form="connectDatabaseCtrl.form" gist-isolate-form>
+    <md-select aria-label="Dataset Connection Url" flex="50" ng-model="connectDatabaseCtrl.connection.type">
+        <md-option value="hadoop">
+            Hadoop
+        </md-option>
+    </md-select>
+
+    <div layout>
+        <md-input-container class="md-block" flex="65" md-no-float>
+            <input name="url"
+                ng-model="connectDatabaseCtrl.connection.url"
+                aria-label="Dataset Connection String"
+                placeholder="Connection URL"
+                autofocus
+                required />
+            <div ng-messages="connectDatabaseCtrl.form.url.$error">
+                <div class="error-message" ng-message="required">This field is required</div>
+                <div class="error-message" ng-message="url">This is not a valid URL</div>
+            </div>
+        </md-input-container>
+        <span flex="5"></span>
+        <md-button class="md-dashboard confirm"
+            style="margin-top: 18px;"
+            ng-click="connectDatabaseCtrl.connect()"
+            ng-hide="connectDatabaseCtrl.connection.connected"
+            ng-disabled="connectDatabaseCtrl.pending || connectDatabaseCtrl.form.$invalid">
+            <span class="btn-label"> {{ connectDatabaseCtrl.pending ? 'Connecting...' : 'Connect' }}</span>
+        </md-button>
+    </div>
+
+    <div layout ng-if="connectDatabaseCtrl.connection.connected">
+        <md-input-container class="md-block" flex="65" md-no-float>
+            <md-select ng-model="connectDatabaseCtrl.connection.tableName"
+                aria-label="Dataset Connection Table Name"
+                placeholder="Table Name">
+                <md-option ng-repeat="table in connectDatabaseCtrl.tables" ng-value="table.name">
+                    {{ table.name }}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <span flex="5"></span>
+        <md-button class="md-dashboard confirm"
+            style="margin-top: 18px;"
+            ng-click="connectDatabaseCtrl.save()"
+            ng-disabled="connectDatabaseCtrl.form.$invalid">
+            <span class="btn-label">Confirm</span>
+        </md-button>
+    </div>
+</div>
